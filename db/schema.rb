@@ -15,30 +15,6 @@ ActiveRecord::Schema.define(version: 2022_12_05_085524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "rooms", force: :cascade do |t|
-    t.string "home_type"
-    t.string "room_type"
-    t.integer "max_occupancy"
-    t.integer "bedrooms"
-    t.integer "bathrooms"
-    t.text "summary"
-    t.string "address"
-    t.boolean "has_wifi"
-    t.boolean "has_kitchen"
-    t.boolean "has_air_con"
-    t.boolean "has_bathtub"
-    t.integer "price"
-    t.datetime "published_at"
-    t.integer "owner_id"
-    t.time "checkin_start_at"
-    t.time "checkin_end_at"
-    t.time "checkout_time"
-    t.point "coordinate"
-    t.datetime "delete_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
