@@ -15,7 +15,7 @@ gem "jbuilder", "~> 2.7"
 gem "foreman"
 gem "devise", "~> 4.2"
 gem "bootsnap", ">= 1.4.4", require: false
-
+gem "font-awesome-rails", "~> 4.6", ">= 4.6.3.1"
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
 end
