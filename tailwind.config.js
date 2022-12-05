@@ -7,7 +7,25 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    screens: {
+      xs: { min: "350px" },
+      sm: { min: "640px" },
+      md: { min: "768px" },
+      lg: { min: "1024px" },
+      xl: { min: "1200px" },
+      xxl: { min: "1400px" },
+    },
+    container: {
+      center: true,
+    },
+    extend: {
+      minWidth: {
+        568: "568px",
+      },
+      maxWidth: {
+        568: "568px",
+      },
+    },
   },
   variants: {
     extend: {},
