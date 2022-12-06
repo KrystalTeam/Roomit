@@ -19,7 +19,7 @@ class CreateRooms < ActiveRecord::Migration[6.1]
       t.time :checkin_end_at
       t.time :checkout_time
       t.point :coordinate
-      t.datetime :delete_at
+      t.datetime :deleted_at
 
       t.timestamps
     end

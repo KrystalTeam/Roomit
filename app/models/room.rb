@@ -12,6 +12,8 @@ class Room < ApplicationRecord
   validates :checkout_time, presence: true
   validate :checkin_time_should_more_than_three_hours
 
+  scope :not_deleted,  -> { where(deleted_at: nil) }
+
   private
   def checkin_time_should_more_than_three_hours
     if checkin_end_at.to_i - checkin_start_at.to_i < 3

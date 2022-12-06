@@ -1,7 +1,9 @@
 class RoomsController < ApplicationController
+  before_action :find_rooms, only: [:edit, :update, :destroy, :show]
 
   def index
-    @rooms = Room.all
+    @rooms = Room.not_deleted
+    @rooms_deleted = Room.where.not(deleted_at: nil)
   end
 
   def new
@@ -19,15 +21,12 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
   end
 
   def edit
-    @room = Room.find(params[:id])
   end
 
   def update
-    @room = Room.find(params[:id])
     if @room.update(room_params)
       redirect_to rooms_path ,notice: "更新成功"
     else
@@ -37,12 +36,15 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room = Room.find(params[:id])
-    @room.delete
-    redirect_to rooms_path ,notice: "刪除成功"
+    @room.update(deleted_at: Time.current)
+    redirect_to rooms_path ,notice: "已刪除"
   end
 
   private
+  def find_rooms
+    @room = Room.not_deleted.find_by!(id: params[:id])
+  end
+
   def room_params
     params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms,:has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time)
   end

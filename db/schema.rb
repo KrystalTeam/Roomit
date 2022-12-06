@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2022_12_05_095315) do
     t.time "checkin_end_at"
     t.time "checkout_time"
     t.point "coordinate"
-    t.datetime "delete_at"
+    t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
