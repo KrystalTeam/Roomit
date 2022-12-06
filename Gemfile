@@ -1,3 +1,5 @@
+gem 'dotenv-rails', groups: [:development, :test]
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -31,4 +33,8 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
 gem "react_on_rails", "= 13.1"
+
+gem 'omniauth-facebook'
+gem 'omniauth-rails_csrf_protection'
