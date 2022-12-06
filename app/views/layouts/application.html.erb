@@ -10,11 +10,12 @@
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
     <%= favicon_link_tag asset_path "fav_icon.ico" %>
   </head>
-
   <body>
-    <%= render "shared/header" %>
-    <%= yield %>
-    <%= render "shared/footer" %>
-    <%= render "shared/flash" %>
+    <div class="relative w-full h-full">
+      <%= render "shared/header" %>
+      <%= yield %>
+      <%= render "shared/footer" %>
+      <%= render "shared/flash" %>
+    </div>
   </body>
 </html>
