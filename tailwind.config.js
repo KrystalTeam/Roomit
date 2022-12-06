@@ -25,6 +25,12 @@ module.exports = {
       maxWidth: {
         568: "568px",
       },
+      colors: {
+        fb: "#4267B2",
+      },
+      spacing: {
+        500: "500px",
+      },
     },
   },
   variants: {

@@ -8,9 +8,10 @@ import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 import "stylesheets/application";
+import "controllers";
 import "@fortawesome/fontawesome-free/css/all.css";
+import "swiper/swiper-bundle.min.css";
+
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
-
-import "controllers";
