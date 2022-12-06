@@ -3,7 +3,6 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.not_deleted
-    @rooms_deleted = Room.where.not(deleted_at: nil)
   end
 
   def new

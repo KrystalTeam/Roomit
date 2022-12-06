@@ -18,22 +18,20 @@ ActiveRecord::Schema.define(version: 2022_12_05_095315) do
   create_table "rooms", force: :cascade do |t|
     t.string "home_type"
     t.string "room_type"
-    t.integer "max_occupancy"
-    t.integer "bedrooms"
-    t.integer "bathrooms"
+    t.integer "max_occupancy", default: 2
+    t.integer "bedrooms", default: 1
+    t.integer "bathrooms", default: 1
     t.text "summary"
     t.string "address"
-    t.boolean "has_wifi"
-    t.boolean "has_kitchen"
-    t.boolean "has_air_con"
-    t.boolean "has_bathtub"
+    t.boolean "has_wifi", default: false
+    t.boolean "has_kitchen", default: false
+    t.boolean "has_air_con", default: false
+    t.boolean "has_bathtub", default: false
     t.integer "price"
     t.datetime "published_at"
-    t.integer "owner_id"
-    t.time "checkin_start_at"
-    t.time "checkin_end_at"
-    t.time "checkout_time"
-    t.point "coordinate"
+    t.time "checkin_start_at", default: "2000-01-01 15:00:00"
+    t.time "checkin_end_at", default: "2000-01-01 23:59:59"
+    t.time "checkout_time", default: "2000-01-01 12:00:00"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
