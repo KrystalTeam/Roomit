@@ -28,10 +28,8 @@
 </div>
 
 <div>
-  <%= link_to "Cancel Signing in with Facebook", cancel_user_registration_path %>  
+  <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
 </div>
-
-
 
 <div>
   <%= render "devise/shared/links" %>
