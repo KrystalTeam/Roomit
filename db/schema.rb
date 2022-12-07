@@ -16,22 +16,22 @@ ActiveRecord::Schema.define(version: 2022_12_05_095315) do
   enable_extension "plpgsql"
 
   create_table "rooms", force: :cascade do |t|
-    t.string "home_type"
-    t.string "room_type"
-    t.integer "max_occupancy", default: 2
-    t.integer "bedrooms", default: 1
-    t.integer "bathrooms", default: 1
-    t.text "summary"
-    t.string "address"
-    t.boolean "has_wifi", default: false
-    t.boolean "has_kitchen", default: false
-    t.boolean "has_air_con", default: false
-    t.boolean "has_bathtub", default: false
-    t.integer "price"
+    t.integer "home_type", null: false
+    t.integer "room_type", null: false
+    t.integer "max_occupancy", default: 2, null: false
+    t.integer "bedrooms", default: 1, null: false
+    t.integer "bathrooms", default: 1, null: false
+    t.text "summary", null: false
+    t.string "address", null: false
+    t.boolean "has_wifi", default: false, null: false
+    t.boolean "has_kitchen", default: false, null: false
+    t.boolean "has_air_con", default: false, null: false
+    t.boolean "has_bathtub", default: false, null: false
+    t.integer "price", null: false
     t.datetime "published_at"
-    t.time "checkin_start_at", default: "2000-01-01 15:00:00"
-    t.time "checkin_end_at", default: "2000-01-01 23:59:59"
-    t.time "checkout_time", default: "2000-01-01 12:00:00"
+    t.time "checkin_start_at", default: "2000-01-01 15:00:00", null: false
+    t.time "checkin_end_at", default: "2000-01-01 23:59:59", null: false
+    t.time "checkout_time", default: "2000-01-01 12:00:00", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

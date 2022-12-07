@@ -13,7 +13,7 @@ class CreateRooms < ActiveRecord::Migration[6.1]
       t.boolean :has_air_con, null: false, default: false
       t.boolean :has_bathtub, null: false, default: false
       t.integer :price, null: false
-      t.datetime :published_at, null: false
+      t.datetime :published_at
       t.time :checkin_start_at, null: false, default: '15:00:00'
       t.time :checkin_end_at, null: false, default: '23:59:59'
       t.time :checkout_time, null: false, default: '12:00:00'

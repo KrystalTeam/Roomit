@@ -1,11 +1,11 @@
 <%= form_with(model: room) do |room| %>
   <div class="mb-2">
     <%= room.label :home_type, "房源類型 *" %>
-    <%= room.select :home_type, options_for_select(Room.home_types), {prompt: '選擇房源類型'}, class:"input"%>
+    <%= room.select :home_type, options_for_select(Room.home_types.keys), {prompt: '選擇房源類型'}, class:"input"%>
   </div>
   <div class="mb-2">
     <%= room.label :room_type, "房間類型 *" %>
-    <%= room.select :room_type, options_for_select(Room.room_types), {prompt: '選擇房間類型'}, class:"input"%>
+    <%= room.select :room_type, options_for_select(Room.room_types.keys), {prompt: '選擇房間類型'}, class:"input"%>
   </div>  
   <div class="flex justify-between mb-2">
     <div class="w-1/4">
