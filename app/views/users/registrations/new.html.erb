@@ -26,4 +26,12 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<div>
+  <%= button_to "Log in with Facebook", user_facebook_omniauth_authorize_path, method: :post %>  
+</div>
+
+<div>
+  <%= button_to "Log in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
+</div>
+
+<%= render "users/shared/links" %>
