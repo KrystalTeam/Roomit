@@ -1,8 +1,8 @@
 class CreateRooms < ActiveRecord::Migration[6.1]
   def change
     create_table :rooms do |t|
-      t.string :home_type, null: false
-      t.string :room_type, null: false
+      t.integer :home_type, null: false
+      t.integer :room_type, null: false
       t.integer :max_occupancy, null: false, default: 2
       t.integer :bedrooms, null: false, default: 1
       t.integer :bathrooms, null: false, default: 1
