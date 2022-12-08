@@ -42,7 +42,7 @@ class RoomsController < ApplicationController
   private
 
   def find_rooms
-    @room = Room.not_deleted.find_by!(id: params[:id])
+    @room = Room.not_deleted.find(params[:id])
   end
 
   def room_params
