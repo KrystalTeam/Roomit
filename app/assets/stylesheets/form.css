@@ -1,0 +1,6 @@
+.field_with_errors textarea,
+.field_with_errors input[type="text"],
+.field_with_errors input[type="time"],
+.field_with_errors input[type="number"]{
+  background-color: rgb(252 231 243);
+}
