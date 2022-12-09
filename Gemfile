@@ -53,6 +53,7 @@ gem 'rubocop'
 gem 'friendly_id', '~> 5.4.0'
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 gem 'mini_magick', '~> 4.12'
 gem "aws-sdk-s3", require: false
@@ -68,3 +69,7 @@ gem 'rubocop'
 >>>>>>> 6739b6f (LINE Pay available)
 =======
 >>>>>>> 23d3fc3 (gem duplicates deleted)
+=======
+gem 'mini_magick', '~> 4.12'
+gem "aws-sdk-s3", require: false
+>>>>>>> d60cc75 (AWS S3 linked)

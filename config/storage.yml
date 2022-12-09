@@ -36,9 +36,14 @@ amazon:
 =======
   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+<<<<<<< HEAD
   region: us-east-1
   bucket: your_own_bucket
 >>>>>>> 1826036 (active storage install /add room relationship)
+=======
+  region: ap-northeast-1
+  bucket: rommit
+>>>>>>> d60cc75 (AWS S3 linked)
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
