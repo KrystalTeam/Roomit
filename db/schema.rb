@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2022_12_13_030057) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+<<<<<<< HEAD
   end
 
   create_table "guest_reviews", force: :cascade do |t|
@@ -126,6 +127,8 @@ ActiveRecord::Schema.define(version: 2022_12_13_030057) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["booking_id"], name: "index_guest_reviews_on_booking_id"
+=======
+>>>>>>> a69000c (active storage install /add room relationship)
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -176,5 +179,10 @@ ActiveRecord::Schema.define(version: 2022_12_13_030057) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
+<<<<<<< HEAD
   add_foreign_key "guest_reviews", "bookings"
+=======
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+>>>>>>> a69000c (active storage install /add room relationship)
 end
