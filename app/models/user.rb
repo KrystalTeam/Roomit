@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :trackable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[ facebook google_oauth2 ]
+
+  attr_accessor :skip_password_validation
   
   enum role: %i[ guest host admin ]
 
@@ -17,6 +19,15 @@ class User < ApplicationRecord
     end
   end
 
+<<<<<<< HEAD
+  # def self.new_with_session(params, session)
+  #   super.tap do |user|
+  #     if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+  #       user.email = data["email"] if user.email.blank?
+  #     end
+  #   end
+  # end
+=======
   def self.new_with_session(params, session)
     super.tap do |user|
       if data == session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -24,5 +35,10 @@ class User < ApplicationRecord
       end
     end
   end
+>>>>>>> f729c52dc0507b3e96b8b63ed75b2b38a2a353e1
 
+  def password_required?
+    return false if skip_password_validation
+    super
+  end
 end

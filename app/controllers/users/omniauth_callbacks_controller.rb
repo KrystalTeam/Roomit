@@ -7,6 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
     if @user.persisted?
+      UserMailer.welcome(@user).deliver_now
       sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
       set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
     else
@@ -19,7 +20,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
     if @user.persisted?
+<<<<<<< HEAD
+      UserMailer.welcome(@user).deliver_now
+      flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
+=======
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Google"
+>>>>>>> f729c52dc0507b3e96b8b63ed75b2b38a2a353e1
       sign_in_and_redirect @user, event: :authentication
     else
       session["devise.google_data"] = request.env["omniauth.auth"].except("extra")
