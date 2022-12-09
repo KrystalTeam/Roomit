@@ -54,4 +54,10 @@ gem 'friendly_id', '~> 5.4.0'
 =======
 gem 'mini_magick', '~> 4.12'
 gem "aws-sdk-s3", require: false
+<<<<<<< HEAD
 >>>>>>> 3468809 (AWS S3 linked)
+=======
+gem 'mini_magick', '~> 4.11'
+gem "aws-sdk-s3", require: false
+gem 'image_processing'
+>>>>>>> b0a3bce (img variant OK/adjust submit btn text)
