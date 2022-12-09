@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      redirect_to rooms_path ,notice: '新增成功'
+      redirect_to rooms_path, notice: '新增成功'
     else
       flash.alert = '新增失敗'
       render :new
@@ -30,7 +30,7 @@ class RoomsController < ApplicationController
       redirect_to rooms_path, notice: '更新成功'
     else
       flash.alert = '更新失敗'
-      render :new
+      render :edit
     end
   end
 
@@ -46,7 +46,6 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, avatars:[])
+    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, photos:[])
   end
-
 end
