@@ -1,0 +1,63 @@
+<nav class="flex items-center justify-between w-full h-20 px-5 mx-auto mb-5 bg-white shadow-md sm:px-10">
+  <!-- logo -->
+  <a class="flex items-center justify-center h-full min-w-max " href="<%= rooms_path %>"
+      >
+    <div class="hidden sm:block">
+      <img src="/assets/logo_small.png" alt="roomit" class="h-7">
+    </div>
+    <div class="block sm:hidden">
+      <img src="/assets/fav_icon.png" alt="roomit" class="h-7">
+    </div>
+  </a>
+  <!-- end logo -->
+  <!-- search bar -->
+  <div class="px-5">
+    <button class="flex items-center p-1 text-gray-400 border rounded-full shadow-md w-60 sm:w-80 hover:shadow-lg hover:text-gray-800" 
+  type="button">
+      <div class="flex-grow flex-shrink block ">搜尋房源</div>
+      <div class="flex items-center justify-center w-8 h-8 bg-pink-600 rounded-full ">
+        <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
+      </div>
+    </button>
+  </div>
+  <!-- end search bar -->
+  <!-- login -->
+  <div class="hidden md:block">
+    <div class="flex items-center justify-end ">
+      <div class="flex items-center mr-4">
+        <a class="hidden px-3 py-2 rounded-full hover:bg-gray-200 lg:inline-block" href="#">
+          <div class="items-center text-sm font-medium text-gray-700 ">在 Roomit 發佈房源</div>
+        </a>
+        <div class="relative block">
+          <button type="button" class="relative inline-block px-3 py-2 rounded-full hover:bg-gray-200 ">
+            <div class="flex items-center h-5">
+              <i class="text-xl text-gray-600 fa-solid fa-earth-americas"></i>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div data-controller="dropdown" class="relative ">
+        <button data-action="dropdown#toggle click@window->dropdown#hide" type="button"  class="relative inline-flex items-center px-2 py-1 border rounded-full hover:shadow-lg">
+          <div class="pl-1">
+            <i class="text-gray-600 fa-solid fa-bars text-md "></i>
+          </div>
+          <div class="block pl-3 ">
+            <i class="text-3xl text-gray-600 fa-solid fa-circle-user "></i>
+          </div>
+        </button>
+        <div data-dropdown-target="menu" class="absolute right-0 z-20 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg ">
+          <% if user_signed_in? %>
+            <%= link_to "帳號", edit_user_registration_path, class: "nav-item " %>
+            <%= link_to "管理房源", "#", class: "nav-item " %>
+            <%= link_to "心願單", "#", class: "nav-item " %>
+            <%= link_to "登出", destroy_user_session_path, method: :delete, class: "nav-item border-0 " %>
+          <% else %>
+            <%= link_to "註冊", new_user_registration_path, class: "nav-item" %>
+            <%= link_to "登入", new_user_session_path, class: "nav-item border-0 ",data: { "turbo-frame": "modal" } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end login -->
+</nav>
