@@ -39,3 +39,6 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
 gem 'react-rails'
+
+gem 'react-rails'
+gem 'acts_as_paranoid'

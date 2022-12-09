@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :trackable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[ facebook google_oauth2 ]
+
+  attr_accessor :skip_password_validation
   
   enum role: %i[ guest host admin ]
 
@@ -25,4 +27,8 @@ class User < ApplicationRecord
   #   end
   # end
 
+  def password_required?
+    return false if skip_password_validation
+    super
+  end
 end
