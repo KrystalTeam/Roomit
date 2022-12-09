@@ -1,3 +1,48 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+
+.fa-google {
+  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.swiper-button-prev{
+  height: 20px;
+  width:  20px;
+}
+.swiper-button-next{
+  height: 20px;
+  width:  20px;
+}
+
+@layer components {
+
+    .nav-item {
+      @apply 
+      block px-4 py-2 font-medium text-gray-800 border-b border-gray-300 hover:bg-pink-700 hover:text-white;
+  }
+    .input {
+      @apply 
+      w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600;
+  }
+    .container-center {
+      @apply 
+      container mx-auto
+  }
+    .ad-cover {
+      @apply
+      w-full h-full  bg-black opacity-60 top-0 bottom-0 m-auto
+    }
+    .OAuth-btn {
+      @apply
+      flex items-center justify-between w-full px-6 py-3 bg-white border border-gray-500 rounded-lg hover:bg-gray-200 mb-5
+    }
+    .swiper-slide{
+      @apply
+      h-auto
+    }
+}

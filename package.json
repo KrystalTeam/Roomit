@@ -2,7 +2,11 @@
   "name": "roomit",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@babel/preset-react": "^7.18.6",
+=======
+    "@fortawesome/fontawesome-free": "^6.2.1",
+>>>>>>> f729c52dc0507b3e96b8b63ed75b2b38a2a353e1
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -10,11 +14,19 @@
     "autoprefixer": "9",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "postcss": "7",
+<<<<<<< HEAD
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react_ujs": "^2.6.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+=======
+    "stimulus": "^3.2.1",
+    "stimulus-carousel": "^4.0.0",
+    "stimulus-dropdown": "^2.0.0",
+    "swiper": "6.8.4",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+>>>>>>> f729c52dc0507b3e96b8b63ed75b2b38a2a353e1
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
