@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @rooms.each do |room| %>
+      <% @rooms.reverse.each do |room| %>
       <tr>
         <td class="p-1 border border-slate-300"><%= room.summary %></td>
         <td class="p-1 border border-slate-300">$<%= room.price %></td>

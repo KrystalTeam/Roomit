@@ -7,5 +7,9 @@
       </div>
     </div>
   </div>
-  <div class="w-3/5 bg-cover rounded-r-md" style="background-image: url(http://www.funtime.com.tw/blog/wp-content/uploads/2021/01/127.jpg)"></div>
+  <div class="w-3/5 bg-cover rounded-r-md">
+    <% @room.photos.each do |photo| %>
+      <%= image_tag photo %>
+    <% end %>
+  </div>
 </div>
