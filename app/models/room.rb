@@ -6,10 +6,15 @@ class Room < ApplicationRecord
   
   has_many_attached :avatars
 <<<<<<< HEAD
+<<<<<<< HEAD
   has_many_attached :photos
 
 =======
 >>>>>>> a69000c (active storage install /add room relationship)
+=======
+  has_many_attached :photos
+
+>>>>>>> 3468809 (AWS S3 linked)
   validates :home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, presence: true
 
   enum home_type: [:boutique_hotel, :hotel, :bed_and_breakfast, :aparthotel, :hostel, :minsu , :nature_lodge, :resort, :ryokan]

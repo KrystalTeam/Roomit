@@ -50,3 +50,8 @@ gem 'acts_as_paranoid'
 gem 'rubocop'
 
 gem 'friendly_id', '~> 5.4.0'
+<<<<<<< HEAD
+=======
+gem 'mini_magick', '~> 4.12'
+gem "aws-sdk-s3", require: false
+>>>>>>> 3468809 (AWS S3 linked)

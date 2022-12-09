@@ -36,6 +36,7 @@
     </div>
   </div>
   <div class="w-3/5 bg-cover rounded-r-md">
+<<<<<<< HEAD
     <% @room.photos.reverse.each do |photo| %>
       <div>
         <%= image_tag photo.variant(resize: '300x300^') %>
@@ -43,3 +44,10 @@
     <% end %>
   </div>
 </div>
+=======
+    <% @room.photos.each do |photo| %>
+      <%= image_tag photo.variant(:thumb) %>
+    <% end %>
+  </div>
+</div>
+>>>>>>> 3468809 (AWS S3 linked)

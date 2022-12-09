@@ -7,6 +7,7 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
   <div class="w-3/5 rounded-r-md">
     <% @room.photos.reverse.each do |photo| %>
       <div class="relative inline-block border-2 border-red-400 ">
@@ -18,3 +19,11 @@
     <% end %>
   </div>
 </div>
+=======
+  <div class="w-3/5 bg-cover rounded-r-md">
+    <% @room.photos.each do |photo| %>
+      <%= image_tag photo %>
+    <% end %>
+  </div>
+</div>
+>>>>>>> 3468809 (AWS S3 linked)
