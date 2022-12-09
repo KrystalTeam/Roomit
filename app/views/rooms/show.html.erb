@@ -259,7 +259,7 @@
   <div class="w-3/5 bg-cover rounded-r-md">
 >>>>>>> d60cc75 (AWS S3 linked)
     <% @room.photos.each do |photo| %>
-      <%= image_tag photo.variant(:thumb) %>
+      <%= image_tag photo.variant(resize: '300x300') %>
     <% end %>
   </div>
 </div>

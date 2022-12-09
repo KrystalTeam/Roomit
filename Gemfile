@@ -58,6 +58,7 @@ gem 'friendly_id', '~> 5.4.0'
 gem 'mini_magick', '~> 4.12'
 gem "aws-sdk-s3", require: false
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3468809 (AWS S3 linked)
 =======
 gem 'mini_magick', '~> 4.11'
@@ -73,3 +74,8 @@ gem 'rubocop'
 gem 'mini_magick', '~> 4.12'
 gem "aws-sdk-s3", require: false
 >>>>>>> d60cc75 (AWS S3 linked)
+=======
+gem 'mini_magick', '~> 4.11'
+gem "aws-sdk-s3", require: false
+gem 'image_processing'
+>>>>>>> 6816a60 (img variant OK/adjust submit btn text)
