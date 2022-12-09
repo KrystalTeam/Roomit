@@ -44,3 +44,5 @@ gem 'sprockets-rails'
 gem 'react-rails'
 
 gem 'acts_as_paranoid'
+
+gem 'rubocop'
