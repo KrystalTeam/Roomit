@@ -73,19 +73,10 @@
       <%= room.time_field :checkout_time, class:"input"%>
     </div>
   </div>  
-  <div class="w-2/3 mb-2">
-    <%= room.label :photos, '上傳圖片'%> 
-    <%= room.file_field :photos, multiple: true %>
-  </div>
+  <%= room.label :avatar, '檔案上傳'%> 
+  <%= room.file_field :avatar%>         
   <div>
-    <%= room.submit form_submit_text, class:"px-4 py-2 font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"%>
-  </div>
-  <div class="w-2/3 mb-2">
-    <%= room.label :photos, '上傳圖片'%>
-    <%= room.file_field :photos, multiple: true %>
-  </div>
-  <div>
-    <%= room.submit form_submit_text, class:"px-4 py-2 font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"%>
+    <%= room.submit nil, class:"px-4 py-2 mb-4 font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"%>
   </div>
   <div class="w-2/3 mb-2">
     <%= room.label :photos, '上傳圖片'%>

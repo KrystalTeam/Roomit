@@ -78,10 +78,14 @@ class RoomsController < ApplicationController
   def room_params
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, photos:[])
 =======
     params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, avatars:[])
 >>>>>>> a69000c (active storage install /add room relationship)
+=======
+    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, avatars:[])
+>>>>>>> 1826036 (active storage install /add room relationship)
   end
 
   def room_params_without_photos
