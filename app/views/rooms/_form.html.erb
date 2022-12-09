@@ -68,17 +68,17 @@
       </div>
     </div>
   </div>        
-  <div class="w-2/3 mb-5">
+  <div class="w-2/3 mb-2">
     <%= room.label :checkout_time, "退房時間 *" %>
     <div class="relative flex items-center">
       <%= room.time_field :checkout_time, class:"input"%>                
     </div>
   </div>  
-  <div>
-    <%= room.label :photos, '檔案上傳'%> 
-    <%= room.file_field :photos, multiple: true %>         
+  <div class="w-2/3 mb-2">
+    <%= room.label :photos, '上傳圖片'%> 
+    <%= room.file_field :photos, multiple: true %>
   </div>
   <div>
-    <%= room.submit nil, class:"px-4 py-2 mb-4 font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"%>
+    <%= room.submit form_submit_text, class:"px-4 py-2 font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"%>
   </div>
 <% end %>
