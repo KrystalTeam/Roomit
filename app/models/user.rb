@@ -5,9 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[ facebook google_oauth2 ]
 
   has_one_attached :avatar
-  
-  enum role: %i[ guest host admin ]
 
+  attr_accessor :skip_password_validation
+
+  enum role: %i[ guest host admin ]
 
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
@@ -27,4 +28,8 @@ class User < ApplicationRecord
     end
   end
 
+  def password_required?
+    return false if skip_password_validation
+    super
+  end
 end

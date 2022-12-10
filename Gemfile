@@ -36,8 +36,6 @@ end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem "react_on_rails", "= 13.1"
-
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
@@ -45,3 +43,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'mini_magick', '~> 4.11'
 gem "aws-sdk-s3", require: false
 gem 'image_processing'
+gem 'sprockets-rails'
+gem 'react-rails'
+
+gem 'acts_as_paranoid'
+
