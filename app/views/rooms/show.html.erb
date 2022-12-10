@@ -7,8 +7,10 @@
     </div>
   </div>
   <div class="w-3/5 bg-cover rounded-r-md">
-    <% @room.photos.each do |photo| %>
-      <%= image_tag photo.variant(resize: '300x300') %>
+    <% @room.photos.reverse.each do |photo| %>
+      <div>
+        <%= image_tag photo.variant(resize: '300x300^') %>
+      </div>
     <% end %>
   </div>
 </div>

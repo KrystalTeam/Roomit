@@ -7,9 +7,14 @@
       </div>
     </div>
   </div>
-  <div class="w-3/5 bg-cover rounded-r-md">
-    <% @room.photos.each do |photo| %>
-      <%= image_tag photo %>
+  <div class="w-3/5 rounded-r-md">
+    <% @room.photos.reverse.each do |photo| %>
+      <div class="relative inline-block border-2 border-red-400 ">
+        <%= image_tag photo.variant(resize: '300x300') %>
+        <%= link_to destroy_photo_room_path(@room, photo), method: :delete do %>
+          <i class="absolute text-red-400 right-2 top-2 r fa-solid fa-circle-xmark"></i>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
