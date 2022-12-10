@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :trackable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[ facebook google_oauth2 ]
+
+  has_one_attached :avatar
   
   enum role: %i[ guest host admin ]
 
