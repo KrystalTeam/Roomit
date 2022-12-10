@@ -52,6 +52,14 @@ class RoomsController < ApplicationController
     end
   end
 
+  def destroy_photo
+    @room.photos.find(params[:photo_id]).purge_later
+    respond_to do |format|
+      format.html { render :edit, notice: '圖片已刪除' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def find_rooms
@@ -60,5 +68,9 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, photos:[])
+  end
+
+  def room_params_without_photos
+    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time)
   end
 end
