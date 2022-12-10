@@ -61,6 +61,14 @@ class RoomsController < ApplicationController
     end
   end
 
+  def destroy_photo
+    @room.photos.find(params[:photo_id]).purge_later
+    respond_to do |format|
+      format.html { render :edit, notice: '圖片已刪除' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def find_room
@@ -82,5 +90,12 @@ class RoomsController < ApplicationController
 =======
     params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, photos:[])
   end
+<<<<<<< HEAD
 >>>>>>> 3468809 (AWS S3 linked)
+=======
+
+  def room_params_without_photos
+    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time)
+  end
+>>>>>>> 4e15191 (delete photo in room_edit OK)
 end
