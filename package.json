@@ -9,6 +9,7 @@
     "@rails/webpacker": "5.4.3",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "autoprefixer": "9",
+    "errno": "^1.0.0",
     "postcss": "7",
     "purgecss": "^5.0.0",
     "stimulus": "^3.2.1",
@@ -17,6 +18,7 @@
     "swiper": "6.8.4",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "turbolinks": "^5.2.0",
+    "tw-elements": "^1.0.0-alpha13",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },

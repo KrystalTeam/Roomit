@@ -1,10 +1,125 @@
-<div class="flex w-11/12 mx-auto rounded-md shadow-md">
-  <div class="w-2/5 py-4 mx-auto text-gray-700 bg-red-100 bg-opacity-50 rounded-md">
-    <div class="w-2/3 mx-auto rounded-l-md">
+<section class="w-full px-10 mt-10 text-gray-700 lg:px-56 ">
+  <div class="flex flex-col">
+    <h1 class="mb-2 text-2xl font-semibold">
+      新上特價、交通便利、大浴缸、山瑚景觀房、近公車站、青小瑞士花園、步道
+    </h1>
+    <div class="flex justify-between mb-2">
+      <div class="flex gap-2">
+        <div>
+          <i class="text-lg fa-solid fa-star"></i>
+          <span>4.79</span>
+        </div>
+        <div>42則評價</div>
+      </div>
+      <div class="flex gap-2">
+        <div>
+          <i class="fa-solid fa-share"></i>
+          <a href="#" class="mr-2">分享</a>
+        </div>
+        <div>
+          <i class="text-sm fa-regular fa-heart"></i>
+          <a href="#" class="font">儲存</a>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-10 overflow-hidden rounded-2xl">
+      <div class="col-span-2 row-span-2 ">
+        <img src="https://picsum.photos/600/300?random=12" alt="" class="img-full aspect-ratio"/>
+      </div>
       <div>
-        <%= render "form", room: @room %>
+        <img src="https://picsum.photos/600/300?random=10" alt="" class="img-full aspect-ratio"/>
+      </div>
+      <div >
+        <img src="https://picsum.photos/600/300?random=9" alt="" class="img-full aspect-ratio"/>
+      </div>
+      <div>
+        <img src="https://picsum.photos/600/300?random=7" alt="" class="img-full aspect-ratio"/>
+      </div>
+      <div>
+        <img src="https://picsum.photos/600/300?random=7" alt="" class="img-full aspect-ratio"/>
+      </div>
+    </div>
+    <div class="flex flex-row justify-between mb-2 ">
+      <div class="flex flex-col gap-3 pr-20 left-side">
+        <div class="flex flex-col gap-3">
+          <h1 class="text-xl font-bold ">KClub Ubud出租的整套別墅</h1>
+          <ul class="flex gap-3 text-sm">
+            <li>6位</li>
+            <li>3間臥室</li>
+            <li>3張床</li>
+            <li>3.5間衛浴</li>
+          </ul>
+        </div>
+        <hr>
+        <div class="flex flex-col gap-3" >
+          <h3 class="text-lg font-medium ">有提供的設備與服務</h3>
+          <ul class="flex flex-col gap-2 list-none ">
+            <li>海灘 緊鄰沙灘</li>
+            <li>廚房</li>
+            <li>WiFi</li>
+            <li>周圍有免費的車道停車位1個車位</li>
+            <li>空調設備</li>
+          </ul>
+        </div>
+        <hr>
+        <div class="flex flex-col">
+          <h3 class="mt-2 text-lg font-medium w-fu">住宿地點</h3>
+          <h4 class="mt-2 font-medium">
+            Aewol-eup,Cheju、濟州特別自治道、南韓
+          </h4>
+          <span class="mt-2">
+            애월 곽지해수욕장을 끼고 있으며 1960~70년대의 빈티지 에어스트림을 축적
+          </span>
+        </div>
+        <hr>
+      </div>
+      <div class="relative h-full border border-gray-300 shadow-2xl rounded-xl">
+        <div class="static p-5 ">
+          <div class="flex flex-col gap-2">
+            <div class="inline-flex">
+              <h2 class="mr-2 text-xl font-semibold">$13,818 TWD</h2>
+              <span class="text-lg ">晚</span>
+            </div>
+            <div class="flex items-center text-sm">
+              <i class="mr-1 fa-solid fa-star"></i>
+              <span class="mr-2">5.0</span>
+              <p>6</p>
+              <p>則評價</p>
+            </div>
+            <!-- checkin_time -->
+            <div class="flex items-center w-full">
+              <div class="relative w-full datepicker form-floating " data-mdb-toggle-button="true">
+                <input type="text" 
+                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-pink-700 focus:outline-none" placeholder="Select a date" />
+                <label for="floatingInput" class="text-gray-700">選擇入住時間</label>
+                <button class="datepicker-toggle-button" data-mdb-toggle="datepicker">
+                  <i class="fas fa-calendar datepicker-toggle-icon"></i>
+                </button>
+              </div>
+            </div>
+            <!-- guest_num -->
+            <div class="flex-grow w-full">
+              <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-pink-700 focus:outline-none" aria-label="Default select example">
+                <option  selected>選擇入住人數</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <button class=" OAuth-btn">預定房間</button>
+            <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
+            <div class="flex justify-between gap-10 text-sm text-gray-700">
+              <span class="">$12,320 TWD x 7晚</span>
+              <span class="">$86,243 TWD</span>
+            </div>
+            <hr class="my-5">
+            <div class="flex justify-between text-lg text-black">
+              <span>$7,895 TWD</span>
+              <span>稅前總價</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="w-3/5 bg-cover rounded-r-md" style="background-image: url(http://cdn.home-designing.com/wp-content/uploads/2018/01/flying-pendant-lights-colourful-stools-kitsch-living-room.jpg)"></div>
-</div>
+</section>
