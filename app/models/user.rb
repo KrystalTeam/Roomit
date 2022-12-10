@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :bookings
   has_many :rooms
   has_many :booked_rooms, through: :bookings, source: :rooms
+  has_one_attached :avatar
   
   enum role: %i[ guest host admin ]
 
