@@ -99,11 +99,17 @@ class RoomsController < ApplicationController
     params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, photos:[])
   end
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3468809 (AWS S3 linked)
 =======
+=======
+>>>>>>> a022e6e (delete photo in room_edit OK)
 
   def room_params_without_photos
     params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time)
   end
+<<<<<<< HEAD
 >>>>>>> 4e15191 (delete photo in room_edit OK)
+=======
+>>>>>>> a022e6e (delete photo in room_edit OK)
 end

@@ -257,9 +257,16 @@
           </section>
   </div>
   <div class="w-3/5 bg-cover rounded-r-md">
+<<<<<<< HEAD
 >>>>>>> d60cc75 (AWS S3 linked)
     <% @room.photos.each do |photo| %>
       <%= image_tag photo.variant(resize: '300x300') %>
+=======
+    <% @room.photos.reverse.each do |photo| %>
+      <div>
+        <%= image_tag photo.variant(resize: '300x300^') %>
+      </div>
+>>>>>>> a022e6e (delete photo in room_edit OK)
     <% end %>
   </div>
 </div>
