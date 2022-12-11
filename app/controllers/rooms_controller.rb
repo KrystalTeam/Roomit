@@ -44,15 +44,6 @@ class RoomsController < ApplicationController
     redirect_to rooms_path, notice: "已刪除"
   end
 
-
-  def destroy_photo
-    @room.photos.find(params[:photo_id]).purge_later
-    respond_to do |format|
-      format.html { render :edit, notice: '圖片已刪除' }
-      format.json { head :no_content }
-    end
-  end
-
   def destroy_photo
     @room.photos.find(params[:photo_id]).purge_later
     respond_to do |format|
