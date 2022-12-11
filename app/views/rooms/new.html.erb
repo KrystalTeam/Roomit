@@ -7,5 +7,9 @@
       </div>
     </div>
   </div>
-  <div class="w-3/5 bg-cover rounded-r-md" style="background-image: url(https://www.ataoi-hotel.com.tw/userfiles/images/20200318001338940.jpg)"></div>
+  <div class="w-3/5 bg-cover rounded-r-md" style="background-image: url(https://www.ataoi-hotel.com.tw/userfiles/images/20200318001338940.jpg)">
+    <% @room.photos.each do |photo| %>
+      <%= image_tag photo %>
+    <% end %>
+  </div>
 </div>

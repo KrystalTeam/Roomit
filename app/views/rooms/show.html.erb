@@ -181,13 +181,12 @@
         </p>
       </div>
     </div>
-    <!-- guest_review_end -->
-    <hr class="my-5">
-    <!-- room_location -->
-    <div>
-      <h3 class="h3">住宿地點</h3>
-      <div class="w-full">
+  </div>
+  <div class="w-3/5 bg-cover rounded-r-md">
+    <% @room.photos.reverse.each do |photo| %>
+      <div>
+        <%= image_tag photo.variant(resize: '300x300^') %>
       </div>
-      <!-- room_location -->
-    </div>
-  </section>
+    <% end %>
+  </div>
+</div>
