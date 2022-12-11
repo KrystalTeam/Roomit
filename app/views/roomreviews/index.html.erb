@@ -3,7 +3,7 @@
 
 <%= link_to '新增評論', new_room_review_path %>
 
-<!-- <a href="http://room_reviews/new">新增評論</a> -->
+<!-- <a href="http://roomreviews/new">新增評論</a> -->
 
 
 <table>
@@ -19,7 +19,7 @@
     
     <% @roomreviews.each do |roomreview| %>
     <tr>
-      <td><%= link_to roomreview.reservation_id, room_review_path(roomreview.id) %></td>
+      <td><%= link_to roomreviews.reservation_id, room_review_path(roomreview.id) %></td>
       <!-- <td><%= roomreview.accuracy_rating %></td>
       <td><%= roomreview.check_in_rating %></td>
       <td><%= roomreview.cleanliness_rating %></td>
@@ -27,6 +27,9 @@
       <td><%= roomreview.location_rating %></td>
       <td><%= roomreview.value_rating %></td>
       <td><%= roomreview.comment %></td> -->
+
+        <%= link_to "更新評論", edit_roomreview_path(roomreview.id) %>
+        <%= link_to "刪除評論", roomreview_path(roomreview.id), method: 'delete', data: {confirm: 'are you sure?'} %>
     </tr>
     <% end %>
 </table>

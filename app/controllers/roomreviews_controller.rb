@@ -1,29 +1,52 @@
 class RoomReviewsController < ApplicationController
+
     def index
-      @roomreviews = Roomreview.all
+      @roomreviews = RoomrReview.all
     end
   
     def new
-      @roomreview = RoomReviews.new
+      @roomreview = RoomRevie.new
     end
   
     def create
       
-  
-      @roomreview = Roomeeview.new(roomreview_clean_parmas)
+      @roomreview = RoomeReview.new(roomreview_clean_parmas)
   
       if @roomreview.save
         flash[:notice] = "評論已新增"
-        redirect_to '/room_reviews'
+        redirect_to '/roomreviews'
+      else
+        render :new
       
       end
   
     end
-  
-    def edit
+
+    def show
+      @roomreview = RoomrReview.find_by(id: params[:id])
     end
   
-    def show
+    def edit
+        @roomreview = RoomrReview.find_by(id: params[:id])
+    end
+
+    def update
+        @roomreview = RoomrReview.find_by(id: params[:id])
+
+        if @roomreview.update(roomreview_clean_parmas)
+            flash[:notice] = "評論已更新"
+            redirect_to '/roomreviews'
+        else
+          render :edit
+        end
+    end
+  
+    def destroy
+      @roomreview = RoomrReview.find_by(id: params[:id])
+      @roomreview.destroy
+
+      flash[:notice] = "評論已刪除"
+      redirect_to '/roomreviews'
     end
   
     private
