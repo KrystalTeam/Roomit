@@ -1,0 +1,47 @@
+<h1>新增評論</h1>
+
+
+<%= form_for(@roomreview) do |form| %>
+
+<div>
+  <%= form.label :房客名稱 %>
+  <%= form.text_field :reservation_id %>
+</div>
+
+<div>
+  <%= form.label :準確度 %>
+  <%= form.text_field :accuracy_rating %>
+</div>
+
+<div>
+  <%= form.label :入住 %>
+  <%= form.text_field :check_in_rating %>
+</div>
+
+<div>
+ <%= form.label :乾淨度 %>
+ <%= form.text_field :cleanliness_rating %>
+</div>
+
+<div>
+ <%= form.label :溝通 %>
+ <%= form.text_field :communication_rating %>
+</div>
+
+<div>
+  <%= form.label :位置 %>
+  <%= form.text_field :location_rating %>
+</div>
+
+<div>
+  <%= form.label :性價比 %>
+  <%= form.text_field :value_rating %>
+</div>
+
+<div>
+  <%= form.label :評論 %>
+  <%= form.text_area :comment %>
+</div>
+
+<%= form.submit %>
+<% end %>

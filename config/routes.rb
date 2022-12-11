@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # root "room#home"
   resources :rooms do
     delete '/photos/:photo_id' => 'rooms#destroy_photo', as: :destroy_photo, on: :member
+  
   end
+  
+  resources :roomreviews
 
 end

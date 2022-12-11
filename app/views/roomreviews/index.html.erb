@@ -1,0 +1,32 @@
+<h1>評論區</h1>
+
+
+<%= link_to '新增評論', new_room_review_path %>
+
+<!-- <a href="http://room_reviews/new">新增評論</a> -->
+
+
+<table>
+    <tr>
+      <td>房客名稱</td>
+      <!-- <td>準確性</td>
+      <td>入住</td>
+      <td>乾淨度</td>
+      <td>溝通</td>
+      <td>位置</td>
+      <td>性價比</td> -->
+    </tr>
+    
+    <% @roomreviews.each do |roomreview| %>
+    <tr>
+      <td><%= link_to roomreview.reservation_id, room_review_path(roomreview.id) %></td>
+      <!-- <td><%= roomreview.accuracy_rating %></td>
+      <td><%= roomreview.check_in_rating %></td>
+      <td><%= roomreview.cleanliness_rating %></td>
+      <td><%= roomreview.communication_rating %></td>
+      <td><%= roomreview.location_rating %></td>
+      <td><%= roomreview.value_rating %></td>
+      <td><%= roomreview.comment %></td> -->
+    </tr>
+    <% end %>
+</table>
