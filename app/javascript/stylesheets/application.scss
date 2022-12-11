@@ -1,8 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
-
+@import 'tw-elements';
 .fa-google {
   background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
   -webkit-background-clip: text;
@@ -20,6 +19,18 @@
 }
 
 @layer components {
+  .h1{
+    @apply
+    text-2xl font-semibold
+  }
+  .h2 {
+    @apply
+    text-xl font-bold
+  }
+  .h3 {
+    @apply
+    text-lg font-medium 
+  }
 
     .nav-item {
       @apply 
@@ -39,10 +50,16 @@
     }
     .OAuth-btn {
       @apply
-      flex items-center justify-between w-full px-6 py-3 bg-white border border-gray-500 rounded-lg hover:bg-gray-200 mb-5
+      w-full px-6 py-2  text-white bg-pink-600 rounded-lg hover:bg-pink-800
     }
     .swiper-slide{
       @apply
       h-auto
+    }
+    .img-full{
+      @apply
+      w-full
+      h-full
+      object-cover
     }
 }
