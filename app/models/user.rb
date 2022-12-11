@@ -8,6 +8,10 @@ class User < ApplicationRecord
 
   attr_accessor :skip_password_validation
 
+  has_many :bookings
+  has_many :rooms
+  has_many :booked_rooms, through: :bookings, source: :rooms
+  
   enum role: %i[ guest host admin ]
 
   def self.from_omniauth(auth)
