@@ -66,15 +66,15 @@
         <%= room.time_field :checkin_end_at, class:"input"%>
       </div>
     </div>
-  </div>        
+  </div>
   <div class="w-2/3 mb-2">
     <%= room.label :checkout_time, "退房時間 *" %>
     <div class="relative flex items-center">
       <%= room.time_field :checkout_time, class:"input"%>
     </div>
-  </div>  
+  </div>
   <div class="w-2/3 mb-2">
-    <%= room.label :photos, '上傳圖片'%> 
+    <%= room.label :photos, '上傳圖片'%>
     <%= room.file_field :photos, multiple: true %>
   </div>
   <div>
