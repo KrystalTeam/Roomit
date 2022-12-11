@@ -57,18 +57,19 @@
   <table class="w-4/5 border border-slate-400">
     <thead>
       <tr>
+        <th class="p-2 bg-gray-200 border border-slate-300">ID</th>
         <th class="w-2/3 p-2 bg-gray-200 border border-slate-300">介紹</th>
         <th class="w-1/6 p-2 bg-gray-200 border border-slate-300">價格</th>
-        <th class="w-1/6 p-2 bg-gray-200 border border-slate-300">Action</th>
+        <th class="p-2 bg-gray-200 border border-slate-300">Action</th>
       </tr>
     </thead>
     <tbody>
-      <% @rooms.each do |room| %>
+      <% @rooms.reverse.each do |room| %>
         <tr>
+          <td class="p-1 border border-slate-300"><%= room.id %></td>
           <td class="p-1 border border-slate-300"><%= room.summary %></td>
           <td class="p-1 border border-slate-300">$<%= room.price %></td>
           <td class="p-1 border border-slate-300">
-            <button class="px-2 py-1 text-white bg-blue-500 rounded"><%= link_to "查看詳細資訊", room_path(room) %></button>
             <button class="px-2 py-1 text-white bg-green-500 rounded"><%= link_to "編輯", edit_room_path(room) %></button>
             <button class="px-2 py-1 text-white bg-red-400 rounded"><%= link_to "刪除", room_path(room), method: "DELETE", data:{ confirm: "確定要刪除嗎？"} %></button>
           </td>

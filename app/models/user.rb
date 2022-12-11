@@ -4,6 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[ facebook google_oauth2 ]
 
+  has_one_attached :avatar
+
+  attr_accessor :skip_password_validation
+
+  has_many :bookings
+  has_many :rooms
+  has_many :booked_rooms, through: :bookings, source: :rooms
+  
   enum role: %i[ guest host admin ]
 
   def self.from_omniauth(auth)
@@ -19,9 +27,13 @@ class User < ApplicationRecord
   # def self.new_with_session(params, session)
   #   super.tap do |user|
   #     if data == session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-  #       user.email = data["email"] if user.email.blank?
+  #     user.email = data["email"] if user.email.blank?
   #     end
   #   end
   # end
 
+  def password_required?
+    return false if skip_password_validation
+    super
+  end
 end

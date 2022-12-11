@@ -1,0 +1,19 @@
+<h1 class=" text-2xl text-pink-800 ">Room#home</h1>
+<p>Find me in app/views/room/home.html.erb</p>
+
+<% if current_user.nil? %>
+  <%= button_to "Log in", new_user_session_path  %>
+
+  <div>
+  <%= button_to "Log in with Facebook", user_facebook_omniauth_authorize_path, method: :post %>  
+  </div>
+
+  <div>
+    <%= button_to "Log in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
+  </div>
+<% else %>
+  <%= link_to "Edit my account", edit_user_registration_path %>
+  <%= button_to "Log out", destroy_user_session_path, method: :delete  %>  
+<% end %>
+
+<%= react_component 'User', abc: 'This is a React Component' %>
