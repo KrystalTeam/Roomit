@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -136,6 +137,8 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+=======
+>>>>>>> 6d649e3 (GuestReview Model)
   create_table "guest_reviews", force: :cascade do |t|
     t.bigint "booking_id", null: false
     t.integer "rating"
@@ -144,6 +147,7 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["booking_id"], name: "index_guest_reviews_on_booking_id"
+<<<<<<< HEAD
 =======
 >>>>>>> a69000c (active storage install /add room relationship)
   end
@@ -190,6 +194,10 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
 
 =======
 >>>>>>> 78c0b14 (fix img update and registration bugs)
+=======
+  end
+
+>>>>>>> 6d649e3 (GuestReview Model)
   create_table "rooms", force: :cascade do |t|
     t.integer "home_type", null: false
     t.integer "room_type", null: false
@@ -240,6 +248,7 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
   add_foreign_key "bookings", "users"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   add_foreign_key "guest_reviews", "bookings"
 =======
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -247,4 +256,7 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
 >>>>>>> a69000c (active storage install /add room relationship)
 =======
 >>>>>>> 23d3fc3 (gem duplicates deleted)
+=======
+  add_foreign_key "guest_reviews", "bookings"
+>>>>>>> 6d649e3 (GuestReview Model)
 end
