@@ -3,4 +3,5 @@ class GuestReview < ApplicationRecord
 
   belongs_to :booking
   validates :comment, presence: true
+
 end

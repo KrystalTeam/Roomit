@@ -118,6 +118,16 @@ ActiveRecord::Schema.define(version: 2022_12_13_030057) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "guest_reviews", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_guest_reviews_on_booking_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.integer "home_type", null: false
     t.integer "room_type", null: false
@@ -166,4 +176,5 @@ ActiveRecord::Schema.define(version: 2022_12_13_030057) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
+  add_foreign_key "guest_reviews", "bookings"
 end
