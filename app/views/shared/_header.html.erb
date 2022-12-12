@@ -51,8 +51,9 @@
             <%= link_to "心願單", "#", class: "nav-item " %>
             <%= link_to "登出", destroy_user_session_path, method: :delete, class: "nav-item border-0 " %>
           <% else %>
-            <button type="button" data-bs-toggle="modal" data-bs-target="#signup" class= "w-full text-left border-0 nav-item">註冊</button>
-            <button type="button" data-bs-toggle="modal" data-bs-target="#signin" class= "w-full text-left border-0 nav-item">登入</button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#signup" class= "w-full text-left nav-item">註冊</button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#signin" class= "w-full text-left border-0 nav-item">登入
+            </button>
           <% end %>
         </div>
       </div>
