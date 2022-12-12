@@ -2,6 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import 'tw-elements';
+
 .fa-google {
   background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
   -webkit-background-clip: text;
@@ -19,47 +20,51 @@
 }
 
 @layer components {
-  .h1{
-    @apply
-    text-2xl font-semibold
+.h1{
+  @apply
+  text-2xl font-semibold
   }
-  .h2 {
-    @apply
-    text-xl font-bold
+.h2 {
+  @apply
+  text-xl font-bold
   }
-  .h3 {
-    @apply
-    text-lg font-medium 
+.h3 {
+  @apply
+  text-lg font-medium 
   }
 
-    .nav-item {
-      @apply 
-      block px-4 py-2 font-medium text-gray-800 border-b border-gray-300 hover:bg-pink-700 hover:text-white;
+  .nav-item {
+    @apply 
+    block px-4 py-2 font-medium text-gray-800 border-b border-gray-300 hover:bg-pink-700 hover:text-white;
   }
-    .input {
-      @apply 
-      w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600;
+  .input {
+    @apply 
+    w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600;
   }
-    .container-center {
-      @apply 
-      container mx-auto
+  .container-center {
+    @apply 
+    container mx-auto
   }
-    .ad-cover {
-      @apply
-      w-full h-full  bg-black opacity-60 top-0 bottom-0 m-auto
-    }
-    .OAuth-btn {
-      @apply
-      w-full px-6 py-2  text-white bg-pink-600 rounded-lg hover:bg-pink-800
-    }
-    .swiper-slide{
-      @apply
-      h-auto
-    }
-    .img-full{
-      @apply
-      w-full
-      h-full
-      object-cover
-    }
+  .ad-cover {
+    @apply
+    w-full h-full  bg-black opacity-60 top-0 bottom-0 m-auto
+  }
+  .OAuth-btn {
+    @apply
+    w-full px-6 py-3  border text-black bg-white rounded-lg hover:text-pink-800 hover:border-gray-600 flex justify-between 
+  }
+  .btn {
+    @apply
+    w-full px-6 py-3  text-white bg-pink-600 rounded-lg hover:bg-pink-800
+  }
+  .swiper-slide{
+    @apply
+    h-auto
+  }
+  .img-full{
+    @apply
+    w-full
+    h-full
+    object-cover
+  }
 }
