@@ -46,6 +46,9 @@ class BookingsController < ApplicationController
       confirm_signature = @api_obj.get_signature(confirm_nonce, confirm_body)
       @api_obj.get_response(@api_obj.header(confirm_nonce, confirm_signature), confirm_body)
     end
+
+    def index
+    end
   end
 
   def cancel
