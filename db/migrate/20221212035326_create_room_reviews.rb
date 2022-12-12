@@ -1,6 +1,6 @@
-class CreateRoomreviews < ActiveRecord::Migration[6.1]
+class CreateRoomReviews < ActiveRecord::Migration[6.1]
   def change
-    create_table :roomreviews do |t|
+    create_table :room_reviews do |t|
       t.integer :reservation_id
       t.integer :accuracy_rating
       t.integer :check_in_rating

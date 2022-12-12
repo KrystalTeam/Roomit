@@ -3,8 +3,8 @@
 <% if @roomreview.errors.any? %>
 
  <ul>
-   <% @roomreview erroes.full_messages.each do |messsage| %>
-    <li><%= message %>></li>
+   <% @roomreview.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
    <% end %>
 </ul>
 
@@ -51,4 +51,3 @@
 </div>
 
 <%= form.submit %>
-<% end %>
