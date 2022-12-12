@@ -20,18 +20,18 @@
 }
 
 @layer components {
-.h1{
-  @apply
-  text-2xl font-semibold
-  }
-.h2 {
-  @apply
-  text-xl font-bold
-  }
-.h3 {
-  @apply
-  text-lg font-medium 
-  }
+  .h1{
+    @apply
+    text-2xl font-semibold
+    }
+  .h2 {
+    @apply
+    text-xl font-bold
+    }
+  .h3 {
+    @apply
+    text-lg font-medium 
+    }
 
   .nav-item {
     @apply 
