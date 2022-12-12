@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :find_rooms, only: [:edit, :update, :destroy, :show, :destroy_photo]
 
   def index
-    @rooms = Room.not_deleted
+    @rooms = current_user.rooms.not_deleted
   end
 
   def new
@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
+    @room = current_user.rooms.not_deleted.new(room_params)
     if @room.save
       redirect_to rooms_path, notice: '新增成功'
     else
@@ -55,7 +55,7 @@ class RoomsController < ApplicationController
   private
 
   def find_rooms
-    @room = Room.not_deleted.find(params[:id])
+    @room = current_user.rooms.not_deleted.find(params[:id])
   end
 
   def room_params
