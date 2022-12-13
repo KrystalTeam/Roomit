@@ -36,5 +36,9 @@ yarn-debug.log*
 .yarn-integrity
 
 # Secret files
+<<<<<<< HEAD
 .env.development
 config/local.env
+=======
+.env.development
+>>>>>>> 8a22f19 (LINE Pay available)
