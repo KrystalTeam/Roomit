@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :find_rooms, only: [:edit, :update, :destroy, :show, :destroy_photo]
+  before_action :find_room, only: [:edit, :update, :destroy, :show, :destroy_photo]
 
   def index
     @rooms = Room.not_deleted
@@ -20,6 +20,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @user = current_user
   end
 
   def edit
@@ -54,7 +55,7 @@ class RoomsController < ApplicationController
 
   private
 
-  def find_rooms
+  def find_room
     @room = Room.not_deleted.find(params[:id])
   end
 

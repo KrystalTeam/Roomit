@@ -8,6 +8,7 @@
   <table class="w-4/5 border border-slate-400">
     <thead>
       <tr>
+        <th class="p-2 bg-gray-200 border border-slate-300"></th>
         <th class="p-2 bg-gray-200 border border-slate-300">ID</th>
         <th class="w-2/3 p-2 bg-gray-200 border border-slate-300">介紹</th>
         <th class="w-1/6 p-2 bg-gray-200 border border-slate-300">價格</th>
@@ -17,6 +18,7 @@
     <tbody>
       <% @rooms.reverse.each do |room| %>
       <tr>
+        <td class="p-1 border border-slate-300"><%= link_to "#{room.address + ' ' + room.home_type}", room_path(room) %></td>
         <td class="p-1 border border-slate-300"><%= room.id %></td>
         <td class="p-1 border border-slate-300"><%= room.summary %></td>
         <td class="p-1 border border-slate-300">$<%= room.price %></td>
