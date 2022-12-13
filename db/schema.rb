@@ -62,9 +62,13 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.datetime "updated_at", precision: 6, null: false
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     t.string "slug"
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+    t.string "slug"
+>>>>>>> 3815161 (LINE Pay available)
     t.string "serial"
     t.index ["room_id"], name: "index_bookings_on_room_id"
     t.index ["slug"], name: "index_bookings_on_slug", unique: true
@@ -216,12 +220,15 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+<<<<<<< HEAD
 =======
 >>>>>>> 78c0b14 (fix img update and registration bugs)
 =======
   end
 
 >>>>>>> 6d649e3 (GuestReview Model)
+=======
+>>>>>>> 3815161 (LINE Pay available)
   create_table "rooms", force: :cascade do |t|
     t.integer "home_type", null: false
     t.integer "room_type", null: false
