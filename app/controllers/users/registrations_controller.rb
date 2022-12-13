@@ -13,7 +13,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def update
+<<<<<<< HEAD
       @user = User.find(params[:user][:id])
+=======
+      @user = User.find_by(id: params[:user][:id])
+>>>>>>> af6eae1 (add user edit name/email/number)
 
         if @user.update(user_params)
           redirect_to edit_user_registration_path, notice: '更新成功'
