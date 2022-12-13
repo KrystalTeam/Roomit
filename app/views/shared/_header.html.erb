@@ -9,23 +9,22 @@
       <img src="/assets/fav_icon.png" alt="roomit" class="h-7">
     </div>
   </a>
-  <!-- end logo -->
+  <!-- logo end -->
   <!-- search bar -->
   <div class="px-5">
-    <button class="flex items-center p-1 text-gray-400 border rounded-full shadow-md w-60 sm:w-80 hover:shadow-lg hover:text-gray-800" 
-  type="button">
-      <div class="flex-grow flex-shrink block ">搜尋房源</div>
-      <div class="flex items-center justify-center w-8 h-8 bg-pink-600 rounded-full ">
+    <button class="flex items-center p-2 text-gray-400 border rounded-full shadow-md hover:shadow-lg hover:text-gray-800" type="button">
+      <div class="flex-grow flex-shrink block px-20 ">搜尋房源</div>
+      <div class="flex items-center justify-center p-3 bg-pink-600 rounded-full ">
         <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
       </div>
     </button>
   </div>
-  <!-- end search bar -->
+  <!-- search bar end -->
   <!-- login -->
   <div class="hidden md:block">
     <div class="flex items-center justify-end ">
       <div class="flex items-center mr-4">
-        <a class="hidden px-3 py-2 rounded-full hover:bg-gray-200 lg:inline-block" href="#">
+        <a class="hidden px-3 py-2 rounded-full hover:bg-gray-200 lg:inline-block" href="<%= new_room_path %>">
           <div class="items-center text-sm font-medium text-gray-700 ">在 Roomit 發佈房源</div>
         </a>
         <div class="relative block">
@@ -52,8 +51,9 @@
             <%= link_to "心願單", "#", class: "nav-item " %>
             <%= link_to "登出", destroy_user_session_path, method: :delete, class: "nav-item border-0 " %>
           <% else %>
-            <%= link_to "註冊", new_user_registration_path, class: "nav-item" %>
-            <%= link_to "登入", new_user_session_path, class: "nav-item border-0 ",data: { "turbo-frame": "modal" } %>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#signup" class= "w-full text-left nav-item">註冊</button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#signin" class= "w-full text-left border-0 nav-item">登入
+            </button>
           <% end %>
         </div>
       </div>
@@ -61,3 +61,114 @@
   </div>
   <!-- end login -->
 </nav>
+<!-- sign_in model-->
+<div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="signin" tabindex="-1" aria-labelledby="signinTitle" aria-modal="true" role="dialog">
+  <div class="relative w-auto pointer-events-none modal-dialog modal-dialog-centered">
+    <div class="relative flex flex-col w-full text-current bg-white border-none rounded-md shadow-lg outline-none pointer-events-auto modal-content bg-clip-padding">
+      <div class="flex items-center justify-between flex-shrink-0 p-4 border-b border-gray-200 modal-header rounded-t-md">
+        <div class="w-8"></div>
+        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
+          登入Roomit
+        </h5>
+        <button class="w-8 h-8 rounded-full hover:bg-gray-200" data-bs-dismiss="modal" aria-label="Close">
+          <i class="text-2xl text-gray-700 i-center fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="relative p-4 modal-body">
+        <div class="flex flex-col gap-4 ">
+          <form action="/users/sign_in" method="POST" >
+            <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>"/>
+            <div class="flex flex-col gap-4">
+              <div>
+                <label class="block" for="email">電子信箱</label>
+                <input id="email " name="user[email]" type="email" placeholder="輸入電子信箱" class="input"/>
+              </div>
+              <div>
+                <label class="block">密碼</label>
+                <input id="password " name="user[password]" type="password" placeholder="輸入密碼" class="input"/>
+              </div>
+            </div>
+            <button type="submit" name="commit" value="Log in" data-disable-with="Log in" class="w-full px-6 py-3 mt-5 text-white bg-pink-700 rounded-lg hover:bg-pink-800">
+              登入
+            </button>
+          </form>
+          <hr>
+          <form action="/users/auth/facebook" method="POST">
+            <button class="button_to OAuth-btn" type="submit" method="post" value="Log in with Facebook" >
+              <i class="text-2xl fa-brands fa-facebook text-facebook text-fb"></i>
+              <p class="font-semibold text-gray-600">使用Facebook登入</p>
+              <div class="w-6"></div>
+              <input type="hidden" name="authenticity_token" value="84SKExKnPnsKWEc0ro3rGQ_uRZsfYEjYP2Ff8uIPEyZT5YkC4Xt9eP2zPPo4MQEiQzw2hhuRA5bjRhOj1uECRA" autocomplete="off"/>
+            </button>
+          </form>
+          <form action="/users/auth/google_oauth2" method="POST">
+            <button class="button_to OAuth-btn" type="submit" method="post" value="Log in with Google">
+              <i class="text-2xl fa-brands fa-google text-facebook"></i>
+              <p class="font-semibold text-gray-600">使用Google登入</p>
+              <div class="w-6"></div>
+              <input type="hidden" name="authenticity_token" value="VormYpSwC-iSXZWLTu0nwJk4FgWODYUMpYW8Fjkw2tB38qTy5YlQSjZ29mZBtPV_THoi8Nspt2zx_ieZ5RsGPw" autocomplete="off"/>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- sign_in model end-->
+<!-- sign_up model-->
+<div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="signup" tabindex="-1" aria-labelledby="signupTitle" aria-modal="true" role="dialog">
+  <div class="relative w-auto pointer-events-none modal-dialog modal-dialog-centered">
+    <div class="relative flex flex-col w-full text-current bg-white border-none rounded-md shadow-lg outline-none pointer-events-auto modal-content bg-clip-padding">
+      <div class="flex items-center justify-between flex-shrink-0 p-4 border-b border-gray-200 modal-header rounded-t-md">
+        <div class="w-8"></div>
+        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
+          註冊Roomit
+        </h5>
+        <button class="w-8 h-8 rounded-full hover:bg-gray-200" data-bs-dismiss="modal" aria-label="Close">
+          <i class="text-2xl text-gray-700 i-center fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="relative p-4 modal-body">
+        <div class="flex flex-col gap-4 ">
+          <form action="/users" method="POST">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+            <div class="flex flex-col gap-4">
+              <div>
+                <label class="block" for="email">電子信箱</label>
+                <input id="email " name="user[email]" type="email" placeholder="輸入電子信箱" class="input"/>
+              </div>
+              <div>
+                <label class="block">密碼</label>
+                <input id="password " name="user[password]" type="password" placeholder="輸入密碼" class="input"/>
+              </div>
+              <div>
+                <label class="block">確認密碼</label>
+                <input id="password_confirm" name="user[password_confirmation]" type="password" placeholder="再次輸入密碼" class="input"/>
+              </div>
+            </div>
+            <button type="submit"name="commit" value="Sign up" data-disable-with="Sign up" class="w-full px-6 py-3 mt-4 text-white bg-pink-700 rounded-lg hover:bg-pink-800">繼續
+            </button>
+          </form>
+          <hr>
+          <form action="/users/auth/facebook" method="POST">
+            <button class="button_to OAuth-btn" type="submit" method="post" value="Log in with Facebook" >
+              <i class="text-2xl fa-brands fa-facebook text-facebook text-fb"></i>
+              <p class="font-semibold text-gray-600">使用Facebook登入</p>
+              <div class="w-6"></div>
+              <input type="hidden" name="authenticity_token" value="84SKExKnPnsKWEc0ro3rGQ_uRZsfYEjYP2Ff8uIPEyZT5YkC4Xt9eP2zPPo4MQEiQzw2hhuRA5bjRhOj1uECRA" autocomplete="off"/>
+            </button>
+          </form>
+          <form action="/users/auth/google_oauth2" method="POST">
+            <button class="button_to OAuth-btn" type="submit" method="post" value="Log in with Google">
+              <i class="text-2xl fa-brands fa-google text-facebook"></i>
+              <p class="font-semibold text-gray-600">使用Google登入</p>
+              <div class="w-6"></div>
+              <input type="hidden" name="authenticity_token" value="VormYpSwC-iSXZWLTu0nwJk4FgWODYUMpYW8Fjkw2tB38qTy5YlQSjZ29mZBtPV_THoi8Nspt2zx_ieZ5RsGPw" autocomplete="off"/>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- sign_up model end-->

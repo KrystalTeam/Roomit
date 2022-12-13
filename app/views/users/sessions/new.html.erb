@@ -1,36 +1,58 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="p-5 mx-auto text-left rounded-lg shadow-lg max-w-568">
+  <div class="flex items-center justify-between mb-2">
+    <div class="w-8"></div>
+    <p class="text-lg font-medium text-gray-700">登入Roomit</p>
+    <button class="w-8 h-8 rounded-full hover:bg-gray-200">
+      <i class="text-2xl text-gray-700 i-center fa-solid fa-xmark"></i>
+    </button>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+  <form action="/users/sign_in" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>"/>
+    <div class="flex flex-col gap-4">
+      <div>
+        <label class="block" for="email">電子信箱</label>
+        <input id="email " name="user[email]" type="email" placeholder="輸入電子信箱" class="input"/>
+      </div>
+      <div>
+        <label class="block">密碼</label>
+        <input id="password " name="user[password]" type="password" placeholder="輸入密碼" class="input"/>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <button type="submit" name="commit" value="Log in" data-disable-with="Log in" class="w-full px-6 py-3 mt-4 text-white bg-pink-700 rounded-lg hover:bg-pink-800">
+      登入
+    </button>
+  </form>
+  <hr class="my-3" />
+  <div class="flex flex-col gap-3">
+    <!-- facebook_login -->
+    <form action="/users/auth/facebook" method="POST">
+      <button class="button_to OAuth-btn" type="submit" method="post" value="Log in with Facebook">
+        <i class="text-2xl fa-brands fa-facebook text-facebook text-fb"></i>
+        <p class="font-semibold text-gray-600">使用Facebook登入</p>
+        <div class="w-6"></div>
+        <input type="hidden" name="authenticity_token" value="84SKExKnPnsKWEc0ro3rGQ_uRZsfYEjYP2Ff8uIPEyZT5YkC4Xt9eP2zPPo4MQEiQzw2hhuRA5bjRhOj1uECRA" autocomplete="off"/>
+      </button>
+    </form>
+    <!-- facebook_login end -->
+    <!-- google_login -->
+    <form action="/users/auth/google_oauth2" method="POST">
+      <button class="button_to OAuth-btn" type="submit" method="post" value="Log in with Google">
+        <i class="text-2xl fa-brands fa-google text-facebook"></i>
+        <p class="font-semibold text-gray-600">使用Google登入</p>
+        <div class="w-6"></div>
+        <input type="hidden" name="authenticity_token" value="VormYpSwC-iSXZWLTu0nwJk4FgWODYUMpYW8Fjkw2tB38qTy5YlQSjZ29mZBtPV_THoi8Nspt2zx_ieZ5RsGPw" autocomplete="off"/>
+      </button>
+    </form>
+    <!-- google_login end -->
+    <button class="OAuth-btn">
+      <i class="text-3xl text-black fa-brands fa-apple "></i>
+      <p class="font-semibold text-gray-600">使用Apple登入</p>
+      <div class="w-6"></div>
+    </button>
+    <button class="OAuth-btn">
+      <i class="text-xl text-gray-600 fa-regular fa-envelope "></i>
+      <p class="font-semibold text-gray-600">使用Email登入</p>
+      <div class="w-6"></div>
+    </button>
   </div>
-<% end %>
-
-<div>
-  <%= button_to "Log in with Facebook", user_facebook_omniauth_authorize_path, method: :post %>  
-</div>
-
-<div>
-  <%= button_to "Log in with Google", user_google_oauth2_omniauth_authorize_path, method: :post %>
-</div>
-
-<div>
-  <%= render "users/shared/links" %>
 </div>

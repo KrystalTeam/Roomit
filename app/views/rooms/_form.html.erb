@@ -6,20 +6,20 @@
   <div class="mb-2">
     <%= room.label :room_type, "房間類型 *" %>
     <%= room.select :room_type, options_for_select(Room.room_types.keys), {prompt: '選擇房間類型'}, class:"input"%>
-  </div>  
+  </div>
   <div class="flex justify-between mb-2">
     <div class="w-1/4">
       <%= room.label :max_occupancy, "可容納人數 *" %>
       <%= room.number_field :max_occupancy, in: 1..30, class:"input"%>
-    </div>  
+    </div>
     <div class="w-1/4">
       <%= room.label :bedrooms, "臥房數 *" %>
       <%= room.number_field :bedrooms, in: 1..10, class:"input"%>
-    </div>    
+    </div>
     <div class="w-1/4">
       <%= room.label :bathrooms, "衛浴間數 *" %>
       <%= room.number_field :bathrooms, in: 1..100, class:"input"%>
-    </div>  
+    </div>
   </div>
   <div class="flex justify-between mb-2">
     <div>
@@ -39,19 +39,18 @@
       <%= room.check_box :has_wifi, class:"w-4 h-4 text-pink-500 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"%>
     </div>
   </div>
-
   <div class="mb-2">
     <%= room.label :summary, "房間簡介 *" %>
     <%= room.text_area :summary, class:"input h-28"%>
-  </div>  
+  </div>
   <div class="mb-2">
     <%= room.label :address, "地址 *" %>
     <%= room.text_field :address, class:"input"%>
-  </div>    
+  </div>
   <div class="mb-2">
     <%= room.label :price, "每晚價格 *" %>
     <%= room.number_field :price, in: 1..100000, class:"input"%>
-  </div>      
+  </div>
   <div class="justify-between w-full mb-2">
     <div class="flex">
       <%= room.label :checkin_start_at, "可入住時間 *" %>
@@ -67,15 +66,15 @@
         <%= room.time_field :checkin_end_at, class:"input"%>
       </div>
     </div>
-  </div>        
+  </div>
   <div class="w-2/3 mb-2">
     <%= room.label :checkout_time, "退房時間 *" %>
     <div class="relative flex items-center">
-      <%= room.time_field :checkout_time, class:"input"%>                
+      <%= room.time_field :checkout_time, class:"input"%>
     </div>
-  </div>  
+  </div>
   <div class="w-2/3 mb-2">
-    <%= room.label :photos, '上傳圖片'%> 
+    <%= room.label :photos, '上傳圖片'%>
     <%= room.file_field :photos, multiple: true %>
   </div>
   <div>

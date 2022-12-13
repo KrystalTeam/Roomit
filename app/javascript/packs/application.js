@@ -12,6 +12,7 @@ import "stylesheets/application";
 import "controllers";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "swiper/swiper-bundle.min.css";
+import "tw-elements";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
