@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     t.string "slug"
 >>>>>>> 6739b6f (LINE Pay available)
@@ -116,12 +117,14 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+=======
+>>>>>>> 78c0b14 (fix img update and registration bugs)
     t.string "serial"
     t.index ["room_id"], name: "index_bookings_on_room_id"
-    t.index ["slug"], name: "index_bookings_on_slug", unique: true
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+<<<<<<< HEAD
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -185,6 +188,8 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+=======
+>>>>>>> 78c0b14 (fix img update and registration bugs)
   create_table "rooms", force: :cascade do |t|
     t.integer "home_type", null: false
     t.integer "room_type", null: false
