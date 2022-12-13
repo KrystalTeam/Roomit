@@ -67,6 +67,7 @@
     <tbody>
       <% @rooms.reverse.each do |room| %>
       <tr>
+        <td class="p-1 border border-slate-300"><%= link_to "#{room.address + ' ' + room.home_type}", room_path(room) %></td>
         <td class="p-1 border border-slate-300"><%= room.id %></td>
         <td class="p-1 border border-slate-300"><%= room.summary %></td>
         <td class="p-1 border border-slate-300">$<%= room.price %></td>

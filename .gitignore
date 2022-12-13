@@ -39,6 +39,7 @@ yarn-debug.log*
 <<<<<<< HEAD
 <<<<<<< HEAD
 .env.development
+<<<<<<< HEAD
 config/local.env
 =======
 .env.development
@@ -46,3 +47,5 @@ config/local.env
 =======
 .env.development
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 6ea5280 (LINE Pay available)
