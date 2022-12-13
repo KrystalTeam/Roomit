@@ -20,9 +20,13 @@
           <i class="text-sm fa-regular fa-heart"></i>
           <a href="#" class="font">儲存</a>
         </div>
-<div class="flex w-11/12 mx-auto rounded-md shadow-md">
-  <div class="w-2/5 py-4 mx-auto text-gray-700 bg-red-100 bg-opacity-50 rounded-md">
-    <div class="w-2/3 mx-auto rounded-l-md">
+      </div>
+    </div>
+    <!-- room_img -->
+    <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-5 overflow-hidden rounded-2xl">
+      <div class="col-span-2 row-span-2 ">
+        <img src="https://picsum.photos/600/300?random=12" alt="" class="img-full aspect-ratio"/>
+      </div>
       <div>
         <%= form_with url: bookings_path do %>
         <input type="hidden" name="user_id" value="<%= @user.id %>">
