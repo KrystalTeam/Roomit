@@ -465,11 +465,14 @@
   version "7.18.6"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.18.6.tgz#a8feef63b010150abd97f1649ec296e849943ca0"
 >>>>>>> 8a22f19 (LINE Pay available)
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.18.6.tgz"
   integrity sha512-6mmljtAedFGTWu2p/8WIORGwy+61PLgOMPOdazc7YoJ9ZCWUyFy3A6CpPkRKLKD1ToAesxX8KGEViAiLo9N+7Q==
   dependencies:
@@ -719,11 +722,14 @@
   version "7.18.6"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-display-name/-/plugin-transform-react-display-name-7.18.6.tgz#8b1125f919ef36ebdfff061d664e266c666b9415"
 >>>>>>> 8a22f19 (LINE Pay available)
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@babel/plugin-transform-react-display-name/-/plugin-transform-react-display-name-7.18.6.tgz"
   integrity sha512-TV4sQ+T013n61uMoygyMRm+xf04Bd5oqFpv2jAEQwSZ8NwQA7zeRPg1LMVg2PWi3zWBz+CLKD+v5bcpZ/BS0aA==
   dependencies:
@@ -733,11 +739,14 @@
   version "7.18.6"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-development/-/plugin-transform-react-jsx-development-7.18.6.tgz#dbe5c972811e49c7405b630e4d0d2e1380c0ddc5"
 >>>>>>> 8a22f19 (LINE Pay available)
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@babel/plugin-transform-react-jsx-development/-/plugin-transform-react-jsx-development-7.18.6.tgz"
   integrity sha512-SA6HEjwYFKF7WDjWcMcMGUimmw/nhNRDWxr+KaLSCrkD/LMDBvWRmHAYgE1HDeF8KUuI8OAu+RT6EOtKxSW2qA==
   dependencies:
@@ -747,11 +756,14 @@
   version "7.19.0"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.19.0.tgz#b3cbb7c3a00b92ec8ae1027910e331ba5c500eb9"
 >>>>>>> 8a22f19 (LINE Pay available)
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@babel/plugin-transform-react-jsx/-/plugin-transform-react-jsx-7.19.0.tgz"
   integrity sha512-UVEvX3tXie3Szm3emi1+G63jyw1w5IcMY0FSKM+CRnKRI5Mr1YbCNgsSTwoTwKphQEG9P+QqmuRFneJPZuHNhg==
   dependencies:
@@ -765,11 +777,14 @@
   version "7.18.6"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-pure-annotations/-/plugin-transform-react-pure-annotations-7.18.6.tgz#561af267f19f3e5d59291f9950fd7b9663d0d844"
 >>>>>>> 8a22f19 (LINE Pay available)
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@babel/plugin-transform-react-pure-annotations/-/plugin-transform-react-pure-annotations-7.18.6.tgz"
   integrity sha512-I8VfEPg9r2TRDdvnHgPepTKvuRomzA8+u+nhY7qSI1fR2hRNebasZEETLyM5mAUr0Ku56OkXJ0I7NHJnO6cJiQ==
   dependencies:
@@ -950,11 +965,14 @@
   version "7.18.6"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.18.6.tgz#979f76d6277048dc19094c217b507f3ad517dd2d"
 >>>>>>> 8a22f19 (LINE Pay available)
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@babel/preset-react/-/preset-react-7.18.6.tgz"
   integrity sha512-zXr6atUmyYdiWRVLOZahakYmOBHtWc2WGCkP8PYTgZi0iJXDY2CN180TdrIW4OGOAdLc7TifzDIvtx6izaRIzg==
   dependencies:
@@ -966,10 +984,14 @@
     "@babel/plugin-transform-react-pure-annotations" "^7.18.6"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@babel/runtime@^7.15.3", "@babel/runtime@^7.7.2":
 =======
 "@babel/runtime@^7.15.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4":
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+"@babel/runtime@^7.15.3", "@babel/runtime@^7.7.2":
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   version "7.20.6"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.20.6.tgz"
   integrity sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==
@@ -1019,11 +1041,14 @@
   version "6.2.1"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz#344baf6ff9eaad7a73cff067d8c56bfc11ae5304"
 >>>>>>> 8a22f19 (LINE Pay available)
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz"
   integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
 
@@ -1036,17 +1061,21 @@
   version "1.0.1"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz#4cd74487adeca576c9865ac2b9fe5cb20cef16dd"
 
 "@hotwired/stimulus-webpack-helpers@^1.0.0":
   version "1.0.1"
 >>>>>>> 8a22f19 (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz"
   integrity sha512-wa/zupVG0eWxRYJjC1IiPBdt3Lruv0RqGN+/DTMmUWUyMAEB27KXmVY6a8YpUVTM7QwVuaLNGW4EqDgrS2upXQ==
 
 "@hotwired/stimulus@^3.2.1":
   version "3.2.1"
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.1.tgz#e3de23623b0c52c247aba4cd5d530d257008676b"
@@ -1058,6 +1087,8 @@
 "@hotwired/stimulus@^3.2.1":
   version "3.2.1"
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.npmjs.org/@hotwired/stimulus/-/stimulus-3.2.1.tgz"
   integrity sha512-HGlzDcf9vv/EQrMJ5ZG6VWNs8Z/xMN+1o2OhV1gKiSG6CqZt5MCBB1gRg5ILiN3U0jEAxuDTNPRfBcnZBDmupQ==
 
@@ -1223,6 +1254,7 @@
 
 "@types/glob@^7.1.1":
   version "7.2.0"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/@types/glob/-/glob-7.2.0.tgz"
 <<<<<<< HEAD
 
@@ -1235,6 +1267,8 @@
 "@types/glob@^7.1.1":
   version "7.2.0"
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.2.0.tgz#bc1b5bf3aa92f25bd5dd39f35c57361bdce5b2eb"
   integrity sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==
   dependencies:
@@ -1250,11 +1284,14 @@
   version "5.1.2"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   resolved "https://registry.npmjs.org/@types/minimatch/-/minimatch-5.1.2.tgz"
 >>>>>>> 8a22f19 (LINE Pay available)
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-5.1.2.tgz#07508b45797cb81ec3f273011b054cd0755eddca"
   integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
 
@@ -1751,6 +1788,7 @@ babel-plugin-polyfill-regenerator@^0.4.1:
   resolved "https://registry.npmjs.org/babel-plugin-polyfill-regenerator/-/babel-plugin-polyfill-regenerator-0.4.1.tgz"
   integrity sha512-NtQGmyQDXjQqQ+IzRkBVwEOz9lQ4zxAQZgoAYEtU9dJjnl1Oc98qnN7jcp+bE7O7aYzVpavXE3/VKXNzUbh7aw==
   dependencies:
+<<<<<<< HEAD
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
@@ -4341,6 +4379,8 @@ babel-plugin-polyfill-regenerator@^0.4.1:
   resolved "https://registry.npmjs.org/babel-plugin-polyfill-regenerator/-/babel-plugin-polyfill-regenerator-0.4.1.tgz"
   integrity sha512-NtQGmyQDXjQqQ+IzRkBVwEOz9lQ4zxAQZgoAYEtU9dJjnl1Oc98qnN7jcp+bE7O7aYzVpavXE3/VKXNzUbh7aw==
   dependencies:
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
     "@babel/helper-define-polyfill-provider" "^0.3.3"
 
 babel-plugin-transform-react-remove-prop-types@^0.4.24:
@@ -8231,6 +8271,7 @@ postcss-loader@^3.0.0:
     postcss-load-config "^2.0.0"
     schema-utils "^1.0.0"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 fast-glob@^3.2.7:
 >>>>>>> 8a22f19 (LINE Pay available)
@@ -13166,6 +13207,8 @@ postcss-loader@^3.0.0:
 
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
 postcss-logical@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/postcss-logical/-/postcss-logical-3.0.0.tgz#2495d0f8b82e9f262725f75f9401b34e7b45d5b5"
@@ -13914,6 +13957,7 @@ regenerator-transform@^0.15.1:
   integrity sha512-knzmNAcuyxV+gQCufkYcvOqX/qIIfHLv0u5x79kRxuGojfYVky1f15TzZEu2Avte8QGepvUNTnLskf8E6X6Vyg==
   dependencies:
 <<<<<<< HEAD
+<<<<<<< HEAD
     regenerate "^1.4.2"
     regenerate-unicode-properties "^10.1.0"
     regjsgen "^0.7.1"
@@ -13923,6 +13967,9 @@ regenerator-transform@^0.15.1:
 =======
     "@babel/runtime" "^7.8.4"
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+    "@babel/runtime" "^7.8.4"
+>>>>>>> 23d3fc3 (gem duplicates deleted)
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"
@@ -14541,12 +14588,15 @@ statuses@2.0.1:
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 "statuses@>= 1.4.0 < 2":
   "integrity" "sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA=="
   "resolved" "https://registry.npmjs.org/statuses/-/statuses-1.5.0.tgz"
   "version" "1.5.0"
 >>>>>>> 8a22f19 (LINE Pay available)
 
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
 stimulus-carousel@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/stimulus-carousel/-/stimulus-carousel-4.0.0.tgz#231d8dbcb5ecefc5a252ae34982fd565f999e681"
@@ -14778,6 +14828,7 @@ swiper@^7.4.1:
   integrity sha512-dhbL4tpYFvHug1J7GnKElfTi6EYhlZy/vNZRhHkWFyUsWZ1Vovipxj3la5gqllMogygXJMe3zvVv+f6eppvWiA==
   dependencies:
 <<<<<<< HEAD
+<<<<<<< HEAD
     "emoji-regex" "^7.0.1"
     "is-fullwidth-code-point" "^2.0.0"
     "strip-ansi" "^5.1.0"
@@ -14887,6 +14938,8 @@ swiper@^7.4.1:
   dependencies:
 =======
 >>>>>>> 6739b6f (LINE Pay available)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
     dom7 "^4.0.2"
     ssr-window "^4.0.2"
 

@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.index ["room_id"], name: "index_bookings_on_room_id"
     t.index ["slug"], name: "index_bookings_on_slug", unique: true
     t.index ["user_id"], name: "index_bookings_on_user_id"
+<<<<<<< HEAD
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -169,6 +170,8 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -231,9 +234,12 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
 <<<<<<< HEAD
+<<<<<<< HEAD
   add_foreign_key "guest_reviews", "bookings"
 =======
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 >>>>>>> a69000c (active storage install /add room relationship)
+=======
+>>>>>>> 23d3fc3 (gem duplicates deleted)
 end
