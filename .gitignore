@@ -37,8 +37,12 @@ yarn-debug.log*
 
 # Secret files
 <<<<<<< HEAD
+<<<<<<< HEAD
 .env.development
 config/local.env
 =======
 .env.development
 >>>>>>> 8a22f19 (LINE Pay available)
+=======
+.env.development
+>>>>>>> 6739b6f (LINE Pay available)
