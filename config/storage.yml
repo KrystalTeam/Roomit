@@ -9,41 +9,10 @@ local:
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 amazon:
   service: S3
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  access_key_id: <%= Rails.root.join("config/local.env")) %>
-  secret_access_key: <%= Rails.root.join("config/local.env") %>
-  region: ap-northeast-1
-  bucket: roomit
-=======
   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-<<<<<<< HEAD
-  region: us-east-1
-  bucket: your_own_bucket
->>>>>>> a69000c (active storage install /add room relationship)
-=======
   region: ap-northeast-1
   bucket: rommit
->>>>>>> 3468809 (AWS S3 linked)
-=======
-  access_key_id: <%= Rails.root.join("config/local.env")) %>
-  secret_access_key: <%= Rails.root.join("config/local.env") %>
-  region: ap-northeast-1
-  bucket: roomit
->>>>>>> 78c0b14 (fix img update and registration bugs)
-=======
-  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-<<<<<<< HEAD
-  region: us-east-1
-  bucket: your_own_bucket
->>>>>>> 1826036 (active storage install /add room relationship)
-=======
-  region: ap-northeast-1
-  bucket: rommit
->>>>>>> d60cc75 (AWS S3 linked)
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

@@ -60,18 +60,9 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.integer "state", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     t.string "slug"
->>>>>>> 6739b6f (LINE Pay available)
-=======
-    t.string "slug"
->>>>>>> 3815161 (LINE Pay available)
     t.string "serial"
     t.index ["room_id"], name: "index_bookings_on_room_id"
-    t.index ["slug"], name: "index_bookings_on_slug", unique: true
     t.index ["user_id"], name: "index_bookings_on_user_id"
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -205,8 +196,6 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
-=======
->>>>>>> 23d3fc3 (gem duplicates deleted)
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

@@ -61,25 +61,6 @@
             <div>
               <h4 class="text-sm">聯絡電話</h4>
               <span class="text-sm text-gray-500">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 78c0b14 (fix img update and registration bugs)
-                <% if current_user.phone_num == nil %>
-                  <p data-user-edit-target="currentSetting">無</p>
-=======
-                <% if current_user.phone_num.empty? %>
-                  <p data-user-edit-target="current_setting">無</p>
-                  <div data-user-edit-target="edit_tip" class="hidden">這是您與房東聯繫的最佳管道，需要目前使用的電話號碼。</div>
->>>>>>> 4712e99 (add user edit name/email/number)
-                <% else %>
-                  <div data-user-edit-target="edit_tip" class="hidden">這是您與房東聯繫的最佳管道，需要目前使用的電話號碼。</div>
-                  <div data-user-edit-target="current_setting"><%= current_user.phone_num%></div>
-                <% end %>
-<<<<<<< HEAD
-                <div data-user-edit-target="editTip" class="hidden">這是您與房東聯繫的最佳管道，需要目前使用的電話號碼。</div>
-=======
                 <% if current_user.phone_num.empty? %>
                   <p data-user-edit-target="current_setting">無</p>
                   <div data-user-edit-target="edit_tip" class="hidden">這是您與房東聯繫的最佳管道，需要目前使用的電話號碼。</div>
