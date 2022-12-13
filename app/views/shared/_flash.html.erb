@@ -1,4 +1,8 @@
 <% if flash.any? %>
-    <p class="p-2 text-sm text-pink-500"><%= notice %></p>
-    <p class="p-2 text-pink-800 "><%= alert %></p>
+  <div class="inline-flex items-center w-full px-6 py-2 text-base text-white bg-pink-600 alert alert-dismissible fade show" role="alert">
+    <p><%= notice %></p>
+    <p><%= alert %></p>
+    <button type="button" class="flex items-center justify-center w-5 h-5 ml-auto text-pink-900 border-none rounded-none opacity-50 focus:outline-none focus:opacity-100 hover:text-white hover:opacity-100 hover:no-underline" data-bs-dismiss="alert" aria-label="Close">
+      <i class="text-2xl text-white i-center fa-solid fa-xmark "></i></button>
+  </div>
 <% end %>
