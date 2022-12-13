@@ -7,4 +7,11 @@ Rails.application.routes.draw do
     delete '/photos/:photo_id' => 'rooms#destroy_photo', as: :destroy_photo, on: :member
   end
 
+  resources :bookings, only: [:create] do
+    member do
+      get 'confirm'
+      get 'cancel'
+    end
+  end
+
 end
