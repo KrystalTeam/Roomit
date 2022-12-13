@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between w-full h-20 px-5 mx-auto mb-5 bg-white shadow-md sm:px-10">
+<nav class="flex items-center justify-between w-full h-20 px-5 mx-auto bg-white shadow-md sm:px-10">
   <!-- logo -->
   <a class="flex items-center justify-center h-full min-w-max " href="<%= rooms_path %>"
       >
@@ -61,6 +61,9 @@
   </div>
   <!-- end login -->
 </nav>
+<div class="w-full h-10">
+  <%= render "shared/flash" %>
+</div>
 <!-- sign_in model-->
 <div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="signin" tabindex="-1" aria-labelledby="signinTitle" aria-modal="true" role="dialog">
   <div class="relative w-auto pointer-events-none modal-dialog modal-dialog-centered">
