@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   add_foreign_key "guest_reviews", "bookings"
 =======
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -295,4 +296,6 @@ ActiveRecord::Schema.define(version: 2022_12_11_074325) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 >>>>>>> 1826036 (active storage install /add room relationship)
+=======
+>>>>>>> a43ccef (gem duplicates deleted)
 end
