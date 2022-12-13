@@ -359,7 +359,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   magnific-popup-rails (~> 1.1)
-  mini_magick (~> 4.11)
+  mini_magick (~> 4.12)
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-rails_csrf_protection

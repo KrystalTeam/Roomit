@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :bookings
   has_many :rooms
   has_many :booked_rooms, through: :bookings, source: :rooms
+  has_one_attached :avatar
   
   enum role: %i[ guest host admin ]
 
@@ -27,7 +28,7 @@ class User < ApplicationRecord
   # def self.new_with_session(params, session)
   #   super.tap do |user|
   #     if data == session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-  #     user.email = data["email"] if user.email.blank?
+  #       user.email = data["email"] if user.email.blank?
   #     end
   #   end
   # end

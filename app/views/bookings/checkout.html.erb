@@ -1,0 +1,25 @@
+<h1>訂單確認</h1>
+
+<div class="flex w-11/12 mx-auto rounded-md shadow-md">
+  <div class="w-2/5 py-4 mx-auto text-gray-700 bg-red-100 bg-opacity-50 rounded-md">
+    <div class="w-2/3 mx-auto rounded-l-md">
+      <div>
+        <%= form_with url: bookings_path do %>
+        <input type="hidden" name="user_id" value="<%= @user.id %>">
+        <input type="hidden" name="room_id" value="<%= @room.id %>">
+        <input type="hidden" name="room_price" value="<%= @room.price %>">
+        <input type="hidden" name="start_at" value="<%= Time.now.to_date %>">
+        <input type="hidden" name="end_at" value="<%= 3.days.after.to_date %>">
+        <button>付款</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="w-3/5 bg-cover rounded-r-md">
+    <% @room.photos.reverse.each do |photo| %>
+      <div>
+        <%= image_tag photo.variant(resize: '300x300^') %>
+      </div>
+    <% end %>
+  </div>
+</div>
