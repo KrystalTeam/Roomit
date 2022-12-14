@@ -46,6 +46,10 @@ class BookingsController < ApplicationController
       confirm_body = @api_obj.confirm_body(@booking)
       confirm_signature = @api_obj.get_signature(confirm_nonce, confirm_body)
       @api_obj.get_response(@api_obj.header(confirm_nonce, confirm_signature), confirm_body)
+
+      redirect_to root_path, notice: '訂單付款成功'
+    else
+      redirect_to root_path, alert: '錯誤'
     end
   end
 
@@ -59,6 +63,8 @@ class BookingsController < ApplicationController
   def cancel
     @booking = Booking.find_by!(serial: params[:id])
     @booking.cancelled!
+
+    redirect_to root_path, alert: '訂單付款失敗'
   end
 
   private

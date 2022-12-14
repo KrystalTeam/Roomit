@@ -60,6 +60,9 @@ class RoomsController < ApplicationController
   end
 
   private
+  def find_room
+    @room = Room.not_deleted.find(params[:id])
+  end
 
   def find_room
     @room = Room.find(params[:id])
