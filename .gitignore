@@ -37,3 +37,4 @@ yarn-debug.log*
 
 # Secret files
 .env.development
+.env

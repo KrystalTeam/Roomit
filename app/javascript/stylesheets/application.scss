@@ -39,7 +39,7 @@
   }
   .input {
     @apply 
-    w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600;
+    w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600;
   }
   .container-center {
     @apply 
@@ -55,7 +55,7 @@
   }
   .btn {
     @apply
-    w-full px-6 py-3  text-white bg-pink-600 rounded-lg hover:bg-pink-800
+    w-full px-6 py-3  text-white bg-pink-500 rounded-lg hover:bg-pink-800
   }
   .swiper-slide{
     @apply
@@ -66,5 +66,16 @@
     w-full
     h-full
     object-cover
+  }
+  .checkbox{
+    @apply 
+    w-4
+    h-4 
+    text-pink-500 
+    bg-gray-100 
+    border-gray-300 
+    focus:ring-pink-500 
+    rounded-lg
+    focus:ring-2
   }
 }
