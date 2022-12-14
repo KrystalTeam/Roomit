@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
-  before_action :find_hosted_rooms, only: [:edit, :update, :destroy, :destroy_photo]
+  before_action :find_hosted_rooms, only: [:manage]
   before_action :find_all_rooms, only: [:index]
+  before_action :find_room, only: [:show]
+  before_action :find_hosted_room, only: [:edit, :update, :destroy, :destroy_photo]
 
   def index
     @rooms = Room.all.not_deleted
@@ -13,7 +15,7 @@ class RoomsController < ApplicationController
   def create
     @room = current_user.rooms.not_deleted.new(room_params)
     if @room.save
-      redirect_to rooms_path, notice: '新增成功'
+      redirect_to manage_rooms_path, notice: '新增成功'
     else
       flash.alert = "新增失敗"
       render :new
@@ -21,7 +23,6 @@ class RoomsController < ApplicationController
   end
 
   def show
-    find_room
     @user = current_user
   end
 
@@ -35,7 +36,7 @@ class RoomsController < ApplicationController
       end
     end
     if @room.update(room_params_without_photos)
-      redirect_to rooms_path, notice: '更新成功'
+      redirect_to manage_rooms_path, notice: '更新成功'
     else
       flash.alert = '更新失敗'
       render :edit
@@ -44,7 +45,7 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.update(deleted_at: Time.current)
-    redirect_to rooms_path, notice: "已刪除"
+    redirect_to manage_rooms_path, notice: "已刪除"
   end
 
   def destroy_photo
@@ -56,7 +57,6 @@ class RoomsController < ApplicationController
   end
 
   def manage
-    @rooms = current_user.rooms.not_deleted
   end
 
   private
@@ -66,8 +66,12 @@ class RoomsController < ApplicationController
   end
 
   def find_hosted_rooms
-    @rooms = current_user.rooms.not_deleted.find(params[:id])
+    @rooms = current_user.rooms.not_deleted
   end
+
+  def find_hosted_room
+    @room = current_user.rooms.not_deleted.find(params[:id])
+  end 
 
   def find_all_rooms
     @rooms = Room.all.not_deleted

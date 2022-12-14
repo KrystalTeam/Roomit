@@ -2,53 +2,57 @@
   <div class="grid grid-cols-1 gap-x-5 gap-y-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 ">
     <% @rooms.each do |room| %>
       <div class="relative card-carousel-container">
-        <div data-controller="carousel" class="relative flex-grow mx-auto rounded-lg swiper-container mySwiper ">
-          <div class="absolute z-10 flex flex-col w-full h-full p-3">
-            <i class="self-end text-2xl text-center fa-solid fa-heart opacity-60 hover:opacity-80" ></i>
-            <div class="flex self-center justify-between w-full my-auto ">
-              <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-50 hover:opacity-100 "
-            data-action="carousel#prev">
-                <i class="text-gray-700 fa-solid fa-chevron-left"></i>
+        <%= link_to room_path(room) do %>
+          <div data-controller="carousel" class="relative flex-grow mx-auto rounded-lg swiper-container mySwiper ">
+            <div class="absolute z-10 flex flex-col w-full h-full p-3">
+              <i class="self-end text-2xl text-center fa-solid fa-heart opacity-60 hover:opacity-80" ></i>
+              <div class="flex self-center justify-between w-full my-auto ">
+                <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-50 hover:opacity-100 "
+              data-action="carousel#prev">
+                  <i class="text-gray-700 fa-solid fa-chevron-left"></i>
+                </div>
+                <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-50 hover:opacity-100 "
+              data-action="click->carousel#next">
+                  <i class="text-gray-700 fa-solid fa-chevron-right"></i>
+                </div>
               </div>
-              <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-50 hover:opacity-100 "
-            data-action="click->carousel#next">
-                <i class="text-gray-700 fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="relative swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="https://fakeimg.pl/250x200/" alt="" class="object-cover w-full aspect-ratio " >
+              </div>
+              <div class="swiper-slide">
+                <img src="/assets/house.jpeg" alt="" class="object-cover w-full aspect-ratio "  >
+              </div>
+              <div class="swiper-slide" >
+                <img src="https://fakeimg.pl/400x600/" alt="" class="object-cover w-full aspect-ratio "  >
+              </div>
+              <div class="swiper-slide" >
+                <img src="https://fakeimg.pl/800x600/" alt="" class="object-cover w-full aspect-ratio "  >
               </div>
             </div>
           </div>
-          <div class="relative swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://fakeimg.pl/250x200/" alt="" class="object-cover w-full aspect-ratio " >
+        <% end %>
+        <%= link_to room_path(room) do %>
+          <div class="flex flex-row justify-between m-2 ">
+            <div class="">
+              <div class="text-lg font-bold"><%=room.summary%></div>
+              <div class="mt-0.5 text-gray-500 "><%=room.room_type%></div>
+              <div class="mt-0.5 text-gray-500 text-sm ">
+                <%=room.checkin_start_at.strftime("%m月%d日")%>
+                <span class="mx-1">至</span>
+                <%=room.checkin_end_at.strftime("%m月%d日")%></div>
+              <div class="mt-0.5">
+                <span class="mr-0.5 text-md"><%=number_to_currency(room.price, negative_format: "(%u%n)",precision:0)%></span>
+                <span class="mr-0.5 text-sm">TWD</span>
+                <span class="text-sm">晚</span></div>
             </div>
-            <div class="swiper-slide">
-              <img src="/assets/house.jpeg" alt="" class="object-cover w-full aspect-ratio "  >
-            </div>
-            <div class="swiper-slide" >
-              <img src="https://fakeimg.pl/400x600/" alt="" class="object-cover w-full aspect-ratio "  >
-            </div>
-            <div class="swiper-slide" >
-              <img src="https://fakeimg.pl/800x600/" alt="" class="object-cover w-full aspect-ratio "  >
+            <div class="flex items-start justify-end ">
+              <i class="mt-1 mr-1 text-sm fa-solid fa-star "></i>
+              <p class="inline-block text-md ">4.87</p>
             </div>
           </div>
-        </div>
-        <div class="flex flex-row justify-between m-2 ">
-          <div class="">
-            <div class="text-lg font-bold"><%=room.summary%></div>
-            <div class="mt-0.5 text-gray-500 "><%=room.room_type%></div>
-            <div class="mt-0.5 text-gray-500 text-sm ">
-              <%=room.checkin_start_at.strftime("%m月%d日")%>
-              <span class="mx-1">至</span>
-              <%=room.checkin_end_at.strftime("%m月%d日")%></div>
-            <div class="mt-0.5">
-              <span class="mr-0.5 text-md"><%=number_to_currency(room.price, negative_format: "(%u%n)",precision:0)%></span>
-              <span class="mr-0.5 text-sm">TWD</span>
-              <span class="text-sm">晚</span></div>
-          </div>
-          <div class="flex items-start justify-end ">
-            <i class="mt-1 mr-1 text-sm fa-solid fa-star "></i>
-            <p class="inline-block text-md ">4.87</p>
-          </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>
