@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   # root "room#home"
   resources :rooms do
     delete '/photos/:photo_id' => 'rooms#destroy_photo', as: :destroy_photo, on: :member
+    collection do
+      get 'manage'
+    end
   end
 
-  resources :bookings, only: [:edit, :show, :new, :index]
-
-  resources :bookings, only: [:create] do
+  resources :bookings, only: [:create, :edit, :show, :new, :index] do
     member do
       get 'confirm'
       get 'cancel'

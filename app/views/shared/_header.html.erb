@@ -48,7 +48,7 @@
           <% if user_signed_in? %>
             <%= link_to "帳號", edit_user_registration_path, class: "nav-item " %>
             <%= link_to "旅程", bookings_path, class: "nav-item "%>
-            <%= link_to "管理房源", "#", class: "nav-item " %>
+            <%= link_to "管理房源", manage_rooms_path, class: "nav-item " %>
             <%= link_to "心願單", "#", class: "nav-item " %>
             <%= link_to "登出", destroy_user_session_path, method: :delete, class: "nav-item border-0 " %>
           <% else %>
