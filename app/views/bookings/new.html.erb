@@ -1,10 +1,10 @@
-<section class="flex flex-col flex-wrap">
-  <div class="flex items-center px-6 py-5 bg-white shadow-sm sticky-top">
+<section class="grid grid-cols-1 gap-2 md:grid-cols-9 md:grid-rows-7 md:px-10 md:gap-10">
+  <div class="flex items-center px-6 py-5 bg-white shadow-sm sticky-top md:static md:col-span-9 md:shadow-none">
     <i class="fa-solid fa-chevron-left"></i>
-    <h1 class="inline-block mx-auto font-bold">確認並付款</h1>
+    <h1 class="inline-block mx-auto font-bold md:mx-6 md:text-3xl">確認並付款</h1>
   </div>
-  <div class="flex flex-col content-between w-full">
-    <div class="px-6 room-info">
+  <div class="flex flex-col content-between w-full md:row-span-6 md:col-span-5">
+    <div class="px-6 room-info md:hidden">
       <div class="flex pb-5 mb-5 border-b border-gray-200 room-summary">
         <img
           class="object-cover w-32 h-full mr-3 rounded-lg"
@@ -18,7 +18,7 @@
             <span class="inline-block text-sm"
               >續住折扣／近車站／免費車位_伯爵夫人二人房
               (獨立衛浴／乾濕分離)</span
-            >
+            >+
           </div>
           <span class="text-xs">
             <i class="fa-solid fa-star"></i>
@@ -36,18 +36,16 @@
         <span>為你的預定提供保障</span>
       </div>
     </div>
-    <div
-      class="flex justify-between px-6 border-b-8 border-gray-100 special-tag"
-    >
-      <div class="pb-6 text-xs">
-        <span class="font-bold">服務費全免。</span>
+    <div class="flex justify-between px-6 border-b-8 border-gray-200 md:items-center md:py-5 md:border md:rounded-xl special-tag md:mx-6">
+      <div class="pb-6 text-xs md:text-lg md:pb-0">
+        <span class="font-bold md:block">服務費全免。</span>
         <span>怡伶將為房客支付服務費。</span>
       </div>
       <div class="text-2xl text-pink-500">
         <i class="fa-solid fa-piggy-bank"></i>
       </div>
     </div>
-    <div class="px-6 border-b-8 border-gray-100 date-and-headcount">
+    <div class="px-6 border-b-8 border-gray-100 md:border-b date-and-headcount">
       <h2 class="my-5 text-xl font-bold">你的旅程</h2>
       <div class="flex justify-between date">
         <div class="mb-5">
@@ -64,7 +62,7 @@
         <a class="font-bold underline" href="#">編輯</a>
       </div>
     </div>
-    <div class="px-6 pb-4 border-b-8 border-gray-100 pay-way">
+    <div class="px-6 pb-4 border-b-8 border-gray-100 md:border-b pay-way">
       <h2 class="my-5 text-xl font-bold">選擇付款方式</h2>
       <div>
         <div class="p-3 border-2 border-black rounded-t-lg">
@@ -103,7 +101,7 @@
         </div>
       </div>
     </div>
-    <div class="px-6 py-5 border-b-8 border-gray-100 price-detel">
+    <div class="px-6 py-5 border-b-8 border-gray-100 md:hidden price-detel">
       <h2 class="mb-4 text-xl font-bold">價格詳情</h2>
       <div class="flex justify-between mb-2">
         <span class="flex justify-between">$2,200TWD x 1晚</span>
@@ -118,12 +116,12 @@
         <span>$110 TWD</span>
       </div>
       <div class="flex justify-between mb-3 font-bold">
-        <span>總價<span class="">(TWD)</span></span>
+        <span>總價<a href="#" class="underline">(TWD)</a></span>
         <span>$2,310</span>
       </div>
       <a href="#" class="flex justify-end font-bold underline">更多資訊</a>
     </div>
-    <div class="px-6 pb-5 border-b-8 border-gray-100 pay-with">
+    <div class="px-6 pb-5 border-b-8 border-gray-100 md:border-b pay-with">
       <h2 class="my-5 text-xl font-bold">付款方式：</h2>
       <div
         class="flex items-center justify-between p-3 mb-5 border border-gray-300 rounded-lg"
@@ -144,12 +142,12 @@
       </div>
       <a href="#" class="pb-4 mb-4 font-bold underline">輸入優惠券代碼</a>
     </div>
-    <div class="px-6 pb-4 border-b-8 border-gray-100 cancellation-policy">
+    <div class="px-6 pb-4 border-b-8 border-gray-100 md:border-b cancellation-policy">
       <h2 class="my-3 text-xl font-bold">退訂政策</h2>
-      <span>在 1月12日前可以免費取消。 在這之後，該筆預訂則無法退款。 </span>
-      <a href="#">了解詳情</a>
+      <span><em class="not-italic font-bold">在 1月12日前可以免費取消。</em> 在這之後，該筆預訂則無法退款。 </span>
+      <a href="#" class="font-bold underline">了解詳情</a>
     </div>
-    <div class="px-6 pb-4 border-b-8 border-gray-100 ground-rules">
+    <div class="px-6 pb-4 border-b-8 border-gray-100 md:border-b ground-rules">
       <h2 class="my-3 text-xl font-bold">基本守則</h2>
       <span>我們請房客記得遵守幾個簡單的事項，當個優質的房客。</span>
       <ul class="my-2 list-disc list-inside">
@@ -157,7 +155,7 @@
         <li>把房源當成自己的家來愛護</li>
       </ul>
     </div>
-    <div class="px-6 policy-agree">
+    <div class="px-6 policy-agree md:py-6">
       <p class="py-3 text-xs">
         點選以下按鈕即表示本人同意<a class="font-bold underline"
           >房東的《房屋守則》</a
@@ -171,14 +169,15 @@
       </p>
     </div>
     <button
-      class="py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-600 rounded-lg confirm"
+      class="py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-600 rounded-lg confirm md:w-40"
     >
       <a href="#">確認並付款</a>
     </button>
   </div>
-  <div>
-    <div class="hidden px-6 room-info">
-      <div class="flex pb-4 border-gray-200 border-b-1 room-summary">
+
+  <div class="hidden py-5 border border-gray-200 sticky-top md:block md:col-span-4 rounded-xl">
+    <div class="px-6 room-info">
+      <div class="flex pb-5 mb-5 border-b border-gray-100 room-summary">
         <img
           class="object-cover w-32 h-full mr-3 rounded-lg"
           src="https://a0.muscache.com/im/pictures/0f187630-06a3-4115-99dc-f3617529aedd.jpg?aki_policy=large"
@@ -202,14 +201,14 @@
           </span>
         </div>
       </div>
-      <div class="flex mb-5 text-sm roomit-cover">
+      <div class="flex mb-5 text-sm border-b border-gray-100 roomit-cover">
         <p class="font-bold">
           <span class="text-pink-500">Roomit</span><span>cover </span>
         </p>
         <span>為你的預定提供保障</span>
       </div>
     </div>
-    <div class="px-6 py-5 border-b-8 border-gray-100 price-detel">
+    <div class="px-6 py-5 border-b-8 border-gray-100 md:border-b price-detel">
       <h2 class="mb-5 text-xl font-bold">價格詳情</h2>
       <div class="flex justify-between mb-3">
         <span class="flex justify-between mb-3">$2,200TWD x 1晚</span>
@@ -219,12 +218,12 @@
         <span>服務費</span>
         <span>$0 TWD</span>
       </div>
-      <div class="flex justify-between mb-3">
+      <div class="flex justify-between mb-3 border-b border-gray-100">
         <span>稅費</span>
         <span>$110 TWD</span>
       </div>
       <div class="flex justify-between mb-3 font-bold">
-        <span>總價<span class="">(TWD)</span></span>
+        <span>總價<a class="underline">(TWD)</a></span>
         <span>$2,310</span>
       </div>
       <a href="#" class="flex justify-end font-bold underline">更多資訊</a>
