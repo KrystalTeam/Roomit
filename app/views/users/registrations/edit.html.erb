@@ -61,7 +61,7 @@
             <div>
               <h4 class="text-sm">聯絡電話</h4>
               <span class="text-sm text-gray-500">
-                <% if current_user.phone_num.empty? %>
+                <% if current_user.phone_num == nil %>
                   <p data-user-edit-target="currentSetting">無</p>
                 <% else %>
                   <div data-user-edit-target="currentSetting"><%= current_user.phone_num%></div>
