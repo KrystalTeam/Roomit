@@ -1,7 +1,7 @@
 class CreateRoomReviews < ActiveRecord::Migration[6.1]
   def change
     create_table :room_reviews do |t|
-      t.integer :booking
+      t.integer :booking_id
       t.integer :accuracy_rating
       t.integer :check_in_rating
       t.integer :cleanliness_rating
@@ -11,8 +11,6 @@ class CreateRoomReviews < ActiveRecord::Migration[6.1]
       t.text :comment
 
       t.timestamps
-
-      rename_column(room_reviews, booking, booking_id)
     end
   end
 end

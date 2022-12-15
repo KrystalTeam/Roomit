@@ -4,6 +4,7 @@ class Booking < ApplicationRecord
 
   belongs_to :user
   belongs_to :room
+  has_many :room_review
 
   validates :start_at, :end_at, :price_per_night, presence: true
 

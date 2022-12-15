@@ -1,0 +1,55 @@
+<% if roomreview.errors.any? %>
+  <div>
+    <% roomreview.errors.full.message.each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+<$ end %>
+
+
+<%= form_for(roomreview) do |form| %>
+ 
+  <div>
+    <%= form.label :booking_id, "房客名稱" %>
+    <%= form.text_field :booking_id %>
+  </div>
+
+  <div>  
+    <%= form.label :accuracy_rating, "準確度" %>
+    <%= form.text_field :accuracy_rating %>
+  </div>
+
+  <div>  
+    <%= form.label :check_in_rating, "前台登記體驗" %>
+    <%= form.text_field :check_in_rating %>
+  </div>
+
+  <div>  
+   <%= form.label :cleanliness_rating, "乾淨度" %>
+   <%= form.text_field :cleanliness_rating %>
+  </div>
+
+  <div>
+   <%= form.label :communication_rating, "溝通" %>
+   <%= form.text_field :communication_rating %>
+  </div>
+
+  <div>
+    <%= form.label :location_rating, "位置" %>
+    <%= form.text_field :location_rating %> 
+  </div>
+
+  <div>
+    <%= form.label :value_rating, "性價比" %>
+    <%= form.text_field :value_rating %>
+  </div>
+
+  <div>
+    <%= form.label :comment, "評論" %>
+    <%= form.text_area :comment %>
+  </div>
+
+    <%= form.submit %>
+    <% end %>
+
+<% end %>

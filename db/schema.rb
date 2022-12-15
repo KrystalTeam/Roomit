@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_13_030057) do
+ActiveRecord::Schema.define(version: 2022_12_14_113326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,19 @@ ActiveRecord::Schema.define(version: 2022_12_13_030057) do
     t.string "serial"
     t.index ["room_id"], name: "index_bookings_on_room_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "room_reviews", force: :cascade do |t|
+    t.integer "booking_id"
+    t.integer "accuracy_rating"
+    t.integer "check_in_rating"
+    t.integer "cleanliness_rating"
+    t.integer "communication_rating"
+    t.integer "location_rating"
+    t.integer "value_rating"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "rooms", force: :cascade do |t|
