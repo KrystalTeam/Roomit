@@ -2,6 +2,7 @@ class BookingsController < ApplicationController
 
   before_action :find_room, only: %i[create]
   skip_before_action :verify_authenticity_token, only: %i[confirm cancel]
+  skip_before_action :authenticate_user!, only: %i[confirm cancel]
 
   def create
     # render html: params

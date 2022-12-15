@@ -1,5 +1,5 @@
 <section class="w-full px-5 text-gray-700 sm:px-10">
-  <div class="grid grid-cols-1 gap-x-5 gap-y-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 ">
+  <div class="grid grid-cols-1 gap-x-7 gap-y-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 ">
     <% @rooms.each do |room| %>
       <div class="relative card-carousel-container">
         <%= link_to room_path(room) do %>
@@ -18,25 +18,28 @@
               </div>
             </div>
             <div class="relative swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="https://fakeimg.pl/250x200/" alt="" class="object-cover w-full aspect-ratio " >
-              </div>
-              <div class="swiper-slide">
-                <img src="/assets/house.jpeg" alt="" class="object-cover w-full aspect-ratio "  >
-              </div>
-              <div class="swiper-slide" >
-                <img src="https://fakeimg.pl/400x600/" alt="" class="object-cover w-full aspect-ratio "  >
-              </div>
-              <div class="swiper-slide" >
-                <img src="https://fakeimg.pl/800x600/" alt="" class="object-cover w-full aspect-ratio "  >
-              </div>
+              <% if room.photos.attached?%>
+                <% room.photos.each do |photo| %>
+                  <div class="swiper-slide">
+                    <%=image_tag photo, class:"object-cover w-full aspect-ratio"%>
+                  </div>
+                <%end %>
+              <%else%>
+                <div class="swiper-slide">
+                  <img src="/assets/house.jpeg" alt="" class="object-cover w-full aspect-ratio">
+                </div>
+                <div class="swiper-slide" >
+                  <img src="https://images.unsplash.com/photo-1614649024145-7f847b1c803f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2274&q=80" alt="" class="object-cover w-full aspect-ratio">
+                </div>
+              <%end%>
             </div>
           </div>
         <% end %>
         <%= link_to room_path(room) do %>
           <div class="flex flex-row justify-between m-2 ">
             <div class="">
-              <div class="text-lg font-bold"><%=room.summary%></div>
+              <!-- <div class="font-bold text-md"><%=room.summary%></div>  -->
+              <div class="font-bold text-md"><%=room.address%></div>
               <div class="mt-0.5 text-gray-500 "><%=room.room_type%></div>
               <div class="mt-0.5 text-gray-500 text-sm ">
                 <%=room.checkin_start_at.strftime("%m月%d日")%>
@@ -57,4 +60,3 @@
     <% end %>
   </div>
 </section>
-

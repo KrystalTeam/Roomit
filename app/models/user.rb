@@ -24,6 +24,10 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+  
+  def remember_me_for
+    2.weeks
+  end
 
   # def self.new_with_session(params, session)
   #   super.tap do |user|

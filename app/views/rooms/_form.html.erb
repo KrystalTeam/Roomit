@@ -94,11 +94,11 @@
       <div class="flex gap-5 font-midium">
         <div class="flex items-center gap-2 w-content">
           <p class="font-medium">從</p>
-          <%= room.time_field :checkin_start_at, class:"input cursor-pointer",value:"%H:%M",onfocus:"this.showPicker()"%>
+          <%= room.time_field :checkin_start_at, class:"input cursor-pointer",onfocus:"this.showPicker()"%>
         </div>
         <div class="flex items-center gap-2 w-content ">
           <p class="font-medium">到</p>
-          <%= room.time_field :checkin_end_at, class:"input cursor-pointer",value:"%H:%M",onfocus:"this.showPicker()"%>
+          <%= room.time_field :checkin_end_at, class:"input cursor-pointer",onfocus:"this.showPicker()"%>
         </div>
       </div>
     </div>
@@ -107,7 +107,7 @@
         <p class="text-sm text-red-700 align-middle ">*</p>
         <%= room.label :checkout_time, "退房時間" %>
       </div>
-      <%= room.time_field :checkout_time,value:"%H:%M", class:"input",onfocus:"this.showPicker()"%>
+      <%= room.time_field :checkout_time,  class:"input", onfocus:"this.showPicker()"%>
     </div>
     <div class="flex items-center gap-2">
       <%= room.label :photos, '上傳圖片', class:"font-medium"%>

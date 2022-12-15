@@ -17,8 +17,13 @@
         <label class="block">密碼</label>
         <input id="password " name="user[password]" type="password" placeholder="輸入密碼" class="input"/>
       </div>
+      <div>
+        <input name="user[remember_me]" type="hidden" value="0" autocomplete="off">
+        <input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+        <label for="user_remember_me">記住我</label>
+      </div>
     </div>
-    <button type="submit" name="commit" value="Log in" data-disable-with="Log in" class="w-full px-6 py-3 mt-4 text-white bg-pink-700 rounded-lg hover:bg-pink-800">
+    <button type="submit" name="commit" value="Log in" data-disable-with="Log in" class="w-full px-6 py-3 mt-4 text-white bg-pink-500 rounded-lg hover:bg-pink-700">
       登入
     </button>
   </form>
@@ -56,3 +61,23 @@
     </button>
   </div>
 </div>
+<h2>Log in</h2>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+<% end %>
