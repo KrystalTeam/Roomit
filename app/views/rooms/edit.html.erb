@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="w-3/5 rounded-r-md">
-    <% @room.photos.each do |photo| %>
+    <% @room.photos[0] do |photo| %>
       <div class="relative inline-block border-2 border-red-400 ">
         <%= image_tag photo%>
         <%= link_to destroy_photo_room_path(@room, photo), method: :delete do %>

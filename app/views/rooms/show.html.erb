@@ -1,7 +1,9 @@
 <section class="w-full px-10 text-gray-700 lg:px-56 ">
-  <div class="flex flex-col">
-    <h1 class="mb-3 h1">
-      新上特價、交通便利、大浴缸、山瑚景觀房、近公車站、青小瑞士花園、步道
+  <div class="flex flex-col ">
+    <h1 class="flex gap-2 mb-3 h1">
+      <p><%= @room.user.name%></p>
+      <p>出租的</p>
+      <p><%= @room.home_type%></p>
     </h1>
     <div class="flex items-center justify-between mb-2">
       <div class="flex gap-2">
@@ -23,45 +25,50 @@
       </div>
     </div>
     <!-- room_img -->
-    <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-5 overflow-hidden rounded-2xl">
+    <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-10 overflow-hidden rounded-2xl">
       <div class="col-span-2 row-span-2 ">
-        <img src="https://picsum.photos/600/300?random=12" alt="" class="img-full aspect-ratio"/>
+        <%=  image_tag @room.photos[0],class:"img-full aspect-ratio"%>
       </div>
-      <div>
-        <img src="https://picsum.photos/600/300?random=10" alt="" class="img-full aspect-ratio"/>
-      </div>
-      <div >
-        <img src="https://picsum.photos/600/300?random=9" alt="" class="img-full aspect-ratio"/>
-      </div>
-      <div>
-        <img src="https://picsum.photos/600/300?random=7" alt="" class="img-full aspect-ratio"/>
-      </div>
-      <div>
-        <img src="https://picsum.photos/600/300?random=7" alt="" class="img-full aspect-ratio"/>
-      </div>
+      <% @room.photos[1..4].each do |photo| %>
+        <div>
+          <%= image_tag photo ,class:"img-full aspect-ratio"%>
+        </div>
+      <%end%>
     </div>
     <!-- room_img_end -->
     <div class="flex justify-between gap-10 ">
       <!-- room_info -->
-      <div class="flex flex-col w-4/6 col-span-2 gap-3">
-        <div class="flex flex-col gap-3">
-          <h2 class="text-xl font-bold ">KClub Ubud出租的整套別墅</h2>
-          <ul class="flex gap-3 text-sm">
-            <li>6位</li>
-            <li>3間臥室</li>
-            <li>3張床</li>
-            <li>3.5間衛浴</li>
-          </ul>
+      <div class="flex flex-col w-4/6 col-span-2 gap-5 ">
+        <div class="flex items-center justify-between">
+          <div class="flex flex-col gap-3">
+            <h2 class="flex gap-2 text-2xl font-bold">
+              <%= @room.address%>
+            </h2>
+            <ul class="flex gap-2.5 ">
+              <li class="flex gap-0.5 border-r border-gray-400 pr-2.5 ">
+                <%= @room.max_occupancy%>
+                <span>位</span>
+              </li>
+              <li class="flex gap-0.5 border-r border-gray-400 pr-2.5 ">
+                <%= @room.bedrooms%>
+                <span>間臥室</span>
+              </li>
+              <li class="flex gap-0.5 pr-2.5 ">
+                <%= @room.bathrooms%>
+                <span>間衛浴</span>
+              </li>
+            </ul>
+          </div>
+          <div class="rounded-full min-w-max min-h-max">
+            <i class="text-5xl text-gray-600 fa-solid fa-circle-user"></i></div>
         </div>
         <hr>
         <div class="flex flex-col gap-3" >
           <h3 class="h3">有提供的設備與服務</h3>
-          <ul class="flex flex-col gap-2 list-none ">
-            <li>海灘 緊鄰沙灘</li>
-            <li>廚房</li>
-            <li>WiFi</li>
-            <li>周圍有免費的車道停車位1個車位</li>
-            <li>空調設備</li>
+          <ul class="flex flex-col gap-5 pl-2">
+            <%equipment_provided.each do |equipment|%>
+              <li class="font-medium tracking-wide"><%= equipment %></li>
+            <%end%>
           </ul>
         </div>
         <hr>
@@ -74,8 +81,10 @@
         </div>
         <hr>
         <div>
-          <h3 class="mb-2 h3">房源介紹</h3>
-          <p class="w-1/2 sm:w-3/4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus suscipit obcaecati deserunt? Omnis corporis voluptatum at quia architecto, perferendis, iste reprehenderit a laboriosam ex nam? Repudiandae inventore nostrum repellendus quam!</p>
+          <h3 class="mb-2 h3">房源簡介</h3>
+          <p class="w-1/2 sm:w-3/4">
+            <%= @room.summary%>
+          </p>
         </div>
         <hr>
         <div class="flex flex-col">
@@ -124,7 +133,7 @@
                   <option value="3">3</option>
                 </select>
               </div>
-              <button class="OAuth-btn">預定房間</button>
+              <button class="font-bold text-center text-white bg-pink-500 OAuth-btn">預定房間</button>
               <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
               <div class="flex justify-between gap-10 text-sm text-gray-700">
                 <span class="">$12,320 TWD x 7晚</span>
@@ -141,8 +150,8 @@
                 <input type="hidden" name="room_price" value="<%= @room.price %>">
                 <input type="hidden" name="start_at" value="<%= Time.now.to_date %>">
                 <input type="hidden" name="end_at" value="<%= 3.days.after.to_date %>">
-                <button class="px-5 py-2 mx-10 mb-2 font-bold text-white bg-pink-600 lg:mx-56 rounded-xl">訂房</button>
               <% end %>
+              <button class="px-5 py-2 mb-2 font-bold text-white bg-pink-600 lg:mx-56 rounded-xl">訂房</button>
             </div>
           </div>
         </div>
@@ -180,12 +189,12 @@
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
-            <span>維毅</span>
-            <span class="text-gray-400 ">2022年10月</span>
+            <span>白冰冰</span>
+            <span class="text-gray-400 ">2022年12月</span>
           </div>
         </div>
         <p>
-          房東回覆快速，房���乾淨漂亮舒服：）
+          非常漂亮，很大泡湯很舒服！
         </p>
       </div>
     </div>
