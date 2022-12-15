@@ -100,65 +100,65 @@
       <!-- room_info_end -->
       <!-- booking_card -->
       <div class="flex-grow min-w-max">
-        <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
-          <div class="p-5">
-            <div class="flex flex-col gap-2">
-              <div class="inline-flex">
-                <h2 class="mr-2 text-xl font-semibold">$<%=@room.price %> TWD</h2>
-                <span class="text-lg">晚</span>
-              </div>
-              <div class="flex items-center text-sm">
-                <i class="mr-1 fa-solid fa-star"></i>
-                <span class="mr-2">5.0</span>
-                <p>6</p>
-                <p>則評價</p>
-              </div>
-              <!-- checkin_date -->
-              <div class="flex items-center ">
-                <%=form_for @booking do |form| %>
-                <div class="relative w-full datepicker form-floating " data-mdb-toggle-button="true">
-                  <%= form.text_field :start_at ,data: {
-                  controller: "flatpickr",
-                  flatpickr_date_format: "Y-m-d",
-                  flatpickr_min_date: Time.zone.now,
-                  }, placeholder:"入住日期", class:"p-2 w-full"%>
-                  <button class="datepicker-toggle-button" data-mdb-toggle="datepicker">
-                    <i class="fas fa-calendar datepicker-toggle-icon"></i>
-                  </button>
+        <%= form_with(url:'#', model: @booking, data: { controller: "room-booking-card" }) do |form| %>
+          <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
+            <div class="p-5">
+              <div class="flex flex-col">
+                <div class="inline-flex">
+                  <h2 class="mr-2 text-xl font-semibold">$<%=@room.price%> TWD</h2>
+                  <span class="text-lg">晚</span>
                 </div>
-                <%end%>
+                <div class="flex items-center text-sm">
+                  <i class="mr-1 fa-solid fa-star"></i>
+                  <span class="mr-2">5.0</span>
+                  <p>6</p>
+                  <p>則評價</p>
+                </div>
+                <!-- checkin_date -->
+                <div class="grid grid-cols-2 gap-8">
+                  <div class="w-full">
+                    <%= form.label :start_at, '入住日期'%>
+                    <%= form.text_field :start_at ,data: {
+                    controller: "flatpickr",
+                    flatpickr_date_format: "Y-m-d",
+                    flatpickr_min_date: Time.zone.now,
+                    action: "input->room-booking-card#startDateChange"
+                    }, class:"p-2 w-full"%>
+                  </div>
+                  <%# 退房日期 %>
+                  <div class="w-full">
+                    <%= form.label :end_at, '退房日期'%>
+                    <%= form.text_field :end_at ,data: {
+                    controller: "flatpickr",
+                    flatpickr_date_format: "Y-m-d",
+                    flatpickr_min_date: Time.zone.now,
+                    action: "change->room-booking-card#endDateChange"
+                    }, class:"p-2 w-full"%>
+                  </div>
+                </div>
+                <!-- guest_num -->
+                <div class="">
+                  <%= form.label :booking,'人數'%>
+                  <div class="flex">
+                    <%= form.select :booking, options_for_select((1..@room.max_occupancy).to_a) %>
+                    <span>位</span>
+                  </div>
+                </div>
+                <button class="mx-auto font-bold text-white bg-pink-600 OAuth-btn">預定房間</button>
+                <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
+                <div class="flex justify-between gap-10 text-sm text-gray-700">
+                  <span class="">$<%= @room.price %> x <%  %>晚</span>
+                  <span class="" data-order-amount-target='amount'>$86,243 TWD</span>
+                </div>
+                <hr class="my-5">
+                <div class="flex justify-between text-lg text-black">
+                  <span>$7,895 TWD</span>
+                  <span>稅前總價</span>
+                </div>
               </div>
-              <!-- guest_num -->
-              <div class="flex-grow ">
-                <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-pink-700 focus:outline-none" aria-label="Default select example">
-                  <option selected>選擇入住人數</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </div>
-              <button class="font-bold text-center text-white bg-pink-500 OAuth-btn">預定房間</button>
-              <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
-              <div class="flex justify-between gap-10 text-sm text-gray-700">
-                <span class="">$<%= @room.price %> x <%= (@booking.checkin_end_at - @booking.checkin_start_at)? @booking.checkin_end_at - @booking.checkin_start_at : 1 %>晚</span>
-                <span class="">$86,243 TWD</span>
-              </div>
-              <hr class="my-5">
-              <div class="flex justify-between text-lg text-black">
-                <span>$7,895 TWD</span>
-                <span>稅前總價</span>
-              </div>
-              <%= form_with url: bookings_path do %>
-                <input type="hidden" name="user_id" value="<%= @user.id %>">
-                <input type="hidden" name="room_id" value="<%= @room.id %>">
-                <input type="hidden" name="room_price" value="<%= @room.price %>">
-                <input type="hidden" name="start_at" value="<%= Time.now.to_date %>">
-                <input type="hidden" name="end_at" value="<%= 3.days.after.to_date %>">
-              <% end %>
-              <button class="px-5 py-2 mb-2 font-bold text-white bg-pink-600 lg:mx-56 rounded-xl">訂房</button>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
       <!-- booking_card_end -->
     </div>
