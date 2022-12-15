@@ -20,12 +20,3 @@ ActiveStorage.start();
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
-//Flatpickr 
-import { Application } from 'stimulus'
-import { definitionsFromContext } from 'stimulus/webpack-helpers'
-const application = Application.start()
-const context = require.context('../controllers', true, /\.js$/)
-application.load(definitionsFromContext(context))
-import Flatpickr from 'stimulus-flatpickr'
-require("flatpickr/dist/flatpickr.css")
-application.register('flatpickr', Flatpickr)
