@@ -19,6 +19,6 @@ export default class extends Controller {
   static targets = ['output'];
 
   connect() {
-    console.log("123")
+    // console.log("123")
   }
 }
