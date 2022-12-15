@@ -3,20 +3,25 @@ import { Controller } from 'stimulus';
 export default class extends Controller {
 
   static targets=['amount']
+
+  aaa(){
+    console.log(999)
+  }
+
   connect() {
-    let amount = this.amount.target.value
+    let amount = this.amountTarget.value
+    console.log(this.amountTarget.textContent);
     
   }
 
   startDateChange(e){
-    e.target.value
+    // console.log(123);   
+    this.aaa() 
   }
 
-  endDateChange(e){
-    e.target.value
-    this.amount.target.value
-  }
-
-  count_nights(start)
+  // endDateChange(e){
+  //   e.target.value
+  //   this.amount.target.value
+  // }
   
 }
