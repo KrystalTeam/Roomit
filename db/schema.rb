@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_13_030057) do
+ActiveRecord::Schema.define(version: 2022_12_14_154747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,14 +70,14 @@ ActiveRecord::Schema.define(version: 2022_12_13_030057) do
     t.boolean "has_air_con", default: false, null: false
     t.boolean "has_bathtub", default: false, null: false
     t.integer "price", null: false
-    t.datetime "published_at"
-    t.time "checkin_start_at", default: "2000-01-01 15:00:00", null: false
-    t.time "checkin_end_at", default: "2000-01-01 23:59:59", null: false
-    t.time "checkout_time", default: "2000-01-01 12:00:00", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.integer "checkin_start_at"
+    t.integer "checkin_end_at"
+    t.integer "checkout_time"
+    t.date "published_at"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 

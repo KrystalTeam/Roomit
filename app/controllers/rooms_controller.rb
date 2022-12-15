@@ -24,6 +24,7 @@ class RoomsController < ApplicationController
 
   def show
     @user = current_user
+    @booking = Booking.new
   end
 
   def edit

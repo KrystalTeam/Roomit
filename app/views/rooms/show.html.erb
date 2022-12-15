@@ -104,7 +104,7 @@
           <div class="p-5">
             <div class="flex flex-col gap-2">
               <div class="inline-flex">
-                <h2 class="mr-2 text-xl font-semibold">$13,818 TWD</h2>
+                <h2 class="mr-2 text-xl font-semibold">$<%=@room.price %> TWD</h2>
                 <span class="text-lg">晚</span>
               </div>
               <div class="flex items-center text-sm">
@@ -113,21 +113,25 @@
                 <p>6</p>
                 <p>則評價</p>
               </div>
-              <!-- checkin_time -->
+              <!-- checkin_date -->
               <div class="flex items-center ">
+                <%=form_for @booking do |form| %>
                 <div class="relative w-full datepicker form-floating " data-mdb-toggle-button="true">
-                  <input type="text" 
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-pink-700 focus:outline-none" placeholder="Select a date" />
-                  <label for="floatingInput" class="text-gray-700">選擇入住時間</label>
+                  <%= form.text_field :start_at ,data: {
+                  controller: "flatpickr",
+                  flatpickr_date_format: "Y-m-d",
+                  flatpickr_min_date: Time.zone.now,
+                  }, placeholder:"入住日期", class:"p-2 w-full"%>
                   <button class="datepicker-toggle-button" data-mdb-toggle="datepicker">
                     <i class="fas fa-calendar datepicker-toggle-icon"></i>
                   </button>
                 </div>
+                <%end%>
               </div>
               <!-- guest_num -->
               <div class="flex-grow ">
                 <select class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-pink-700 focus:outline-none" aria-label="Default select example">
-                  <option  selected>選擇入住人數</option>
+                  <option selected>選擇入住人數</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -136,7 +140,7 @@
               <button class="font-bold text-center text-white bg-pink-500 OAuth-btn">預定房間</button>
               <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
               <div class="flex justify-between gap-10 text-sm text-gray-700">
-                <span class="">$12,320 TWD x 7晚</span>
+                <span class="">$<%= @room.price %> x <%= (@booking.checkin_end_at - @booking.checkin_start_at)? @booking.checkin_end_at - @booking.checkin_start_at : 1 %>晚</span>
                 <span class="">$86,243 TWD</span>
               </div>
               <hr class="my-5">
