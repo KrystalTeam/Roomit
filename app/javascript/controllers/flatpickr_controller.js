@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus';
+// import { Controller } from 'stimulus';
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 
@@ -9,6 +9,6 @@ application.load(definitionsFromContext(context))
 import Flatpickr from 'stimulus-flatpickr'
 require("flatpickr/dist/flatpickr.css")
 application.register('flatpickr', Flatpickr)
-export default class extends Controller {
-  static targets = ['output'];
-}
+// export default class extends Controller {
+//   static targets = ['output'];
+// }

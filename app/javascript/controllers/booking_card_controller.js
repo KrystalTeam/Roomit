@@ -22,8 +22,10 @@ export default class extends Controller {
     this.dateStart = this.startDateTarget.value
     if ((this.dateStart) && (this.dateEnd)){
       this.changeNightsText()
-      this.changeAmountText()
-      this.changeTotalText()
+      if(this.countNights() > 0){
+        this.changeAmountText()
+        this.changeTotalText()        
+      }
     }
   }
 
@@ -31,8 +33,10 @@ export default class extends Controller {
     this.dateEnd = this.endDateTarget.value
     if ((this.dateStart) && (this.dateEnd)){
       this.changeNightsText()
-      this.changeAmountText()
-      this.changeTotalText()
+      if(this.countNights() > 0){
+        this.changeAmountText()
+        this.changeTotalText()        
+      }
     }
   }
 

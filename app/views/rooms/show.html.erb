@@ -100,7 +100,7 @@
       <!-- room_info_end -->
       <!-- booking_card -->
       <div class="flex-grow min-w-max">
-        <%= form_with(url:'#', model: @booking, data: { controller: "booking-card" }) do |form| %>
+        <%= form_with(url: new_booking_path(@room), method:'get', data: { controller: "booking-card" }) do |form| %>
           <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
             <div class="p-5">
               <div class="flex flex-col">
@@ -140,9 +140,9 @@
                 </div>
                 <!-- guest_num -->
                 <div class="">
-                  <%= form.label :booking,'人數'%>
+                  <%= form.label :headcount,'人數'%>
                   <div class="flex">
-                    <%= form.select :booking, options_for_select((1..@room.max_occupancy).to_a) %>
+                    <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a) %>
                     <span>位</span>
                   </div>
                 </div>

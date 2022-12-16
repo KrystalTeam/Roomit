@@ -107,7 +107,7 @@
         <p class="text-sm text-red-700 align-middle ">*</p>
         <%= room.label :checkout_time, "退房時間" %>
       </div>
-      <%= room.select :checkout_time, options_for_select(Room.checkout_times.keys, '12:00'), {}, class:"input", selected:"14"%>
+      <%= room.select :checkout_time, options_for_select(Room.checkout_times.keys, '12:00'), {}, class:"input"%>
     </div>
     <div class="flex items-center gap-2">
       <%= room.label :photos, '上傳圖片', class:"font-medium"%>
