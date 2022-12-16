@@ -4,19 +4,19 @@
 // that code so it'll be compiled.
 //= require magnific-popup
 
-import Rails from "@rails/ujs";
-import Turbolinks from "turbolinks";
-import * as ActiveStorage from "@rails/activestorage";
-import "channels";
-import "stylesheets/application";
-import "controllers";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "swiper/swiper-bundle.min.css";
-import "tw-elements";
+import Rails from '@rails/ujs';
+import Turbolinks from 'turbolinks';
+import * as ActiveStorage from '@rails/activestorage';
+import 'channels';
+import 'stylesheets/application';
+import 'controllers';
+import '@fortawesome/fontawesome-free/css/all.css';
+import 'swiper/swiper-bundle.min.css';
+import 'tw-elements';
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 // Support component names relative to this directory:
-var componentRequireContext = require.context("components", true);
-var ReactRailsUJS = require("react_ujs");
+var componentRequireContext = require.context('components', true);
+var ReactRailsUJS = require('react_ujs');
 ReactRailsUJS.useContext(componentRequireContext);
