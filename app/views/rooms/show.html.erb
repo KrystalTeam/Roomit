@@ -100,7 +100,7 @@
       <!-- room_info_end -->
       <!-- booking_card -->
       <div class="flex-grow min-w-max">
-        <%= form_with(url:'#', model: @booking, data: { controller: "room-booking-card" }) do |form| %>
+        <%= form_with(url:'#', model: @booking, data: { controller: "booking-card" }) do |form| %>
           <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
             <div class="p-5">
               <div class="flex flex-col">
@@ -122,8 +122,8 @@
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
-                    action: "input->room-booking-card#startDateChange",
-                    "room-booking-card-target": "start_date"
+                    action: "input->booking-card#startDate",
+                    "booking-card-target": "startDate"
                     }, class:"p-2 w-full"%>
                   </div>
                   <%# 退房日期 %>
@@ -133,8 +133,8 @@
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
-                    action: "change->room-booking-card#endDateChange",
-                    "room-booking-card-target": "end_date"
+                    action: "change->booking-card#endDate",
+                    "booking-card-target": "endDate"
                     }, class:"p-2 w-full"%>
                   </div>
                 </div>
@@ -149,8 +149,8 @@
                 <button class="mx-auto font-bold text-white bg-pink-600 OAuth-btn">預定房間</button>
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
                 <div class="flex justify-between gap-10 text-sm text-gray-700">
-                  <span class="">$<%= @room.price %> x <%  %>晚</span>
-                  <span class="" data-room-booking-card-target='amount'>$86,243 TWD</span>
+                  <span class="">$<%= @room.price %></span><span data-booking_card-target='nights'> x 晚</span>
+                  <span class="" data-booking-card-target='amount'>$86,243 TWD</span>
                 </div>
                 <hr class="my-5">
                 <div class="flex justify-between text-lg text-black">
