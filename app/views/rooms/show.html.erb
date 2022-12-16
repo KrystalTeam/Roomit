@@ -149,12 +149,12 @@
                 <button class="mx-auto font-bold text-white bg-pink-600 OAuth-btn">預定房間</button>
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
                 <div class="flex justify-between gap-10 text-sm text-gray-700">
-                  <span class="">$<%= @room.price %></span><span data-booking_card-target='nights'> x 晚</span>
-                  <span class="" data-booking-card-target='amount'>$86,243 TWD</span>
+                  <span data-booking-card-target="price">$<%= @room.price %></span><span data-booking-card-target="nights"> x 1 晚</span>
+                  <span data-booking-card-target="amount">$ <%= @room.price %> TWD</span>
                 </div>
                 <hr class="my-5">
                 <div class="flex justify-between text-lg text-black">
-                  <span>$7,895 TWD</span>
+                  <span data-booking-card-target="total">$ <%= @room.price %> TWD</span>
                   <span>稅前總價</span>
                 </div>
               </div>
