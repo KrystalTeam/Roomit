@@ -1,3 +1,43 @@
 .aspect-ratio {
   aspect-ratio: 1 / 1;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--swiper-navigation-color, var(--swiper-theme-color));
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-family: none;
+  font-size: none;
+  text-transform: none !important;
+  letter-spacing: none;
+  text-transform: none;
+  font-variant: none;
+  line-height: none;
+  content: '';
+}
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 1px 0 1px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.5;
+}
+.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-main {
+  transform: scale(1);
+  background-color: #fff;
+  opacity: 100%;
+}
