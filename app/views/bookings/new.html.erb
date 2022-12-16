@@ -229,4 +229,17 @@
       <a href="#" class="flex justify-end font-bold underline">更多資訊</a>
     </div>
   </div>
+  <div>
+    <%= form_for (@booking) do |form| %>
+      <%= form.label :start_at, '日期' %>
+      <%= form.text_field :start_at, class: "bg-blue-100",data: {
+      controller: "flatpickr",
+      flatpickr_date_format: "Y-m-d",
+      flatpickr_min_date: Time.zone.now,
+      minDate: "today",
+      mode: "range"
+    }%>
+    <% end %>
+  </div>
 </section>
+
