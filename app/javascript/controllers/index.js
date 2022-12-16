@@ -13,4 +13,4 @@ import Flatpickr from 'stimulus-flatpickr'
 require("flatpickr/dist/flatpickr.css")
 application.register('flatpickr', Flatpickr)
 
-import 'flatpickr/dist/themes/airbnb.css'
+import 'flatpickr/dist/themes/airbnb.css';
