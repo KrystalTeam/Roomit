@@ -7,23 +7,18 @@ export default class extends Controller {
 
   connect() {
     let amount = this.amountTarget.value
-    console.log(this.amountTarget.textContent);
     
   }
   countDates(){
-    console.log('123')
     if ((this.endDateTarget.textContent !== null) && (this.startDateTarget.textContent !== null)){
-      console.log(this.dateDiff(this.endDateTarget.textContent, this.startDateTarget.textContent))
     }
   }
 
   startDate(){
-    console.log(this.startDateTarget.value)
     this.countDates()
   }
 
   endDate(){
-    console.log(`${this.endDateTarget.value},${this.startDateTarget.value}`)
     this.countDates()
   }
 
