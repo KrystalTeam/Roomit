@@ -9,3 +9,5 @@ application.register('carousel', Carousel);
 import { definitionsFromContext } from 'stimulus/webpack-helpers';
 const context = require.context('controllers', true, /_controller\.js$/);
 application.load(definitionsFromContext(context));
+
+import 'flatpickr/dist/themes/airbnb.css'
