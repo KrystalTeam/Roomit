@@ -53,7 +53,11 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @booking = Booking.new
+    @booking = current_user.bookings.new
+    @room = Room.find(params[:room_id])
+    @owner_name = User.find(@room.user_id).name ? User.find(@room.user_id).name : "房東"
+    @room_intro = @room.summary.size>=15 ? @room.summary[0..15] : @room.summary
+    @nights = (params[:end_at].to_date  - params[:start_at].to_date ).to_i
   end
 
   def cancel

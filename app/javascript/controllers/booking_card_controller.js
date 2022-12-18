@@ -13,7 +13,7 @@ export default class extends Controller {
   }
 
   connect() {
-    this.price = Number(this.priceTarget.innerText.replace('$',''))
+    this.price = Number(this.priceTarget.innerText.replace('$','').replace('NT','').replace(/(\d+),(?=\d{3}(\D|$))/g, "$1"))
     this.night = 1
     this.amount = this.price * this.night
   }
@@ -59,9 +59,13 @@ export default class extends Controller {
 
   changeAmountText(price,nights){
     this.amount = this.price * this.nights
-    this.amountTarget.innerText = this.amount
+    this.amountTarget.innerText = `$ ${this.numberWithCommas(this.amount)} TWD`
   }
   changeTotalText(){
-    this.totalTarget.innerText = `$ ${this.amount} TWD`
+    this.totalTarget.innerText = `$ ${this.numberWithCommas(this.amount)} TWD`
+  }
+
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 }
