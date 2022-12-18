@@ -1,9 +1,19 @@
-<section class="w-full px-10 text-gray-700 lg:px-56 ">
-  <div class="flex flex-col ">
-    <h1 class="flex gap-2 mb-3 h1">
-      <p><%= @room.user.name%></p>
-      <p>出租的</p>
-      <p><%= @room.home_type%></p>
+<div class="flex w-11/12 mx-auto rounded-md shadow-md">
+  <div class="w-2/5 py-4 mx-auto text-gray-700 bg-red-100 bg-opacity-50 rounded-md">
+    <div class="w-2/3 mx-auto rounded-l-md">
+      <div>
+        <%= form_with url: bookings_path do %>
+        <input type="hidden" name="user_id" value="<%= @user.id %>">
+        <input type="hidden" name="room_id" value="<%= @room.id %>">
+        <input type="hidden" name="room_price" value="<%= @room.price %>">
+        <input type="hidden" name="start_at" value="<%= Time.now.to_date %>">
+        <input type="hidden" name="end_at" value="<%= 3.days.after.to_date %>">
+        <button>訂房</button>
+        <% end %>
+<section class="w-full px-10 mt-10 text-gray-700 lg:px-56 ">
+  <div class="flex flex-col">
+    <h1 class="mb-3 h1">
+      新上特價、交通便利、大浴缸、山瑚景觀房、近公車站、青小瑞士花園、步道
     </h1>
     <div class="flex items-center justify-between mb-2">
       <div class="flex gap-2">
@@ -25,50 +35,45 @@
       </div>
     </div>
     <!-- room_img -->
-    <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-10 overflow-hidden rounded-2xl">
+    <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-5 overflow-hidden rounded-2xl">
       <div class="col-span-2 row-span-2 ">
-        <%=  image_tag @room.photos[0],class:"img-full aspect-ratio"%>
+        <img src="https://picsum.photos/600/300?random=12" alt="" class="img-full aspect-ratio"/>
       </div>
-      <% @room.photos[1..4].each do |photo| %>
-        <div>
-          <%= image_tag photo ,class:"img-full aspect-ratio"%>
-        </div>
-      <%end%>
+      <div>
+        <img src="https://picsum.photos/600/300?random=10" alt="" class="img-full aspect-ratio"/>
+      </div>
+      <div >
+        <img src="https://picsum.photos/600/300?random=9" alt="" class="img-full aspect-ratio"/>
+      </div>
+      <div>
+        <img src="https://picsum.photos/600/300?random=7" alt="" class="img-full aspect-ratio"/>
+      </div>
+      <div>
+        <img src="https://picsum.photos/600/300?random=7" alt="" class="img-full aspect-ratio"/>
+      </div>
     </div>
     <!-- room_img_end -->
     <div class="flex justify-between gap-10 ">
       <!-- room_info -->
-      <div class="flex flex-col w-4/6 col-span-2 gap-5 ">
-        <div class="flex items-center justify-between">
-          <div class="flex flex-col gap-3">
-            <h2 class="flex gap-2 text-2xl font-bold">
-              <%= @room.address%>
-            </h2>
-            <ul class="flex gap-2.5 ">
-              <li class="flex gap-0.5 border-r border-gray-400 pr-2.5 ">
-                <%= @room.max_occupancy%>
-                <span>位</span>
-              </li>
-              <li class="flex gap-0.5 border-r border-gray-400 pr-2.5 ">
-                <%= @room.bedrooms%>
-                <span>間臥室</span>
-              </li>
-              <li class="flex gap-0.5 pr-2.5 ">
-                <%= @room.bathrooms%>
-                <span>間衛浴</span>
-              </li>
-            </ul>
-          </div>
-          <div class="rounded-full min-w-max min-h-max">
-            <i class="text-5xl text-gray-600 fa-solid fa-circle-user"></i></div>
+      <div class="flex flex-col w-4/6 col-span-2 gap-3">
+        <div class="flex flex-col gap-3">
+          <h2 class="text-xl font-bold ">KClub Ubud出租的整套別墅</h2>
+          <ul class="flex gap-3 text-sm">
+            <li>6位</li>
+            <li>3間臥室</li>
+            <li>3張床</li>
+            <li>3.5間衛浴</li>
+          </ul>
         </div>
         <hr>
         <div class="flex flex-col gap-3" >
           <h3 class="h3">有提供的設備與服務</h3>
-          <ul class="flex flex-col gap-5 pl-2">
-            <%equipment_provided.each do |equipment|%>
-              <li class="font-medium tracking-wide"><%= equipment %></li>
-            <%end%>
+          <ul class="flex flex-col gap-2 list-none ">
+            <li>海灘 緊鄰沙灘</li>
+            <li>廚房</li>
+            <li>WiFi</li>
+            <li>周圍有免費的車道停車位1個車位</li>
+            <li>空調設備</li>
           </ul>
         </div>
         <hr>
@@ -81,10 +86,8 @@
         </div>
         <hr>
         <div>
-          <h3 class="mb-2 h3">房源簡介</h3>
-          <p class="w-1/2 sm:w-3/4">
-            <%= @room.summary%>
-          </p>
+          <h3 class="mb-2 h3">房源介紹</h3>
+          <p class="w-1/2 sm:w-3/4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus suscipit obcaecati deserunt? Omnis corporis voluptatum at quia architecto, perferendis, iste reprehenderit a laboriosam ex nam? Repudiandae inventore nostrum repellendus quam!</p>
         </div>
         <hr>
         <div class="flex flex-col">
@@ -100,62 +103,28 @@
       <!-- room_info_end -->
       <!-- booking_card -->
       <div class="flex-grow min-w-max">
-        <%= form_with(url: new_booking_path(@room), method:'get', data: { controller: "booking-card" }) do |form| %>
-          <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
-            <div class="p-5">
-              <div class="flex flex-col">
-                <div class="inline-flex">
-                  <h2 class="mr-2 text-xl font-semibold">$<%=@room.price%> TWD</h2>
-                  <span class="text-lg">晚</span>
-                </div>
-                <div class="flex items-center text-sm">
-                  <i class="mr-1 fa-solid fa-star"></i>
-                  <span class="mr-2">5.0</span>
-                  <p>6</p>
-                  <p>則評價</p>
-                </div>
-                <!-- checkin_date -->
-                <div class="grid grid-cols-2 gap-8">
-                  <div class="w-full">
-                    <%= form.label :start_at, '入住日期'%>
-                    <%= form.text_field :start_at ,data: {
-                    controller: "flatpickr",
-                    flatpickr_date_format: "Y-m-d",
-                    flatpickr_min_date: Time.zone.now,
-                    action: "input->booking-card#startDate",
-                    "booking-card-target": "startDate"
-                    }, class:"p-2 w-full"%>
-                  </div>
-                  <%# 退房日期 %>
-                  <div class="w-full">
-                    <%= form.label :end_at, '退房日期'%>
-                    <%= form.text_field :end_at ,data: {
-                    controller: "flatpickr",
-                    flatpickr_date_format: "Y-m-d",
-                    flatpickr_min_date: Time.zone.now,
-                    action: "change->booking-card#endDate",
-                    "booking-card-target": "endDate"
-                    }, class:"p-2 w-full"%>
-                  </div>
-                </div>
-                <!-- guest_num -->
-                <div class="">
-                  <%= form.label :headcount,'人數'%>
-                  <div class="flex">
-                    <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a) %>
-                    <span>位</span>
-                  </div>
-                </div>
-                <button class="mx-auto font-bold text-white bg-pink-600 OAuth-btn">預定房間</button>
-                <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
-                <div class="flex justify-between gap-10 text-sm text-gray-700">
-                  <span data-booking-card-target="price">$<%= @room.price %></span><span data-booking-card-target="nights"> x 1 晚</span>
-                  <span data-booking-card-target="amount">$ <%= @room.price %> TWD</span>
-                </div>
-                <hr class="my-5">
-                <div class="flex justify-between text-lg text-black">
-                  <span data-booking-card-target="total">$ <%= @room.price %> TWD</span>
-                  <span>稅前總價</span>
+        <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
+          <div class="p-5">
+            <div class="flex flex-col gap-2">
+              <div class="inline-flex">
+                <h2 class="mr-2 text-xl font-semibold">$13,818 TWD</h2>
+                <span class="text-lg">晚</span>
+              </div>
+              <div class="flex items-center text-sm">
+                <i class="mr-1 fa-solid fa-star"></i>
+                <span class="mr-2">5.0</span>
+                <p>6</p>
+                <p>則評價</p>
+              </div>
+              <!-- checkin_time -->
+              <div class="flex items-center ">
+                <div class="relative w-full datepicker form-floating " data-mdb-toggle-button="true">
+                  <input type="text" 
+                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-pink-700 focus:outline-none" placeholder="Select a date" />
+                  <label for="floatingInput" class="text-gray-700">選擇入住時間</label>
+                  <button class="datepicker-toggle-button" data-mdb-toggle="datepicker">
+                    <i class="fas fa-calendar datepicker-toggle-icon"></i>
+                  </button>
                 </div>
               </div>
               <!-- guest_num -->
@@ -188,7 +157,7 @@
               </div>
             </div>
           </div>
-        <% end %>
+        </div>
       </div>
       <!-- booking_card_end -->
     </div>
@@ -223,12 +192,12 @@
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
-            <span>白冰冰</span>
-            <span class="text-gray-400 ">2022年12月</span>
+            <span>維毅</span>
+            <span class="text-gray-400 ">2022年10月</span>
           </div>
         </div>
         <p>
-          非常漂亮，很大泡湯很舒服！
+          房東回覆快速，房間乾淨漂亮舒服：）
         </p>
       </div>
     </div>
