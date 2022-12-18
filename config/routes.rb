@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     collection do
       get 'manage'
     end
+    member do 
+      patch :wish_list
+    end
   end
 
   resources :bookings, only: [:create, :show, :new, :index] do
