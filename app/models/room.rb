@@ -9,9 +9,19 @@ class Room < ApplicationRecord
 
   validates :home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, presence: true
 
-  enum home_type: [:boutique_hotel, :hotel, :bed_and_breakfast, :aparthotel, :hostel, :minsu , :nature_lodge, :resort, :ryokan]
+  enum home_type: {
+    'boutique_hotel'=> 0, 
+    'hotel'=> 1, 
+    'bed_and_breakfast'=> 2, 
+    'aparthotel'=> 3, 
+    'hostel'=> 4, 
+    'minsu'=> 5, 
+    'nature_lodge'=> 6, 
+    'resort'=> 7, 
+    'ryokan'=> 8
+  }
 
-  enum room_type: [:entire_place, :private_rooms, :hotel_rooms, :shared_rooms]
+  enum room_type: { 'entire_place'=> 0, 'private_rooms'=> 1, 'hotel_rooms'=> 2, 'shared_rooms'=> 3 }
 
   enum checkin_start_at: {"11:00": 11, "12:00": 12, "下午1點": 13, "14:00": 14, "15:00": 15, "16:00": 16, "17:00": 17, "18:00": 18, "彈性時間": 99}, _prefix: :checkin_start_at
   enum checkin_end_at: {"14:00": 14, "15:00": 15, "16:00": 16, "17:00": 17, "18:00": 18, "19:00": 19, "20:00": 20, "21:00": 21, "22:00": 22, "23:00": 23, "半夜": 24, "彈性時間": 99}, _prefix: :checkin_end_at

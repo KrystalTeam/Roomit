@@ -51,3 +51,5 @@ gem 'acts_as_paranoid'
 gem 'rubocop'
 
 gem 'friendly_id', '~> 5.4.0'
+gem 'enum_help'
+gem 'simple_form'
