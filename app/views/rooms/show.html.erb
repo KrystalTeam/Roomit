@@ -100,12 +100,13 @@
       <!-- room_info_end -->
       <!-- booking_card -->
       <div class="flex-grow min-w-max">
-        <%= form_with(url: new_booking_path(@room), method:'get', data: { controller: "booking-card" }) do |form| %>
+        <%= form_with(url: new_booking_path, method:'get', data: { controller: "booking-card" }) do |form| %>
+          <input type="hidden" name="room_id" value="<%= @room.id %>">
           <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
             <div class="p-5">
               <div class="flex flex-col">
                 <div class="inline-flex">
-                  <h2 class="mr-2 text-xl font-semibold">$<%=@room.price%> TWD</h2>
+                  <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, unit: "TWD", precision: 0)%></h2>
                   <span class="text-lg">晚</span>
                 </div>
                 <div class="flex items-center text-sm">
@@ -124,7 +125,7 @@
                     flatpickr_min_date: Time.zone.now,
                     action: "input->booking-card#startDate",
                     "booking-card-target": "startDate"
-                    }, class:"p-2 w-full"%>
+                    }, class:"p-2 w-full",turbo: "false"%>
                   </div>
                   <%# 退房日期 %>
                   <div class="w-full">
@@ -149,12 +150,12 @@
                 <button class="mx-auto font-bold text-white bg-pink-600 OAuth-btn">預定房間</button>
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
                 <div class="flex justify-between gap-10 text-sm text-gray-700">
-                  <span data-booking-card-target="price">$<%= @room.price %></span><span data-booking-card-target="nights"> x 1 晚</span>
-                  <span data-booking-card-target="amount">$ <%= @room.price %> TWD</span>
+                  <span data-booking-card-target="price"><%=number_to_currency(@room.price, precision: 0)%></span><span data-booking-card-target="nights"> x 1 晚</span>
+                  <span data-booking-card-target="amount"><%=number_to_currency(@room.price, unit: "TWD", precision: 0)%></span>
                 </div>
                 <hr class="my-5">
                 <div class="flex justify-between text-lg text-black">
-                  <span data-booking-card-target="total">$ <%= @room.price %> TWD</span>
+                  <span data-booking-card-target="total"><%=number_to_currency(@room.price, unit: "TWD", precision: 0)%></span>
                   <span>稅前總價</span>
                 </div>
               </div>
