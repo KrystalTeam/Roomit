@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bookings, only: [:create, :edit, :show, :new, :index] do
+  resources :bookings, only: [:create, :show, :new, :index] do
     member do
       get 'confirm'
       get 'cancel'
