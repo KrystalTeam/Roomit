@@ -5,15 +5,15 @@
         <div class="flex items-center w-full gap-1 font-medium">
           <p class="text-sm text-red-700 align-middle ">*</p>
           <%= room.label :home_type, "房源類型"%>
+          </div>
+          <%= room.select :home_type, Room.home_types.keys.collect { |home_type| [Room.human_enum_name(:home_type, home_type), home_type] }, {prompt: '選擇房源類型'}, class:"input" %>
         </div>
-        <%= room.select :home_type, options_for_select(Room.home_types.keys), {prompt: '選擇房源類型'}, class:"input"%>
-      </div>
       <div class="flex flex-col w-full gap-1">
         <div class="flex items-center w-full gap-1 font-medium ">
           <p class="text-sm text-red-700 align-middle ">*</p>
           <%= room.label :room_type, "房間類型" %>
         </div>
-        <%= room.select :room_type, options_for_select(Room.room_types.keys), {prompt: '選擇房間類型'}, class:"input"%>
+        <%= room.select :room_type, Room.room_types.keys.collect { |room_type| [Room.human_enum_name(:room_type, room_type), room_type] }, {prompt: '選擇房間類型'}, class:"input" %>
       </div>
     </div>
     <div class="flex gap-3 ">

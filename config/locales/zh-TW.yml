@@ -1,7 +1,23 @@
 ---
 zh-TW:
-  home_type:
   activerecord:
+    attributes:
+      room:
+        home_types:
+          boutique_hotel: 精品飯店
+          hotel: 飯店
+          bed_and_breakfast: 家庭式旅館
+          aparthotel: 公寓式旅店
+          hostel: 青年旅舍
+          minsu: 民宿
+          nature_lodge: 自然小屋
+          resort: 度假村
+          ryokan: 日式旅館
+        room_types:
+          entire_place: 整套房源
+          private_rooms: 獨立房間
+          hotel_rooms: 飯店房間
+          shared_rooms: 合住房間
     errors:
       messages:
         record_invalid: 校驗失敗：%{errors}
@@ -180,3 +196,4 @@ zh-TW:
       long: '%Y年%m月%d日 %H:%M'
       short: '%m月%d日 %H:%M'
     pm: 下午
+
