@@ -6,8 +6,9 @@
           <div  data-controller="carousel" class="relative flex-grow mx-auto rounded-lg swiper-container" 
                 data-carousel-options-value='{"loop":"true","pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "navigation": { "allowTouchMove":"false","nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}}'>
             <div class="absolute z-30 flex flex-col justify-between w-full h-full p-3">
-              <i type="button"  class= "self-end text-2xl text-center text-gray-500 transition duration-150 ease-in-out transform fa-solid fa-heart opacity-80 hover:scale-125">
-              </i>
+              <button class="self-end text-2xl text-center transition duration-150 ease-in-out transform hover:scale-125"data-controller="wishList" data-action="click->wishList#wishListState" data-id="<%= room.id%>" data-liked="<%= current_user.liked_wish_list_rooms.include?(room) %>">
+                <i data-wishList-target="wishListIcon" class="text-gray-500 opacity-80 fa-solid fa-heart"></i>
+              </button>
               <div class="flex justify-between w-full my-auto">
                 <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-70 hover:opacity-100 swiper-button-prev">
                   <i class="text-gray-700 fa-solid fa-chevron-left"></i>
