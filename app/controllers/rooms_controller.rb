@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :find_hosted_rooms, only: [:manage]
   before_action :find_all_rooms, only: [:index]
-  before_action :find_room, only: [:show]
+  before_action :find_room, only: [:show,:wish_list]
   before_action :find_hosted_room, only: [:edit, :update, :destroy, :destroy_photo]
 
 
@@ -63,6 +63,16 @@ class RoomsController < ApplicationController
   end
 
   def manage
+  end
+
+  def wish_list
+    if current_user.liked_wish_list_rooms.include?(@room)
+      current_user.liked_wish_list_rooms.delete(@room)
+      render json: {status: "unliked"}
+    else
+      current_user.liked_wish_list_rooms << (@room)
+      render json: {status: "liked"}
+    end
   end
 
   private
