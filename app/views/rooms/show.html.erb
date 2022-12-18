@@ -147,7 +147,9 @@
                     <span>位</span>
                   </div>
                 </div>
-                <button class="mx-auto font-bold text-white bg-pink-600 OAuth-btn">預定房間</button>
+                <button class="mx-auto font-bold text-white bg-pink-600 OAuth-btn">
+                <%=form.submit "預定房間"%>
+                </button>
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
                 <div class="flex justify-between gap-10 text-sm text-gray-700">
                   <span data-booking-card-target="price"><%=number_to_currency(@room.price, precision: 0)%></span><span data-booking-card-target="nights"> x 1 晚</span>

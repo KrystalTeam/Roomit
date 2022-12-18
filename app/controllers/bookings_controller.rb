@@ -1,22 +1,15 @@
 class BookingsController < ApplicationController
 
-  before_action :find_room, only: %i[create]
+  # before_action :find_room, only: %i[create]
   skip_before_action :verify_authenticity_token, only: %i[confirm cancel]
   skip_before_action :authenticate_user!, only: %i[confirm cancel]
 
   def create
-    # render html: params
-    @booking = Booking.new(
-      user_id: params[:user_id],
-      room_id: params[:room_id],
-      start_at: params[:start_at].to_date,
-      end_at: params[:end_at].to_date,
-      price_per_night: params[:price].to_i
-    )
+    @room = Room.find(params[:booking][:room_id])
+    @booking = Booking.new(booking_params)
 
     if @booking.save
       @booking.unpaid!
-
       # after payment success => get the response from the confirm api
       @api_obj = LinePayApi.new('/v3/payments/request')
 
@@ -68,5 +61,12 @@ class BookingsController < ApplicationController
   private
   def find_room
     @room = Room.find(params[:room_id])
+  end
+
+  def verify_owner
+  end
+  
+  def booking_params
+    params.require(:booking).permit(:user_id, :room_id, :start_at, :end_at, :price_per_night, :serial, :headcount)
   end
 end
