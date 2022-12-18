@@ -169,21 +169,19 @@
         >。
       </p>
     </div>
-    <%= form_with model: @booking,  do |booking| :html=> {:id => 'custom_form_id'}%>
+    <%= form_with(model: @booking) do |booking| %>
       <%= booking.hidden_field :room_id, value: params[:room_id] %>
-      <%= booking.hidden_field :start_at, value: params[:start_at] %>
-      <%= booking.hidden_field :end_at, value: params[:end_at] %>
+      <%= booking.hidden_field :user_id, value: current_user.id%>
+      <%= booking.hidden_field :start_at, value: params[:start_at].to_date %>
+      <%= booking.hidden_field :end_at, value: params[:end_at].to_date %>
       <%= booking.hidden_field :price_per_night, value: @room.price %>
       <%= booking.hidden_field :headcount, value: params[:headcount] %>
-      <%= booking.hidden_field :headcount, value: params[:headcount] %>
-      <%= booking.hidden_field :headcount, value: params[:headcount] %>
-    <button
-      class="py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-600 rounded-lg confirm md:w-40"
-    >
-      <a href="#">確認並付款</a>
-    </button>
-  </div>
+      <%#= booking.hidden_field :serial, value: generate_serial%>
+      <button class="py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-600 rounded-lg confirm md:w-40">
+      <%= booking.submit '確認並付款'%>
+      </button>
     <% end %>
+  </div>
   <div class="hidden py-5 border border-gray-200 sticky-top md:block md:col-span-4 rounded-xl">
     <div class="px-6 room-info">
       <div class="flex pb-5 mb-5 border-b border-gray-100 room-summary">
