@@ -27,9 +27,9 @@
     <!-- room_img -->
     <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-10 overflow-hidden rounded-2xl">
       <div class="col-span-2 row-span-2 ">
-        <%=  image_tag @room.photos[0],class:"img-full aspect-ratio"%>
+        <%=  image_tag @room.photos.all[0], class:"img-full aspect-ratio"%>
       </div>
-      <% @room.photos[1..4].each do |photo| %>
+      <% @room.photos.all[1..4].each do |photo| %>
         <div>
           <%= image_tag photo ,class:"img-full aspect-ratio"%>
         </div>
@@ -106,7 +106,7 @@
             <div class="p-5">
               <div class="flex flex-col">
                 <div class="inline-flex">
-                  <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, unit: "TWD", precision: 0)%></h2>
+                  <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
                   <span class="text-lg">晚</span>
                 </div>
                 <div class="flex items-center text-sm">
@@ -147,17 +147,20 @@
                     <span>位</span>
                   </div>
                 </div>
-                <button class="mx-auto font-bold text-white bg-pink-600 OAuth-btn">
-                <%=form.submit "預定房間"%>
+                <button class="w-full mx-auto font-bold bg-pink-600 rounded-xl">
+                  <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
                 </button>
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
                 <div class="flex justify-between gap-10 text-sm text-gray-700">
-                  <span data-booking-card-target="price"><%=number_to_currency(@room.price, precision: 0)%></span><span data-booking-card-target="nights"> x 1 晚</span>
-                  <span data-booking-card-target="amount"><%=number_to_currency(@room.price, unit: "TWD", precision: 0)%></span>
+                  <div class="underline">
+                    <span data-booking-card-target="price"><%=number_to_currency(@room.price, precision: 0)%></span>
+                    <span data-booking-card-target="nights"> x 1 晚</span>
+                  </div>
+                  <span data-booking-card-target="amount"><%=number_to_currency(@room.price, precision: 0)%></span>
                 </div>
                 <hr class="my-5">
                 <div class="flex justify-between text-lg text-black">
-                  <span data-booking-card-target="total"><%=number_to_currency(@room.price, unit: "TWD", precision: 0)%></span>
+                  <span data-booking-card-target="total"><%=number_to_currency(@room.price, precision: 0)%></span>
                   <span>稅前總價</span>
                 </div>
               </div>

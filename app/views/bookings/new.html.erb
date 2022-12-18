@@ -1,6 +1,8 @@
 <section class="grid grid-cols-1 gap-2 md:grid-cols-9 md:grid-rows-7 md:px-10 md:gap-10">
   <div class="flex items-center px-6 py-5 bg-white shadow-sm sticky-top md:static md:col-span-9 md:shadow-none">
-    <i class="fa-solid fa-chevron-left"></i>
+    <%= link_to room_path(@room) do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
     <h1 class="inline-block mx-auto font-bold md:mx-6 md:text-3xl">確認並付款</h1>
   </div>
   <div class="flex flex-col content-between w-full md:row-span-6 md:col-span-5">
@@ -177,9 +179,13 @@
       <%= booking.hidden_field :price_per_night, value: @room.price %>
       <%= booking.hidden_field :headcount, value: params[:headcount] %>
       <%#= booking.hidden_field :serial, value: generate_serial%>
-      <button class="py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-600 rounded-lg confirm md:w-40">
-      <%= booking.submit '確認並付款'%>
-      </button>
+      <div class="flex">
+        <button class="flex justify-center py-3 mx-6 mb-6 text-gray-500 bg-gray-100 border-pink-500 rounded-lg text-md confirm md:w-40">
+          <%=link_to '回上一頁重新輸入', room_path(@room)%>
+        </button>
+        <button class="flex justify-center py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-500 rounded-lg confirm md:w-40 ">
+          <%= booking.submit '確認並付款'%>
+        </button></div>
     <% end %>
   </div>
   <div class="hidden py-5 border border-gray-200 sticky-top md:block md:col-span-4 rounded-xl">

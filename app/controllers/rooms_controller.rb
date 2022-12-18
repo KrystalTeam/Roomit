@@ -1,11 +1,17 @@
 class RoomsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :find_hosted_rooms, only: [:manage]
   before_action :find_all_rooms, only: [:index]
   before_action :find_room, only: [:show]
   before_action :find_hosted_room, only: [:edit, :update, :destroy, :destroy_photo]
 
+
   def index
-    @rooms = Room.all.not_deleted
+    if current_user
+      @rooms = Room.where.not(user_id: current_user.id).not_deleted
+    else
+      @rooms = Room.all.not_deleted
+    end
   end
 
   def new
