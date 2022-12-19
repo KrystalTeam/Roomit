@@ -15,7 +15,8 @@ class User < ApplicationRecord
   has_many :liked_wish_list_rooms, through: :wish_list_rooms, source: :room
   
   has_one_attached :avatar
-  
+  has_many :reviews
+
   enum role: %i[ guest host admin ]
 
   def self.from_omniauth(auth)

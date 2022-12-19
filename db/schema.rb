@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(version: 2022_12_18_075916) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "deleted_at"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.integer "home_type", null: false
     t.integer "room_type", null: false

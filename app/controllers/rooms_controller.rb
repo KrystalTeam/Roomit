@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to manage_rooms_path, notice: '新增成功'
     else
-      flash.alert = "新增失敗"
+      flash.alert = '新增失敗'
       render :new
     end
   end

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  room_id: 1
+  rating: 1
+  comment: MyText
+  deleted_at: 2022-12-18 02:21:10
+  state: MyString
+
+two:
+  user_id: 1
+  room_id: 1
+  rating: 1
+  comment: MyText
+  deleted_at: 2022-12-18 02:21:10
+  state: MyString

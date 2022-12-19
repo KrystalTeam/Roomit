@@ -1,0 +1,21 @@
+<h1>請給評價</h1>
+<%= form_with(model: @reviews) do |f| %>
+  <div>
+    <%= f.label :留言 %>
+    <%= f.text_area :留言 %>
+  </div>
+  <div>
+    <%= f.label :請給評價 %>
+    <%= f.number_field :請給評價 %>
+  </div>
+  <div>
+    <%= f.label :日期 %>
+    <%= f.date_field :日期 %>
+  </div>
+
+  <button class="border-solid border-2 bg-pink-300 ring-offset-4 rounded-full py-1.5 px-4 hover:bg-green-300">    
+    <%= f.submit %></button>  
+<% end %>
+
+<br />
+<%=link_to '回評價頁面', reviews_path %>
