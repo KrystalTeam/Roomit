@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between w-full h-20 px-5 mx-auto bg-white shadow-md sm:px-10">
+<nav class="z-50 flex items-center justify-between w-full h-20 px-5 mx-auto bg-white shadow-md sm:px-10">
   <!-- logo -->
   <a class="flex items-center justify-center h-full min-w-max " href="<%= rooms_path %>"
       >
@@ -48,7 +48,7 @@
             <% end %>
           </div>
         </button>
-        <div data-dropdown-target="menu" class="absolute right-0 z-20 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg ">
+        <div data-dropdown-target="menu" class="absolute right-0 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg z-max ">
           <% if user_signed_in? %>
             <%= link_to "帳號", edit_user_registration_path, class: "nav-item " %>
             <%= link_to "旅程", bookings_path, class: "nav-item "%>

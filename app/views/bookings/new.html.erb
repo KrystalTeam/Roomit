@@ -1,4 +1,4 @@
-<section class="grid grid-cols-1 gap-2 md:grid-cols-9 md:grid-rows-7 md:px-10 md:gap-10">
+<section class="relative grid grid-cols-1 gap-2 z-2 md:grid-cols-9 md:grid-rows-7 md:px-10 md:gap-10">
   <div class="flex items-center px-6 py-5 bg-white shadow-sm sticky-top md:static md:col-span-9 md:shadow-none">
     <%= link_to room_path(@room) do %>
       <i class="fa-solid fa-chevron-left"></i>
@@ -161,7 +161,7 @@
         </button></div>
     <% end %>
   </div>
-  <div class="hidden py-5 border border-gray-200 sticky-top md:block md:col-span-4 rounded-xl">
+  <div class="z-0 hidden py-5 bg-white border border-gray-200 sticky-top md:block md:col-span-4 rounded-xl">
     <div class="px-6 room-info">
       <div class="flex pb-5 mb-5 border-b border-gray-100 room-summary">
         <img class="object-cover w-32 h-full mr-3 rounded-lg" src="https://a0.muscache.com/im/pictures/0f187630-06a3-4115-99dc-f3617529aedd.jpg?aki_policy=large" alt="" style="aspect-ratio: 4 / 3"/>
@@ -169,15 +169,13 @@
           <div class="flex flex-col">
             <span class="text-xs text-gray-500"><%=@room.home_type%>中的<%=@room.room_type%></span>
             <span class="inline-block text-sm"
-              ><%=@room_intro%></span
-            >
+              ><%=@room_intro%></span>
           </div>
           <span class="text-xs">
             <i class="fa-solid fa-star"></i>
             <span>4.98</span>
             <span class="text-xs text-gray-500"
-              >(126<span class="hidden">則評價</span>)</span
-            >
+              >(126<span class="hidden">則評價</span>)</span>
           </span>
         </div>
       </div>
