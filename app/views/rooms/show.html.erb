@@ -18,12 +18,14 @@
           <i class="fa-solid fa-share"></i>
           <a href="#" class="mr-2">分享</a>
         </div>
-        <button data-controller="wishList" 
+        <% if current_user %>
+          <button data-controller="wishList" 
           data-action="click->wishList#wishListState" 
-          data-id="<%= @room.id%>"
-          data-liked="<%= current_user.liked_wish_list_rooms.include?(@room) %>">
-          <i data-wishList-target="wishListIcon" class="text-2xl text-gray-500 fa-solid fa-heart opacity-80"></i>
-        </button>
+            data-id="<%= @room.id%>"
+            data-liked="<%= current_user.liked_wish_list_rooms.include?(@room) %>">
+            <i data-wishList-target="wishListIcon" class="text-2xl text-gray-500 fa-solid fa-heart opacity-80"></i>
+          </button>
+        <%end%>
       </div>
     </div>
     <!-- room_img -->
@@ -152,13 +154,12 @@
                 <% if @room.user == current_user %>
                   <button class="w-full mx-auto font-bold text-gray-500 bg-gray-200 rounded-xl">
                     <%=form.submit '無法預定自己的房源', disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
-                  </button>                   
+                  </button>
                 <% else%>
                   <button class="w-full mx-auto font-bold bg-pink-600 rounded-xl">
                     <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
-                  </button>                       
+                  </button>
                 <% end %>
-
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
                 <div class="flex justify-between gap-10 text-sm text-gray-700">
                   <div class="underline">
@@ -186,7 +187,7 @@
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
-            <span>維毅</span>
+            <span>維���</span>
             <span class="text-gray-400 ">2022年10月</span>
           </div>
         </div>
