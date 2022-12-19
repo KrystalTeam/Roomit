@@ -7,11 +7,7 @@ class RoomsController < ApplicationController
 
 
   def index
-    if current_user
-      @rooms = Room.where.not(user_id: current_user.id).not_deleted
-    else
       @rooms = Room.all.not_deleted
-    end
   end
 
   def new
