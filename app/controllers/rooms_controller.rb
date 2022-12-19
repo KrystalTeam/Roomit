@@ -75,6 +75,10 @@ class RoomsController < ApplicationController
     end
   end
 
+  def wish_list_rooms
+    
+  end
+
   private
 
   def find_room
