@@ -16,7 +16,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = current_user.rooms.not_deleted.new(room_params_without_photos)
+    @room = current_user.rooms.not_deleted.new(room_params)
 
     @geocoding_obj = GoogGeocodingApi.new(@room.address)
     @coordinates = @geocoding_obj.get_response
