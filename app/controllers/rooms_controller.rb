@@ -19,9 +19,9 @@ class RoomsController < ApplicationController
 
     @geocoding_obj = GoogGeocodingApi.new(@room.address)
     @coordinates = @geocoding_obj.get_response
-    @room.lat = get_lat(@coordinates)
-    @room.lng = get_lng(@coordinates)
-    
+    @room.lat = @geocoding_obj.get_lat(@coordinates)
+    @room.lng = @geocoding_obj.get_lng(@coordinates)
+
     if @room.save
       redirect_to manage_rooms_path, notice: '新增成功'
     else

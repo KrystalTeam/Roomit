@@ -54,12 +54,12 @@ class GoogleRoomMap extends React.Component {
   render() {
     return (
       <LoadScript
-        googleMapsApiKey={'AIzaSyAUrf2KiJ7hgIr50aNw6MJi5zZ5IJbHSeQ'}
+        googleMapsApiKey={this.props.api_key}
       >
         <GoogleMap
           mapContainerStyle={{width: '800px', height: '600px'}}
           center={{lat: this.props.lat, lng: this.props.lng}}
-          zoom={11}
+          zoom={15}
           options={mapOptions}
         >
           <>

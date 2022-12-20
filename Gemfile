@@ -53,3 +53,5 @@ gem 'rubocop'
 gem 'friendly_id', '~> 5.4.0'
 
 gem 'activerecord-postgres-earthdistance'
+
+gem 'http'
