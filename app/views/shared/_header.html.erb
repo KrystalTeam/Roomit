@@ -48,7 +48,7 @@
             <% end %>
           </div>
         </button>
-        <div data-dropdown-target="menu" class="absolute right-0 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg z-max ">
+        <div data-dropdown-target="menu" class="absolute right-0 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg z-700">
           <% if user_signed_in? %>
             <%= link_to "帳號", edit_user_registration_path, class: "nav-item " %>
             <%= link_to "旅程", bookings_path, class: "nav-item "%>
@@ -68,9 +68,9 @@
 </nav>
 <!-- flash -->
 <div class="w-full h-10">
-  <!-- end flash -->
-  <%= render "shared/flash" %>
+  <%# <%= render "shared/flash" %>
 </div>
+<!-- end flash -->
 <!-- sign_in model-->
 <div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="signin" tabindex="-1" aria-labelledby="signinTitle" aria-modal="true" role="dialog">
   <div class="relative w-auto pointer-events-none modal-dialog modal-dialog-centered">
