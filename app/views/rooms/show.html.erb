@@ -177,10 +177,6 @@
       </div>
       <!-- booking_card_end -->
     </div>
-    <div>
-      <%= react_component('GoogleRoomMap', 
-      { lat: @room.lat.to_f, lng: @room.lng.to_f, api_key: ENV['GOOG_MAPS_API_KEY'] }) %>
-    </div>
     <hr class="my-5">
     <!-- guest_review -->
     <div class="grid grid-cols-2 gap-5">
@@ -225,9 +221,13 @@
     <hr class="my-5">
     <!-- room_location -->
     <div>
-      <h3 class="h3">住宿地點</h3>
+      <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
       <div class="w-full">
       </div>
       <!-- room_location -->
+      <%= react_component('GoogleRoomMap', 
+      { lat: @room.lat.to_f, lng: @room.lng.to_f, api_key: ENV['GOOG_MAPS_API_KEY'] }) %>
+      <div>
+    </div>
     </div>
   </section>
