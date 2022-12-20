@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_18_045847) do
+ActiveRecord::Schema.define(version: 2022_12_20_031926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 2022_12_18_045847) do
     t.date "published_at"
     t.string "city", default: "", null: false
     t.string "district", default: "", null: false
+    t.decimal "lat", precision: 13, scale: 10
+    t.decimal "lng", precision: 13, scale: 10
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 

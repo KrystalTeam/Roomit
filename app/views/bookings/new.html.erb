@@ -1,31 +1,26 @@
 <section class="grid grid-cols-1 gap-2 md:grid-cols-9 md:grid-rows-7 md:px-10 md:gap-10">
   <div class="flex items-center px-6 py-5 bg-white shadow-sm sticky-top md:static md:col-span-9 md:shadow-none">
-    <i class="fa-solid fa-chevron-left"></i>
+    <%= link_to room_path(@room) do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
     <h1 class="inline-block mx-auto font-bold md:mx-6 md:text-3xl">確認並付款</h1>
   </div>
   <div class="flex flex-col content-between w-full md:row-span-6 md:col-span-5">
     <div class="px-6 room-info md:hidden">
       <div class="flex pb-5 mb-5 border-b border-gray-200 room-summary">
-        <img
-          class="object-cover w-32 h-full mr-3 rounded-lg"
-          src="https://a0.muscache.com/im/pictures/0f187630-06a3-4115-99dc-f3617529aedd.jpg?aki_policy=large"
-          alt=""
-          style="aspect-ratio: 4 / 3"
-        />
+        <img class="object-cover w-32 h-full mr-3 rounded-lg" src="https://a0.muscache.com/im/pictures/0f187630-06a3-4115-99dc-f3617529aedd.jpg?aki_policy=large" alt="" style="aspect-ratio: 4 / 3"/>
         <div class="flex flex-col justify-between room-info">
           <div class="flex flex-col">
-            <span class="text-xs text-gray-500">連棟房屋中的獨立房間</span>
+            <span class="text-xs text-gray-500"><%=@room.home_type%>中的<%=@room.room_type%></span>
             <span class="inline-block text-sm"
-              >續住折扣／近車站／免費車位_伯爵夫人二人房
-              (獨立衛浴／乾濕分離)</span
-            >+
+              ><%=@room_intro%></span>
+            +
           </div>
-          <span class="text-xs">
+          <span class="hidden text-xs">
             <i class="fa-solid fa-star"></i>
             <span>4.98</span>
             <span class="text-xs text-gray-500"
-              >(126<span class="hidden">則評價</span>)</span
-            >
+              >(126<span class="hidden">則評價</span>)</span>
           </span>
         </div>
       </div>
@@ -36,10 +31,10 @@
         <span>為你的預定提供保障</span>
       </div>
     </div>
-    <div class="flex justify-between px-6 border-b-8 border-gray-200 md:items-center md:py-5 md:border md:rounded-xl special-tag md:mx-6">
+    <div class="justify-between hidden px-6 border-b-8 border-gray-200 md:items-center md:py-5 md:border md:rounded-xl special-tag md:mx-6">
       <div class="pb-6 text-xs md:text-lg md:pb-0">
         <span class="font-bold md:block">服務費全免。</span>
-        <span>怡伶將為房客支付服務費。</span>
+        <span><%=@owner_name%>將為房客支付服務費。</span>
       </div>
       <div class="text-2xl text-pink-600">
         <i class="fa-solid fa-piggy-bank"></i>
@@ -50,45 +45,37 @@
       <div class="flex justify-between date">
         <div class="mb-5">
           <h3 class="mb-1 font-bold">日期</h3>
-          <span>2023年1月13日至14日</span>
+          <span><%=params[:start_at].to_date%>至<%=params[:end_at].to_date%></span>
         </div>
-        <a class="font-bold underline" href="#">編輯</a>
+        <a class="hidden font-bold underline" href="#">編輯</a>
       </div>
       <div class="flex justify-between headcount">
         <div class="mb-5">
           <h3 class="mb-1 font-bold">房客人數</h3>
-          <span>2位房客</span>
+          <span><%=params[:headcount]%>位房客</span>
         </div>
-        <a class="font-bold underline" href="#">編輯</a>
+        <a class="hidden font-bold underline" href="#">編輯</a>
       </div>
     </div>
     <div class="px-6 pb-4 border-b-8 border-gray-100 md:border-b pay-way">
       <h2 class="my-5 text-xl font-bold">選擇付款方式</h2>
       <div>
-        <div class="p-3 border-2 border-black rounded-t-lg">
+        <div class="p-3 border-2 border-gray-600 rounded-lg">
           <div class="flex justify-between">
             <span class="font-bold">全額支付</span>
             <div class="flex content-center">
-              <span class="font-bold">$2,310</span>
-              <input
-                class="w-5 h-6 ml-2 bg-black"
-                type="radio"
-                name="pay-way"
-              />
+              <span class="font-bold">$<%=@room.price * @nights%></span>
+              <input class="w-5 h-6 ml-2 bg-black" type="radio" name="pay-way" checked/>
             </div>
           </div>
           <p class="text-gray-400">立即支付總額，一切就大功告成了。</p>
         </div>
-        <div class="p-3 border-2 border-t-0 border-gray-300 rounded-b-lg">
+        <div class="hidden p-3 border-2 border-t-0 border-gray-300 rounded-b-lg">
           <div class="flex justify-between">
             <span class="font-bold">立即支付部分費用，之後再付清餘額</span>
             <div class="flex content-center">
               <span class="font-bold">$462</span>
-              <input
-                class="w-5 h-6 ml-2 bg-black"
-                type="radio"
-                name="pay-way"
-              />
+              <input class="w-5 h-6 ml-2 bg-black" type="radio" name="pay-way"/>
             </div>
           </div>
           <div>
@@ -104,8 +91,8 @@
     <div class="px-6 py-5 border-b-8 border-gray-100 md:hidden price-detel">
       <h2 class="mb-4 text-xl font-bold">價格詳情</h2>
       <div class="flex justify-between mb-2">
-        <span class="flex justify-between">$2,200TWD x 1晚</span>
-        <span>$2,200 TWD</span>
+        <span class="flex justify-between">$<%=@room.price%>TWD x <%=params[:nights]%>晚</span>
+        <span>$<%=@room.price * @nights%> TWD</span>
       </div>
       <div class="flex justify-between mb-3">
         <span>服務費</span>
@@ -117,28 +104,18 @@
       </div>
       <div class="flex justify-between mb-3 font-bold">
         <span>總價<a href="#" class="underline">(TWD)</a></span>
-        <span>$2,310</span>
+        <span>$<%=@room.price * @nights%></span>
       </div>
       <a href="#" class="flex justify-end font-bold underline">更多資訊</a>
     </div>
     <div class="px-6 pb-5 border-b-8 border-gray-100 md:border-b pay-with">
       <h2 class="my-5 text-xl font-bold">付款方式：</h2>
       <div
-        class="flex items-center justify-between p-3 mb-5 border border-gray-300 rounded-lg"
-      >
+        class="flex items-center justify-between p-3 mb-5 border-2 border-gray-600 rounded-lg">
         <label for="linepay">
-          <img
-            class="w-28"
-            src="https://www.new-thing.org/sites/www.new-thing.org/files/field/image/logo_0.jpg"
-            alt=""
-          />
+          <img class="w-28" src="https://www.new-thing.org/sites/www.new-thing.org/files/field/image/logo_0.jpg" alt=""/>
         </label>
-        <input
-          class="w-5 h-6 bg-gray-400"
-          type="radio"
-          name="pay-way"
-          id="linepay"
-        />
+        <input class="w-5 h-6 bg-gray-400" type="radio" name="pay-with" id="linepay" checked/>
       </div>
       <a href="#" class="pb-4 mb-4 font-bold underline">輸入優惠券代碼</a>
     </div>
@@ -157,39 +134,42 @@
     </div>
     <div class="px-6 policy-agree md:py-6">
       <p class="py-3 text-xs">
-        點選以下按鈕即表示本人同意<a class="font-bold underline"
-          >房東的《房屋守則》</a
-        >、<a class="font-bold underline">房客基本守則</a>、<a
-          class="font-bold underline"
-          >《重新預訂和退款政策》</a
-        >，且允許 Airbnb 在我應負責賠償損壞時，可以<a
-          class="font-bold underline"
-          >向我的付款方式扣款</a
-        >。
+        點選以下按鈕即表示本人同意
+        <a class="font-bold underline">房東的《房屋守則</a>、
+        <a class="font-bold underline">房客基本守則</a>、
+        <a class="font-bold underline">
+          《重新預訂和退款政策》</a>
+        ，且允許 Airbnb 在我應負責賠償損壞時，可以
+        <a class="font-bold underline">向我的付款方式扣款</a>
+        。
       </p>
     </div>
-    <button
-      class="py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-600 rounded-lg confirm md:w-40"
-    >
-      <a href="#">確認並付款</a>
-    </button>
+    <%= form_with(model: @booking) do |booking| %>
+      <%= booking.hidden_field :room_id, value: params[:room_id] %>
+      <%= booking.hidden_field :user_id, value: current_user.id%>
+      <%= booking.hidden_field :start_at, value: params[:start_at].to_date %>
+      <%= booking.hidden_field :end_at, value: params[:end_at].to_date %>
+      <%= booking.hidden_field :price_per_night, value: @room.price %>
+      <%= booking.hidden_field :headcount, value: params[:headcount] %>
+      <%#= booking.hidden_field :serial, value: generate_serial%>
+      <div class="flex">
+        <button class="flex justify-center py-3 mx-6 mb-6 text-gray-500 bg-gray-100 border-pink-500 rounded-lg text-md confirm md:w-40">
+          <%=link_to '回上一頁重新輸入', room_path(@room)%>
+        </button>
+        <button class="flex justify-center py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-500 rounded-lg confirm md:w-40 ">
+          <%= booking.submit '確認並付款'%>
+        </button></div>
+    <% end %>
   </div>
-
   <div class="hidden py-5 border border-gray-200 sticky-top md:block md:col-span-4 rounded-xl">
     <div class="px-6 room-info">
       <div class="flex pb-5 mb-5 border-b border-gray-100 room-summary">
-        <img
-          class="object-cover w-32 h-full mr-3 rounded-lg"
-          src="https://a0.muscache.com/im/pictures/0f187630-06a3-4115-99dc-f3617529aedd.jpg?aki_policy=large"
-          alt=""
-          style="aspect-ratio: 4 / 3"
-        />
+        <img class="object-cover w-32 h-full mr-3 rounded-lg" src="https://a0.muscache.com/im/pictures/0f187630-06a3-4115-99dc-f3617529aedd.jpg?aki_policy=large" alt="" style="aspect-ratio: 4 / 3"/>
         <div class="flex flex-col justify-between room-info">
           <div class="flex flex-col">
-            <span class="text-xs text-gray-500">連棟房屋中的獨立房間</span>
+            <span class="text-xs text-gray-500"><%=@room.home_type%>中的<%=@room.room_type%></span>
             <span class="inline-block text-sm"
-              >續住折扣／近車站／免費車位_伯爵夫人二人房
-              (獨立衛浴／乾濕分離)</span
+              ><%=@room_intro%></span
             >
           </div>
           <span class="text-xs">
@@ -211,35 +191,23 @@
     <div class="px-6 py-5 border-b-8 border-gray-100 md:border-b price-detel">
       <h2 class="mb-5 text-xl font-bold">價格詳情</h2>
       <div class="flex justify-between mb-3">
-        <span class="flex justify-between mb-3">$2,200TWD x 1晚</span>
-        <span>$2,200 TWD</span>
+        <span class="flex justify-between mb-3"><%=number_to_currency(@room.price, unit: 'TWD', precision: 0)%>x <%=@nights%>晚</span>
+        <span><%=number_to_currency(@room.price * @nights, unit: 'TWD', precision: 0)%></span>
       </div>
-      <div class="flex justify-between mb-3">
+      <div class="hidden mb-3 ">
         <span>服務費</span>
         <span>$0 TWD</span>
       </div>
-      <div class="flex justify-between mb-3 border-b border-gray-100">
+      <div class="hidden mb-3 border-b border-gray-100 ">
         <span>稅費</span>
         <span>$110 TWD</span>
       </div>
       <div class="flex justify-between mb-3 font-bold">
         <span>總價<a class="underline">(TWD)</a></span>
-        <span>$2,310</span>
+        <span><%=number_to_currency(@room.price * @nights, precision: 0)%></span>
       </div>
       <a href="#" class="flex justify-end font-bold underline">更多資訊</a>
     </div>
-  </div>
-  <div>
-    <%= form_for (@booking) do |form| %>
-      <%= form.label :start_at, '日期' %>
-      <%= form.text_field :start_at, class: "bg-blue-100",data: {
-      controller: "flatpickr",
-      flatpickr_date_format: "Y-m-d",
-      flatpickr_min_date: Time.zone.now,
-      minDate: "today",
-      mode: "range"
-    }%>
-    <% end %>
   </div>
 </section>
 

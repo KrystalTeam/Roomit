@@ -1,20 +1,13 @@
 class RoomsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :find_hosted_rooms, only: [:manage]
   before_action :find_all_rooms, only: [:index]
-  before_action :find_room, only: [:show]
+  before_action :find_room, only: [:show,:wish_list]
   before_action :find_hosted_room, only: [:edit, :update, :destroy, :destroy_photo]
 
+
   def index
-    @rooms = Room.all.not_deleted
-    sql = <<-SQL
-      SELECT rooms.id, rooms.address, rooms.max_occupancy, rooms.price, bookings.start_at, bookings.end_at
-      FROM rooms
-      LEFT JOIN bookings
-      ON rooms.id = bookings.room_id;
-    SQL
-   
-    @rooms_with_booking_records = ActiveRecord::Base.connection.execute(sql)
-    # render html: @rooms_with_booking_records.values
+      @rooms = Room.all.not_deleted
   end
 
   def new
@@ -23,6 +16,12 @@ class RoomsController < ApplicationController
 
   def create
     @room = current_user.rooms.not_deleted.new(room_params)
+
+    @geocoding_obj = GoogGeocodingApi.new(@room.address)
+    @coordinates = @geocoding_obj.get_response
+    @room.lat = get_lat(@coordinates)
+    @room.lng = get_lng(@coordinates)
+    
     if @room.save
       redirect_to manage_rooms_path, notice: '新增成功'
     else
@@ -66,6 +65,20 @@ class RoomsController < ApplicationController
   end
 
   def manage
+  end
+
+  def wish_list
+    if current_user.liked_wish_list_rooms.include?(@room)
+      current_user.liked_wish_list_rooms.delete(@room)
+      render json: {status: "unliked"}
+    else
+      current_user.liked_wish_list_rooms << (@room)
+      render json: {status: "liked"}
+    end
+  end
+
+  def wish_list_rooms
+    
   end
 
   private

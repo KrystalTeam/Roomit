@@ -1,22 +1,15 @@
 class BookingsController < ApplicationController
 
-  before_action :find_room, only: %i[create]
+  # before_action :find_room, only: %i[create]
   skip_before_action :verify_authenticity_token, only: %i[confirm cancel]
   skip_before_action :authenticate_user!, only: %i[confirm cancel]
 
   def create
-    # render html: params
-    @booking = Booking.new(
-      user_id: params[:user_id],
-      room_id: params[:room_id],
-      start_at: params[:start_at].to_date,
-      end_at: params[:end_at].to_date,
-      price_per_night: params[:price].to_i
-    )
+    @room = Room.find(params[:booking][:room_id])
+    @booking = Booking.new(booking_params)
 
     if @booking.save
       @booking.unpaid!
-
       # after payment success => get the response from the confirm api
       @api_obj = LinePayApi.new('/v3/payments/request')
 
@@ -46,10 +39,6 @@ class BookingsController < ApplicationController
       confirm_body = @api_obj.confirm_body(@booking)
       confirm_signature = @api_obj.get_signature(confirm_nonce, confirm_body)
       @api_obj.get_response(@api_obj.header(confirm_nonce, confirm_signature), confirm_body)
-
-      redirect_to root_path, notice: '訂單付款成功'
-    else
-      redirect_to root_path, alert: '錯誤'
     end
   end
 
@@ -57,18 +46,27 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @booking = Booking.new
+    @booking = current_user.bookings.new
+    @room = Room.find(params[:room_id])
+    @owner_name = User.find(@room.user_id).name ? User.find(@room.user_id).name : "房東"
+    @room_intro = @room.summary.size>=15 ? @room.summary[0..15] : @room.summary
+    @nights = (params[:end_at].to_date  - params[:start_at].to_date ).to_i
   end
 
   def cancel
     @booking = Booking.find_by!(serial: params[:id])
     @booking.cancelled!
-
-    redirect_to root_path, alert: '訂單付款失敗'
   end
 
   private
   def find_room
     @room = Room.find(params[:room_id])
+  end
+
+  def verify_owner
+  end
+  
+  def booking_params
+    params.require(:booking).permit(:user_id, :room_id, :start_at, :end_at, :price_per_night, :serial, :headcount)
   end
 end
