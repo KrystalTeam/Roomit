@@ -16,6 +16,7 @@ class User < ApplicationRecord
   
   has_one_attached :avatar
   has_many :reviews
+  has_many :reviewed, through: :reviews, source: :rooms
 
   enum role: %i[ guest host admin ]
 
