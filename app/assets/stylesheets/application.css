@@ -44,3 +44,13 @@
 .z-max {
   z-index: 1000;
 }
+.h-full-with-nav {
+  height: calc(100% - 120px);
+}
+html,
+body {
+  height: 100%;
+}
+.flatpickr-day.selected {
+  background-color: #ec4899;
+}

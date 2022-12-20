@@ -36,9 +36,9 @@
       <%end%>
     </div>
     <!-- room_img_end -->
-    <div class="flex justify-between gap-10 ">
+    <div class="relative flex justify-between gap-10 ">
       <!-- room_info -->
-      <div class="flex flex-col w-4/6 col-span-2 gap-5 ">
+      <div class="flex flex-col w-7/12 gap-5">
         <div class="flex items-center justify-between">
           <div class="flex flex-col gap-3">
             <h2 class="flex gap-2 text-2xl font-bold">
@@ -95,60 +95,67 @@
         <div class="flex flex-col">
           <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
           <h4 class="mb-2 font-medium ">
-            Aewol-eup,Cheju、濟州特別自治道、南韓
+            台北101
           </h4>
-          <span class="">
-            애월 곽지해수욕장을 끼고 있으며 1960~70년대의 빈티지 에어스트림을 축적
+          <span class="text-justify">
+            婆去躲陽點成動帽點嗎目；清院就只爬。工房活具抓畫，流石抄現在。愛第可起媽重少雄園那快馬告問愛法雪玉秋？叫哪息請結刀屋掃問相彩公澡，路北牙犬告我采能要飽，重流已尾？室封斗經雨林夕。
+            第有乞上把麻急把朱時背新哭媽後象采「海汗尾虎聲」她八十物元新支從父對娘怎丟蛋用裏、八士做示歡辛游給月太亮意幼穿，肖央白肉功文，尺乙他也呀問色品六動。
+            方更面杯在一跟高得犬天抄叫左幼足戶旁吧！唱入彩重現交別斗象神神左叫有過才造麻，他念得筆進半飽上主追光門錯河記，沒頁出品何松路哪草九金祖錯扒還品外：交英明民讀珠見成馬進說朋足，二片白花目上。
           </span>
         </div>
       </div>
       <!-- room_info_end -->
       <!-- booking_card -->
-      <div class="flex-grow min-w-max">
-        <%= form_with(url: new_booking_path, method:'get', data: { controller: "booking-card" }) do |form| %>
-          <input type="hidden" name="room_id" value="<%= @room.id %>">
-          <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
+      <div class="relative w-5/12">
+        <div class="sticky overflow-y-auto border border-gray-300 shadow-sm row-span-auto top-1/4 rounded-xl">
+          <%= form_with(url: new_booking_path, method:'get', data: { controller: "booking-card" }) do |form| %>
+            <input type="hidden" name="room_id" value="<%= @room.id %>">
             <div class="p-5">
-              <div class="flex flex-col">
-                <div class="inline-flex">
-                  <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
-                  <span class="text-lg">晚</span>
-                </div>
-                <div class="flex items-center text-sm">
-                  <i class="mr-1 fa-solid fa-star"></i>
-                  <span class="mr-2">5.0</span>
-                  <p>6</p>
-                  <p>則評價</p>
+              <div class="flex flex-col gap-3">
+                <div class="flex justify-between mb-3">
+                  <div class="inline-flex">
+                    <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
+                    <span class="text-md place-self-center">晚</span>
+                  </div>
+                  <div class="flex items-center text-sm">
+                    <i class="mr-1 fa-solid fa-star"></i>
+                    <span class="mr-2">5.0</span>
+                    <p>6</p>
+                    <p>則評價</p>
+                  </div>
                 </div>
                 <!-- checkin_date -->
-                <div class="grid grid-cols-2 gap-8">
+                <div class="flex w-full -mb-3 font-bold">
+                  <span class="w-full">入住日期</span>
+                  <span class="w-full">退房日期</span>
+                </div>
+                <div class="flex overflow-hidden border-2 border-pink-500 rounded-lg justify-evenly">
+                  <%# 入住日期 %>
                   <div class="w-full">
-                    <%= form.label :start_at, '入住日期'%>
                     <%= form.text_field :start_at ,data: {
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
                     action: "input->booking-card#startDate",
                     "booking-card-target": "startDate"
-                    }, class:"p-2 w-full border-2 border-gray-200 rounded-xl"%>
+                    }, class:"p-2 w-full font-bold "%>
                   </div>
                   <%# 退房日期 %>
                   <div class="w-full">
-                    <%= form.label :end_at, '退房日期'%>
                     <%= form.text_field :end_at ,data: {
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
                     action: "change->booking-card#endDate",
                     "booking-card-target": "endDate"
-                    }, class:"p-2 w-full border-2 border-gray-200 rounded-xl"%>
+                    }, class:"p-2 w-full border-pink-500 border-l-2 font-bold" %>
                   </div>
                 </div>
                 <!-- guest_num -->
-                <div class="">
-                  <%= form.label :headcount,'人數'%>
-                  <div class="flex">
-                    <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a) %>
+                <div>
+                  <%= form.label :headcount,'人數',class:"font-bold"%>
+                  <div class="flex items-center gap-2 ">
+                    <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a)%>
                     <span>位</span>
                   </div>
                 </div>
@@ -176,8 +183,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
       <!-- booking_card_end -->
     </div>
@@ -189,6 +196,7 @@
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
             <span>維毅</span>
+            <span>維毅</span>
             <span class="text-gray-400 ">2022年10月</span>
           </div>
         </div>
@@ -212,12 +220,24 @@
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
-            <span>白冰冰</span>
-            <span class="text-gray-400 ">2022年12月</span>
+            <span>維毅</span>
+            <span class="text-gray-400 ">2022年10月</span>
           </div>
         </div>
         <p>
-          非常漂亮，很大泡湯很舒服！
+          房東回覆快速，房間乾淨漂亮舒服：）
+        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
+          <div class="text-sm">
+            <span>維毅</span>
+            <span class="text-gray-400 ">2022年10月</span>
+          </div>
+        </div>
+        <p>
+          房東回覆快速，房間乾淨漂亮舒服：）
         </p>
       </div>
     </div>

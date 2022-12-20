@@ -18,7 +18,10 @@
   height: 20px;
   width:  20px;
 }
-
+select{
+  border: 2px solid #ec4899;
+  width: 100px;
+}
 @layer components {
   .h1{
     @apply

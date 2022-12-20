@@ -3,11 +3,15 @@
     <% @rooms.all.each do |room| %>
       <div class="relative card-carousel-container">
         <%= link_to room_path(room) do %>
-          <div  data-controller="carousel" class="relative flex-grow mx-auto rounded-lg swiper-container" 
-                data-carousel-options-value='{"loop":"true","pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "navigation": { "nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}}'>
-            <div class="absolute z-10 flex flex-col justify-between w-full h-full p-3">
-              <i class="self-end text-2xl text-center fa-solid fa-heart opacity-60 hover:opacity-80" ></i>
-              <div class="flex justify-between w-full my-auto ">
+          <div  data-controller="carousel" class="relative flex-grow mx-auto rounded-lg group swiper-container" 
+                data-carousel-options-value='{"loop":"true","pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "navigation": { "allowTouchMove":"false","nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}}'>
+            <div class="absolute z-30 flex flex-col justify-between w-full h-full p-3">
+              <% if current_user %>
+                <button class="self-end text-2xl text-center transition duration-150 ease-in-out transform hover:scale-125"data-controller="wishList" data-action="click->wishList#wishListState" data-id="<%= room.id%>" data-liked="<%= current_user&.liked_wish_list_rooms&.include?(room) %>">
+                  <i data-wishList-target="wishListIcon" class="text-gray-500 opacity-80 fa-solid fa-heart"></i>
+                </button>
+              <%end %>
+              <div class="flex justify-between w-full my-auto transition duration-500 ease-out opacity-0 group-hover:opacity-100">
                 <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-70 hover:opacity-100 swiper-button-prev">
                   <i class="text-gray-700 fa-solid fa-chevron-left"></i>
                 </div>
@@ -53,7 +57,7 @@
               <p class="inline-block text-md ">4.87</p>
             </div>
           </div>
-        <%  end %>
+        <%end%>
       </div>
     <% end %>
   </div>
