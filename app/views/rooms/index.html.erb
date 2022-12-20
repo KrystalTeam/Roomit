@@ -4,7 +4,7 @@
       <div class="relative card-carousel-container">
         <%= link_to room_path(room) do %>
           <div  data-controller="carousel" class="relative flex-grow mx-auto rounded-lg group swiper-container" 
-                data-carousel-options-value='{"loop":"true","pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "navigation": { "allowTouchMove":"false","nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}}'>
+                data-carousel-options-value='{"loop":"true","pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}}'>
             <div class="absolute z-30 flex flex-col justify-between w-full h-full p-3">
               <% if current_user %>
                 <button class="self-end text-2xl text-center transition duration-150 ease-in-out transform hover:scale-125"data-controller="wishList" data-action="click->wishList#wishListState" data-id="<%= room.id%>" data-liked="<%= current_user&.liked_wish_list_rooms&.include?(room) %>">
