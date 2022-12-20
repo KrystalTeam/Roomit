@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2022_12_20_031926) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.string "serial"
-    t.integer "headcount"
+    t.integer "headcount", null: false
     t.index ["room_id"], name: "index_bookings_on_room_id"
     t.index ["slug"], name: "index_bookings_on_slug", unique: true
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -119,8 +119,19 @@ ActiveRecord::Schema.define(version: 2022_12_20_031926) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wish_list_rooms", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_wish_list_rooms_on_room_id"
+    t.index ["user_id"], name: "index_wish_list_rooms_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
+  add_foreign_key "wish_list_rooms", "rooms"
+  add_foreign_key "wish_list_rooms", "users"
 end

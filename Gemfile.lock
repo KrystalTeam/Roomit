@@ -123,6 +123,8 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    enum_help (0.0.19)
+      activesupport (>= 3.0.0)
     erubi (1.11.0)
     execjs (2.8.1)
     faraday (2.7.1)
@@ -314,6 +316,9 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -376,6 +381,7 @@ DEPENDENCIES
   colorbox-rails (~> 0.1.2)
   devise (~> 4.2)
   dotenv-rails
+  enum_help
   font-awesome-rails (~> 4.6, >= 4.6.3.1)
   foreman
   friendly_id (~> 5.4.0)
@@ -395,6 +401,7 @@ DEPENDENCIES
   rubocop
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
+  simple_form
   spring
   sprockets-rails
   turbolinks (~> 5)
