@@ -11,6 +11,7 @@
     <%= favicon_link_tag asset_path "fav_icon.ico" %>
   </head>
   <body>
+    <%= render "shared/flash" %>
     <div class="relative w-full h-full">
       <%= render "shared/header" %>
       <%= yield %>
