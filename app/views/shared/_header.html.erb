@@ -41,7 +41,11 @@
             <i class="text-gray-600 fa-solid fa-bars text-md "></i>
           </div>
           <div class="block pl-3 ">
-            <%= image_tag current_user&.avatar || default_avater, class:"rounded-full w-8 h-8"%>
+            <% if !current_user || !current_user&.avatar.attached? %>
+              <%= image_tag default_avater, class:"rounded-full w-8 h-8 object-cover"%>
+            <% else %>
+              <%= image_tag current_user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
+            <% end %>
           </div>
         </button>
         <div data-dropdown-target="menu" class="absolute right-0 z-20 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg ">
