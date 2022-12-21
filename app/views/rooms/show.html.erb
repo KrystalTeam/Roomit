@@ -27,7 +27,7 @@
     <!-- room_img -->
     <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-10 overflow-hidden rounded-2xl">
       <div class="col-span-2 row-span-2 ">
-        <%=  image_tag @room.photos.all[0], class:"img-full aspect-ratio"%>
+        <%= image_tag @room.photos.first, class:"img-full aspect-ratio"%>
       </div>
       <% @room.photos.all[1..4].each do |photo| %>
         <div>
