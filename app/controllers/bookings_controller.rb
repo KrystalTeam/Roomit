@@ -46,7 +46,7 @@ class BookingsController < ApplicationController
   end
 
   def index
-    @first_booking = current_user.bookings.order(start_at: :ASC)[0]
+    @first_booking = current_user.bookings.where(state: "paid").order(start_at: :ASC)[0]
   end
 
   def new
@@ -62,10 +62,16 @@ class BookingsController < ApplicationController
   end
 
   def cancel
-    @booking = Booking.find_by!(serial: params[:id])
-    @booking.cancelled!
-
-    redirect_to root_path, notice: '訂單付款失敗'
+    @booking = Booking.find(params[:id])
+    if @booking.cancelled!
+      if @booking.state == "paid"
+        redirect_to room_path, notice: "成功取消預定"
+      else @booking.state == "unpaid"
+        redirect_to root_path, notice: '訂單付款失敗'
+      end
+    else
+      redirect_to root_path, alert: "訂單發生不明錯誤，請重新預定"
+    end
   end
 
   private

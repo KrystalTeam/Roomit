@@ -20,6 +20,7 @@
     "errno": "^1.0.0",
     "flatpickr": "^4.6.13",
     "globby": "^13.1.2",
+    "google-map-react": "^2.2.0",
     "postcss": "7",
     "prop-types": "^15.8.1",
     "purgecss": "^5.0.0",

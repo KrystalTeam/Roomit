@@ -3,7 +3,7 @@
     <h1 class="flex gap-2 mb-3 h1">
       <p><%= @room.user.name%></p>
       <p>出租的</p>
-      <p><%= @room.home_type%></p>
+      <p><%=Room.human_enum_name(:room_type, @room.room_type)%></p>
     </h1>
     <div class="flex items-center justify-between mb-2">
       <div class="flex gap-2">
