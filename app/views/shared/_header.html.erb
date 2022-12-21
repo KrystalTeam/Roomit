@@ -42,20 +42,22 @@
           </div>
           <div class="block pl-3 ">
             <% if !current_user || !current_user&.avatar.attached? %>
-              <%= image_tag default_avater, class:"rounded-full w-8 h-8 object-cover"%>
+              <div class="flex items-center justify-center w-8 h-8 rounded-full ">
+                <i class="text-3xl text-pink-500 fa-solid fa-circle-user"></i>
+              </div>
             <% else %>
               <%= image_tag current_user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
             <% end %>
           </div>
         </button>
-        <div data-dropdown-target="menu" class="absolute right-0 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg z-700">
+        <div data-dropdown-target="menu" class="absolute right-0 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg z-999">
           <% if user_signed_in? %>
             <%= link_to "帳號", edit_user_registration_path, class: "nav-item " %>
             <%= link_to "旅程", bookings_path, class: "nav-item "%>
-            <%= link_to "管理房源", manage_rooms_path, class: "nav-item " %>
+            <%= link_to "管理房源", manage_rooms_path, class: "nav-item "%>
             <%= link_to "心願單", wish_list_rooms_rooms_path , class: "nav-item " %>
             <%= link_to "登出", destroy_user_session_path, method: :delete, class: "nav-item border-0 " %>
-          <% else %>
+          <%else%>
             <button type="button" data-bs-toggle="modal" data-bs-target="#signup" class= "w-full text-left nav-item">註冊</button>
             <button type="button" data-bs-toggle="modal" data-bs-target="#signin" class= "w-full text-left border-0 nav-item">登入
             </button>

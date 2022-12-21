@@ -4,14 +4,15 @@
   <div class="grid grid-cols-2 gap-5 p-5 border border-gray-500 rounded-2xl">
     <div class="flex flex-col gap-5">
       <!-- name_field -->
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|%>
         <%= f.hidden_field "id", value:current_user.id %>
         <div data-controller="user-edit"  class="flex flex-col gap-2 py-5 border-b">
           <div class="flex justify-between ">
             <div>
               <h4 class="text-sm">法定名稱</h4>
               <span class="text-sm text-gray-500">
-                <div data-user-edit-target="editTip" class="hidden">這是你旅行證件（駕照或護照）上所記載的姓名。</div>
+                <div data-user-edit-target="editTip" class="hidden">這是你旅行證件（駕照或護照）上所記載的姓名。
+                </div>
                 <div data-user-edit-target="currentSetting"><%= current_user.name%></div>
               </span>
             </div>
@@ -21,7 +22,7 @@
           </div>
           <div  data-user-edit-target="edit" class="flex-col hidden gap-5 ">
             <%= f.text_field :name, autocomplete: "name", class:"input mt-0 mb-3", data:{action:"keydown->user-edit#save"}%>
-            <div   class="flex justify-center w-20 px-4 py-1 text-white bg-pink-600 rounded-lg action hover:bg-pink-800">
+            <div   class="flex justify-center w-20 px-4 py-1 text-white bg-pink-500 rounded-lg action hover:bg-pink-800">
               <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
             </div>
           </div>
@@ -29,7 +30,7 @@
       <% end %>
       <!-- name_field_end -->
       <!-- Email_field -->
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|%>
         <%= f.hidden_field "id", value:current_user.id %>
         <div data-controller="user-edit"  class="flex flex-col gap-2 py-5 border-b">
           <div class="flex justify-between ">
@@ -46,7 +47,7 @@
           </div>
           <div  data-user-edit-target="edit" class="hidden name1">
             <%= f.email_field :email, autocomplete: "email", class:"input mt-0 mb-3", data:{action:"keydown->user-edit#save"}%>
-            <div   class="flex justify-center w-20 px-4 py-1 text-white bg-pink-600 rounded-lg action hover:bg-pink-800">
+            <div   class="flex justify-center w-20 px-4 py-1 text-white bg-pink-500 rounded-lg action hover:bg-pink-800">
               <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
             </div>
           </div>
@@ -54,7 +55,7 @@
       <% end %>
       <!-- Email_field_end -->
       <!-- Phone_field -->
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|%>
         <%= f.hidden_field "id", value:current_user.id %>
         <div data-controller="user-edit"  class="flex flex-col gap-2 py-5 border-b">
           <div class="flex justify-between ">
@@ -75,53 +76,57 @@
           </div>
           <div  data-user-edit-target="edit" class="hidden name1">
             <%= f.text_field :phone_num, autocomplete: "phone_num", class:"input mt-0 mb-3", data:{action:"keydown->user-edit#save"}%>
-            <div class="flex justify-center w-20 px-4 py-1 text-white bg-pink-600 rounded-lg action hover:bg-pink-800">
+            <div class="flex justify-center w-20 px-4 py-1 text-white bg-pink-500 rounded-lg action hover:bg-pink-800">
               <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
             </div>
           </div>
         </div>
       <% end %>
       <!-- Phone_field_end -->
-      <i c>
-        <!-- avatar -->
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= f.hidden_field "id", value:current_user.id %>
-          <div data-controller="user-edit"  class="flex flex-col gap-2 py-5 border-b">
-            <div class="flex justify-between ">
-              <div>
-                <h4 class="text-sm">個人頭像</h4>
+      <!-- avatar_field -->
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|%>
+        <%= f.hidden_field "id", value:current_user.id %>
+        <div data-controller="user-edit" class="flex flex-col gap-2 py-5 border-b">
+          <div class="flex justify-between ">
+            <div>
+              <h4 class="text-sm ">個人頭像
+                <div data-user-edit-target="currentSetting" class="hidden w-0 h-0"></h4>
+                <% if !current_user || !current_user&.avatar.attached? %>
+                  <div class="flex items-center justify-center w-16 h-16 my-5 rounded-full ">
+                    <i class="text-6xl text-pink-500 fa-solid fa-circle-user"></i>
+                  </div>
+                <% else %>
+                  <%= image_tag current_user.avatar, class:"rounded-full w-16 h-16 my-5 object-cover"%>
+                <% end %>
                 <span class="text-sm text-gray-500">
-                  <div data-user-edit-target="editTip" class="hidden">其他使用者能看到的個人頭像。</div>
-                  <% if !current_user || !current_user&.avatar.attached? %>
-                    <%= image_tag default_avater, class:"rounded-full w-16 h-16 object-cover"%>
-                  <% else %>
-                    <%= image_tag current_user.avatar, class:"rounded-full w-16 h-16 object-cover"%>
-                  <% end %>
+                  <div data-user-edit-target="editTip" class="hidden ">
+                    其他使用者能看到的個人頭像。
+                  </div>
                 </span>
               </div>
               <div class="flex items-start">
-                <button  data-action="click->user-edit#input_switch" class="text-sm font-bold underline">編輯</button>
+                <button data-action="click->user-edit#input_switch" class="text-sm font-bold underline">編輯</button>
               </div>
             </div>
-            <div  data-user-edit-target="edit" class="hidden name1">
-              <div class="flex items-center gap-2">
+            <div  data-user-edit-target="edit" class="hidden">
+              <div class="flex items-center gap-2 mb-3">
                 <%= f.label :avatar, '上傳圖片', class:"font-medium"%>
                 <%= f.file_field :avatar, direct_upload: true%>
               </div>
-              <div class="flex justify-center w-20 px-4 py-1 text-white bg-pink-600 rounded-lg action hover:bg-pink-800">
+              <div class="flex justify-center w-20 px-4 py-1 text-white bg-pink-500 rounded-lg action hover:bg-pink-800">
                 <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
               </div>
             </div>
           </div>
-        <% end %>
-        <!-- Email_field_end -->
-        <button class="flex justify-center px-4 py-1 mt-auto font-semibold text-gray-500 bg-white border border-gray-500 rounded-lg w-fit hover:border-gray-800 hover:text-gray-800">
-          <%= link_to "返回首頁", root_path %>
-        </button>
-      </div>
-      <div class="w-5/6 h-full ml-auto overflow-hidden max-h-96 rounded-xl">
+        </div>
+      <% end %>
+      <!-- avatar_field_end -->
+      <div class="w-full h-full ml-auto overflow-hidden max-h-96 rounded-xl">
         <img src="/assets/house2.jpeg" alt="" class="object-cover w-full h-full">
       </div>
     </div>
+    <button class="flex justify-center px-4 py-1 mt-5 font-semibold text-gray-500 bg-white border border-gray-500 rounded-lg w-fit hover:border-gray-800 hover:text-gray-800">
+      <%= link_to "返回首頁", root_path %>
+    </button>
   </div>
-  <div></div>
+</div>
