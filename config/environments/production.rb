@@ -83,6 +83,10 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  config.assets.precompile += %w( '.svg' )  
+
+  # Must include to get inline SVGs to work in deploy
+  config.assets.css_compressor = :sass
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"

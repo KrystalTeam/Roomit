@@ -61,9 +61,11 @@
           </div>
           <div class="rounded-full min-w-max min-h-max">
             <% if !current_user || !current_user&.avatar.attached? %>
-              <%= image_tag default_avater, class:"rounded-full w-16 h-16 object-cover"%>
+              <div class="flex items-center justify-center w-16 h-16 rounded-full ">
+                <i class="text-5xl text-pink-500 fa-solid fa-circle-user"></i>
+              </div>
             <% else %>
-              <%= image_tag current_user.avatar, class:"rounded-full w-16 h-16 object-cover"%>
+              <%= image_tag @room.user.avatar, class:"rounded-full w-16 h-16 object-cover"%>
             <% end %>
           </div>
         </div>
@@ -92,16 +94,22 @@
           </p>
         </div>
         <hr>
-        <div class="flex flex-col">
+        <div class="flex flex-col gap-3">
           <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
           <h4 class="mb-2 font-medium ">
-            台北101
+            <%= @room.address %>
           </h4>
-          <span class="text-justify">
-            婆去躲陽點成動帽點嗎目；清院就只爬。工房活具抓畫，流石抄現在。愛第可起媽重少雄園那快馬告問愛法雪玉秋？叫哪息請結刀屋掃問相彩公澡，路北牙犬告我采能要飽，重流已尾？室封斗經雨林夕。
-            第有乞上把麻急把朱時背新哭媽後象采「海汗尾虎聲」她八十物元新支從父對娘怎丟蛋用裏、八士做示歡辛游給月太亮意幼穿，肖央白肉功文，尺乙他也呀問色品六動。
-            方更面杯在一跟高得犬天抄叫左幼足戶旁吧！唱入彩重現交別斗象神神左叫有過才造麻，他念得筆進半飽上主追光門錯河記，沒頁出品何松路哪草九金祖錯扒還品外：交英明民讀珠見成馬進說朋足，二片白花目上。
-          </span>
+          <div class="text-justify">
+            <span class="mb-3 font-bold">鄰近超商：</span>
+            <ul class="flex flex-col gap-2 list-none">
+              <li>7-ELEVEn 鑫衡陽門市</li>
+              <li>全家便利超商 衡慶門市</li>
+            </ul>
+          </div>
+          <div class="text-justify">
+            <span class="font-bold">鄰近醫院：</span>
+            台大醫院
+          </div>
         </div>
       </div>
       <!-- room_info_end -->
