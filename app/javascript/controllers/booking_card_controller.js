@@ -17,7 +17,6 @@ export default class extends Controller {
     this.night = 1
     this.amount = this.price * this.night
     this.submitTarget.value = '請選擇日期'
-    console.log(this.submitBtnTarget.classList)
   }
 
   startDate() {
