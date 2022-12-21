@@ -1,8 +1,8 @@
 class BookingsController < ApplicationController
 
-  # before_action :find_room, only: %i[create]
   skip_before_action :verify_authenticity_token, only: %i[confirm cancel]
   skip_before_action :authenticate_user!, only: %i[confirm cancel]
+  before_action :should_compelete_user_info, only: [:new]
 
   def create
     @room = Room.find(params[:booking][:room_id])

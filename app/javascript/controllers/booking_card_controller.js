@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 export default class extends Controller {
 
-  static targets = ['amount', 'endDate', 'startDate', 'nights', 'price', 'total', 'submit']
+  static targets = ['amount', 'endDate', 'startDate', 'nights', 'price', 'total', 'submit', 'submitBtn']
   static values = {
     nights: Number,
     price: Number,
@@ -17,6 +17,7 @@ export default class extends Controller {
     this.night = 1
     this.amount = this.price * this.night
     this.submitTarget.value = '請選擇日期'
+    console.log(this.submitBtnTarget.classList)
   }
 
   startDate() {
@@ -75,9 +76,22 @@ export default class extends Controller {
         this.changeAmountText()
         this.changeTotalText()
         this.enableSubmit()
+        this.changeBtnColorAble()
       }else{
         this.disableSubmit()
+        this.changeBtnColorDisble()
       }
     }
+  }
+
+  changeBtnColorAble(){
+    this.submitBtnTarget.classList.replace('text-gray-500', 'text-white')
+    this.submitBtnTarget.classList.replace('bg-gray-100', 'bg-pink-500')
+    this.submitBtnTarget.classList.add('font-blod')
+  }
+  changeBtnColorDisble(){
+    this.submitBtnTarget.classList.replace('text-white', 'text-gray-500')
+    this.submitBtnTarget.classList.replace('bg-pink-500', 'bg-gray-100' )
+    this.submitBtnTarget.classList.remove('font-blod')
   }
 }

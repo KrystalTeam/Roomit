@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
   before_action :find_all_rooms, only: [:index]
   before_action :find_room, only: [:show,:wish_list]
   before_action :find_hosted_room, only: [:edit, :update, :destroy, :destroy_photo]
+  before_action :should_compelete_user_info, only: [:new]
 
 
   def index
@@ -15,7 +16,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = current_user.rooms.not_deleted.new(room_params)
+    @room = current_user.rooms.not_deleted.new(room_params_without_photos)
 
     @geocoding_obj = GoogGeocodingApi.new(@room.address)
     @coordinates = @geocoding_obj.get_response
@@ -53,7 +54,7 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.update(deleted_at: Time.current)
-    redirect_to manage_rooms_path, notice: "已刪除"
+    redirect_to manage_rooms_path, notice: '已刪除'
   end
 
   def destroy_photo
@@ -106,4 +107,5 @@ class RoomsController < ApplicationController
   def room_params_without_photos
     params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time)
   end
+
 end

@@ -18,14 +18,10 @@
           <i class="fa-solid fa-share"></i>
           <a href="#" class="mr-2">分享</a>
         </div>
-        <% if current_user %>
-          <button data-controller="wishList" 
-          data-action="click->wishList#wishListState" 
-            data-id="<%= @room.id%>"
-            data-liked="<%= current_user.liked_wish_list_rooms.include?(@room) %>">
-            <i data-wishList-target="wishListIcon" class="text-2xl text-gray-500 fa-solid fa-heart opacity-80"></i>
-          </button>
-        <%end%>
+        <div>
+          <i class="text-sm fa-regular fa-heart"></i>
+          <a href="#" class="font">儲存</a>
+        </div>
       </div>
     </div>
     <!-- room_img -->
@@ -129,7 +125,7 @@
                     flatpickr_min_date: Time.zone.now,
                     action: "input->booking-card#startDate",
                     "booking-card-target": "startDate"
-                    }, class:"p-2 w-full"%>
+                    }, class:"p-2 w-full border-2 border-gray-200 rounded-xl"%>
                   </div>
                   <%# 退房日期 %>
                   <div class="w-full">
@@ -140,7 +136,7 @@
                     flatpickr_min_date: Time.zone.now,
                     action: "change->booking-card#endDate",
                     "booking-card-target": "endDate"
-                    }, class:"p-2 w-full"%>
+                    }, class:"p-2 w-full border-2 border-gray-200 rounded-xl"%>
                   </div>
                 </div>
                 <!-- guest_num -->
@@ -152,15 +148,14 @@
                   </div>
                 </div>
                 <% if @room.user == current_user %>
-                  <button class="w-full mx-auto font-bold text-gray-500 bg-gray-200 rounded-xl">
+                  <button class="w-full mx-auto font-bold text-gray-700 bg-gray-200 rounded-xl">
                     <%=form.submit '無法預定自己的房源', disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
-                  </button>                   
+                  </button>
                 <% else%>
-                  <button class="w-full mx-auto font-bold bg-pink-600 rounded-xl">
-                    <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
-                  </button>                       
+                  <button class="w-full mx-auto my-3 text-gray-500 bg-gray-100 rounded-xl" data-booking-card-target="submitBtn">
+                    <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true, class: "block w-full h-full p-3 font-bold"%>
+                  </button>
                 <% end %>
-
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
                 <div class="flex justify-between gap-10 text-sm text-gray-700">
                   <div class="underline">
@@ -188,7 +183,7 @@
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
-            <span>維���</span>
+            <span>維毅</span>
             <span class="text-gray-400 ">2022年10月</span>
           </div>
         </div>
@@ -213,11 +208,11 @@
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
             <span>白冰冰</span>
-            <span class="text-gray-400 ">2022年12��</span>
+            <span class="text-gray-400 ">2022年12月</span>
           </div>
         </div>
         <p>
-          非�����漂������，很大�����湯很舒服���
+          非常漂亮，很大泡湯很舒服！
         </p>
       </div>
     </div>
@@ -232,6 +227,6 @@
       <%= react_component('GoogleRoomMap', 
       { lat: @room.lat.to_f, lng: @room.lng.to_f, api_key: ENV['GOOG_MAPS_API_KEY'] }) %>
       <div>
-    </div>
+      </div>
     </div>
   </section>

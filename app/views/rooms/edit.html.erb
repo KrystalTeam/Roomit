@@ -1,20 +1,22 @@
-<div class="flex w-11/12 mx-auto rounded-md shadow-md">
-  <div class="w-2/5 py-4 mx-auto text-gray-700 bg-red-100 bg-opacity-50 rounded-md">
-    <div class="w-2/3 mx-auto rounded-l-md">
-      <h1 class="mb-4 text-3xl">更新房源資料</h1>
-      <div>
-        <%= render "form", room: @room %>
+<div class="w-full px-10 mb-10 text-gray-700 lg:px-56">
+  <div class="flex w-full overflow-hidden text-gray-700 border-2 shadow-md rounded-2xl ">
+    <div class="w-1/2 px-10 py-5 text-gray-700 bg-white bg-opacity-50 ">
+      <div class="flex flex-col gap-5">
+        <h1 class="h1">更新房源資料</h1>
+        <div>
+          <%= render "form", room: @room %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="w-3/5 rounded-r-md">
-    <% @room.photos[0] do |photo| %>
-      <div class="relative inline-block border-2 border-red-400 ">
-        <%= image_tag photo%>
-        <%= link_to destroy_photo_room_path(@room, photo), method: :delete do %>
-          <i class="absolute text-red-400 right-2 top-2 r fa-solid fa-circle-xmark"></i>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="grid w-1/2 grid-cols-2 gap-1 overflow-y-auto bg-cover h-500">
+      <% @room.photos.all.each do |photo| %>
+        <div class="relative inline-block h-48 border-2">
+          <%= image_tag photo, class:"w-full h-full object-cover"%>
+          <%= link_to destroy_photo_room_path(@room, photo), method: :delete do %>
+            <i class="absolute text-red-400 right-2 top-2 fa-solid fa-circle-xmark"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
