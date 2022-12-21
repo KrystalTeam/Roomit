@@ -43,6 +43,7 @@ class BookingsController < ApplicationController
   end
 
   def index
+    @first_booking = current_user.bookings.order(start_at: :ASC)[0]
   end
 
   def new
@@ -51,6 +52,10 @@ class BookingsController < ApplicationController
     @owner_name = User.find(@room.user_id).name ? User.find(@room.user_id).name : "房東"
     @room_intro = @room.summary.size>=15 ? @room.summary[0..15] : @room.summary
     @nights = (params[:end_at].to_date  - params[:start_at].to_date ).to_i
+  end
+
+  def show
+    @booking = Booking.find(params[:id])
   end
 
   def cancel
