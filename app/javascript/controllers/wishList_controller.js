@@ -14,10 +14,10 @@ export default class extends Controller {
   setLikedStatus(state) {
     if (state) {
       this.wishListIconTarget.classList.remove('text-gray-500', 'opacity-80');
-      this.wishListIconTarget.classList.add('text-pink-600', 'opacity-100');
+      this.wishListIconTarget.classList.add('text-pink-500', 'opacity-100');
     } else {
       this.wishListIconTarget.classList.add('text-gray-500', 'opacity-80');
-      this.wishListIconTarget.classList.remove('text-pink-600', 'opacity-100');
+      this.wishListIconTarget.classList.remove('text-pink-500', 'opacity-100');
     }
   }
 

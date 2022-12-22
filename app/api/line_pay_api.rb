@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LinePayApi
   def initialize(signature_uri)
     @signature_uri = signature_uri
@@ -11,23 +13,23 @@ class LinePayApi
   end
 
   def req_body(room, booking)
-    name = room.address + ' ' + room.home_type
+    name = "#{room.address} #{room.home_type}"
     quantity = (booking.end_at - booking.start_at).to_i
     price = room.price.to_i
     amount = quantity * price
 
     @req_body = {
-      amount: amount,
+      amount:,
       currency: 'TWD',
-      orderId: "ORDER#{Time.now.to_date.strftime('%Y%m%d')}#{booking.id.to_s.rjust(4, "0")}",
+      orderId: "ORDER#{Time.now.to_date.strftime('%Y%m%d')}#{booking.id.to_s.rjust(4, '0')}",
       packages: [{
         id: room.id.to_s,
-        amount: amount,
+        amount:,
         products: [
           {
-            name: name,
-            quantity: quantity,
-            price: price
+            name:,
+            quantity:,
+            price:
           }
         ]
       }],
@@ -44,17 +46,17 @@ class LinePayApi
     amount = quantity * price
 
     @confirm_body = {
-    amount: amount,
-    currency: 'TWD'
+      amount:,
+      currency: 'TWD'
     }
   end
 
   def header(nonce, signature)
     header = {
-    "Content-Type": "application/json",
-    "X-LINE-ChannelId": ENV['LINE_CHANNEL_ID'],
-    "X-LINE-Authorization-Nonce": nonce,
-    "X-LINE-Authorization": signature
+      "Content-Type": 'application/json',
+      "X-LINE-ChannelId": ENV['LINE_CHANNEL_ID'],
+      "X-LINE-Authorization-Nonce": nonce,
+      "X-LINE-Authorization": signature
     }
   end
 

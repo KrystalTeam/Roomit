@@ -18,20 +18,16 @@
           <i class="fa-solid fa-share"></i>
           <a href="#" class="mr-2">分享</a>
         </div>
-        <% if current_user %>
-          <button data-controller="wishList" 
-          data-action="click->wishList#wishListState" 
-            data-id="<%= @room.id%>"
-            data-liked="<%= current_user.liked_wish_list_rooms.include?(@room) %>">
-            <i data-wishList-target="wishListIcon" class="text-2xl text-gray-500 fa-solid fa-heart opacity-80"></i>
-          </button>
-        <%end%>
+        <div>
+          <i class="text-sm fa-regular fa-heart"></i>
+          <a href="#" class="font">儲存</a>
+        </div>
       </div>
     </div>
     <!-- room_img -->
     <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-10 overflow-hidden rounded-2xl">
       <div class="col-span-2 row-span-2 ">
-        <%=  image_tag @room.photos.all[0], class:"img-full aspect-ratio"%>
+        <%= image_tag @room.photos.first, class:"img-full aspect-ratio"%>
       </div>
       <% @room.photos.all[1..4].each do |photo| %>
         <div>
@@ -40,9 +36,9 @@
       <%end%>
     </div>
     <!-- room_img_end -->
-    <div class="flex justify-between gap-10 ">
+    <div class="relative flex justify-between gap-10 ">
       <!-- room_info -->
-      <div class="flex flex-col w-4/6 col-span-2 gap-5 ">
+      <div class="flex flex-col w-7/12 gap-5">
         <div class="flex items-center justify-between">
           <div class="flex flex-col gap-3">
             <h2 class="flex gap-2 text-2xl font-bold">
@@ -64,7 +60,14 @@
             </ul>
           </div>
           <div class="rounded-full min-w-max min-h-max">
-            <i class="text-5xl text-gray-600 fa-solid fa-circle-user"></i></div>
+            <% if @room.user.avatar.attached? %>
+              <%= image_tag @room.user.avatar, class:"rounded-full w-16 h-16 object-cover"%>
+            <% else %>
+              <div class="flex items-center justify-center w-16 h-16 rounded-full ">
+                <i class="text-5xl text-pink-500 fa-solid fa-circle-user"></i>
+              </div>
+            <% end %>
+          </div>
         </div>
         <hr>
         <div class="flex flex-col gap-3" >
@@ -91,76 +94,88 @@
           </p>
         </div>
         <hr>
-        <div class="flex flex-col">
+        <div class="flex flex-col gap-3">
           <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
           <h4 class="mb-2 font-medium ">
-            Aewol-eup,Cheju、濟州特別自治道、南韓
+            <%= @room.address %>
           </h4>
-          <span class="">
-            애월 곽지해수욕장을 끼고 있으며 1960~70년대의 빈티지 에어스트림을 축적
-          </span>
+          <div class="text-justify">
+            <span class="mb-3 font-bold">鄰近超商：</span>
+            <ul class="flex flex-col gap-2 list-none">
+              <li>7-ELEVEn 鑫衡陽門市</li>
+              <li>全家便利超商 衡慶門市</li>
+            </ul>
+          </div>
+          <div class="text-justify">
+            <span class="font-bold">鄰近醫院：</span>
+            台大醫院
+          </div>
         </div>
       </div>
       <!-- room_info_end -->
       <!-- booking_card -->
-      <div class="flex-grow min-w-max">
-        <%= form_with(url: new_booking_path, method:'get', data: { controller: "booking-card" }) do |form| %>
-          <input type="hidden" name="room_id" value="<%= @room.id %>">
-          <div class="sticky overflow-y-auto border border-gray-300 shadow-xl row-span-auto top-1/4 rounded-xl">
+      <div class="relative w-5/12">
+        <div class="sticky overflow-y-auto border border-gray-300 shadow-sm row-span-auto top-1/4 rounded-xl">
+          <%= form_with(url: new_booking_path, method:'get', data: { controller: "booking-card" }) do |form| %>
+            <input type="hidden" name="room_id" value="<%= @room.id %>">
             <div class="p-5">
-              <div class="flex flex-col">
-                <div class="inline-flex">
-                  <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
-                  <span class="text-lg">晚</span>
-                </div>
-                <div class="flex items-center text-sm">
-                  <i class="mr-1 fa-solid fa-star"></i>
-                  <span class="mr-2">5.0</span>
-                  <p>6</p>
-                  <p>則評價</p>
+              <div class="flex flex-col gap-3">
+                <div class="flex justify-between mb-3">
+                  <div class="inline-flex">
+                    <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
+                    <span class="text-md place-self-center">晚</span>
+                  </div>
+                  <div class="flex items-center text-sm">
+                    <i class="mr-1 fa-solid fa-star"></i>
+                    <span class="mr-2">5.0</span>
+                    <p>6</p>
+                    <p>則評價</p>
+                  </div>
                 </div>
                 <!-- checkin_date -->
-                <div class="grid grid-cols-2 gap-8">
+                <div class="flex w-full -mb-3 font-bold">
+                  <span class="w-full">入住日期</span>
+                  <span class="w-full">退房日期</span>
+                </div>
+                <div class="flex overflow-hidden border-2 border-pink-500 rounded-lg justify-evenly">
+                  <%# 入住日期 %>
                   <div class="w-full">
-                    <%= form.label :start_at, '入住日期'%>
                     <%= form.text_field :start_at ,data: {
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
                     action: "input->booking-card#startDate",
                     "booking-card-target": "startDate"
-                    }, class:"p-2 w-full"%>
+                    }, class:"p-2 w-full font-bold "%>
                   </div>
                   <%# 退房日期 %>
                   <div class="w-full">
-                    <%= form.label :end_at, '退房日期'%>
                     <%= form.text_field :end_at ,data: {
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
                     action: "change->booking-card#endDate",
                     "booking-card-target": "endDate"
-                    }, class:"p-2 w-full"%>
+                    }, class:"p-2 w-full border-pink-500 border-l-2 font-bold" %>
                   </div>
                 </div>
                 <!-- guest_num -->
-                <div class="">
-                  <%= form.label :headcount,'人數'%>
-                  <div class="flex">
-                    <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a) %>
+                <div>
+                  <%= form.label :headcount,'人數',class:"font-bold"%>
+                  <div class="flex items-center gap-2 ">
+                    <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a)%>
                     <span>位</span>
                   </div>
                 </div>
                 <% if @room.user == current_user %>
-                  <button class="w-full mx-auto font-bold text-gray-500 bg-gray-200 rounded-xl">
+                  <button class="w-full mx-auto font-bold text-gray-700 bg-gray-200 rounded-xl">
                     <%=form.submit '無法預定自己的房源', disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
-                  </button>                   
+                  </button>
                 <% else%>
-                  <button class="w-full mx-auto font-bold bg-pink-600 rounded-xl">
-                    <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
-                  </button>                       
+                  <button class="w-full mx-auto my-3 text-gray-500 bg-gray-100 rounded-xl" data-booking-card-target="submitBtn">
+                    <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true, class: "block w-full h-full p-3 font-bold"%>
+                  </button>
                 <% end %>
-
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
                 <div class="flex justify-between gap-10 text-sm text-gray-700">
                   <div class="underline">
@@ -176,8 +191,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
       <!-- booking_card_end -->
     </div>
@@ -188,7 +203,8 @@
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
-            <span>維���</span>
+            <span>維毅</span>
+            <span>維毅</span>
             <span class="text-gray-400 ">2022年10月</span>
           </div>
         </div>
@@ -212,12 +228,24 @@
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
           <div class="text-sm">
-            <span>白冰冰</span>
-            <span class="text-gray-400 ">2022年12��</span>
+            <span>維毅</span>
+            <span class="text-gray-400 ">2022年10月</span>
           </div>
         </div>
         <p>
-          非�����漂������，很大�����湯很舒服���
+          房東回覆快速，房間乾淨漂亮舒服：）
+        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-pink-700 rounded-full"></div>
+          <div class="text-sm">
+            <span>維毅</span>
+            <span class="text-gray-400 ">2022年10月</span>
+          </div>
+        </div>
+        <p>
+          房東回覆快速，房間乾淨漂亮舒服：）
         </p>
       </div>
     </div>
@@ -232,6 +260,6 @@
       <%= react_component('GoogleRoomMap', 
       { lat: @room.lat.to_f, lng: @room.lng.to_f, api_key: ENV['GOOG_MAPS_API_KEY'] }) %>
       <div>
-    </div>
+      </div>
     </div>
   </section>

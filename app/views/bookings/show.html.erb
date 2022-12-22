@@ -1,0 +1,18 @@
+<div>
+  <h1>訂單編號</h1>
+  房東
+  t.bigint "user_id", null: false
+  t.bigint "room_id", null: false
+  t.date "start_at", null: false
+  t.date "end_at", null: false
+  t.integer "price_per_night", null: false
+  t.integer "state", default: 0
+  t.datetime "created_at", precision: 6, null: false
+  t.datetime "updated_at", precision: 6, null: false
+  t.string "serial"
+  t.integer "headcount", null: false
+  t.index ["room_id"], name: "index_bookings_on_room_id"
+  t.index ["user_id"], name: "index_bookings_on_user_id"
+end
+
+</div>

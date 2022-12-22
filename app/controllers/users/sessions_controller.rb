@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class Users::SessionsController < Devise::SessionsController
-  def new
-    super
+module Users
+  class SessionsController < Devise::SessionsController
+    def new
+      super
 
-    if current_user
-      redirect_to root_path
+      redirect_to root_path if current_user
     end
   end
 end

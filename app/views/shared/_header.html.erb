@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between w-full h-20 px-5 mx-auto bg-white shadow-md sm:px-10">
+<nav class="fixed flex items-center justify-between w-full h-20 px-5 mx-auto bg-white shadow-md z-999 sm:px-10">
   <!-- logo -->
   <a class="flex items-center justify-center h-full min-w-max " href="<%= rooms_path %>"
       >
@@ -11,14 +11,12 @@
   </a>
   <!-- logo end -->
   <!-- search bar -->
-  <div class="px-5">
-    <button class="flex items-center p-2 text-gray-400 border rounded-full shadow-md hover:shadow-lg hover:text-gray-800" type="button">
-      <div class="flex-grow flex-shrink block px-20 ">搜尋房源</div>
-      <div class="flex items-center justify-center p-3 bg-pink-500 rounded-full ">
-        <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
-      </div>
-    </button>
-  </div>
+  <button class="flex items-center p-2 text-gray-400 border rounded-full shadow-md hover:shadow-lg hover:text-gray-800" type="button">
+    <div class="flex-grow flex-shrink block px-20 ">搜尋房源</div>
+    <div class="flex items-center justify-center p-3 bg-pink-500 rounded-full ">
+      <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
+    </div>
+  </button>
   <!-- search bar end -->
   <!-- login -->
   <div class="hidden md:block">
@@ -41,17 +39,23 @@
             <i class="text-gray-600 fa-solid fa-bars text-md "></i>
           </div>
           <div class="block pl-3 ">
-            <i class="text-3xl text-gray-600 fa-solid fa-circle-user "></i>
+            <% if !current_user || !current_user&.avatar.attached? %>
+              <div class="flex items-center justify-center w-8 h-8 rounded-full ">
+                <i class="text-3xl text-pink-500 fa-solid fa-circle-user"></i>
+              </div>
+            <% else %>
+              <%= image_tag current_user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
+            <% end %>
           </div>
         </button>
-        <div data-dropdown-target="menu" class="absolute right-0 z-20 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg ">
+        <div data-dropdown-target="menu" class="absolute right-0 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg z-999">
           <% if user_signed_in? %>
             <%= link_to "帳號", edit_user_registration_path, class: "nav-item " %>
             <%= link_to "旅程", bookings_path, class: "nav-item "%>
-            <%= link_to "管理房源", manage_rooms_path, class: "nav-item " %>
+            <%= link_to "管理房源", manage_rooms_path, class: "nav-item "%>
             <%= link_to "心願單", wish_list_rooms_rooms_path , class: "nav-item " %>
             <%= link_to "登出", destroy_user_session_path, method: :delete, class: "nav-item border-0 " %>
-          <% else %>
+          <%else%>
             <button type="button" data-bs-toggle="modal" data-bs-target="#signup" class= "w-full text-left nav-item">註冊</button>
             <button type="button" data-bs-toggle="modal" data-bs-target="#signin" class= "w-full text-left border-0 nav-item">登入
             </button>
@@ -62,11 +66,6 @@
   </div>
   <!-- end login -->
 </nav>
-<!-- flash -->
-<div class="w-full h-10">
-  <!-- end flash -->
-  <%= render "shared/flash" %>
-</div>
 <!-- sign_in model-->
 <div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="signin" tabindex="-1" aria-labelledby="signinTitle" aria-modal="true" role="dialog">
   <div class="relative w-auto pointer-events-none modal-dialog modal-dialog-centered">

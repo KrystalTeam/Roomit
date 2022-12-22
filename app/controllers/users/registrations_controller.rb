@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-class Users::RegistrationsController < Devise::RegistrationsController
-
+module Users
+  class RegistrationsController < Devise::RegistrationsController
     def update
       @user = User.find(params[:user][:id])
 
-        if @user.update(user_params)
-          redirect_to edit_user_registration_path, notice: '更新成功'
-        else
-          render :edit, alert: @user.errors.full_messages.join("\n")
-        end
+      if @user.update(user_params)
+        redirect_to edit_user_registration_path, notice: '更新成功'
+      else
+        render :edit, alert: @user.errors.full_messages.join("\n")
+      end
     end
 
     def create
       build_resource(sign_up_params)
-  
+
       resource.save
       yield resource if block_given?
       if resource.persisted?
@@ -35,7 +35,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     private
+
     def user_params
-      params.require(:user).permit(:email, :password, :description, :phone_num, :current_password, :password, :name)
+      params.require(:user).permit(:email, :password, :description, :phone_num, :current_password, :password, :name,
+                                   :avatar, :id)
     end
+  end
 end

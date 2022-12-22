@@ -41,3 +41,22 @@
   background-color: #fff;
   opacity: 100%;
 }
+.z-999 {
+  z-index: 999;
+}
+.z-700 {
+  z-index: 700;
+}
+.h-full-with-nav {
+  height: calc(100vh - 80px);
+  margin-top: -32px;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.flatpickr-day.selected {
+  background-color: #ec4899;
+}

@@ -1,5 +1,6 @@
-class Booking < ApplicationRecord
+# frozen_string_literal: true
 
+class Booking < ApplicationRecord
   before_validation :generate_serial
 
   belongs_to :user
@@ -10,6 +11,7 @@ class Booking < ApplicationRecord
   enum state: %i[pending unpaid paid cancelled]
 
   private
+
   def generate_serial
     self.serial = SecureRandom.alphanumeric(13)
   end

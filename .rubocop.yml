@@ -1,0 +1,13 @@
+Style/Documentation:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'bin/*'
+    - 'db/migrate/*'
+    - 'config/environments/*'
+    - 'config/routes.rb'
+
+Metrics/MethodLength:
+  Max: 25
