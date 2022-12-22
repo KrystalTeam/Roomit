@@ -47,6 +47,8 @@ class BookingsController < ApplicationController
 
   def index
     @first_booking = current_user.bookings.where(state: "paid").order(start_at: :ASC)[0]
+    @past_bookings = current_user.bookings.where("end_at < ?", Time.now).where(state: "paid")
+    @cancelled_bookings = current_user.bookings.where(state: "cancelled")
   end
 
   def new
@@ -63,6 +65,7 @@ class BookingsController < ApplicationController
 
   def cancel
     @booking = Booking.find(params[:id])
+    @booking.update(state: "cancelled")
     if @booking.cancelled!
       if @booking.state == "paid"
         redirect_to room_path, notice: "成功取消預定"

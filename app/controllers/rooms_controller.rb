@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RoomsController < ApplicationController
+  require 'mini_magick'
+
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :find_hosted_rooms, only: [:manage]
   before_action :find_all_rooms, only: [:index]

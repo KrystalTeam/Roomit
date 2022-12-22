@@ -35,6 +35,7 @@ gem 'activerecord-postgres-earthdistance'
 gem 'http'
 gem 'enum_help'
 gem 'simple_form'
+gem 'ransack'
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
