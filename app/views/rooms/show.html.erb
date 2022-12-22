@@ -60,12 +60,12 @@
             </ul>
           </div>
           <div class="rounded-full min-w-max min-h-max">
-            <% if !current_user || !current_user&.avatar.attached? %>
+            <% if @room.user.avatar.attached? %>
+              <%= image_tag @room.user.avatar, class:"rounded-full w-16 h-16 object-cover"%>
+            <% else %>
               <div class="flex items-center justify-center w-16 h-16 rounded-full ">
                 <i class="text-5xl text-pink-500 fa-solid fa-circle-user"></i>
               </div>
-            <% else %>
-              <%= image_tag @room.user.avatar, class:"rounded-full w-16 h-16 object-cover"%>
             <% end %>
           </div>
         </div>
