@@ -37,5 +37,6 @@ yarn-debug.log*
 
 # Secret files
 .env.development
+.env.production
 .env
 credentials.yml.enc
