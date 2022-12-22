@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Room < ApplicationRecord
+  acts_as_paranoid
+  
   belongs_to :user
   has_many :bookings
   has_many :guests, through: :bookings, source: :users
@@ -36,5 +38,4 @@ class Room < ApplicationRecord
   enum checkout_time: { "11:00": 11, "12:00": 12, "13:00": 13, "14:00": 14, "15:00": 15, "16:00": 16, "彈性時間": 99 },
        _prefix: :checkout_time
 
-  scope :not_deleted, -> { where(deleted_at: nil) }
 end

@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
   before_action :should_compelete_user_info, only: [:new]
 
   def index
-    @rooms = Room.all.not_deleted
+      @rooms = Room.all
   end
 
   def new
@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = current_user.rooms.not_deleted.new(room_params)
+    @room = current_user.rooms.new(room_params)
 
     @geocoding_obj = GoogGeocodingApi.new(@room.address)
     @coordinates = @geocoding_obj.get_response
@@ -63,7 +63,7 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room.update(deleted_at: Time.current)
+    @room.destroy
     redirect_to manage_rooms_path, notice: '已刪除'
   end
 
@@ -75,7 +75,10 @@ class RoomsController < ApplicationController
     end
   end
 
-  def manage; end
+  def manage
+    @q = current_user.rooms.ransack(params[:q])
+    @rooms = @q.result(distinct: true)
+  end
 
   def wish_list
     if current_user.liked_wish_list_rooms.include?(@room)
@@ -96,15 +99,15 @@ class RoomsController < ApplicationController
   end
 
   def find_hosted_rooms
-    @rooms = current_user.rooms.not_deleted
+    @rooms = current_user.rooms
   end
 
   def find_hosted_room
-    @room = current_user.rooms.not_deleted.find(params[:id])
-  end
+    @room = current_user.rooms.find(params[:id])
+  end 
 
   def find_all_rooms
-    @rooms = Room.all.not_deleted
+    @rooms = Room.all
   end
 
   def room_params
