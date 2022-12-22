@@ -49,7 +49,9 @@ class RoomsController < ApplicationController
       @geocoding_obj = GoogGeocodingApi.new(@room.address)
       @coordinates = @geocoding_obj.get_response
       @room.update(
-        lat: @geocoding_obj.get_lat(@coordinates), lng: @geocoding_obj.get_lng(@coordinates))
+        lat: @geocoding_obj.get_lat(@coordinates), 
+        lng: @geocoding_obj.get_lng(@coordinates)
+      )
 
       redirect_to manage_rooms_path, notice: '更新成功'
     else

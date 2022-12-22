@@ -84,3 +84,4 @@ production:
   database: Roomit_production
   username: Roomit
   password: <%= ENV['ROOMIT_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
