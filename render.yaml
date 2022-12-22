@@ -1,7 +1,7 @@
 databases:
   - name: Roomit
-    databaseName: Roomit
-    user: Roomit
+    databaseName: roomit
+    user: roomit
     plan: free
     ipAllowList: []
 
