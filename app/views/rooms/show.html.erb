@@ -18,10 +18,14 @@
           <i class="fa-solid fa-share"></i>
           <a href="#" class="mr-2">分享</a>
         </div>
-        <div>
-          <i class="text-sm fa-regular fa-heart"></i>
-          <a href="#" class="font">儲存</a>
-        </div>
+        <% if current_user %>
+          <button data-controller="wishList" 
+          data-action="click->wishList#wishListState" 
+            data-id="<%= @room.id%>"
+            data-liked="<%= current_user.liked_wish_list_rooms.include?(@room) %>">
+            <i data-wishList-target="wishListIcon" class="text-2xl text-gray-500 fa-solid fa-heart opacity-80"></i>
+          </button>
+        <%end%>
       </div>
     </div>
     <!-- room_img -->
