@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
 
       # get the response from the request api => get the paymentUrl
       req_response = @api_obj.get_response(req_header, req_body)
-      webConfirmUrl = JSON.parse(req_response.body)["info"]["paymentUrl"]["web"]
+      webConfirmUrl = JSON.parse(req_response.body)['info']['paymentUrl']['web']
 
       # redirect to the paymentUrl => user scans and pays
       redirect_to webConfirmUrl
@@ -65,7 +65,7 @@ class BookingsController < ApplicationController
 
   def cancel
     @booking = Booking.find(params[:id])
-    @booking.update(state: "cancelled")
+    @booking.update(state: 3)
     if @booking.cancelled!
       if @booking.state == "paid"
         redirect_to room_path, notice: "成功取消預定"
