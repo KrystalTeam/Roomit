@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GoogGeocodingApi
   def initialize(address)
     @address = address
@@ -18,5 +20,4 @@ class GoogGeocodingApi
   def get_lng(coordinates)
     coordinates['lng']
   end
-
 end

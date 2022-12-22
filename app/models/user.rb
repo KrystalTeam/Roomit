@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :trackable
   devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[ facebook google_oauth2 ]
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   attr_accessor :skip_password_validation
 
@@ -11,10 +13,10 @@ class User < ApplicationRecord
   has_many :booked_rooms, through: :bookings, source: :rooms
   has_many :wish_list_rooms
   has_many :liked_wish_list_rooms, through: :wish_list_rooms, source: :room
-  
+
   has_one_attached :avatar
-  
-  enum role: %i[ guest host admin ]
+
+  enum role: %i[guest host admin]
 
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
@@ -25,7 +27,7 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
-  
+
   def remember_me_for
     2.weeks
   end
@@ -40,6 +42,7 @@ class User < ApplicationRecord
 
   def password_required?
     return false if skip_password_validation
+
     super
   end
 end

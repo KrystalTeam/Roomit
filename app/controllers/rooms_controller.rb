@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class RoomsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: %i[index show]
   before_action :find_hosted_rooms, only: [:manage]
   before_action :find_all_rooms, only: [:index]
-  before_action :find_room, only: [:show,:wish_list]
-  before_action :find_hosted_room, only: [:edit, :update, :destroy, :destroy_photo]
+  before_action :find_room, only: %i[show wish_list]
+  before_action :find_hosted_room, only: %i[edit update destroy destroy_photo]
   before_action :should_compelete_user_info, only: [:new]
 
-
   def index
-      @rooms = Room.all.not_deleted
+    @rooms = Room.all.not_deleted
   end
 
   def new
@@ -26,7 +27,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to manage_rooms_path, notice: '新增成功'
     else
-      flash.alert = "新增失敗"
+      flash.alert = '新增失敗'
       render :new
     end
   end
@@ -35,8 +36,7 @@ class RoomsController < ApplicationController
     @booking = Booking
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if params[:room][:photos].present?
@@ -73,22 +73,19 @@ class RoomsController < ApplicationController
     end
   end
 
-  def manage
-  end
+  def manage; end
 
   def wish_list
     if current_user.liked_wish_list_rooms.include?(@room)
       current_user.liked_wish_list_rooms.delete(@room)
-      render json: {status: "unliked"}
+      render json: { status: 'unliked' }
     else
       current_user.liked_wish_list_rooms << (@room)
-      render json: {status: "liked"}
+      render json: { status: 'liked' }
     end
   end
 
-  def wish_list_rooms
-    
-  end
+  def wish_list_rooms; end
 
   private
 
@@ -102,18 +99,19 @@ class RoomsController < ApplicationController
 
   def find_hosted_room
     @room = current_user.rooms.not_deleted.find(params[:id])
-  end 
+  end
 
   def find_all_rooms
     @rooms = Room.all.not_deleted
   end
 
   def room_params
-    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, photos:[])
+    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub,
+                                 :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time, photos: [])
   end
 
   def room_params_without_photos
-    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub, :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time)
+    params.require(:room).permit(:home_type, :room_type, :max_occupancy, :bedrooms, :bathrooms, :has_bathtub,
+                                 :has_kitchen, :has_air_con, :has_wifi, :summary, :address, :price, :checkin_start_at, :checkin_end_at, :checkout_time)
   end
-
 end

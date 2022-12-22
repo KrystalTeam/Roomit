@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddCoordinatesToRooms < ActiveRecord::Migration[6.1]
   def change
     add_column :rooms, :lat, :decimal, precision: 13, scale: 10

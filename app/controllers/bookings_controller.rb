@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BookingsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[confirm cancel]
   skip_before_action :authenticate_user!, only: %i[confirm cancel]
@@ -62,7 +64,7 @@ class BookingsController < ApplicationController
   def cancel
     @booking = Booking.find_by!(serial: params[:id])
     @booking.cancelled!
-    redirect_to root_path, notice: "訂單付款失敗"
+    redirect_to root_path, notice: "訂單付款失敗！"
   end
 
   private
