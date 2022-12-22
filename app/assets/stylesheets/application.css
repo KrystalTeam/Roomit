@@ -48,11 +48,13 @@
   z-index: 700;
 }
 .h-full-with-nav {
-  height: calc(100% - 120px);
+  height: calc(100vh - 80px);
+  margin-top: -32px;
 }
 html,
 body {
   height: 100%;
+  width: 100%;
   position: relative;
 }
 .flatpickr-day.selected {

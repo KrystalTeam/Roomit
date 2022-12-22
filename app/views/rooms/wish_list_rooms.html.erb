@@ -1,62 +1,52 @@
-<section class="w-full px-5 text-gray-700 bg-gray-400 h-full-with-nav sm:px-0 ">
-  <div class="flex w-full h-full">
-    <div class="flex flex-col flex-grow w-1/2 h-full gap-5 p-5 overflow-y-scroll bg-white min-w-568">
-      <div class="w-20 px-4 py-2 font-bold text-center text-white bg-pink-500 rounded-xl hover:bg-pink-700">
-        <%= link_to '返回', url_for(:back) %>
-      </div>
-      <% current_user.liked_wish_list_rooms.each do |room| %>
-        <div class="grid grid-cols-3 gap-5 p-3 bg-white border shadow-lg rounded-xl">
-          <div class="relative">
-            <div data-controller="carousel" class="relative flex-grow mx-auto rounded-lg group swiper-container" 
+<section class="flex w-full bg-white h-full-with-nav sm:px-0">
+  <div class="flex flex-col w-1/2 h-full gap-3 p-5 overflow-y-scroll bg-white max-w-568">
+    <%= link_to url_for(:back),class:"p-2 block font-bold text-gray-400 bg-white w-fit rounded-xl hover:text-gray-500" do%>
+      <i class="fa-solid fa-chevron-left"></i>
+      返回
+    <%end%>
+    <% current_user.liked_wish_list_rooms.each do |room| %>
+      <div class="grid grid-cols-3 gap-2 p-3 bg-white border shadow-md rounded-xl">
+        <div class="relative">
+          <div data-controller="carousel" class="relative flex-grow mx-auto rounded-lg group swiper-container" 
                 data-carousel-options-value='{"loop":"true","pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "navigation": { "allowTouchMove":"false","nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}}'>
-              <div class="absolute z-30 flex flex-col justify-between w-full h-full p-3">
-                <div class="flex justify-between w-full my-auto transition duration-500 ease-out opacity-0 group-hover:opacity-100">
-                  <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-70 hover:opacity-100 swiper-button-prev">
-                    <i class="text-gray-700 fa-solid fa-chevron-left"></i>
-                  </div>
-                  <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-70 hover:opacity-100 swiper-button-next">
-                    <i class="text-gray-700 fa-solid fa-chevron-right"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="self-center mb-5 swiper-pagination"></div>
-              <div class="relative swiper-wrapper">
-                <% if room.photos.attached?%>
-                  <% room.photos.all.each do |photo| %>
-                    <div class="swiper-slide">
-                      <%=image_tag photo, class:"object-cover w-full aspect-ratio"%>
-                    </div>
-                  <%end %>
-                <%else%>
+            <div class="self-center mb-5 swiper-pagination"></div>
+            <div class="relative swiper-wrapper">
+              <% if room.photos.attached?%>
+                <% room.photos.all.each do |photo| %>
                   <div class="swiper-slide">
-                    <img src="/assets/house.jpeg" alt="" class="object-cover w-full aspect-ratio">
+                    <%=image_tag photo, class:"object-cover w-full aspect-ratio"%>
                   </div>
-                  <div class="swiper-slide" >
-                    <img src="https://images.unsplash.com/photo-1614649024145-7f847b1c803f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2274&q=80" alt="" class="object-cover w-full aspect-ratio">
-                  </div>
-                <%end%>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-row justify-between col-span-2 gap-3 m-2 ">
-            <div class="flex flex-col gap-0.5 overflow-hidden justify-between ">
-              <div class="w-full overflow-hidden text-base font-bold whitespace-nowrap"><%=room.address%></div>
-              <div class="text-gray-500"><%=Room.human_enum_name(:home_type, room.home_type) %>的<%=Room.human_enum_name(:room_type, room.room_type) %></div>
-              <div class="">
-                <span class="mr-0.5 tracking-wider text-md"><%=number_to_currency(room.price, negative_format: "(%u%n)",precision:0,unit: "$")%></span>
-                <span class="mr-0.5 text-sm">TWD</span>
-                <span class="text-sm">晚</span></div>
-            </div>
-            <div class="flex items-start justify-end ">
-              <i class="mt-1 mr-1 text-sm fa-solid fa-star "></i>
-              <p class="inline-block text-md ">4.87</p>
+                <%end %>
+              <%else%>
+                <div class="swiper-slide">
+                  <img src="/assets/house.jpeg" alt="" class="object-cover w-full aspect-ratio">
+                </div>
+                <div class="swiper-slide" >
+                  <img src="https://images.unsplash.com/photo-1614649024145-7f847b1c803f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2274&q=80" alt="" class="object-cover w-full aspect-ratio">
+                </div>
+              <%end%>
             </div>
           </div>
         </div>
-      <%end%>
-    </div>
-    <div class="flex items-center justify-center w-full">
-      <span class="text-3xl font-bold">Google Map</span>
-    </div>
+        <div class="flex flex-row justify-between col-span-2 gap-3 m-2 ">
+          <div class="flex flex-col justify-start gap-3 overflow-hidden ">
+            <div class="w-full overflow-hidden text-base font-bold whitespace-nowrap"><%=room.address%></div>
+            <div class="text-gray-500"><%=Room.human_enum_name(:home_type, room.home_type) %>的<%=Room.human_enum_name(:room_type, room.room_type) %></div>
+            <div class="">
+              <span class="mr-0.5 tracking-wider text-md"><%=number_to_currency(room.price, negative_format: "(%u%n)",precision:0,unit: "$")%></span>
+              <span class="mr-0.5 text-sm">TWD</span>
+              <span class="text-sm">晚</span>
+            </div>
+          </div>
+          <div class="flex items-start justify-end ">
+            <i class="mt-1 mr-1 text-sm fa-solid fa-star "></i>
+            <p class="inline-block text-md ">4.87</p>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  <div class="flex items-center justify-center w-full h-full bg-gray-200">
+    <span class="text-3xl font-bold">Google Map</span>
   </div>
 </section>

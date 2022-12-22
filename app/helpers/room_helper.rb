@@ -1,5 +1,6 @@
-module RoomHelper
+# frozen_string_literal: true
 
+module RoomHelper
   def form_submit_text
     if @room.id.present?
       '更新房源資料'
@@ -7,5 +8,4 @@ module RoomHelper
       '新增房源'
     end
   end
-
 end
