@@ -164,12 +164,11 @@
   <div class="z-0 hidden py-5 bg-white border border-gray-200 sticky-top md:block md:col-span-4 rounded-xl">
     <div class="px-6 room-info">
       <div class="flex pb-5 mb-5 border-b border-gray-100 room-summary">
-        <img class="object-cover w-32 h-full mr-3 rounded-lg" src="https://a0.muscache.com/im/pictures/0f187630-06a3-4115-99dc-f3617529aedd.jpg?aki_policy=large" alt="" style="aspect-ratio: 4 / 3"/>
+        <%= image_tag @room.photos&.first, class:"object-cover w-32 h-24 mr-3 rounded-lg" %>
         <div class="flex flex-col justify-between room-info">
           <div class="flex flex-col">
-            <span class="text-xs text-gray-500"><%=@room.home_type%>中的<%=@room.room_type%></span>
-            <span class="inline-block text-sm"
-              ><%=@room_intro%></span>
+            <span class="text-xs text-gray-500"><%=Room.human_enum_name(:home_type, @room.home_type)%>中的<%=Room.human_enum_name(:room_type, @room.room_type)%></span>
+            <span class="inline-block text-sm"><%=@room_intro%></span>
           </div>
           <span class="text-xs">
             <i class="fa-solid fa-star"></i>

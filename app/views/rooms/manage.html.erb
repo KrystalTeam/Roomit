@@ -71,26 +71,88 @@
           </th>
         </tr>
       </thead>
-      <% current_user.rooms.each do |room| %>
-        <%Room.find(room.id).bookings.where(state: 3).each do |booking|%>
-          <%=booking.start_at%><%=booking.end_at%>
-        <%end%>
+      <%current_user.bookings.where(state: 3).each do |booking|%>
+        <%=booking.start_at%><%=booking.end_at%>
       <% end %>
     </table>
   </div>
   <h2>搜尋</h2>
+  <div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            地址
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <%= sort_link(@q, :start_at ,'入住日期', default_order: :desc)%>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            退房日期
+          </th>
+          <th scope="col" class="px-6 py-3">
+            住宿晚數
+          </th>
+          <th scope="col" class="px-6 py-3">
+            訂單價格
+          </th>
+          <th scope="col" class="px-6 py-3">
+            選項
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= search_form_for @q, url: manage_rooms_url do |f| %>
+          <div class='inline-block'>
+            <%= f.label :start_at_gteq %>
+            <%= f.date_field :start_at_gteq, class:'input' %>
+          </div>
+          <div class='inline-block'>
+            <%= f.label :start_at_lteq %>
+            <%= f.date_field :start_at_lteq, class:'input'%>
+          </div>
+          <%= f.submit%>
+          <% @bookings_filted.each do |booking|%>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= link_to booking.room&.address, root_path||room_path(booking.room&.room_id), class:"block" %>
+              </th>
+              <td class="px-6 py-4">
+                <%= booking.start_at %>
+              </td>
+              <td class="px-6 py-4">
+                <%= booking.end_at %>
+              </td>
+              <td class="px-6 py-4">
+                <%= (booking.end_at-booking.start_at).to_i %>
+              </td>
+              <td class="px-6 py-4">
+                $<%= booking.price_per_night * (booking.end_at-booking.start_at).to_i %>
+              </td>
+              <td class="px-6 py-4">
+                <button class="px-2 py-1 text-white bg-green-500 rounded"></button>
+                <button class="px-2 py-1 text-white bg-red-400 rounded"></button>
+              </td>
+            </tr>
+          <%end%>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
   <div>
-    <%= search_form_for @q, url: manage_rooms_url do |f| %>
-      <%= f.label :created_at_gteq %>
-      <%= f.text_field :created_at_gteq %>
-      <%= f.label :created_at_lteq %>
-      <%= f.text_field :created_at_lteq %>
+    <% search_form_for @q, url: manage_rooms_url do |f| %>
+      <%= f.label :start_at_gteq %>
+      <%= f.text_field :start_at_gteq %>
+      <%= f.label :start_at_lteq %>
+      <%= f.text_field :start_at_lteq %>
       <%= f.submit%>
-      <% @rooms.each do |room|%>
+      <% @bookings_filted.each do |booking|%>
         <div>
-          <%=room.address%>
+          <%=booking.room_id%>
+          <%=booking.start_at%>
         </div>
       <% end %>
-    <%end%>
+    <% end %>
   </div>
+  <h2>已取消</h2>
 </div>
