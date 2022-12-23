@@ -106,4 +106,12 @@ export default class extends Controller {
     this.submitBtnTarget.classList.replace('bg-pink-500', 'bg-gray-100');
     this.submitBtnTarget.classList.remove('font-blod');
   }
+
+  closeStart(selectedDates, dateStr, instance) {
+    this.endPicker.set("minDate", dateStr);
+  }
+
+  closeEnd(selectedDates, dateStr, instance) {
+    this.startPicker.set("maxDate", dateStr);
+  }
 }
