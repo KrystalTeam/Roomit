@@ -26,15 +26,17 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'mini_magick', '~> 4.12'
 gem "aws-sdk-s3", require: false
-gem 'image_processing'
-gem 'sprockets-rails'
-gem 'react-rails'
-gem 'acts_as_paranoid'
-gem 'rubocop'
-gem 'activerecord-postgres-earthdistance'
-gem 'http'
-gem 'enum_help'
-gem 'simple_form'
+gem "image_processing"
+gem "sprockets-rails"
+gem "react-rails"
+gem "acts_as_paranoid"
+gem "rubocop"
+gem "activerecord-postgres-earthdistance"
+gem "http"
+gem "enum_help"
+gem "friendly_id", "~> 5.4.0"
+gem "activerecord-postgres-earthdistance"
+gem "simple_form"
 gem 'ransack'
 
 group :development, :test do

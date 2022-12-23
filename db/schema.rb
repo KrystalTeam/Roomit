@@ -57,6 +57,24 @@ ActiveRecord::Schema.define(version: 2022_12_22_091614) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.integer "guest_rating"
+    t.integer "accuracy_rating"
+    t.integer "check_in_rating"
+    t.integer "cleanliness_rating"
+    t.integer "communication_rating"
+    t.integer "location_rating"
+    t.integer "value_rating"
+    t.string "comment"
+    t.string "review_to", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_reviews_on_room_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.integer "home_type", null: false
     t.integer "room_type", null: false
@@ -118,6 +136,8 @@ ActiveRecord::Schema.define(version: 2022_12_22_091614) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
+  add_foreign_key "reviews", "rooms"
+  add_foreign_key "reviews", "users"
   add_foreign_key "wish_list_rooms", "rooms"
   add_foreign_key "wish_list_rooms", "users"
 end
