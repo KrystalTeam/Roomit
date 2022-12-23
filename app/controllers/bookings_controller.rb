@@ -29,7 +29,7 @@ class BookingsController < ApplicationController
       # if not => redirect to the cancelUrl
     else
       redirect_to room_path(@room), alert: "訂房失敗"
-    end
+    end 
   end
 
   def confirm

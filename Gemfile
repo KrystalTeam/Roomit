@@ -35,9 +35,6 @@ gem "activerecord-postgres-earthdistance"
 gem "http"
 gem "enum_help"
 gem "friendly_id", "~> 5.4.0"
-gem "activerecord-postgres-earthdistance"
-gem "http"
-gem "enum_help"
 gem "simple_form"
 
 group :development, :test do
@@ -55,5 +52,3 @@ group :test do
   gem "selenium-webdriver", ">= 4.0.0.rc1"
   gem "webdrivers"
 end
-gem "sprockets-rails"
-gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
