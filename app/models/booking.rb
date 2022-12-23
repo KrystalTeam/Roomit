@@ -2,7 +2,6 @@
 
 class Booking < ApplicationRecord
   before_validation :generate_serial
-
   belongs_to :user
   belongs_to :room
 

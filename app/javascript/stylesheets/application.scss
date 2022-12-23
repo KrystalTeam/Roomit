@@ -42,7 +42,7 @@ select{
   }
   .input {
     @apply 
-    w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600;
+    w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600 bg-white;
   }
   .container-center {
     @apply 
