@@ -18,10 +18,20 @@
   height: 20px;
   width:  20px;
 }
+.gradient-text {
+  background-image: linear-gradient(to bottom, #EC4899, #E88481);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 select{
   border: 2px solid #ec4899;
   width: 100px;
+  background-color: #fff;
+  padding: 2px;
+  border-radius: 4px;
 }
+
+
 @layer components {
   .h1{
     @apply
@@ -38,11 +48,11 @@ select{
 
   .nav-item {
     @apply 
-    block px-4 py-2 font-medium text-gray-800 border-b border-gray-300 hover:bg-pink-500 hover:text-white;
+    block px-4 py-2 font-medium text-gray-800 border-b border-gray-300  bg-gradient-to-b hover:from-pink-500 hover:to-orange hover:text-white;
   }
   .input {
     @apply 
-    w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600 bg-white;
+    w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-500 bg-white;
   }
   .container-center {
     @apply 
@@ -54,11 +64,11 @@ select{
   }
   .OAuth-btn {
     @apply
-    w-full px-6 py-3  border text-black bg-white rounded-lg hover:text-pink-800 hover:border-gray-600 flex justify-between 
+    w-full px-6 py-3  border text-black bg-white rounded-lg hover:text-pink-500 hover:border-gray-600 flex justify-between 
   }
   .btn {
     @apply
-    w-full px-6 py-3  text-white bg-pink-600 rounded-lg hover:bg-pink-800
+    w-full px-6 py-3  text-white bg-gradient-to-b from-pink-500 to-orange rounded-lg
   }
   .swiper-slide{
     @apply
@@ -69,5 +79,13 @@ select{
     w-full
     h-full
     object-cover
+  }
+  .bg-color-main{
+    @apply
+    bg-gradient-to-b from-pink-500 to-orange 
+  }
+  .bg-color-main-hover{
+    @apply
+    hover:from-orange hover:to-pink-500 
   }
 }

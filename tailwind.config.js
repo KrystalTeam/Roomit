@@ -27,6 +27,7 @@ module.exports = {
       },
       colors: {
         fb: '#4267B2',
+        orange: '#E88481',
       },
       spacing: {
         500: '500px',

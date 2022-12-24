@@ -80,7 +80,7 @@ class BookingsController < ApplicationController
   def create_review
     @review = Review.create!(review_params)
     if @review.save
-      redirect_to room_path, notice: "評論完成!"
+      redirect_to room_path(params[:review][:room_id]), notice: "評論完成!"
     else
       flash.alert = "評論失敗!"
       render :new
