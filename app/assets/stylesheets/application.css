@@ -60,3 +60,6 @@ body {
 .flatpickr-day.selected {
   background-color: #ec4899;
 }
+input[type='checkbox']:checked {
+  color: #ec4899;
+}
