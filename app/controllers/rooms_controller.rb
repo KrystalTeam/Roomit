@@ -36,6 +36,7 @@ class RoomsController < ApplicationController
 
   def show
     @booking = Booking
+    @disable_dates = disable_dates(@room).flatten
   end
 
   def edit; end
