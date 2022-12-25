@@ -9,8 +9,8 @@ class BookingsController < ApplicationController
   def create
     @room = Room.find(params[:booking][:room_id])
     @booking = Booking.new(booking_params)
-
-    if @booking.save
+  
+     if @booking.save
       @booking.unpaid!
       # after payment success => get the response from the confirm api
       @api_obj = LinePayApi.new('/v3/payments/request')
@@ -58,6 +58,18 @@ class BookingsController < ApplicationController
     @owner_name = User.find(@room.user_id).name || '房東'
     @room_intro = @room.summary.size >= 15 ? @room.summary[0..15] : @room.summary
     @nights = (params[:end_at].to_date - params[:start_at].to_date).to_i
+
+    
+    #@bookings = Booking.new(booking_params)
+
+    #if @bookings.save
+    #@rooms = Room.find(params[:booking][:room_id])
+    #@bookings = Booking.find_by!(serial: params[:id])
+    @form_info = Newebpay::Mpg.new(@booking).form_info
+    @form_MerchantID = @form_info[:MerchantID]
+    @form_TradeInfo = @form_info[:TradeInfo]
+    @form_TradeSha = @form_info[:TradeSha]
+    #end
   end
 
   def show
@@ -117,3 +129,4 @@ class BookingsController < ApplicationController
     end
   end
 end
+
