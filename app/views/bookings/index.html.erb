@@ -1,7 +1,7 @@
 <section class="px-10 mb-10 text-black lg:px-56">
   <h1 class="my-10 mb-8 text-3xl font-bold">旅程</h1>
   <div data-controller="booking-list-expand" class="flex flex-col justify-center">
-    <% if current_user.bookings.where(state: "paid").present? %>
+    <% if current_user.bookings.where(state: "paid").where("end_at >= ?", Time.current).present? %>
       <div>
         <div class="grid w-full grid-cols-3 p-3 mb-1 border border-gray-200 md:flex-start md:p-0 rounded-xl">
           <div class="flex flex-col items-center w-full col-span-2 m-3 md:items-start md:m-8 xl:col-span-1">
@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <% if current_user.bookings.where(state: "paid").size > 1 %>
+      <% if current_user.bookings.where(state: "paid").where("end_at >= ?", Time.current).size > 1 %>
         <button class="flex justify-center w-full py-2 font-bold text-gray-400 bg-gray-200 rounded" data-action="click->booking-list-expand#expand" data-booking-list-expand-target="expandBtn"><i class="fa-solid fa-caret-down"></i> 更多已預定旅程</button>
         <div class="hidden" data-booking-list-expand-target="listToExpand">
           <% current_user.bookings.where(state: "paid").order(start_at: :ASC)[1..current_user.bookings.size].each do |booking| %>
@@ -28,7 +28,7 @@
                 </div>
                 <span class="my-1 text-lg font-bold"><%=booking.start_at %> - <%=booking.end_at %> 的旅程</span>
                 <span class="mb-5 text-sm text-gray-500">共<%=(booking.end_at - booking.start_at).to_i%>晚</span>
-                <button class="w-full py-3 font-bold text-white bg-pink-500 rounded-lg md:w-28">訂單資訊</button>
+                <button class="w-full py-3 font-bold text-white bg-pink-500 rounded-lg md:w-28"><%= link_to '訂單資訊', booking_path(@first_booking.id)%></button>
               </div>
               <div class="col-span-2 rounded-r-xl md:block xl:2/5">
                 <%= image_tag Room.find(booking.room_id).photos.first, class:"object-cover rounded-r-xl w-full h-72"%>
@@ -58,81 +58,16 @@
     <div>
       <h2 class="mb-6 text-2xl font-bold">你去過的地方</h2>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <%= %>
-        <div class="flex">
-          <%= image_tag  %>
-          <img class="object-cover w-20 h-full rounded-xl" style="aspect-ratio: 1 / 1" src="https://a0.muscache.com/im/pictures/a993dcc5-d5fb-4dd4-9b4c-88922e302fb2.jpg?im_w=240" alt="">
-          <div class="flex flex-col justify-between p-1 ml-5">
-            <h3 class="text-lg font-bold">中區</h3>
-            <span class="text-sm text-gray-500">房東：Jeff</span>
-            <span class="text-sm text-gray-500">2019年5月11日 - 2019年5月12號</span>
+        <% @past_bookings.each do |booking| %>
+          <div class="flex">
+            <%= image_tag Room.find(booking.room_id)&.photos.first, class:"object-cover w-20 rounded-xl"%>
+            <div class="flex flex-col justify-between p-1 ml-5">
+              <h3 class="text-lg font-bold"><%=link_to Room.find(booking.room_id).address, booking_path(booking)%></h3>
+              <span class="text-sm text-gray-500">房東：<%=User.find(Room.find(booking.room_id).user_id).name%></span>
+              <span class="text-sm text-gray-500"><%=booking.start_at%> - <%=booking.end_at%></span>
+            </div>
           </div>
-        </div>
-        <div class="flex">
-          <img class="object-cover w-20 h-full rounded-xl" style="aspect-ratio: 1 / 1" src="https://a0.muscache.com/im/pictures/a993dcc5-d5fb-4dd4-9b4c-88922e302fb2.jpg?im_w=240" alt="">
-          <div class="flex flex-col justify-between p-1 ml-5">
-            <h3 class="text-lg font-bold">中區</h3>
-            <span class="text-sm text-gray-500">房東：Jeff</span>
-            <span class="text-sm text-gray-500">2019年5月11日 - 2019年5月12號</span>
-          </div>
-        </div>
-        <div class="flex">
-          <img class="object-cover w-20 h-full rounded-xl" style="aspect-ratio: 1 / 1" src="https://a0.muscache.com/im/pictures/a993dcc5-d5fb-4dd4-9b4c-88922e302fb2.jpg?im_w=240" alt="">
-          <div class="flex flex-col justify-between p-1 ml-5">
-            <h3 class="text-lg font-bold">中區</h3>
-            <span class="text-sm text-gray-500">房東：Jeff</span>
-            <span class="text-sm text-gray-500">2019年5月11日 - 2019年5月12號</span>
-          </div>
-        </div>
-        <div class="flex">
-          <img class="object-cover w-20 h-full rounded-xl" style="aspect-ratio: 1 / 1" src="https://a0.muscache.com/im/pictures/a993dcc5-d5fb-4dd4-9b4c-88922e302fb2.jpg?im_w=240" alt="">
-          <div class="flex flex-col justify-between p-1 ml-5">
-            <h3 class="text-lg font-bold">中區</h3>
-            <span class="text-sm text-gray-500">房東：Jeff</span>
-            <span class="text-sm text-gray-500">2019年5月11日 - 2019年5月12號</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  <%end%>
-  <% if @past_bookings.present? %>
-    <div>
-      <h2 class="mb-6 text-2xl font-bold">你去過的地方</h2>
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <%= %>
-        <div class="flex">
-          <%= image_tag  %>
-          <img class="object-cover w-20 h-full rounded-xl" style="aspect-ratio: 1 / 1" src="https://a0.muscache.com/im/pictures/a993dcc5-d5fb-4dd4-9b4c-88922e302fb2.jpg?im_w=240" alt="">
-          <div class="flex flex-col justify-between p-1 ml-5">
-            <h3 class="text-lg font-bold">中區</h3>
-            <span class="text-sm text-gray-500">房東：Jeff</span>
-            <span class="text-sm text-gray-500">2019年5月11日 - 2019年5月12號</span>
-          </div>
-        </div>
-        <div class="flex">
-          <img class="object-cover w-20 h-full rounded-xl" style="aspect-ratio: 1 / 1" src="https://a0.muscache.com/im/pictures/a993dcc5-d5fb-4dd4-9b4c-88922e302fb2.jpg?im_w=240" alt="">
-          <div class="flex flex-col justify-between p-1 ml-5">
-            <h3 class="text-lg font-bold">中區</h3>
-            <span class="text-sm text-gray-500">房東：Jeff</span>
-            <span class="text-sm text-gray-500">2019年5月11日 - 2019年5月12號</span>
-          </div>
-        </div>
-        <div class="flex">
-          <img class="object-cover w-20 h-full rounded-xl" style="aspect-ratio: 1 / 1" src="https://a0.muscache.com/im/pictures/a993dcc5-d5fb-4dd4-9b4c-88922e302fb2.jpg?im_w=240" alt="">
-          <div class="flex flex-col justify-between p-1 ml-5">
-            <h3 class="text-lg font-bold">中區</h3>
-            <span class="text-sm text-gray-500">房東：Jeff</span>
-            <span class="text-sm text-gray-500">2019年5月11日 - 2019年5月12號</span>
-          </div>
-        </div>
-        <div class="flex">
-          <img class="object-cover w-20 h-full rounded-xl" style="aspect-ratio: 1 / 1" src="https://a0.muscache.com/im/pictures/a993dcc5-d5fb-4dd4-9b4c-88922e302fb2.jpg?im_w=240" alt="">
-          <div class="flex flex-col justify-between p-1 ml-5">
-            <h3 class="text-lg font-bold">中區</h3>
-            <span class="text-sm text-gray-500">房東：Jeff</span>
-            <span class="text-sm text-gray-500">2019年5月11日 - 2019年5月12號</span>
-          </div>
-        </div>
+        <% end %>
       </div>
     </div>
   <%end%>

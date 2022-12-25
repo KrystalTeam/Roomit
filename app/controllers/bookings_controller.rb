@@ -4,6 +4,7 @@ class BookingsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[confirm cancel]
   skip_before_action :authenticate_user!, only: %i[confirm cancel]
   before_action :should_compelete_user_info, only: [:new]
+  before_action :cancel_unpaid_bookings, :update_past_bookings
 
   def create
     @room = Room.find(params[:booking][:room_id])
@@ -47,7 +48,7 @@ class BookingsController < ApplicationController
 
   def index
     @first_booking = current_user.bookings.where(state: "paid").order(start_at: :ASC)[0]
-    @past_bookings = current_user.bookings.where("end_at < ?", Time.now).where(state: "paid")
+    @past_bookings = current_user.bookings.where(state: "past")
     @cancelled_bookings = current_user.bookings.where(state: "cancelled")
   end
 
@@ -65,7 +66,7 @@ class BookingsController < ApplicationController
 
   def cancel
     @booking = Booking.find(params[:id])
-    @booking.update(state: 3)
+    @booking.update_column(:state, 3)
     if @booking.cancelled!
       if @booking.state == "paid"
         redirect_to room_path, notice: "成功取消預定"
@@ -89,4 +90,21 @@ class BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:user_id, :room_id, :start_at, :end_at, :price_per_night, :serial, :headcount)
   end
+
+  def cancel_unpaid_bookings
+    Booking.unpaid.each do |booking|
+      if booking.created_at + 30*60 <= Time.current
+        booking.update_column(:state, 3)
+      end
+    end
+  end
+
+  def update_past_bookings
+    Booking.paid.each do |booking|
+      if booking.end_at <= Time.current
+        booking.update_column(:state, 4)
+      end
+    end
+  end
+
 end
