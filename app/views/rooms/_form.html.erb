@@ -16,7 +16,7 @@
         <%= room.select :room_type, Room.room_types.keys.collect { |room_type| [Room.human_enum_name(:room_type, room_type), room_type] }, {prompt: '選擇房間類型'}, class:"input" %>
       </div>
     </div>
-    <div class="flex gap-3 ">
+    <div class="flex gap-3">
       <div class="grid w-full grid-cols-3 gap-5">
         <div class="flex flex-col w-full gap-1">
           <div class="flex items-center gap-1 font-medium">
@@ -67,6 +67,7 @@
         <p class="text-sm text-red-700 align-middle ">*</p>
         <%= room.label :summary, "房間簡介" %>
       </div>
+      <%= room.text_area :summary, class:"input h-28 resize-none overflow-y-scroll"%>
     </div>
     <div class="flex flex-col w-full gap-1">
       <div class="flex items-center gap-1 font-medium">
