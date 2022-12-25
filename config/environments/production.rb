@@ -64,11 +64,20 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "Roomit_production"
 
-  config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+    # Don't care if the mailer can't send.
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.default_url_options = { host: 'https://roomit-25xt.onrender.com' }
+    config.action_mailer.perform_caching = false
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: 'smtp.mailgun.org',
+      port: 587,
+      domain: ENV['MG_DOMAIN'],
+      user_name: ENV['MG_SMTP_USER_NAME'],
+      password: ENV['MG_SMTP_PASSWORD'],
+      authentication: 'plain',
+      enable_starttls_auto: true
+    }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
