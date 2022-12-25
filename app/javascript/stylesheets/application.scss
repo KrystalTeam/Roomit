@@ -52,7 +52,7 @@ select{
   }
   .input {
     @apply 
-    w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-500 bg-white;
+    w-full px-4 py-2  border rounded-md focus:outline-none focus:ring-1 focus:ring-pink-500 bg-white;
   }
   .container-center {
     @apply 
@@ -68,7 +68,11 @@ select{
   }
   .btn {
     @apply
-    w-full px-6 py-3  text-white bg-gradient-to-b from-pink-500 to-orange rounded-lg
+    w-full px-6 py-3  text-white bg-gradient-to-b from-pink-500 to-orange rounded-lg hover:from-orange hover:to-pink-500
+  }
+  .btn-cancel {
+    @apply
+    px-6 py-3 block font-bold text-gray-500 bg-white w-fit hover:text-gray-700 border rounded-lg hover:border-gray-700
   }
   .swiper-slide{
     @apply

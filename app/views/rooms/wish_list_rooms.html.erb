@@ -4,7 +4,7 @@
       <i class="fa-solid fa-chevron-left"></i>
       返回
     <%end%>
-    <div class="flex flex-col h-full gap-3 p-2 overflow-y-scroll ">
+    <div class="flex flex-col h-full gap-3 p-2 overflow-y-scroll border ">
       <% current_user.liked_wish_list_rooms.each do |room| %>
         <div class="grid grid-cols-3 gap-2 p-3 bg-white border shadow-md rounded-xl">
           <div class="relative">

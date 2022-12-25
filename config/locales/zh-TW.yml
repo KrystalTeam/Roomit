@@ -18,6 +18,14 @@ zh-TW:
           private_rooms: 獨立房間
           hotel_rooms: 飯店房間
           shared_rooms: 合住房間
+      review:
+        guest_rating: 旅客評分
+        accuracy_rating: 準確評分
+        check_in_rating: 入住時間評分
+        cleanliness_rating: 整潔評分
+        communication_rating: 溝通評分
+        location_rating: 位置評分
+        value_rating: 性價比
     errors:
       messages:
         record_invalid: 校驗失敗：%{errors}
