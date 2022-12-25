@@ -34,8 +34,8 @@ class LinePayApi
         ]
       }],
       redirectUrls: {
-        confirmUrl: "http://127.0.0.1:3000/bookings/#{booking.serial}/confirm",
-        cancelUrl: "http://127.0.0.1:3000/bookings/#{booking.serial}/cancel"
+        confirmUrl: "https://roomit-25xt.onrender.com/bookings/#{booking.serial}/confirm",
+        cancelUrl: "https://roomit-25xt.onrender.com/bookings/#{booking.serial}/cancel"
       }
     }
   end

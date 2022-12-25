@@ -1,5 +1,5 @@
 import React from "react"
-import { GoogleMap, LoadScript, Marker, useGoogleMap } from "@react-google-maps/api"
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api"
 
 const mapOptions = {
   zoomControl: true,
@@ -50,17 +50,25 @@ const circleOptions = {
 }
 
 class GoogleRoomMap extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      map: ( /** @type google.maps.Map */ (null))
+    }
+  }
 
   render() {
     return (
       <LoadScript
         googleMapsApiKey={this.props.api_key}
       >
+        <button onClick={() => this.state.map.panTo({lat: this.props.lat, lng: this.props.lng})}>X</button>
         <GoogleMap
           mapContainerStyle={{width: '100%', height: '480px'}}
           center={{lat: this.props.lat, lng: this.props.lng}}
           zoom={15}
           options={mapOptions}
+          onLoad={map => this.setState({map: map})}
         >
           <>
           {/* Child components, such as markers, info windows, etc. */}
