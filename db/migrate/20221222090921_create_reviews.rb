@@ -10,7 +10,7 @@ class CreateReviews < ActiveRecord::Migration[6.1]
       t.integer :communication_rating, null: true
       t.integer :location_rating, null: true
       t.integer :value_rating, null: true
-      t.string :comment, null: true
+      t.string :comment, null: true, default: nil
       t.string :review_to, null: false
       t.timestamps
     end
