@@ -29,16 +29,18 @@
       </div>
     </div>
     <!-- room_img -->
-    <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-10 overflow-hidden rounded-2xl">
-      <div class="col-span-2 row-span-2 ">
-        <%= image_tag @room.photos.first, class:"img-full aspect-ratio"%>
-      </div>
-      <% @room.photos.all[1..4].each do |photo| %>
-        <div>
-          <%= image_tag photo ,class:"img-full aspect-ratio"%>
+    <button class="mb-10 overflow-hidden rounded-2xl">
+      <div class="grid grid-cols-4 grid-rows-2 gap-3 ">
+        <div class="col-span-2 row-span-2 ">
+          <%= image_tag @room.photos.first, class:"img-full aspect-ratio"%>
         </div>
-      <%end%>
-    </div>
+        <% @room.photos.all[1..4].each do |photo| %>
+          <div>
+            <%= image_tag photo ,class:"img-full aspect-ratio"%>
+          </div>
+        <%end%>
+      </div>
+    </button>
     <!-- room_img_end -->
     <div class="relative flex justify-between gap-10 ">
       <!-- room_info -->
@@ -297,11 +299,10 @@
     <div>
       <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
       <div class="w-full">
+        <%= react_component('GoogleRoomMap', 
+      { lat: @room.lat.to_f, lng: @room.lng.to_f, api_key: ENV['GOOG_MAPS_API_KEY'] }) %>
       </div>
       <!-- room_location -->
-      <%= react_component('GoogleRoomMap', 
-      { lat: @room.lat.to_f, lng: @room.lng.to_f, api_key: ENV['GOOG_MAPS_API_KEY'] }) %>
-      <div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>

@@ -99,10 +99,11 @@ export default class extends Controller {
   changeBtnColorAble() {
     this.submitBtnTarget.classList.replace('text-gray-500', 'text-white');
     this.submitBtnTarget.classList.replace('bg-gray-100', 'bg-pink-500');
-    this.submitBtnTarget.classList.add('font-blod');
+    this.submitBtnTarget.classList.add('font-bold');
   }
   changeBtnColorDisble() {
     this.submitBtnTarget.classList.replace('text-white', 'text-gray-500');
     this.submitBtnTarget.classList.replace('bg-pink-500', 'bg-gray-100');
-    this.submitBtnTarget.classList.remove('font-blod');
+    this.submitBtnTarget.classList.remove('font-bold');
   }
+}
