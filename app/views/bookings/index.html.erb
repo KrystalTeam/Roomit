@@ -28,7 +28,7 @@
                 </div>
                 <span class="my-1 text-lg font-bold"><%=booking.start_at %> - <%=booking.end_at %> 的旅程</span>
                 <span class="mb-5 text-sm text-gray-500">共<%=(booking.end_at - booking.start_at).to_i%>晚</span>
-                <button class="w-full py-3 font-bold text-white bg-pink-500 rounded-lg md:w-28"><%= link_to '訂單資訊', booking_path(@first_booking.id)%></button>
+                <button class="w-full py-3 font-bold text-white bg-pink-500 rounded-lg md:w-28"><%= link_to '訂單資訊', booking_path(booking)%></button>
               </div>
               <div class="col-span-2 rounded-r-xl md:block xl:2/5">
                 <%= image_tag Room.find(booking.room_id).photos.first, class:"object-cover rounded-r-xl w-full h-72"%>

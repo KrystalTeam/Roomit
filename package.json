@@ -15,7 +15,6 @@
     "activestorage": "^5.2.8-1",
     "autoprefixer": "9",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "daisyui": "^2.46.0",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
     "errno": "^1.0.0",
