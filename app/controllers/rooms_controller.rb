@@ -77,8 +77,6 @@ class RoomsController < ApplicationController
   end
 
   def manage
-    @q = current_user.rooms.ransack(params[:q])
-    @bookings_filted = @q.result(distinct: true)
   end
 
   def wish_list
