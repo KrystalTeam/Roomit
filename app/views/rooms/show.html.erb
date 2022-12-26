@@ -7,11 +7,16 @@
     </h1>
     <div class="flex items-center justify-between mb-2">
       <div class="flex gap-2">
-        <div>
-          <i class="text-lg fa-solid fa-star"></i>
-          <span>4.79</span>
+        <div class="flex items-center gap-1 text-lg font-medium">
+          <div class="flex items-center gap-1">
+            <i class="pb-0.5 text-base fa-solid fa-star"></i>
+            <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
+          </div>
+          <span>．</span>
+          <p class="flex gap-1"><%= @room.reviews.count%>
+            <span>則評價</span>
+          </p>
         </div>
-        <div>42則評價</div>
       </div>
       <div class="flex gap-2">
         <div>
@@ -131,11 +136,15 @@
                     <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
                     <span class="text-md place-self-center">晚</span>
                   </div>
-                  <div class="flex items-center text-sm">
-                    <i class="mr-1 fa-solid fa-star"></i>
-                    <span class="mr-2">5.0</span>
-                    <p>6</p>
-                    <p>則評價</p>
+                  <div class="flex items-center gap-1 text-base font-medium">
+                    <div class="flex items-center gap-1">
+                      <i class="pb-0.5 text-sm fa-solid fa-star"></i>
+                      <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
+                    </div>
+                    <span>．</span>
+                    <p class="flex gap-1"><%= @room.reviews.count%>
+                      <span>則評價</span>
+                    </p>
                   </div>
                 </div>
                 <!-- checkin_date -->
@@ -211,8 +220,7 @@
         <div class="flex items-center gap-2 text-xl font-medium">
           <div class="flex items-center gap-1">
             <i class="pb-0.5 text-lg fa-solid fa-star"></i>
-            <span><%= (average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) +
-            average(:communication_rating) + average(:value_rating))/6.0 %></span>
+            <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
           </div>
           <span>．</span>
           <span><%= @room.reviews.count%>則評價</span>
