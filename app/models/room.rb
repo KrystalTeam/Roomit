@@ -35,7 +35,7 @@ class Room < ApplicationRecord
   private
 
   def checkin_time_more_then_3_hours
-    if checkin_end_at[0..1].to_i - checkin_start_at[0..1].to_i < 3 
+    if Room.checkin_end_ats[checkin_end_at] - Room.checkin_start_ats[checkin_start_at] < 3
       errors.add(:checkin_end_at, "checkin time should be more than 3 hours")
     end
   end
