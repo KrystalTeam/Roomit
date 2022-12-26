@@ -203,19 +203,28 @@
       <!-- booking_card_end -->
     </div>
     <hr class="my-5">
+    <!-- guest_rating -->
+    <div>
+      <div class="w-20 h-1 mb-6 bg-gray-200">
+        <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width: 25%"></div>
+      </div>
+    </div>
+    <!-- guest_rating_end -->
     <!-- guest_review -->
     <div class="grid grid-cols-2 gap-5">
       <% @room.reviews.each do |review| %>
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-3">
-            <%= image_tag review.user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
-            <div class="text-sm">
-              <span><%= review.user.name%></span>
-              <span class="text-gray-400 "><%= review.created_at.strftime("%Y年%m月")%></span>
+        <% if review.comment != "" %>
+          <div class="flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <%= image_tag review.user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
+              <div class="text-sm">
+                <span><%= review.user.name%></span>
+                <span class="text-gray-400 "><%= review.created_at.strftime("%Y年%m月")%></span>
+              </div>
             </div>
+            <p><%= review.comment%></p>
           </div>
-          <p><%= review.comment%></p>
-        </div>
+        <% end %>
       <% end %>
     </div>
     <!-- guest_review_end -->

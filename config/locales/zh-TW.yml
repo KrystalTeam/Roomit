@@ -27,7 +27,7 @@ zh-TW:
         location_rating: 位置評分
         value_rating: 性價比
       booking:
-        state:
+        states:
           pending: 處理中
           unpaid: 待付款
           paid: 已付款
