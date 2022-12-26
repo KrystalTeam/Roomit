@@ -27,9 +27,9 @@ class RoomsController < ApplicationController
     @room.lng = @geocoding_obj.get_lng(@coordinates)
 
     if @room.save
-      redirect_to manage_rooms_path, notice: "新增成功"
+      redirect_to manage_rooms_path, notice: '新增成功'
     else
-      flash.alert = "新增失敗"
+      flash.alert = '新增失敗'
       render :new
     end
   end
@@ -53,12 +53,12 @@ class RoomsController < ApplicationController
       @coordinates = @geocoding_obj.get_response
       @room.update(
         lat: @geocoding_obj.get_lat(@coordinates),
-        lng: @geocoding_obj.get_lng(@coordinates),
+        lng: @geocoding_obj.get_lng(@coordinates)
       )
 
-      redirect_to manage_rooms_path, notice: "更新成功"
+      redirect_to manage_rooms_path, notice: '更新成功'
     else
-      flash.alert = "更新失敗"
+      flash.alert = '更新失敗'
       render :edit
     end
   end
@@ -71,7 +71,7 @@ class RoomsController < ApplicationController
   def destroy_photo
     @room.photos.find(params[:photo_id]).purge_later
     respond_to do |format|
-      format.html { render :edit, notice: "圖片已刪除" }
+      format.html { render :edit, notice: '圖片已刪除' }
       format.json { head :no_content }
     end
   end
@@ -82,15 +82,14 @@ class RoomsController < ApplicationController
   def wish_list
     if current_user.liked_wish_list_rooms.include?(@room)
       current_user.liked_wish_list_rooms.delete(@room)
-      render json: { status: "unliked" }
+      render json: { status: 'unliked' }
     else
       current_user.liked_wish_list_rooms << (@room)
-      render json: { status: "liked" }
+      render json: { status: 'liked' }
     end
   end
 
-  def wish_list_rooms
-  end
+  def wish_list_rooms; end
 
   private
 
