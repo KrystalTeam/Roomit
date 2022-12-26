@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
     if @booking.save
       @booking.unpaid!
       # after payment success => get the response from the confirm api
-      @api_obj = LinePayApi.new("/v3/payments/request")
+      @api_obj = LinePayApi.new('/v3/payments/request')
 
       req_nonce = @api_obj.nonce
       req_body = @api_obj.req_body(@room, @booking)
@@ -29,21 +29,21 @@ class BookingsController < ApplicationController
       # if success => redirect to the confirmUrl
       # if not => redirect to the cancelUrl
     else
-      redirect_to room_path(@room), alert: "訂房失敗"
-    end 
+      redirect_to room_path(@room), alert: '訂房失敗'
+    end
   end
 
   def confirm
     @booking = Booking.find_by!(serial: params[:id])
-    if @booking.paid!
-      @api_obj = LinePayApi.new("/v3/payments/#{params[:transactionId]}/confirm")
-      confirm_nonce = @api_obj.nonce
-      confirm_body = @api_obj.confirm_body(@booking)
-      confirm_signature = @api_obj.get_signature(confirm_nonce, confirm_body)
-      @api_obj.get_response(@api_obj.header(confirm_nonce, confirm_signature), confirm_body)
+    return unless @booking.paid!
 
-      redirect_to root_path, notice: '訂單付款成功'
-    end
+    @api_obj = LinePayApi.new("/v3/payments/#{params[:transactionId]}/confirm")
+    confirm_nonce = @api_obj.nonce
+    confirm_body = @api_obj.confirm_body(@booking)
+    confirm_signature = @api_obj.get_signature(confirm_nonce, confirm_body)
+    @api_obj.get_response(@api_obj.header(confirm_nonce, confirm_signature), confirm_body)
+
+    redirect_to root_path, notice: '訂單付款成功'
   end
 
   def index
@@ -55,7 +55,7 @@ class BookingsController < ApplicationController
   def new
     @booking = current_user.bookings.new
     @room = Room.find(params[:room_id])
-    @owner_name = User.find(@room.user_id).name ? User.find(@room.user_id).name : "房東"
+    @owner_name = User.find(@room.user_id).name || '房東'
     @room_intro = @room.summary.size >= 15 ? @room.summary[0..15] : @room.summary
     @nights = (params[:end_at].to_date - params[:start_at].to_date).to_i
   end
@@ -64,7 +64,6 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @review = Review.new
     @nights = (@booking.end_at.to_date - @booking.start_at.to_date).to_i
-    
   end
 
   def cancel
@@ -82,10 +81,10 @@ class BookingsController < ApplicationController
   def create_review
     @review = Review.create!(review_params)
     if @review.save
-      redirect_to room_path(params[:review][:room_id]), notice: "評論完成!"
+      redirect_to room_path(params[:review][:room_id]), notice: '評論發佈成功!'
     else
-      flash.alert = "評論失敗!"
-      render :new
+      flash.alert = '評論發佈失敗！'
+      render :show
     end
   end
 
@@ -95,8 +94,7 @@ class BookingsController < ApplicationController
     @room = Room.find(params[:room_id])
   end
 
-  def verify_owner
-  end
+  def verify_owner; end
 
   def booking_params
     params.require(:booking).permit(:user_id, :room_id, :start_at, :end_at, :price_per_night, :serial, :headcount)
