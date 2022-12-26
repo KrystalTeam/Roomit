@@ -84,7 +84,7 @@
         </div>
         <hr>
         <div class="flex flex-col gap-3 ">
-          <div class="text-2xl font-black text-pink-700">
+          <div class="text-2xl font-black text-pink-500">
             <span>Roomit</span>
             <span class="text-black">cover</span>
           </div>
@@ -204,28 +204,92 @@
     </div>
     <hr class="my-5">
     <!-- guest_rating -->
-    <div>
-      <div class="w-20 h-1 mb-6 bg-gray-200">
-        <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width: 25%"></div>
-      </div>
-    </div>
-    <!-- guest_rating_end -->
-    <!-- guest_review -->
-    <div class="grid grid-cols-2 gap-5">
-      <% @room.reviews.each do |review| %>
-        <% if review.comment != "" %>
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-3">
-              <%= image_tag review.user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
-              <div class="text-sm">
-                <span><%= review.user.name%></span>
-                <span class="text-gray-400 "><%= review.created_at.strftime("%Y年%m月")%></span>
-              </div>
-            </div>
-            <p><%= review.comment%></p>
+    <div class="w-full">
+      <% if @room.reviews.any?%>
+        <div class="flex items-center gap-2 text-xl font-medium">
+          <div class="flex items-center gap-1">
+            <i class="pb-0.5 text-lg fa-solid fa-star"></i>
+            <span><%= (average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) +
+            average(:communication_rating) + average(:value_rating))/6.0 %></span>
           </div>
-        <% end %>
+          <span>．</span>
+          <span><%= @room.reviews.count%>則評價</span>
+        </div>
+        <div class="grid w-4/6 grid-cols-2 py-5 gap-x-40 gap-y-5">
+          <div class="flex justify-between">
+            <span class="font-normal">準確性</span>
+            <div class="flex items-center gap-2">
+              <div class="bg-gray-300 w-36">
+                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:accuracy_rating))%>"></div>
+              </div>
+              <span class="text-sm font-bold"><%= average(:accuracy_rating)%></span>
+            </div>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-normal">入住時間性</span>
+            <div class="flex items-center gap-2">
+              <div class="bg-gray-300 w-36">
+                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:check_in_rating))%>"></div>
+              </div>
+              <span class="text-sm font-bold"><%= average(:check_in_rating)%></span>
+            </div>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-normal">整潔性</span>
+            <div class="flex items-center gap-2">
+              <div class="bg-gray-300 w-36">
+                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:cleanliness_rating))%>"></div>
+              </div>
+              <span class="text-sm font-bold"><%= average(:cleanliness_rating)%></span>
+            </div>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-normal">溝通性</span>
+            <div class="flex items-center gap-2">
+              <div class="bg-gray-300 w-36">
+                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:communication_rating))%>"></div>
+              </div>
+              <span class="text-sm font-bold"><%= average(:communication_rating)%></span>
+            </div>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-normal">位置性</span>
+            <div class="flex items-center gap-2">
+              <div class="bg-gray-300 w-36">
+                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:location_rating))%>"></div>
+              </div>
+              <span class="text-sm font-bold"><%= average(:location_rating)%></span>
+            </div>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-normal">性價比</span>
+            <div class="flex items-center gap-2">
+              <div class="bg-gray-300 w-36">
+                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:value_rating))%>"></div>
+              </div>
+              <span class="text-sm font-bold"><%= average(:value_rating)%></span>
+            </div>
+          </div>
+        </div>
       <% end %>
+      <!-- guest_rating_end -->
+      <!-- guest_review -->
+      <div class="grid w-4/6 grid-cols-2 mt-5 gap-x-40 gap-y-8">
+        <% @room.reviews.each do |review| %>
+          <% if review.comment != "" %>
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center gap-3">
+                <%= image_tag review.user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
+                <div class="text-sm">
+                  <span><%= review.user.name%></span>
+                  <span class="text-gray-400 "><%= review.created_at.strftime("%Y年%m月")%></span>
+                </div>
+              </div>
+              <p><%= review.comment%></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
     <!-- guest_review_end -->
     <hr class="my-5">
