@@ -10,7 +10,13 @@ module ApplicationHelper
     res
   end
 
-  def default_avatar
-    'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQWNvEE9LlF0GhLP3WpNRyRVWpu8qkyfm1-Vpm5ppxfKeczSjYi'
+  def rating_percentage(value)
+    percentage = value / 5.0 * 100
+    number_to_percentage(percentage, precision: 0)
   end
+
+  def average(column)
+    @room.reviews.average(column).floor(1)
+  end
+
 end
