@@ -98,12 +98,12 @@
     <!-- detail_footer -->
     <div class="flex items-start justify-end w-full px-10 py-10 bg-gray-100 border-2 ">
       <div class="flex flex-col items-end gap-2 px-10">
-        <%= link_to room_path,class:"p-2 block -mr-2 font-bold text-gray-400  w-fit hover:text-gray-500" do%>
+        <%= link_to room_path(@booking.room_id),class:"p-2 block -mr-2 font-bold text-gray-400  w-fit hover:text-gray-500" do%>
           查看房源資訊
           <i class="fa-solid fa-chevron-right"></i>
         <%end%>
-        <% if @booking.room.reviews.present?%>
-          <button class= "px-6 py-3 font-bold text-gray-300 bg-gray-200 border border-gray-300 rounded-lg cursor-not-allowed w-fit">已評論此房源</button>
+        <%if @booking.room.reviews.present?%>
+          <button class= "px-6 py-3 font-bold text-gray-400 bg-gray-200 border border-gray-300 rounded-lg cursor-not-allowed w-fit">已評論此房源</button>
         <%else%>
           <button  data-bs-toggle="modal" data-bs-target="#room_review" class= "font-bold btn w-fit">評價此房源</button>
         <%end%>
