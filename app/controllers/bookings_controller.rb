@@ -67,14 +67,12 @@ class BookingsController < ApplicationController
   def cancel
     @booking = Booking.find(params[:id])
     @booking.update_column(:state, 3)
-    if @booking.cancelled!
-      if @booking.state == "paid"
-        redirect_to room_path, notice: "成功取消預定"
-      else @booking.state == "unpaid"
-        redirect_to root_path, notice: '訂單付款失敗'
-      end
+    if @booking.paid?
+      @booking.cancelled!
+      redirect_to room_path, notice: "成功取消預訂"
     else
-      redirect_to root_path, alert: "訂單發生不明錯誤，請重新預定"
+      @booking.cancelled!
+      redirect_to root_path, notice: '訂單付款失敗'
     end
   end
 
