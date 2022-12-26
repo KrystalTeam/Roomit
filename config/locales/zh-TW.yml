@@ -26,6 +26,12 @@ zh-TW:
         communication_rating: 溝通評分
         location_rating: 位置評分
         value_rating: 性價比
+      booking:
+        state:
+          pending: 處理中
+          unpaid: 待付款
+          paid: 已付款
+          cancelled: 已取消
     errors:
       messages:
         record_invalid: 校驗失敗：%{errors}

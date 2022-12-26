@@ -1,5 +1,5 @@
-<div class="w-full px-10 text-gray-700 xl:px-56">
-  <div class="flex flex-col px-20 py-10">
+<div class="w-full px-10 pb-10 text-gray-700 xl:px-56">
+  <div class="flex flex-col px-20 ">
     <!-- detail_head -->
     <div class="flex items-center justify-between w-full px-20 py-10 bg-gray-100 border-2">
       <div class="flex flex-col justify-between gap-2">
@@ -10,8 +10,11 @@
           <span>預訂的房源</span>
         </h2>
         <ul class="flex flex-col gap-1 text-xl font-bold">
-          <li class="flex items-center gap-2"><span class="text-base">訂單編號</span><%= @booking.serial%></li>
-          <li class="flex items-center gap-2"><span class="text-base">訂單狀態</span><%= @booking.state%></li>
+          <li class="flex items-center gap-2"><span class="text-base text-gray-500">訂單編號</span><%= @booking.serial%></li>
+          <li class="flex items-center gap-2"><span class="text-base text-gray-500">訂單狀態</span>
+            <%=Booking.human_enum_name(:state, @booking.state)%>
+            <%= @booking.state%>
+          </li>
         </ul>
       </div>
       <%= image_tag "logo_small.svg",class:"h-8 lg:h-16" %>
@@ -45,10 +48,9 @@
           <li class="flex justify-between gap-1">
             <span>房源類型</span>
             <p>
+              <%= t(@booking.room.home_type, locale: :'zh-TW') %>
               <%=Room.human_enum_name(:home_type, @booking.room.home_type)%>
-              <span>
-                的
-              </span>
+              <span>的</span>
               <%=Room.human_enum_name(:room_type, @booking.room.room_type)%>
             </p>
           </li>
@@ -94,8 +96,16 @@
     <!-- detail_body_end -->
     <!-- detail_footer -->
     <div class="flex items-start justify-end w-full px-20 py-10 bg-gray-100 border-2 ">
-      <div class="px-20">
-        <button  data-bs-toggle="modal" data-bs-target="#room_review" class= "font-bold btn w-fit">對此次體驗發表評論</button>
+      <div class="flex flex-col items-center px-20">
+        <%= link_to room_path,class:"p-2 block font-bold text-gray-400  w-fit hover:text-gray-500" do%>
+          查看房源資訊
+          <i class="fa-solid fa-chevron-right"></i>
+        <%end%>
+        <% if @booking.room.reviews.present?%>
+          <button class= "px-6 py-3 font-bold text-gray-300 bg-gray-200 border border-gray-300 rounded-lg cursor-not-allowed w-fit">已評論此房源</button>
+        <%else%>
+          <button  data-bs-toggle="modal" data-bs-target="#room_review" class= "font-bold btn w-fit">評價此房源</button>
+        <%end%>
       </div>
     </div>
   </div>
@@ -107,63 +117,74 @@
         <div class="relative p-5 modal-body">
           <%= form_with(model: @review, url:create_review_booking_path) do |review| %>
             <!-- 各項評分 -->
-            <div class="border">
-              <div class="flex items-center gap-2 p-2 bg-gray-200 ">
-                <%= review.select :accuracy_rating,options_for_select(Review.accuracy_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                <div class="flex items-center gap-1 font-medium">
-                  <%= review.label :accuracy_rating, "準確度" ,class:"text-lg"%>
-                  <span class="self-end text-gray-600">準確的房源詳情有助房客判斷你的房源是否符合需求。</span>
+            <div class="flex flex-col gap-5">
+              <div class="flex flex-col items-center justify-center">
+                <h3 class="text-xl font-bold">
+                  為這趟旅程留下評價
+                </h3>
+                <span class="text-sm font-medium text-gray-500">您的評價與回饋將反映於此房源的展示頁面</span>
+                <span></span>
+              </div>
+              <div class="border rounded-md ">
+                <div class="flex items-center gap-2 px-2 py-5 bg-gray-200 ">
+                  <%= review.select :accuracy_rating,options_for_select(Review.accuracy_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
+                  <div class="flex items-center gap-1 font-medium">
+                    <%= review.label :accuracy_rating, "準確度" ,class:"text-lg"%>
+                    <span class="self-end text-gray-600">準確的房源詳情有助房客判斷你的房源是否符合需求。</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-5 ">
+                  <%= review.select :check_in_rating,options_for_select(Review.check_in_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
+                  <div class="flex items-center gap-1 font-medium">
+                    <%= review.label :check_in_rating, "入住時間評分" ,class:"text-lg"%>
+                    <span class="self-end text-gray-600">充裕的入住登記時間替良好的住宿體驗打下基礎。</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-5 bg-gray-200 ">
+                  <%= review.select :cleanliness_rating,options_for_select(Review.cleanliness_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
+                  <div class="flex items-center gap-1 font-medium">
+                    <%= review.label :cleanliness_rating, "整潔評分" ,class:"text-lg"%>
+                    <span class="self-end text-gray-600">房客期待房源能乾淨整潔，跟相片中看到的一樣。</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-5 ">
+                  <%= review.select :communication_rating,options_for_select(Review.communication_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
+                  <div class="flex items-center gap-1 font-medium">
+                    <%= review.label :communication_rating, "溝通評分" ,class:"text-lg"%>
+                    <span class="self-end text-gray-600">主動傳送訊息給房客並及時回覆都很重要，這麼做能確保房客的需求得到滿足。</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-5 bg-gray-200 ">
+                  <%= review.select :location_rating,options_for_select(Review.location_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
+                  <div class="flex items-center gap-1 font-medium">
+                    <%= review.label :location_rating, "位置評分" ,class:"text-lg"%>
+                    <span class="self-end text-gray-600">房客可以針對房源位置是否符合描述給予意見。</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-5 ">
+                  <%= review.select :value_rating,options_for_select(Review.value_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
+                  <div class="flex items-center gap-1 font-medium">
+                    <%= review.label :value_rating, "性價比" ,class:"text-lg"%>
+                    <span class="self-end text-gray-600">房客會根據價格是否合理反映住宿體驗，而給予你的房源評分。</span>
+                  </div>
                 </div>
               </div>
-              <div class="flex items-center gap-2 p-2 ">
-                <%= review.select :check_in_rating,options_for_select(Review.check_in_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                <div class="flex items-center gap-1 font-medium">
-                  <%= review.label :check_in_rating, "入住時間評分" ,class:"text-lg"%>
-                  <span class="self-end text-gray-600">充裕的入住登記時間替良好的住宿體驗打下基礎。</span>
+              <!-- 各項評分_end -->
+              <div class="flex flex-col w-full gap-2">
+                <div class="flex flex-col gap-1 text-lg font-bold"><%= review.label :comment, "留下此次體驗的感想/回饋：" %>
+                  <span class="text-sm font-medium text-gray-500">您的評論將公開於此房源之展示頁面。</span>
                 </div>
+                <%= review.text_area :comment, class:"input border-2 h-28 resize-none overflow-y-scroll"%>
               </div>
-              <div class="flex items-center gap-2 p-2 bg-gray-200 ">
-                <%= review.select :cleanliness_rating,options_for_select(Review.cleanliness_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                <div class="flex items-center gap-1 font-medium">
-                  <%= review.label :cleanliness_rating, "整潔評分" ,class:"text-lg"%>
-                  <span class="self-end text-gray-600">房客期待房源能乾淨整潔，跟相片中看到的一樣。</span>
-                </div>
+              <%= review.hidden_field :user_id, value: current_user.id %>
+              <%= review.hidden_field :room_id, value: @booking.room_id %>
+              <%= review.hidden_field :review_to, value:"room"%>
+              <div class="flex justify-end w-full gap-3">
+                <div class="font-bold cursor-pointer btn-cancel w-fit " data-bs-dismiss="modal" aria-label="Close">取消</div>
+                <button class="btn w-fit">
+                  <%= review.submit "送出評論",class:"font-bold"  %>
+                </button>
               </div>
-              <div class="flex items-center gap-2 p-2 ">
-                <%= review.select :communication_rating,options_for_select(Review.communication_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                <div class="flex items-center gap-1 font-medium">
-                  <%= review.label :communication_rating, "溝通評分" ,class:"text-lg"%>
-                  <span class="self-end text-gray-600">主動傳送訊息給房客並及時回覆都很重要，這麼做能確保房客的需求得到滿足。</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 p-2 bg-gray-200 ">
-                <%= review.select :location_rating,options_for_select(Review.location_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                <div class="flex items-center gap-1 font-medium">
-                  <%= review.label :location_rating, "位置評分" ,class:"text-lg"%>
-                  <span class="self-end text-gray-600">房客可以針對房源位置是否符合描述給予意見。</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 p-2 ">
-                <%= review.select :value_rating,options_for_select(Review.value_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                <div class="flex items-center gap-1 font-medium">
-                  <%= review.label :value_rating, "性價比" ,class:"text-lg"%>
-                  <span class="self-end text-gray-600">房客會根據價格是否合理反映住宿體驗，而給予你的房源評分。</span>
-                </div>
-              </div>
-            </div>
-            <!-- 各項評分_end -->
-            <div class="flex flex-col w-full gap-1">
-              <div class="flex items-center gap-1 text-lg font-bold"><%= review.label :comment, "對此次體驗留下你的評論：" %></div>
-              <%= review.text_area :comment, class:"input h-28 resize-none overflow-y-scroll"%>
-            </div>
-            <%= review.hidden_field :user_id, value: current_user.id %>
-            <%= review.hidden_field :room_id, value: @booking.room_id %>
-            <%= review.hidden_field :review_to, value:"room"%>
-            <div class="flex gap-5">
-              <button class="font-bold btn-cancel w-fit" data-bs-dismiss="modal" aria-label="Close">取消</button>
-              <button class="btn w-fit">
-                <%= review.submit "送出評論",class:"font-bold"  %>
-              </button>
             </div>
           <%end %>
         </div>
