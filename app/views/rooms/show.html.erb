@@ -155,6 +155,7 @@
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
+                    flatpickr_disable: @disable_dates.map{|date| date.tomorrow},
                     action: "input->booking-card#endDate",
                     "booking-card-target": "endDate"
                     }, class:"p-2 w-full border-pink-500 border-l-2 font-bold" %>

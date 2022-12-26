@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       (booking.start_at..booking.end_at.yesterday).map do |disabledate|
         disabledates << disabledate
       end
-      disabledates
+      disabledates.flatten
     end
   end
 end
