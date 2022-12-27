@@ -32,6 +32,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 5.0'
 gem 'rack-mini-profiler', '~> 3.0'
 gem 'bullet'
+gem 'xmpp4r'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
