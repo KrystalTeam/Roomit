@@ -22,7 +22,7 @@
           </div>
           <div  data-user-edit-target="edit" class="flex-col hidden gap-5 ">
             <%= f.text_field :name, autocomplete: "name", class:"input w-1/2  mt-0 mb-3", data:{action:"keydown->user-edit#save"}%>
-            <div   class="flex justify-center w-20 px-4 py-1 text-white bg-pink-500 rounded-lg action hover:bg-pink-800">
+            <div class="px-4 py-2 font-bold btn w-fit">
               <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
             </div>
           </div>
@@ -47,7 +47,7 @@
           </div>
           <div  data-user-edit-target="edit" class="hidden name1">
             <%= f.email_field :email, autocomplete: "email", class:"input w-1/2 mt-0 mb-3", data:{action:"keydown->user-edit#save"}%>
-            <div   class="flex justify-center w-20 px-4 py-1 text-white bg-pink-500 rounded-lg action hover:bg-pink-800">
+            <div class="px-4 py-2 font-bold btn w-fit">
               <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
             </div>
           </div>
@@ -76,7 +76,7 @@
           </div>
           <div  data-user-edit-target="edit" class="hidden name1">
             <%= f.text_field :phone_num, autocomplete: "phone_num", class:"input w-1/2 mt-0 mb-3", data:{action:"keydown->user-edit#save"}%>
-            <div class="flex justify-center w-20 px-4 py-1 text-white bg-pink-500 rounded-lg action hover:bg-pink-800">
+            <div class="px-4 py-2 font-bold btn w-fit">
               <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
             </div>
           </div>
@@ -113,7 +113,7 @@
                 <%= f.label :avatar, '上傳圖片', class:"font-medium"%>
                 <%= f.file_field :avatar, direct_upload: true%>
               </div>
-              <div class="flex justify-center w-20 px-4 py-1 text-white bg-pink-500 rounded-lg action hover:bg-pink-800">
+              <div class="px-4 py-2 font-bold btn w-fit">
                 <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
               </div>
             </div>
