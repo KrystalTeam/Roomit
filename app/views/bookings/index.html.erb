@@ -64,12 +64,14 @@
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         <% @past_bookings.each do |booking| %>
           <div class="flex">
-            <%= image_tag Room.find(booking.room_id)&.photos.first, class:"object-cover w-20 rounded-xl"%>
-            <div class="flex flex-col justify-between p-1 ml-5">
-              <h3 class="text-lg font-bold"><%=link_to Room.find(booking.room_id).address, booking_path(booking)%></h3>
-              <span class="text-sm text-gray-500">房東：<%=User.find(Room.find(booking.room_id).user_id).name%></span>
-              <span class="text-sm text-gray-500"><%=booking.start_at%> - <%=booking.end_at%></span>
-            </div>
+            <a href="<%= booking_path(booking)%>">
+              <%= image_tag Room.find(booking.room_id)&.photos.first, class:"object-cover w-20 rounded-xl"%>
+              <div class="flex flex-col justify-between p-1 ml-5">
+                <h3 class="text-lg font-bold"><%=link_to Room.find(booking.room_id).address, booking_path(booking)%></h3>
+                <span class="text-sm text-gray-500">房東：<%=User.find(Room.find(booking.room_id).user_id).name%></span>
+                <span class="text-sm text-gray-500"><%=booking.start_at%> - <%=booking.end_at%></span>
+              </div>
+            </a>
           </div>
         <% end %>
       </div>
