@@ -111,7 +111,7 @@
     </div>
     <div class="flex items-center gap-2">
       <%= room.label :photos, '上傳圖片', class:"font-medium"%>
-      <%= room.file_field :photos, multiple: true, direct_upload: true %>
+      <%= room.file_field :photos, multiple: true %>
     </div>
     <div>
       <%= room.submit form_submit_text, class:"px-4 py-2 font-semibold text-white bg-pink-500 rounded-lg shadow-md hover:bg-pink-700  focus:ring-2  focus:ring-opacity-75"%>
