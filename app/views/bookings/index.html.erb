@@ -13,7 +13,9 @@
             <button class="w-full py-3 font-bold text-white bg-pink-500 rounded-lg md:w-28"><%= link_to '訂單資訊', booking_path(@first_booking.id)%></button>
           </div>
           <div class="col-span-2 rounded-r-xl md:block">
-            <%= image_tag Room.find(@first_booking.room_id).photos.first, class:"object-cover rounded-r-xl w-full h-72"%>
+            <% if Room.find(@first_booking.room_id).photos.attach %>
+              <%= image_tag Room.find(@first_booking.room_id).photos.first, class:"object-cover rounded-r-xl w-full h-72"%>
+            <% end %>
           </div>
         </div>
       </div>
@@ -31,7 +33,9 @@
                 <button class="w-full py-3 font-bold text-white bg-pink-500 rounded-lg md:w-28"><%= link_to '訂單資訊', booking_path(booking)%></button>
               </div>
               <div class="col-span-2 rounded-r-xl md:block xl:2/5">
-                <%= image_tag Room.find(booking.room_id).photos.first, class:"object-cover rounded-r-xl w-full h-72"%>
+                <% if Room.find(@first_booking.room_id).photos.attach%>
+                  <%= image_tag Room.find(booking.room_id).photos.first, class:"object-cover rounded-r-xl w-full h-72"%>
+                <%end%>
               </div>
             </div>
           <% end %>
