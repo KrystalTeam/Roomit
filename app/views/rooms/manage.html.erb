@@ -37,9 +37,11 @@
             <td class="px-6 py-4">
               $<%= room.price %>
             </td>
-            <td class="px-6 py-4">
-              <button class="px-2 py-1 text-white bg-green-500 rounded"><%= link_to "編輯", edit_room_path(room) %></button>
-              <button class="px-2 py-1 text-white bg-red-400 rounded"><%= link_to "刪除", room_path(room), method: "DELETE", data:{ confirm: "確定要刪除嗎？"} %></button>
+            <td class="flex items-center gap-2 px-6 py-4">
+              <button  class="px-3 py-2 text-white rounded btn w-fit"><%= link_to "編輯", edit_room_path(room) %></button>
+              <a href="<%= room_path(room)%>" data-method="DELETE" data-confirm="確定要刪除嗎？">
+                <i class="p-2 fa-regular fa-trash-can btn-delete "></i>
+              </a>
             </td>
           </tr>
         <%end%>
