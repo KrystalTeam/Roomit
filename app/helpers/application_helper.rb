@@ -18,5 +18,4 @@ module ApplicationHelper
   def average(column)
     @room.reviews.average(column).floor(1)
   end
-
 end

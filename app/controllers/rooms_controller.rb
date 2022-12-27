@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
   before_action :should_compelete_user_info, only: [:new]
 
   def index
-      @rooms = Room.all
+    @rooms = Room.all
   end
 
   def new
@@ -76,8 +76,7 @@ class RoomsController < ApplicationController
     end
   end
 
-  def manage
-  end
+  def manage; end
 
   def wish_list
     if current_user.liked_wish_list_rooms.include?(@room)
@@ -103,7 +102,7 @@ class RoomsController < ApplicationController
 
   def find_hosted_room
     @room = current_user.rooms.find(params[:id])
-  end 
+  end
 
   def find_all_rooms
     @rooms = Room.all

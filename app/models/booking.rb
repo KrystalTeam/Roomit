@@ -32,15 +32,13 @@ class Booking < ApplicationRecord
   def end_date_after_start_date
     return if end_at.blank? || start_at.blank?
 
-    if end_at < start_at
-      errors.add(:end_at, "must be after the start date")
-    end
+    errors.add(:end_at, 'must be after the start date') if end_at < start_at
   end
 
   def other_booking_during_the_period
-    if disable_dates(Room.find(room_id)).intersect?((start_at..(end_at-1)).to_a)
-      errors.add(:end_at, "already booked by someone else")
-    end
+    return unless disable_dates(Room.find(room_id)).intersect?((start_at..(end_at - 1)).to_a)
+
+    errors.add(:end_at, 'already booked by someone else')
   end
 
   def disable_dates(room)
@@ -52,5 +50,4 @@ class Booking < ApplicationRecord
       disabledates.flatten
     end
   end
-
 end
