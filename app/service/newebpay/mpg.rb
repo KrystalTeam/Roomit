@@ -31,7 +31,7 @@ module Newebpay
   
       def set_info(booking)  
         info[:MerchantID] = "MS146289298"
-        info[:MerchantOrderNo] = "123322432"
+        info[:MerchantOrderNo] = "12227432"
         info[:Amt] = 99
         info[:ItemDesc] = "TEST" 
         info[:Email] = "fidomoon612@gmail.com" 
