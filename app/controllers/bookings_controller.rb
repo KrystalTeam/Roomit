@@ -28,6 +28,11 @@ class BookingsController < ApplicationController
       redirect_to webConfirmUrl
       # if success => redirect to the confirmUrl
       # if not => redirect to the cancelUrl
+      
+      #@form_info = Newebpay::Mpg.new(@booking).form_info
+      #@form_MerchantID = @form_info.form_info['MerchantID']
+      #@form_TradeInfo = @form_info.form_info['TradeInfo']
+      #@form_TradeSha = @form_info.form_info['TradeSha']
     else
       redirect_to room_path(@room), alert: '訂房失敗'
     end
