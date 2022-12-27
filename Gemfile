@@ -28,6 +28,7 @@ gem 'omniauth-rails_csrf_protection'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.7'
+gem 'ransack'
 gem 'react-rails'
 gem 'rubocop'
 gem 'sass-rails', '>= 6'
@@ -36,7 +37,6 @@ gem 'sprockets-rails'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 5.0'
-gem 'ransack'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

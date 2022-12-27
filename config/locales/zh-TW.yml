@@ -32,6 +32,7 @@ zh-TW:
           unpaid: 待付款
           paid: 已付款
           cancelled: 已取消
+          past: 已完成
     errors:
       messages:
         record_invalid: 校驗失敗：%{errors}

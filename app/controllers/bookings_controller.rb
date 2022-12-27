@@ -47,9 +47,9 @@ class BookingsController < ApplicationController
   end
 
   def index
-    @first_booking = current_user.bookings.where(state: "paid").order(start_at: :ASC)[0]
-    @past_bookings = current_user.bookings.where(state: "past")
-    @cancelled_bookings = current_user.bookings.where(state: "cancelled")
+    @first_booking = current_user.bookings.where(state: 'paid').order(start_at: :ASC)[0]
+    @past_bookings = current_user.bookings.where(state: 'past')
+    @cancelled_bookings = current_user.bookings.where(state: 'cancelled')
   end
 
   def new
@@ -69,11 +69,10 @@ class BookingsController < ApplicationController
   def cancel
     @booking = Booking.find(params[:id])
     @booking.update_column(:state, 3)
+    @booking.cancelled!
     if @booking.paid?
-      @booking.cancelled!
-      redirect_to room_path, notice: "成功取消預訂"
+      redirect_to room_path, notice: '成功取消預訂'
     else
-      @booking.cancelled!
       redirect_to root_path, notice: '訂單付款失敗'
     end
   end
@@ -107,18 +106,13 @@ class BookingsController < ApplicationController
 
   def cancel_unpaid_bookings
     Booking.unpaid.each do |booking|
-      if booking.created_at + 30*60 <= Time.current
-        booking.update_column(:state, 3)
-      end
+      booking.update_column(:state, 3) if booking.created_at + 30 * 60 <= Time.current
     end
   end
 
   def update_past_bookings
     Booking.paid.each do |booking|
-      if booking.end_at <= Time.current
-        booking.update_column(:state, 4)
-      end
+      booking.update_column(:state, 4) if booking.end_at <= Time.current
     end
   end
-
 end

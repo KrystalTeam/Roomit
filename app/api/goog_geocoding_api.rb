@@ -2,7 +2,7 @@
 
 class GoogGeocodingApi
   def initialize(address)
-    @address = address
+    @address = address.gsub(/\s+/, '')
   end
 
   def get_response

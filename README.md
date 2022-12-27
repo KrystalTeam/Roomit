@@ -1,25 +1,31 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Roomit
 
-Things you may want to cover:
+### 致敬於 Airbnb 的台灣旅遊訂房平台
 
-* Ruby version
+## 開發技術
 
-* System dependencies
+前端：
+HTML / JavaScript / Tailwind / Stimulus / React
 
-* Configuration
+後端：
+Ruby on Rails
+Foreman / Devise / Paranoia
 
-* Database creation
+資料庫：
+PostgreSQL
 
-* Database initialization
+第三方登入：
+Google / Facebook
 
-* How to run the test suite
+協作工具：
+git / github / rubocop
 
-* Services (job queues, cache servers, search engines, etc.)
+部署：
+Render
 
-* Deployment instructions
+## 環境
 
-* ...
- 
+RUBY 3.1.2
+Rails 6.1.7

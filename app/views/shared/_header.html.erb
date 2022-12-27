@@ -21,19 +21,12 @@
   <!-- login -->
   <div class="hidden md:block">
     <div class="flex items-center justify-end ">
-      <div class="flex items-center mr-4">
-        <a class="hidden px-3 py-2 rounded-full hover:bg-gray-200 lg:inline-block" href="<%= new_room_path %>">
-          <div class="items-center text-sm font-medium text-gray-700 ">在 Roomit 發佈房源</div>
-        </a>
-        <div class="relative block">
-          <button type="button" class="relative inline-block px-3 py-2 rounded-full hover:bg-gray-200 ">
-            <div class="flex items-center h-5">
-              <i class="text-xl text-gray-600 fa-solid fa-earth-americas"></i>
-            </div>
-          </button>
+      <a class="hidden h-full px-3 py-2 mr-4 rounded-full hover:bg-gray-200 lg:inline-block" href="<%= new_room_path %>">
+        <div class="flex items-center gap-1">
+          <div class="items-center text-sm font-medium text-gray-700">發佈 Roomit 房源</div>
         </div>
-      </div>
-      <div data-controller="dropdown" class="relative ">
+      </a>
+      <div data-controller="dropdown" class="relative">
         <button data-action="dropdown#toggle click@window->dropdown#hide" type="button"  class="relative inline-flex items-center px-2 py-1 border rounded-full hover:shadow-lg">
           <div class="pl-1">
             <i class="text-gray-600 fa-solid fa-bars text-md "></i>
@@ -145,7 +138,7 @@
             <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
             <div class="flex flex-col gap-4 mb-5">
               <div>
-                <label class="block" for="email">電子信箱</label>
+                <label class="block" for="email">��子��箱</label>
                 <input id="email " name="user[email]" type="email" placeholder="輸入電子信箱" autocomplete="username" class="input"/>
               </div>
               <div>

@@ -18,11 +18,11 @@ export default class extends Controller {
   input_switch(e) {
     e.preventDefault();
     if (e.srcElement.textContent === '取消') {
-      this.setEditStatus(true);
       e.srcElement.textContent = '編輯';
+      this.setEditStatus(true);
     } else {
-      this.setEditStatus(false);
       e.srcElement.textContent = '取消';
+      this.setEditStatus(false);
     }
   }
   save(e) {
