@@ -76,7 +76,49 @@ class RoomsController < ApplicationController
     end
   end
 
-  def manage; end
+  def manage
+    monthly_income_data_query = <<-SQL
+      SELECT  b.end_at, SUM(b.price_per_night * (b.end_at - b.start_at)) 
+      FROM rooms AS r
+      LEFT JOIN bookings AS b
+      ON r.id = b.room_id
+      WHERE r.user_id = #{current_user.id}
+        AND b.id IS NOT NULL
+        AND b.start_at >= DATE_TRUNC('month', NOW())::DATE
+        AND b.end_at <= (DATE_TRUNC('month', NOW()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE
+      GROUP BY b.end_at;
+    SQL
+    monthly_paid_income_query = <<-SQL
+      SELECT  SUM(b.price_per_night * (b.end_at - b.start_at)) 
+      FROM rooms AS r
+      LEFT JOIN bookings AS b
+      ON r.id = b.room_id
+      WHERE r.user_id = #{current_user.id}
+        AND b.id IS NOT NULL
+        AND b.start_at >= DATE_TRUNC('month', NOW())::DATE
+        AND b.end_at <= (DATE_TRUNC('month', NOW()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE
+        AND b.state = 2;
+    SQL
+    monthly_past_income_query = <<-SQL
+      SELECT  SUM(b.price_per_night * (b.end_at - b.start_at)) 
+      FROM rooms AS r
+      LEFT JOIN bookings AS b
+      ON r.id = b.room_id
+      WHERE r.user_id = #{current_user.id}
+        AND b.id IS NOT NULL
+        AND b.start_at >= DATE_TRUNC('month', NOW())::DATE
+        AND b.end_at <= (DATE_TRUNC('month', NOW()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE
+        AND b.state = 4;
+    SQL
+    
+    @monthly_income_data = ActiveRecord::Base.connection.execute(monthly_income_data_query).values
+
+    @monthly_paid_income_result = ActiveRecord::Base.connection.execute(monthly_paid_income_query).values.flatten.first
+    @monthly_paid_income = @monthly_paid_income_result.nil? ? 0 : @monthly_paid_income_result
+    
+    @monthly_past_income_result = ActiveRecord::Base.connection.execute(monthly_past_income_query).values.flatten.first
+    @monthly_past_income = @monthly_past_income_result.nil? ? 0 : @monthly_past_income_result
+  end
 
   def wish_list
     if current_user.liked_wish_list_rooms.include?(@room)

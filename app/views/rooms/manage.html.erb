@@ -73,3 +73,12 @@
       <% end %>
     </table>
   </div>
+  <h2 class="h2">本月預定收入</h2>
+  <div class="text-2xl">$<%= @monthly_past_income + @monthly_paid_income %></div>
+  <h3 class="h3">已支付：$<%= @monthly_past_income %> 預期：$<%= @monthly_paid_income %></h3>
+  <div class="mb-8">
+    <%# dashboard will be here %>
+    <%= line_chart @monthly_income_data, 
+    xmin: Date.today.beginning_of_month, xmax: Date.today.end_of_month, curve: false,
+    ytitle: '收入', loading: 'Loading...', empty: 'No data', prefix: '$' %>
+  </div>

@@ -14,6 +14,7 @@ import 'controllers';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'swiper/swiper-bundle.min.css';
 import 'tw-elements';
+import "chartkick/chart.js"
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();

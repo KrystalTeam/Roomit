@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
 
   def welcome(user)
     @user = user
-    @url = 'https://roomit-25xt.onrender.com'
+    @url = 'https://roomit.gg/'
 
     mail to: @user.email, subject: 'Welcome to Roomit'
   end
