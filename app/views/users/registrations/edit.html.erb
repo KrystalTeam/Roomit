@@ -1,7 +1,7 @@
 <section class="flex flex-col w-full gap-5 mx-auto mb-10 text-gray-700 sm:w-11/12 md:w-10/12 xxl:w-9/12 lg:max-w-1024 ">
   <h2 class="ml-5 text-2xl font-bold">個人資料</h2>
   <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="flex gap-5 overflow-hidden border shadow-md rounded-2xl">
+  <div class="flex gap-5 mx-5 overflow-hidden border shadow-md sm:mx-0 rounded-2xl">
     <div class="flex flex-col w-full p-5 ">
       <!-- name_field -->
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|%>
@@ -121,7 +121,7 @@
     <div class="hidden w-64 bg-cover sm:block bg-color-main ">
     </div>
   </div>
-  <button class="flex justify-center px-4 py-1 font-semibold text-gray-400 bg-white border rounded-lg w-fit hover:border-gray-600 hover:text-gray-600">
+  <button class="flex justify-center px-4 py-1 ml-5 font-semibold text-gray-400 bg-white border rounded-lg sm:ml-0 w-fit hover:border-gray-600 hover:text-gray-600">
     <%= link_to "返回首頁", root_path %>
   </button>
 </div>
