@@ -40,8 +40,20 @@
               </div>
             </div>
             <div class="flex items-start justify-end ">
-              <i class="mt-1 mr-1 text-sm fa-solid fa-star "></i>
-              <p class="inline-block text-md ">4.87</p>
+              <% if room.reviews.any?%>
+                <div class="flex gap-1 text-sm font-medium items-star">
+                  <div class="flex items-center gap-1">
+                    <i class="pb-0.5 text-sm fa-solid fa-star"></i>
+                    <span><%= ((
+                      room.reviews.average(:value_rating).floor(1)+
+                      room.reviews.average(:accuracy_rating).floor(1)+
+                      room.reviews.average(:cleanliness_rating).floor(1)+
+                      room.reviews.average(:communication_rating).floor(1)+
+                      room.reviews.average(:location_rating).floor(1)+
+                      room.reviews.average(:value_rating).floor(1))/6).floor(1) %></span>
+                  </div>
+                </div>
+              <%end%>
             </div>
           </div>
         </div>
