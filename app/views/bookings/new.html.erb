@@ -1,8 +1,7 @@
 <section data-controller="payment" 
          data-price="<%= @room.price * @nights %>"
-         data-serial="<%= @booking.serial %>"
          class="relative grid grid-cols-1 gap-2 z-2 md:grid-cols-9 md:grid-rows-7 md:px-10 md:gap-10">
-  <div class="static items-center px-6 py-5 bg-white shadow-sm sticky-top md: md:col-span-9 md:shadow-none">
+  <div class="flex items-center px-6 py-5 bg-white shadow-sm sticky-top md:static md:col-span-9 md:shadow-none">
     <%= link_to room_path(@room) do %>
       <i class="fa-solid fa-chevron-left"></i>
     <% end %>
