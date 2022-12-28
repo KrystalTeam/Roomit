@@ -3,8 +3,8 @@ module Newebpay
       attr_reader :status, :message, :result, :order_no, :trans_no
   
       def initialize(booking)
-        @key = "MgLptatfKCWVR3YNPtTWVbdQGbJuX407"
-        @iv = "ChQukURlVlTmntsP"
+        @key = ENV['HASH_KEY']
+        @iv = ENV['HASH_IV']
   
         response = decrypy(booking)
         @status = response['Status']

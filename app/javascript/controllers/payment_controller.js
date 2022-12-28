@@ -3,11 +3,12 @@ import { Controller } from 'stimulus';
 export default class extends Controller {
   static targets = ["linePay", "ebPay"];
 
-  btneb(e){
-    this.changeState(true);
+ 
+  btneb(){
+    this.changeState(true);    
   }
 
-  btnline(e){
+  btnline(){ 
     this.changeState(false);
   }
   

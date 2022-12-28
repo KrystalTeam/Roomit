@@ -2,12 +2,16 @@ module Newebpay
     class Mpg
       attr_accessor :info
   
-      def initialize(booking)
-        @key = "MgLptatfKCWVR3YNPtTWVbdQGbJuX407"
-        @iv = "ChQukURlVlTmntsP"
-        @merchant_id = "MS146289298"
+      def initialize(booking, room, nights)
+        @key = ENV['HASH_KEY']
+        @iv = ENV['HASH_IV']
+        @merchant_id = ENV['MERCHANT_ID']
         @info = {} 
-        set_info(booking)
+        set_info(booking, room, nights)
+      end
+
+      def nonce
+        (0...8).map { (65 + rand(26)).chr }.join     
       end
   
       def form_info
@@ -29,17 +33,17 @@ module Newebpay
         sha256_encode(@key, @iv, trade_info)
       end
   
-      def set_info(booking)  
-        info[:MerchantID] = "MS146289298"
-        info[:MerchantOrderNo] = "12227432"
-        info[:Amt] = 99
+      def set_info(booking, room, nights)  
+        info[:MerchantID] = @merchant_id
+        info[:MerchantOrderNo] = nonce
+        info[:Amt] = (nights * room.price)
         info[:ItemDesc] = "TEST" 
         info[:Email] = "fidomoon612@gmail.com" 
-        info[:TimeStamp] = "1671958801"
+        info[:TimeStamp] = nights
         info[:RespondType] = "JSON"
         info[:Version] = "1.6"
         info[:ReturnURL] = ""
-        info[:NotifyURL] = "https://b0dd-114-44-29-179.jp.ngrok.io"
+        info[:NotifyURL] = "https://6b8c-114-44-6-170.jp.ngrok.io "
         info[:LoginType] = 0 
         info[:CREDIT] =  1,
         info[:VACC] = 1
