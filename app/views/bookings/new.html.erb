@@ -151,14 +151,14 @@
       <%= booking.hidden_field :end_at, value: params[:end_at].to_date %>
       <%= booking.hidden_field :price_per_night, value: @room.price %>
       <%= booking.hidden_field :headcount, value: params[:headcount] %>
-      <%#= booking.hidden_field :serial, value: generate_serial%>
-      <div class="flex">
-        <button class="flex justify-center py-3 mx-6 mb-6 text-gray-500 bg-gray-100 border-pink-500 rounded-lg text-md confirm md:w-40">
+      <div class="flex mb-5">
+        <button class="flex justify-center btn-cancel text-md whitespace-nowrap confirm md:w-40">
           <%=link_to '回上一頁重新輸入', room_path(@room)%>
         </button>
-        <button class="flex justify-center py-3 mx-6 mb-6 text-lg font-bold text-white bg-pink-500 rounded-lg confirm md:w-40 ">
+        <button class="flex justify-center ml-3 btn confirm md:w-40">
           <%= booking.submit '確認並付款'%>
-        </button></div>
+        </button>
+      </div>
     <% end %>
   </div>
   <div class="z-0 hidden py-5 bg-white border border-gray-200 sticky-top md:block md:col-span-4 rounded-xl">

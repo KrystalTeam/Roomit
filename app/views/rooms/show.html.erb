@@ -195,8 +195,8 @@
                     <%=form.submit '無法預定自己的房源', disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
                   </button>
                 <% else%>
-                  <button class="w-full mx-auto my-3 text-gray-500 bg-gray-100 rounded-xl" data-booking-card-target="submitBtn">
-                    <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true, class: "block w-full h-full p-3 font-bold"%>
+                  <button class="w-full btn-cancel" data-booking-card-target="submitBtn">
+                    <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true%>
                   </button>
                 <% end %>
                 <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>

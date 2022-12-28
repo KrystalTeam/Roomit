@@ -11,12 +11,14 @@
   </a>
   <!-- logo end -->
   <!-- search bar -->
-  <button class="flex items-center p-2 text-gray-400 border rounded-full shadow-md hover:shadow-lg hover:text-gray-800" type="button">
-    <div class="flex-grow flex-shrink block px-20 ">搜尋房源</div>
-    <div class="flex items-center justify-center p-3 rounded-full bg-color-main">
-      <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
-    </div>
-  </button>
+  <%= link_to search_index_path do %>
+    <button class="flex items-center p-2 text-gray-400 border rounded-full shadow-md hover:shadow-lg hover:text-gray-800" type="button">
+      <div class="flex-grow flex-shrink block px-20 ">搜尋房源</div>
+      <div class="flex items-center justify-center p-3 rounded-full bg-color-main">
+        <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
+      </div>
+    </button>
+  <%end%>
   <!-- search bar end -->
   <!-- login -->
   <div class="hidden md:block">
