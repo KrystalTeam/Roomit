@@ -22,16 +22,14 @@
             </div>
             <div class="self-center mb-5 swiper-pagination"></div>
             <div class="relative swiper-wrapper">
-              <% room.photos.each do |photo| %>
+              <% room.photos[0..2].each do |photo| %>
                 <div class="swiper-slide">
                   <%=image_tag photo.variant(saver: {strip: true, quality: 30, interlace: "JPEG", sampling_factor: "4:2.:", colorspace: "sRGB"}), class:"object-cover w-full aspect-ratio"%>
                 </div>
               <%end%>
             </div>
           </div>
-        <% end %>
-        <%= link_to room_path(room) do %>
-          <div class="flex flex-row justify-between m-2 ">
+          <div class="flex flex-row justify-between p-2 ">
             <div class="flex flex-col gap-0.5 overflow-hidden pr-3 justify-between ">
               <div class="w-full overflow-hidden text-base font-bold whitespace-nowrap"><%=room.address%></div>
               <div class="text-gray-500 "><%=Room.human_enum_name(:room_type, room.room_type)%></div>
@@ -59,7 +57,7 @@
               <%end%>
             </div>
           </div>
-        <%end%>
+        <% end %>
       </div>
     <% end %>
   </div>

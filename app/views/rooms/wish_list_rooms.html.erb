@@ -13,7 +13,7 @@
               <div class="self-center mb-5 swiper-pagination"></div>
               <div class="relative swiper-wrapper">
                 <% if room.photos.attached?%>
-                  <% room.photos.all.each do |photo| %>
+                  <% room.photos[0..2].each do |photo| %>
                     <div class="swiper-slide">
                       <%=image_tag photo, class:"object-cover w-full aspect-ratio"%>
                     </div>
