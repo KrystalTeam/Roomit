@@ -1,56 +1,54 @@
-<section class="flex w-full bg-white h-full-with-nav sm:px-0">
-  <div class="flex flex-col w-1/2 h-full gap-3 p-5 bg-white min-w-568">
+<section class="flex w-full bg-white h-full-with-nav ">
+  <div class="flex flex-col h-full gap-3 p-5 bg-white">
     <%= link_to url_for(:back),class:"p-2 block font-bold text-gray-400 bg-white w-fit hover:text-gray-500" do%>
-      <i class="fa-solid fa-chevron-left"></i>
-      返回
+      <i class="fa-solid fa-chevron-left"></i>返回
     <%end%>
-    <div class="flex flex-col h-full gap-3 p-2 overflow-y-scroll border ">
+    <div class="grid w-full grid-cols-1 gap-3 p-2 mx-auto overflow-y-scroll border sm:grid-cols-2 md:grid-cols-1 h-fit md:w-500">
       <% current_user.liked_wish_list_rooms.each do |room| %>
-        <div class="grid grid-cols-3 gap-2 p-3 bg-white border shadow-md rounded-xl">
-          <div class="relative">
-            <div data-controller="carousel" class="relative flex-grow mx-auto rounded-lg group swiper-container" 
-                data-carousel-options-value='{"loop":"true","pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "navigation": { "allowTouchMove":"false","nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}}'>
-              <div class="self-center mb-5 swiper-pagination"></div>
-              <div class="relative swiper-wrapper">
+        <div class="flex flex-col items-center gap-2 p-3 bg-white border shadow-md md:flex-row md:items-start rounded-xl">
+          <!-- card_img -->
+          <div class="relative w-full md:w-1/3 ">
+            <div  class="relative flex-grow mx-auto rounded-lg group swiper-container">
+              <div class="absolute z-30 flex flex-col justify-between w-full h-full p-3">
+                <% if current_user %>
+                  <button class="self-end text-2xl text-center transition duration-150 ease-in-out transform hover:scale-125"data-controller="wishList" data-action="click->wishList#wishListState" data-id="<%= room.id%>" data-liked="<%= current_user&.liked_wish_list_rooms&.include?(room) %>">
+                    <i data-wishList-target="wishListIcon" class="text-gray-500 opacity-80 fa-solid fa-heart"></i>
+                  </button>
+                <%end %>
+              </div>
+              <div class="relative">
                 <% if room.photos.attached?%>
-                  <% room.photos[0..2].each do |photo| %>
-                    <div class="swiper-slide">
-                      <%=image_tag photo, class:"object-cover w-full aspect-ratio"%>
-                    </div>
-                  <%end %>
-                <%else%>
-                  <div class="swiper-slide">
-                    <img src="/assets/house.jpeg" alt="" class="object-cover w-full aspect-ratio">
-                  </div>
-                  <div class="swiper-slide" >
-                    <img src="https://images.unsplash.com/photo-1614649024145-7f847b1c803f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2274&q=80" alt="" class="object-cover w-full aspect-ratio">
-                  </div>
-                <%end%>
+                  <%=image_tag room.photos.first, class:"object-cover w-full aspect-ratio"%>
+                <%end %>
               </div>
             </div>
           </div>
-          <div class="flex flex-row justify-between col-span-2 gap-3 m-2 ">
-            <div class="flex flex-col justify-start gap-3 overflow-hidden ">
-              <div class="w-full overflow-hidden text-base font-bold whitespace-nowrap"><%=room.address%></div>
-              <div class="text-gray-500"><%=Room.human_enum_name(:home_type, room.home_type) %>的<%=Room.human_enum_name(:room_type, room.room_type) %></div>
-              <div class="">
-                <span class="mr-0.5 tracking-wider text-md"><%=number_to_currency(room.price, negative_format: "(%u%n)",precision:0,unit: "$")%></span>
-                <span class="mr-0.5 text-sm">TWD</span>
-                <span class="text-sm">晚</span>
+          <!-- card_text -->
+          <div class="flex w-full h-full gap-5 p-2 md:w-2/3 ">
+            <div class="flex flex-row justify-between w-full gap-1 overflow-hidden md:flex-col">
+              <div class="flex flex-col justify-start gap-1">
+                <div class="w-full overflow-hidden text-base font-bold whitespace-nowrap"><%=room.address%></div>
+                <div class="text-gray-500"><%=Room.human_enum_name(:home_type, room.home_type) %>的<%=Room.human_enum_name(:room_type, room.room_type)%>
+                </div>
+                <div class="flex gap-0.5 items-center">
+                  <span class="tracking-wider text-md"><%=number_to_currency(room.price, negative_format: "(%u%n)",precision:0,unit: "$")%></span>
+                  <span class="text-sm ">TWD</span>
+                  <span class="text-sm">晚</span>
+                </div>
               </div>
-            </div>
-            <div class="flex items-start justify-end ">
               <% if room.reviews.any?%>
-                <div class="flex gap-1 text-sm font-medium items-star">
-                  <div class="flex items-center gap-1">
-                    <i class="pb-0.5 text-sm fa-solid fa-star"></i>
-                    <span><%= ((
+                <div class="flex items-start ">
+                  <div class="flex gap-1 text-sm font-medium items-star">
+                    <div class="flex items-center gap-1">
+                      <i class="pb-0.5 text-sm fa-solid fa-star"></i>
+                      <span><%= ((
                       room.reviews.average(:value_rating).floor(1)+
                       room.reviews.average(:accuracy_rating).floor(1)+
                       room.reviews.average(:cleanliness_rating).floor(1)+
                       room.reviews.average(:communication_rating).floor(1)+
                       room.reviews.average(:location_rating).floor(1)+
                       room.reviews.average(:value_rating).floor(1))/6).floor(1) %></span>
+                    </div>
                   </div>
                 </div>
               <%end%>
@@ -60,7 +58,7 @@
       <%end%>
     </div>
   </div>
-  <div class="flex items-center justify-center w-full h-full bg-gray-200">
+  <div class="items-center justify-center hidden w-full h-full bg-gray-200 md:flex">
     <span class="text-3xl font-bold">Google Map</span>
   </div>
 </section>
