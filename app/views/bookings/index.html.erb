@@ -1,5 +1,5 @@
-<section class="px-10 mb-10 text-black lg:px-56">
-  <h1 class="my-10 mb-8 text-3xl font-bold">旅程</h1>
+<section class="flex flex-col w-full gap-5 mx-auto mb-10 text-gray-700 sm:w-11/12 md:w-10/12 xxl:w-9/12 lg:max-w-1024">
+  <h1 class="text-3xl font-bold ">旅程</h1>
   <div data-controller="booking-list-expand" class="flex flex-col justify-center">
     <% if current_user.bookings.where(state: "paid").where("end_at >= ?", Time.current).present? %>
       <div>
