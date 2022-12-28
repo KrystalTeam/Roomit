@@ -1,6 +1,6 @@
 <nav class="fixed flex items-center justify-between w-full h-20 px-5 mx-auto bg-white shadow-md z-999 sm:px-10">
   <!-- logo -->
-  <a class="flex items-center justify-center h-full min-w-max " href="<%= rooms_path %>"
+  <a class="flex items-center justify-center h-full min-w-max" href="<%= rooms_path %>"
       >
     <div class="hidden sm:block">
       <%= image_tag "logo_small.svg",class:"h-7",alt:"roomit_logo" %>
@@ -12,7 +12,7 @@
   <!-- logo end -->
   <!-- search bar -->
   <%= link_to search_index_path do %>
-    <button class="items-center hidden p-2 text-gray-400 border rounded-full hover:border-gray-500 h-11 md:flex hover:shadow-md hover:text-gray-800" type="button">
+    <button class="items-center hidden p-2 text-gray-400 border rounded-full hover:border-gray-300 h-11 md:flex hover:shadow-md hover:text-gray-800" type="button">
       <div class="flex-grow flex-shrink block px-20">搜尋房源</div>
       <div class="flex items-center justify-center w-8 h-8 rounded-full bg-color-main">
         <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
@@ -25,7 +25,7 @@
     <div class="flex items-center justify-end ">
       <!-- 發佈房源 -->
       <a class="hidden mr-4 lg:block" href="<%= new_room_path %>">
-        <div class="flex items-center justify-center px-2 py-1 border rounded-full h-11 hover:bg-gray-200 hover:border-gray-500 hover:shadow-md">
+        <div class="flex items-center justify-center px-2 py-1 border rounded-full h-11 hover:bg-gray-200 hover:border-gray-300 hover:shadow-md">
           <div class="text-sm font-medium text-gray-700 ">發佈 Roomit 房源</div>
         </div>
       </a>
@@ -37,7 +37,7 @@
       </a>
       <!-- 漢堡選單 -->
       <div data-controller="dropdown" class="relative">
-        <button data-action="dropdown#toggle click@window->dropdown#hide" type="button"  class="relative inline-flex items-center px-2 py-1 border rounded-full h-11 hover:border-gray-500 hover:shadow-md">
+        <button data-action="dropdown#toggle click@window->dropdown#hide" type="button"  class="relative inline-flex items-center px-2 py-1 border rounded-full h-11 hover:border-gray-300 hover:shadow-md">
           <div class="pl-1">
             <i class="text-gray-600 fa-solid fa-bars text-md "></i>
           </div>
