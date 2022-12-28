@@ -13,7 +13,7 @@ module.exports = {
       md: { min: '768px' },
       lg: { min: '1024px' },
       xl: { min: '1200px' },
-      xxl: { min: '1400px' },
+      xxl: { min: '1440px' },
     },
     container: {
       center: true,
@@ -21,9 +21,17 @@ module.exports = {
     extend: {
       minWidth: {
         568: '568px',
+        1024: '1024px',
+        1200: '1200px',
+        1366: '1366px',
+        1440: '1440px',
       },
       maxWidth: {
         568: '568px',
+        1024: '1024px',
+        1200: '1200px',
+        1366: '1366px',
+        1440: '1440px',
       },
       colors: {
         fb: '#4267B2',

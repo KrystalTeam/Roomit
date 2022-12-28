@@ -1,6 +1,7 @@
 <%= form_with(model: room) do |room| %>
-  <div class="flex flex-col gap-5 bg-white">
+  <div class="flex flex-col w-full gap-5 bg-white">
     <div class="flex w-full gap-5">
+      <!-- 房源類型、房間類型-->
       <div class="flex flex-col w-full gap-1">
         <div class="flex items-center w-full gap-1 font-medium">
           <p class="text-sm text-red-700 align-middle ">*</p>
@@ -16,52 +17,55 @@
         <%= room.select :room_type, Room.room_types.keys.collect { |room_type| [Room.human_enum_name(:room_type, room_type), room_type] }, {prompt: '選擇房間類型'}, class:"input" %>
       </div>
     </div>
-    <div class="flex gap-3">
-      <div class="grid w-full grid-cols-3 gap-5">
-        <div class="flex flex-col w-full gap-1">
+    <div class="flex flex-wrap gap-5">
+      <!--人數、房數、衛浴數-->
+      <div class="flex flex-wrap gap-5 w-fit">
+        <div class="flex flex-col gap-1 ">
           <div class="flex items-center gap-1 font-medium">
             <p class="text-sm text-red-700 align-middle ">*</p>
             <%= room.label :max_occupancy, "可容納人數" %>
           </div>
-          <%= room.number_field :max_occupancy, in: 1..30, class:"input"%>
+          <%= room.number_field :max_occupancy, in: 1..30, class:"input h-10 w-24"%>
         </div>
-        <div class="flex flex-col w-full gap-1">
+        <div class="flex flex-col gap-1 ">
           <div class="flex items-center gap-1 font-medium">
             <p class="text-sm text-red-700 align-middle ">*</p>
-            <%= room.label :bedrooms, "臥房數 " %>
+            <%= room.label :bedrooms, "臥房數" %>
           </div>
-          <%= room.number_field :bedrooms, in: 1..10, class:"input"%>
+          <%= room.number_field :bedrooms, in: 1..10, class:"input h-10 w-24"%>
         </div>
-        <div class="flex flex-col w-full gap-1">
+        <div class="flex flex-col gap-1 ">
           <div class="flex items-center gap-1 font-medium">
             <p class="text-sm text-red-700 align-middle ">*</p>
             <%= room.label :bathrooms, "衛浴間數"%>
           </div>
-          <%= room.number_field :bathrooms, in: 1..100, class:"input"%>
+          <%= room.number_field :bathrooms, in: 1..100, class:"input h-10 w-24"%>
+        </div>
+      </div>
+      <!-- 設備提供 -->
+      <div class="flex flex-col gap-1">
+        <p class="font-medium ">設備提供</p>
+        <div class="flex flex-wrap h-10 gap-5 font-medium">
+          <div class="flex items-center gap-1 cursor-pointer ">
+            <%= room.check_box :has_bathtub, class:"checkbox"%>
+            <%= room.label :has_bathtub, "浴缸" %>
+          </div>
+          <div class="flex items-center gap-1 cursor-pointer ">
+            <%= room.check_box :has_kitchen, class:"checkbox"%>
+            <%= room.label :has_kitchen, "廚房" %>
+          </div>
+          <div class="flex items-center gap-1 cursor-pointer ">
+            <%= room.check_box :has_air_con, class:"checkbox"%>
+            <%= room.label :has_air_con, "空調" %>
+          </div>
+          <div class="flex items-center gap-1 cursor-pointer ">
+            <%= room.check_box :has_wifi, class:"checkbox"%>
+            <%= room.label :has_wifi, "WIFI",class:"tracking-wide" %>
+          </div>
         </div>
       </div>
     </div>
-    <div class="flex flex-col">
-      <p class="mb-1 font-medium ">設備提供</p>
-      <div class="flex flex-wrap gap-5 font-medium">
-        <div class="flex items-center gap-0.5 cursor-pointer ">
-          <%= room.check_box :has_bathtub, class:"checkbox"%>
-          <%= room.label :has_bathtub, "浴缸" %>
-        </div>
-        <div class="flex items-center gap-0.5 cursor-pointer ">
-          <%= room.check_box :has_kitchen, class:"checkbox"%>
-          <%= room.label :has_kitchen, "廚房" %>
-        </div>
-        <div class="flex items-center gap-0.5 cursor-pointer ">
-          <%= room.check_box :has_air_con, class:"checkbox"%>
-          <%= room.label :has_air_con, "空調" %>
-        </div>
-        <div class="flex items-center gap-0.5 cursor-pointer ">
-          <%= room.check_box :has_wifi, class:"checkbox"%>
-          <%= room.label :has_wifi, "wifi",class:"tracking-wide" %>
-        </div>
-      </div>
-    </div>
+    <!-- 房間簡介 -->
     <div class="flex flex-col w-full gap-1">
       <div class="flex items-center gap-1 font-medium ">
         <p class="text-sm text-red-700 align-middle ">*</p>
@@ -69,6 +73,7 @@
       </div>
       <%= room.text_area :summary, class:"input h-28 resize-none overflow-y-scroll"%>
     </div>
+    <!-- 地址 -->
     <div class="flex flex-col w-full gap-1">
       <div class="flex items-center gap-1 font-medium">
         <p class="text-sm text-red-700 align-middle ">*</p>
@@ -76,43 +81,50 @@
       </div>
       <%= room.text_field :address, class:"input"%>
     </div>
+    <!-- 每晚價格 -->
     <div class="flex flex-col w-full gap-1">
       <div class="flex items-center gap-1 font-medium">
         <p class="text-sm text-red-700 align-middle ">*</p>
         <%= room.label :price, "每晚價格" %>
       </div>
-      <%= room.number_field :price, in: 1..100000, class:"input"%>
+      <%= room.number_field :price, in: 1..100000, class:"input w-48"%>
     </div>
-    <div class="flex flex-col w-full gap-1">
-      <div>
+    <div class="flex flex-wrap gap-x-10 gap-y-5 ">
+      <!-- 可登記時間 -->
+      <div class="flex flex-col gap-1 w-fit min-w-max">
+        <div>
+          <div class="flex items-center gap-1 font-medium">
+            <p class="text-sm text-red-700 align-middle ">*</p>
+            <%= room.label :checkin_start_at, "可登記時間" %>
+            <p class="text-sm font-normal text-gray-400 ">需要3個小時以上時間供旅人入住</p>
+          </div>
+        </div>
+        <div class="flex gap-5 font-midium">
+          <div class="flex items-center gap-1">
+            <p class="font-medium">從</p>
+            <%= room.select :checkin_start_at, options_for_select(Room.checkin_start_ats.keys, '15:00'), {}, class:"input h-10"%>
+          </div>
+          <div class="flex items-center gap-1">
+            <p class="font-medium">到</p>
+            <%= room.select :checkin_end_at, options_for_select(Room.checkin_end_ats.keys, '半夜'), {}, class:"input h-10"%>
+          </div>
+        </div>
+      </div>
+      <!-- 退房時間 -->
+      <div class="flex flex-col gap-1 w-fit min-w-max">
         <div class="flex items-center gap-1 font-medium">
           <p class="text-sm text-red-700 align-middle ">*</p>
-          <%= room.label :checkin_start_at, "可登記時間" %>
-          <p class="text-sm font-normal text-gray-400 ">需要3個小時以上時間供旅人入住</p>
+          <%= room.label :checkout_time, "退房時間" %>
         </div>
-      </div>
-      <div class="flex gap-5 font-midium">
-        <div class="flex items-center gap-2 w-content">
-          <p class="font-medium">從</p>
-          <%= room.select :checkin_start_at, options_for_select(Room.checkin_start_ats.keys, '15:00'), {}, class:"input"%>
-        </div>
-        <div class="flex items-center gap-2 w-content ">
-          <p class="font-medium">到</p>
-          <%= room.select :checkin_end_at, options_for_select(Room.checkin_end_ats.keys, '半夜'), {}, class:"input"%>
-        </div>
+        <%= room.select :checkout_time, options_for_select(Room.checkout_times.keys, '12:00'), {}, class:"input w-fit h-10"%>
       </div>
     </div>
-    <div class="flex flex-col w-1/2 gap-1">
-      <div class="flex items-center gap-1 font-medium">
-        <p class="text-sm text-red-700 align-middle ">*</p>
-        <%= room.label :checkout_time, "退房時間" %>
-      </div>
-      <%= room.select :checkout_time, options_for_select(Room.checkout_times.keys, '12:00'), {}, class:"input"%>
-    </div>
-    <div class="flex items-center gap-2">
-      <%= room.label :photos, '上傳圖片', class:"font-medium"%>
+    <!-- 上傳圖片 -->
+    <div class="flex items-center gap-1">
+      <%= room.label :photos, '上傳房源圖片', class:"font-medium"%>
       <%= room.file_field :photos, multiple: true %>
     </div>
+    <!-- 送出 -->
     <div class="mt-3 rounded-lg w-fit bg-color-main bg-color-main-hover">
       <%= room.submit form_submit_text, 
       class:"w-fit px-6 py-3 font-bold text-white"%>
