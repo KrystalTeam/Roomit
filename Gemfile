@@ -30,8 +30,7 @@ gem 'sprockets-rails'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 5.0'
-gem 'rack-mini-profiler', '~> 3.0'
-gem 'bullet'
+
 gem 'xmpp4r'
 gem 'selenium-webdriver', '>= 4.0.0.rc1'
 
@@ -45,6 +44,8 @@ group :development do
   gem 'rubocop'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
+  gem 'rack-mini-profiler', '~> 3.0'
+  gem 'bullet'
 end
 
 group :test do
