@@ -1,6 +1,6 @@
 <main class="w-full px-5 text-gray-700 sm:px-10">
   <div class="grid grid-cols-1 gap-x-7 gap-y-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 ">
-    <% @rooms.all.reverse.each do |room| %>
+    <% @rooms.each do |room| %>
       <div class="relative card-carousel-container">
         <%= link_to room_path(room) do %>
           <div data-controller="carousel" class="relative flex-grow mx-auto rounded-lg group swiper-container" 
@@ -22,18 +22,14 @@
             </div>
             <div class="self-center mb-5 swiper-pagination"></div>
             <div class="relative swiper-wrapper">
-              <% if room.photos.attached?%>
-                <% room.photos.each do |photo| %>
-                  <div class="swiper-slide">
-                    <%=image_tag photo.variant(saver: { strip: true, quality: 30, interlace: "JPEG", sampling_factor: "4:2:0", colorspace: "sRGB"}), class:"object-cover w-full aspect-ratio"%>
-                  </div>
-                <%end%>
+              <% room.photos[0..2].each do |photo| %>
+                <div class="swiper-slide">
+                  <%=image_tag photo.variant(saver: {strip: true, quality: 30, interlace: "JPEG", sampling_factor: "4:2.:", colorspace: "sRGB"}), class:"object-cover w-full aspect-ratio"%>
+                </div>
               <%end%>
             </div>
           </div>
-        <% end %>
-        <%= link_to room_path(room) do %>
-          <div class="flex flex-row justify-between m-2 ">
+          <div class="flex flex-row justify-between p-2 ">
             <div class="flex flex-col gap-0.5 overflow-hidden pr-3 justify-between ">
               <div class="w-full overflow-hidden text-base font-bold whitespace-nowrap"><%=room.address%></div>
               <div class="text-gray-500 "><%=Room.human_enum_name(:room_type, room.room_type)%></div>
@@ -45,11 +41,23 @@
                 <span class="text-sm">晚</span></div>
             </div>
             <div class="flex items-start justify-end ">
-              <i class="mt-1 mr-1 text-sm fa-solid fa-star "></i>
-              <p class="inline-block text-md ">4.87</p>
+              <% if room.reviews.any?%>
+                <div class="flex items-center gap-1 text-sm font-medium">
+                  <div class="flex items-center gap-1">
+                    <i class="pb-0.5 text-sm fa-solid fa-star"></i>
+                    <span><%= ((
+                      room.reviews.average(:value_rating).floor(1)+
+                      room.reviews.average(:accuracy_rating).floor(1)+
+                      room.reviews.average(:cleanliness_rating).floor(1)+
+                      room.reviews.average(:communication_rating).floor(1)+
+                      room.reviews.average(:location_rating).floor(1)+
+                      room.reviews.average(:value_rating).floor(1))/6).floor(1) %></span>
+                  </div>
+                </div>
+              <%end%>
             </div>
           </div>
-        <%end%>
+        <% end %>
       </div>
     <% end %>
   </div>

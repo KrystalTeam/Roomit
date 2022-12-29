@@ -11,7 +11,6 @@ class RoomsController < ApplicationController
   before_action :should_compelete_user_info, only: [:new]
 
   def index
-    @rooms = Room.all
   end
 
   def new
@@ -135,7 +134,7 @@ class RoomsController < ApplicationController
   private
 
   def find_room
-    @room = Room.find(params[:id])
+    @room = Room.with_attached_photos.includes([:reviews]).find(params[:id])
   end
 
   def find_hosted_rooms
@@ -147,7 +146,7 @@ class RoomsController < ApplicationController
   end
 
   def find_all_rooms
-    @rooms = Room.all
+    @rooms = Room.with_attached_photos.includes([:reviews]).reverse_order
   end
 
   def room_params
