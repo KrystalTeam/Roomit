@@ -24,5 +24,8 @@ Rails.application.routes.draw do
       get "cancel"
       post "create_review"
     end
+      collection do
+      get 'ebpay'
+    end
   end
 end
