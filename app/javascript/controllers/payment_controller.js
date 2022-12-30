@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = ["linePay", "ebPay", "MerchantOrderNo"];
+  static targets = ["linePay", "ebPay", "MerchantID", "MerchantOrderNo", "TradeInfo", "TradeSha", "TimeStamp","Version", "RespondType", "Amt", "ItemDesc", "Email", "LoginType"];
   connect() {
 
   }
@@ -19,11 +19,22 @@ export default class extends Controller {
 
     fetch(`/bookings/ebpay?room_id=${id}&start_at=${startTime}&end_at=${endTime}&headcount=${headcount}&commit=預定行程`, {
       method: "GET"
-      },)
+      })
       .then((resp) => resp.json())
-      .then(({ data }) => {
-        console.log(data.id);
-        this.MerchantOrderNoTarget.value = data.id;
+      .then(({ data, form_info, info }) => {
+        // console.log(info.MerchantOrderNo);
+        this.MerchantIDTarget.value = form_info.MerchantID;
+        this.TradeInfoTarget.value = form_info.TradeInfo;
+        this.TradeShaTarget.value = form_info.TradeSha;
+
+        this.MerchantOrderNoTarget.value = info.MerchantOrderNo;
+        this.TimeStampTarget.value = info.TimeStamp;
+        this.VersionTarget.value = info.Version;
+        this.RespondTypeTarget.value = info.RespondType;
+        this.AmtTarget.value = info.Amt;
+        this.ItemDescTarget.value = info.ItemDesc;
+        this.EmailTarget.value = info.Email;
+        this.LoginTypeTarget.value = info.LoginType       
       })
       .catch(() => {
         console.log("error!!");

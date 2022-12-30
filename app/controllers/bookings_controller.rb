@@ -57,26 +57,39 @@ class BookingsController < ApplicationController
     @cancelled_bookings = current_user.bookings.where(state: 'cancelled')
   end
 
-  def new
-    
+  def new    
     @booking = current_user.bookings.new
     @room = Room.find(params[:room_id])
     @owner_name = User.find(@room.user_id).name || '房東'
     @room_intro = @room.summary.size >= 15 ? @room.summary[0..15] : @room.summary
     @nights = (params[:end_at].to_date - params[:start_at].to_date).to_i
-
-    
-    #mpg = Newebpay::Mpg.new(@booking, @room, @nights)
-    mpg = Newebpay::Mpg.new(@booking, @room, @nights)
-    @form_info = mpg.form_info
-    @form_MerchantID = @form_info[:MerchantID]
-    @form_TradeInfo = @form_info[:TradeInfo]
-    @form_TradeSha = @form_info[:TradeSha]
-    
-    @info = mpg.info
-    #@form_serial = @info[:MerchantOrderNo]
-    @form_price = @info[:Amt]  
   end
+
+  #同create
+  def ebpay
+    @nights = (params[:end_at].to_date - params[:start_at].to_date).to_i
+    @ebroom = Room.find(params[:room_id])
+    @ebbooking = Booking.new({
+      user_id: current_user.id,
+      room_id: params[:room_id],
+      price_per_night: @ebroom.price * @nights,
+      start_at: params[:start_at],
+      end_at: params[:end_at],
+      headcount: params[:headcount]
+    })
+
+    if @ebbooking.save
+      puts @ebbooking.inspect
+
+      mpg = Newebpay::Mpg.new(@ebbooking, @ebroom, @nights)
+      @form_info = mpg.form_info
+      @info = mpg.info
+
+      render json: { data: @ebbooking, form_info: @form_info, info: @info}
+    end
+  end
+
+  
 
   def show
     @booking = Booking.find(params[:id])
