@@ -6,8 +6,8 @@ class RoomsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :find_hosted_rooms, only: [:manage]
   before_action :find_all_rooms, only: [:index]
-  before_action :find_room, only: %i[:show, :wish_list]
-  before_action :find_hosted_room, only: %i[:edit, :update, :destroy, :destroy_photo]
+  before_action :find_room, only: %i[show wish_list]
+  before_action :find_hosted_room, only: %i[edit update destroy destroy_photo]
   before_action :should_compelete_user_info, only: [:new]
 
   def index
