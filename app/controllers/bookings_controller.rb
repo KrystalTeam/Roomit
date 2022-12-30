@@ -65,7 +65,6 @@ class BookingsController < ApplicationController
     @nights = (params[:end_at].to_date - params[:start_at].to_date).to_i
   end
 
-  #同create
   def ebpay
     @nights = (params[:end_at].to_date - params[:start_at].to_date).to_i
     @ebroom = Room.find(params[:room_id])
@@ -79,7 +78,7 @@ class BookingsController < ApplicationController
     })
 
     if @ebbooking.save
-      puts @ebbooking.inspect
+      #puts @ebbooking.inspect
 
       mpg = Newebpay::Mpg.new(@ebbooking, @ebroom, @nights)
       @form_info = mpg.form_info
@@ -88,7 +87,6 @@ class BookingsController < ApplicationController
       render json: { data: @ebbooking, form_info: @form_info, info: @info}
     end
   end
-
   
 
   def show

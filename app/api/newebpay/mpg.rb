@@ -32,18 +32,16 @@ module Newebpay
       end
   
       def set_info(booking, room, nights)
-        puts "booking.serial"
-        puts booking.serial
         info[:MerchantID] = @merchant_id
-        info[:MerchantOrderNo] = booking.serial
+        info[:MerchantOrderNo] = 
         info[:Amt] = (nights * room.price)
         info[:ItemDesc] = "TEST" 
         info[:Email] = "fidomoon612@gmail.com" 
         info[:TimeStamp] = nights
         info[:RespondType] = "JSON"
         info[:Version] = "1.6"
-        info[:ReturnURL] = ""
-        info[:NotifyURL] = "https://805b-114-44-6-170.jp.ngrok.io"
+        info[:ReturnURL] = "https://f19d-114-44-6-170.jp.ngrok.io"
+        info[:NotifyURL] = ""
         info[:LoginType] = 0 
         info[:CREDIT] =  1,
         info[:VACC] = 1
