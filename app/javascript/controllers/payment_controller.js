@@ -18,7 +18,7 @@ export default class extends Controller {
     const headcount = url.searchParams.get("headcount");
 
     fetch(`/bookings/ebpay?room_id=${id}&start_at=${startTime}&end_at=${endTime}&headcount=${headcount}&commit=預定行程`, {
-      method: "GET"
+      method: "GET",
       })
       .then((resp) => resp.json())
       .then(({ data, form_info, info }) => {
