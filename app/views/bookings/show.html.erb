@@ -1,38 +1,45 @@
-<div class="w-full px-10 pb-10 text-gray-700 xl:px-56">
-  <div class="flex flex-col px-20 ">
+<div class="flex flex-col w-full gap-5 px-5 mx-auto mb-10 text-gray-700 sm:px-0 sm:w-10/12 xxl:w-9/12 lg:max-w-1024">
+  <div class="relative flex flex-col ">
     <!-- detail_head -->
-    <div class="flex items-center justify-between w-full px-20 pt-10 bg-white border-2 border-b-0">
-      <div class="flex items-center justify-between w-full pb-10 border-b-2">
+    <div class="flex items-center justify-between w-full px-20 py-10 bg-white border-2">
+      <div class="flex items-center justify-between w-full gap-5 ">
         <div class="flex flex-col justify-between gap-2">
-          <h2 class="flex gap-2 text-2xl font-bold ">
+          <h2 class="flex flex-wrap gap-2 text-2xl font-bold ">
             <%= @booking.user.name%>
             <span>於</span>
             <%= @booking.created_at.strftime("%Y年%m月%d日")%>
             <span>預訂的房源</span>
           </h2>
           <ul class="flex flex-col gap-1 text-xl font-bold">
-            <li class="flex items-center gap-2 text-base text-gray-500"><span>訂單編號</span><%= @booking.serial%></li>
-            <li class="flex items-center gap-2 text-base text-gray-500"><span>訂單狀態</span>
+            <li class="flex flex-wrap items-center gap-2 text-base text-gray-500"><span>訂單編號</span><%= @booking.serial%></li>
+            <li class="flex flex-wrap items-center gap-2 text-base text-gray-500"><span>訂單狀態</span>
               <%=Booking.human_enum_name(:state, @booking.state)%>
             </li>
           </ul>
         </div>
-        <%= image_tag "logo_small.svg",class:"h-8 lg:h-16" %>
+        <%= image_tag "logo_small.svg",class:"h-16 hidden lg:block" %>
+        <%= image_tag "fav_icon.svg",class:"h-16 hidden sm:block lg:hidden" %>
       </div>
     </div>
     <!-- detail_head_end -->
     <!-- detail_body -->
-    <div class="flex flex-col gap-10 px-10 py-10 bg-white border-l-2 border-r-2">
-      <div class="px-10">
-        <div class="flex items-center justify-between pb-10 border-b border-gray-300 ">
-          <div class="flex flex-col">
+    <div class="flex flex-col gap-10 px-20 py-10 bg-white border-l-2 border-r-2">
+      <!-- 入住、退房 -->
+      <div class="w-full border-b border-gray-300">
+        <div class="flex flex-col items-start justify-center gap-5 pb-10 w-fit sm:w-full sm:gap-0 sm:flex-row sm:justify-between ">
+          <div class="flex flex-row items-center gap-2 sm:flex-col min-w-max">
             <span class="gap-1 text-lg font-bold text-gray-500">入住</span>
             <span class="text-2xl font-bold">
               <%= @booking.start_at.strftime("%Y年%m月%d日")%>
             </span>
           </div>
-          <i class="text-lg text-gray-700 fa-solid fa-chevron-right"></i>
-          <div class="flex flex-col items-end gap-1">
+          <div class="hidden sm:block">
+            <i class="text-lg text-gray-700 fa-solid fa-chevron-right"></i>
+          </div>
+          <div class="self-center block sm:hidden">
+            <i class="block text-lg text-gray-700 fa-solid fa-chevron-down sm:hidden"></i>
+          </div>
+          <div class="flex flex-row items-center gap-2 sm:flex-col min-w-max">
             <p class="text-lg font-bold text-gray-500">退房</p>
             <div class="text-2xl font-bold ">
               <%= @booking.end_at.strftime("%Y年%m月%d日")%>
@@ -40,65 +47,60 @@
           </div>
         </div>
       </div>
-      <div class="px-10 ">
-        <ul class="flex flex-col w-full pb-10 text-xl font-bold border-b border-gray-300 gap-7">
-          <li class="flex justify-between">
-            <span class="text-gray-500">房源位置</span>
-            <%= @booking.room.address%>
-          </li>
-          <li class="flex justify-between gap-1">
-            <span class="text-gray-500">房源類型</span>
-            <p>
-              <%= t(@booking.room.home_type, locale: :'zh-TW') %>
-              <%=Room.human_enum_name(:home_type, @booking.room.home_type)%>
-              <span>的</span>
-              <%=Room.human_enum_name(:room_type, @booking.room.room_type)%>
-            </p>
-          </li>
-          <li class="flex justify-between">
-            <span class="text-gray-500">房東</span>
-            <%= @booking.room.user.name%>
-          </li>
-          <li class="flex justify-between">
-            <span class="text-gray-500">入住人數</span>
-            <p>
-              <%= @booking.headcount %>
-              <span>人</span>
-            </p>
-          </li>
-          <li class="flex justify-between">
-            <span class="text-gray-500">每晚價格</span>
+      <ul class="flex flex-col w-full pb-10 text-xl font-bold border-b border-gray-300 gap-7">
+        <!-- 房源位置 -->
+        <li class="flex flex-col justify-between gap-1 sm:flex-row ">
+          <span class="text-gray-500 min-w-max">房源位置</span>
+          <%= @booking.room.address%>
+        </li>
+        <!-- 房源類型 -->
+        <li class="flex flex-col justify-between gap-1 sm:flex-row ">
+          <span class="text-gray-500 min-w-max">房源類型</span>
+          <p class="flex flex-wrap">
+            <%=Room.human_enum_name(:home_type, @booking.room.home_type)%>
+            <span>的</span>
+            <%=Room.human_enum_name(:room_type, @booking.room.room_type)%>
+          </p>
+        </li>
+        <!-- 房東 -->
+        <li class="flex flex-col justify-between gap-1 sm:flex-row ">
+          <span class="text-gray-500">房東</span>
+          <%= @booking.room.user.name%>
+        </li>
+        <!-- 入住人數 -->
+        <li class="flex flex-col justify-between gap-1 sm:flex-row ">
+          <span class="text-gray-500">入住人數</span>
+          <p><%= @booking.headcount %><span>人</span></p>
+        </li>
+        <!-- 每晚價格 -->
+        <li class="flex flex-col justify-between gap-1 sm:flex-row ">
+          <span class="text-gray-500">每晚價格</span>
+          <%=number_to_currency(@booking.price_per_night, negative_format: "(%u%n)",precision:0,unit: "$")%>
+        </li>
+        <!-- 入住天數 -->
+        <li class="flex flex-col justify-between gap-1 sm:flex-row ">
+          <span class="text-gray-500">入住天數</span>
+          <p><%= @nights %><span>晚</span></p>
+        </li>
+      </ul>
+      <div class="flex flex-col items-start justify-start gap-1 text-2xl font-bold tracking-wide sm:justify-between sm:items-center sm:flex-row ">
+        <span class="flex-shrink-0">總價</span>
+        <div class="flex items-center justify-between w-full gap-5 sm:justify-end">
+          <p class="text-lg font-normal text-gray-400 ">
             <%=number_to_currency(@booking.price_per_night, negative_format: "(%u%n)",precision:0,unit: "$")%>
-          </li>
-          <li class="flex justify-between">
-            <span class="text-gray-500">入住天數</span>
-            <p>
-              <%= @nights %>
-              <span>晚</span>
-            </p>
-          </li>
-        </ul>
-      </div>
-      <div class="flex items-center justify-between px-10 text-2xl font-bold tracking-wide ">
-        <span>總價</span>
-        <div>
-          <div class="flex items-center gap-5">
-            <p class="text-lg font-normal text-gray-400 ">
-              <%=number_to_currency(@booking.price_per_night, negative_format: "(%u%n)",precision:0,unit: "$")%>
-              <span>x</span>
-              <%= @nights %>
-              <span>晚 =</span>
-            </p>
-            <%=number_to_currency(@booking.room.price * @nights , precision: 0)%>
-          </div>
+            <span>x</span>
+            <%= @nights %>
+            <span>晚 =</span>
+          </p>
+          <%=number_to_currency(@booking.room.price * @nights , precision: 0)%>
         </div>
       </div>
     </div>
     <!-- detail_body_end -->
     <!-- detail_footer -->
-    <div class="flex items-start justify-end w-full px-10 py-5 bg-gray-100 border-2 ">
-      <div class="flex flex-col items-end gap-2 px-10">
-        <%= link_to room_path(@booking.room_id),class:"p-2 block -mr-2 font-bold text-gray-400  w-fit hover:text-gray-500" do%>
+    <div class="sticky bottom-0 flex items-start justify-end w-full px-20 py-5 overflow-y-auto bg-gray-100 border-2 ">
+      <div class="flex flex-col items-end gap-2">
+        <%= link_to room_path(@booking.room_id),class:"py-2 block font-bold text-gray-400  w-fit hover:text-gray-500" do%>
           查看房源資訊
           <i class="fa-solid fa-chevron-right"></i>
         <%end%>
@@ -109,8 +111,8 @@
         <%end%>
       </div>
     </div>
+    <!-- detail_footer_end -->
   </div>
-  <!-- detail_footer_end -->
   <!-- review_model -->
   <div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="room_review" tabindex="-1" aria-labelledby="roomReviewTitle" aria-modal="true" role="dialog">
     <div class="relative w-auto pointer-events-none modal-dialog modal-xl">
@@ -129,42 +131,42 @@
               <div class="border rounded-md ">
                 <div class="flex items-center gap-2 px-2 py-5 bg-gray-200 ">
                   <%= review.select :accuracy_rating,options_for_select(Review.accuracy_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                  <div class="flex items-center gap-1 font-medium">
-                    <%= review.label :accuracy_rating, "準確度" ,class:"text-lg"%>
+                  <div class="flex flex-col items-center gap-1 font-medium md:flex-row">
+                    <%= review.label :accuracy_rating, "準確度" ,class:"text-lg flex-shrink-0"%>
                     <span class="self-end text-gray-600">準確的房源詳情有助房客判斷你的房源是否符合需求。</span>
                   </div>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-5 ">
                   <%= review.select :check_in_rating,options_for_select(Review.check_in_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                  <div class="flex items-center gap-1 font-medium">
+                  <div class="flex flex-col items-center gap-1 font-medium md:flex-row">
                     <%= review.label :check_in_rating, "入住時間評分" ,class:"text-lg"%>
                     <span class="self-end text-gray-600">充裕的入住登記時間替良好的住宿體驗打下基礎。</span>
                   </div>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-5 bg-gray-200 ">
                   <%= review.select :cleanliness_rating,options_for_select(Review.cleanliness_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                  <div class="flex items-center gap-1 font-medium">
+                  <div class="flex flex-col items-center gap-1 font-medium md:flex-row">
                     <%= review.label :cleanliness_rating, "整潔評分" ,class:"text-lg"%>
-                    <span class="self-end text-gray-600">房客期待房源能乾淨整潔，跟相片中看到的一樣。</span>
+                    <span class="self-end text-gray-600">房客期待房源能乾淨整潔，跟照片中看到的一樣。</span>
                   </div>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-5 ">
                   <%= review.select :communication_rating,options_for_select(Review.communication_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                  <div class="flex items-center gap-1 font-medium">
+                  <div class="flex flex-col items-center gap-1 font-medium md:flex-row">
                     <%= review.label :communication_rating, "溝通評分" ,class:"text-lg"%>
                     <span class="self-end text-gray-600">主動傳送訊息給房客並及時回覆都很重要，這麼做能確保房客的需求得到滿足。</span>
                   </div>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-5 bg-gray-200 ">
                   <%= review.select :location_rating,options_for_select(Review.location_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                  <div class="flex items-center gap-1 font-medium">
+                  <div class="flex flex-col items-center gap-1 font-medium md:flex-row">
                     <%= review.label :location_rating, "位置評分" ,class:"text-lg"%>
                     <span class="self-end text-gray-600">房客可以針對房源位置是否符合描述給予意見。</span>
                   </div>
                 </div>
                 <div class="flex items-center gap-2 px-2 py-5 ">
                   <%= review.select :value_rating,options_for_select(Review.value_ratings.keys,'5'),{}, class:"input w-fit font-bold text-center text-xl"%>
-                  <div class="flex items-center gap-1 font-medium">
+                  <div class="flex flex-col items-center gap-1 font-medium md:flex-row">
                     <%= review.label :value_rating, "性價比" ,class:"text-lg"%>
                     <span class="self-end text-gray-600">房客會根據價格是否合理反映住宿體驗，而給予你的房源評分。</span>
                   </div>
