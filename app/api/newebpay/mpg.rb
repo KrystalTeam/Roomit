@@ -10,9 +10,7 @@ module Newebpay
         set_info(booking, room, nights)
       end
 
-      def nonce
-        (0...8).map { (65 + rand(26)).chr }.join     
-      end
+      
   
       def form_info
         {
@@ -33,9 +31,11 @@ module Newebpay
         sha256_encode(@key, @iv, trade_info)
       end
   
-      def set_info(booking, room, nights)  
+      def set_info(booking, room, nights)
+        puts "booking.serial"
+        puts booking.serial
         info[:MerchantID] = @merchant_id
-        info[:MerchantOrderNo] = nonce
+        info[:MerchantOrderNo] = booking.serial
         info[:Amt] = (nights * room.price)
         info[:ItemDesc] = "TEST" 
         info[:Email] = "fidomoon612@gmail.com" 
@@ -43,7 +43,7 @@ module Newebpay
         info[:RespondType] = "JSON"
         info[:Version] = "1.6"
         info[:ReturnURL] = ""
-        info[:NotifyURL] = "https://6b8c-114-44-6-170.jp.ngrok.io "
+        info[:NotifyURL] = "https://805b-114-44-6-170.jp.ngrok.io"
         info[:LoginType] = 0 
         info[:CREDIT] =  1,
         info[:VACC] = 1
