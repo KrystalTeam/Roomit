@@ -40,7 +40,7 @@ module Newebpay
         info[:TimeStamp] = nights
         info[:RespondType] = "JSON"
         info[:Version] = "1.6"
-        info[:ReturnURL] = "https://f19d-114-44-6-170.jp.ngrok.io"
+        info[:ReturnURL] = "https://f10d-114-44-6-170.jp.ngrok.io/bookings/ebpaid"
         info[:NotifyURL] = ""
         info[:LoginType] = 0 
         info[:CREDIT] =  1,

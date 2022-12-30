@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class BookingsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: %i[confirm cancel]
-  skip_before_action :authenticate_user!, only: %i[confirm cancel]
+  skip_before_action :verify_authenticity_token, only: %i[index confirm cancel ebpaid notify_response]
+  skip_before_action :authenticate_user!, only: %i[confirm cancel ]
   before_action :should_compelete_user_info, only: [:new]
   before_action :cancel_unpaid_bookings, :update_past_bookings
 
@@ -86,6 +86,10 @@ class BookingsController < ApplicationController
 
       render json: { data: @ebbooking, form_info: @form_info, info: @info}
     end
+  end
+
+  def ebpaid
+    redirect_to root_path, notice: "訂單付款成功！"
   end
   
 

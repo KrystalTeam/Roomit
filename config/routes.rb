@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     end
       collection do
       get 'ebpay'
+      post 'ebpaid'
     end
   end
 end
+

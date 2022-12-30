@@ -14,9 +14,9 @@ module Roomit
     config.load_defaults 6.1
     config.i18n.default_locale = 'zh-TW'
     config.time_zone = 'Taipei'
-    #Rails.application.config.hosts << "f19d-114-44-6-170.jp.ngrok.io"
-    config.hosts << "f19d-114-44-6-170.jp.ngrok.io"
+    config.hosts << "f10d-114-44-6-170.jp.ngrok.io"
 
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
