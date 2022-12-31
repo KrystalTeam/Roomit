@@ -58,7 +58,8 @@
       <%end%>
     </div>
   </div>
-  <div class="items-center justify-center hidden w-full h-full bg-gray-200 md:flex">
-    <span class="text-3xl font-bold">Google Map</span>
+  <div class="w-full h-full bg-gray-200">
+    <%= react_component('GoogleRoomMap', 
+      { lat: 23.67565, lng: 120.9738819, api_key: ENV['GOOG_MAPS_API_KEY'], data: @data }) %>
   </div>
 </section>

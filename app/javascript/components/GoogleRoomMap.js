@@ -1,54 +1,23 @@
 import React from "react"
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api"
+import LocationButton from "./LocationButton"
+
+const taiwanBounds = {
+  north: 28.17565,
+  south: 19.17565,
+  west: 116.9738819,
+  east: 124.9738819,
+}
 
 const mapOptions = {
   zoomControl: true,
   streetViewControl: true,
   mapTypeControl: false,
-  fullscreenControl: false
+  fullscreenControl: false,
+  restriction: {
+    latLngBounds: taiwanBounds
+  },
 }
-
-// function GoogleRoomMap() {
-//   const { isLoaded, loadError } = useJsApiLoader({
-//     googleMapsApiKey: ENV['GOOG_MAPS_API_KEY'],
-//   })
-//   const renderMap = () => {
-//     const onLoad = React.useCallback(
-//       function onLoad(mapInstance) {
-//         // do something with the map instance
-//       }
-//     )
-//     return (
-//       <GoogleMap
-//         center={this.props.center}
-//         mapContainerStyle={{width: '600px', height: '600px'}}
-//         options={options}
-//         onLoad={onLoad}>
-//         {/* my map components */}
-//       </GoogleMap>
-//     )
-//   }
-//   if (loadError) {
-//     return <div>Map cannot be loaded right now, sorry.</div>
-//   }
-
-//   return isLoaded ? renderMap() : <div>Spinner</div>
-// }
-
-const circleOptions = {
-  strokeColor: '#FF0000',
-  strokeOpacity: 0.8,
-  strokeWeight: 2,
-  fillColor: '#FF0000',
-  fillOpacity: 0.35,
-  clickable: false,
-  draggable: false,
-  editable: false,
-  visible: true,
-  radius: 3000,
-  zIndex: 1
-}
-
 class GoogleRoomMap extends React.Component {
   constructor(props) {
     super(props)
@@ -58,25 +27,44 @@ class GoogleRoomMap extends React.Component {
   }
 
   render() {
+    let latAvg = this.props.data.map((datum => parseFloat(datum.lat))).reduce((a, b) => a + b, 0) / this.props.data.length
+    let lngAvg = this.props.data.map((datum => parseFloat(datum.lng))).reduce((a, b) => a + b, 0) / this.props.data.length
+    let center = {lat: latAvg, lng: lngAvg}
+
     return (
       <LoadScript
         googleMapsApiKey={this.props.api_key}
       >
-        <button onClick={() => this.state.map.panTo({lat: this.props.lat, lng: this.props.lng})}>X</button>
-        <GoogleMap
-          mapContainerStyle={{width: '100%', height: '480px'}}
-          center={{lat: this.props.lat, lng: this.props.lng}}
-          zoom={15}
-          options={mapOptions}
-          onLoad={map => this.setState({map: map})}
+        <div
+          className="relative"
         >
-          <>
-          {/* Child components, such as markers, info windows, etc. */}
-            <Marker
-              position={{lat: this.props.lat, lng: this.props.lng}}
-            />
-          </>
-        </GoogleMap>
+          <GoogleMap 
+            mapContainerStyle={{width: '100%', height: '712px'}}
+            center={center}
+            zoom={7.8}
+            options={mapOptions}
+            onLoad={map => this.setState({map: map})}
+          >
+            <>
+            {/* Child components, such as markers, info windows, etc. */}
+              {this.props.data.map((room) => {
+                return (
+                  <Marker
+                    key={room.id}
+                    position={{lat: parseFloat(room.lat), lng: parseFloat(room.lng)}}
+                  />
+                )
+              })}
+            </>
+          </GoogleMap>
+          <LocationButton
+            onClick={() => {
+              this.state.map.panTo(center)
+              this.state.map.setZoom(7.8)
+              }
+            }
+          />
+        </div>
       </LoadScript>
     )
   }

@@ -333,8 +333,15 @@
   <div>
     <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
     <div class="w-full">
-      <%= react_component('GoogleRoomMap', 
-      { lat: @room.lat.to_f, lng: @room.lng.to_f, api_key: ENV['GOOG_MAPS_API_KEY'] }) %>
+      <iframe
+          width="100%"
+          height="480"
+          frameborder="0" style="border:0"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOG_MAPS_API_KEY'] %>
+          &q=<%= @room.address %>"
+          allowfullscreen>
+      </iframe>
     </div>
     <!-- room_location -->
   </div>

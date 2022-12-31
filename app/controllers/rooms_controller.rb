@@ -129,7 +129,12 @@ class RoomsController < ApplicationController
     end
   end
 
-  def wish_list_rooms; end
+  def wish_list_rooms
+    @rooms = current_user.liked_wish_list_rooms
+    @photos = current_user.liked_wish_list_rooms.first.photos
+    @data = @rooms.select(:id, :lat, :lng)
+    # render json: @data
+  end
 
   private
 
