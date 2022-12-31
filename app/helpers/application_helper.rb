@@ -18,4 +18,9 @@ module ApplicationHelper
   def average(column)
     @room.reviews.average(column).floor(1)
   end
+
+  def no_review_bookings_count
+  Booking.includes(:reviews).where(user_id: current_user.id,reviews:{id: nil}).count
+  end
+  
 end

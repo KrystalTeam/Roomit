@@ -7,8 +7,8 @@ class Room < ApplicationRecord
   has_many :bookings
   has_many :guests, through: :bookings, source: :users
   has_many :wish_list_rooms
-  has_many :liked_users, through: :wish_list_rooms, source: :user
   has_many :reviews
+  has_many :liked_users, through: :wish_list_rooms, source: :user
 
   has_many_attached :photos
 

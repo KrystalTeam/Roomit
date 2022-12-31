@@ -63,6 +63,7 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
     @review = Review.new
+    @guest_review = @booking.reviews.where(review_to: 'room')
     @nights = (@booking.end_at.to_date - @booking.start_at.to_date).to_i
   end
 
@@ -80,7 +81,7 @@ class BookingsController < ApplicationController
   def create_review
     @review = Review.create!(review_params)
     if @review.save
-      redirect_to room_path(params[:review][:room_id]), notice: '評論發佈成功!'
+      redirect_to room_path(@review.booking.room.id), notice: '評論發佈成功!'
     else
       flash.alert = '評論發佈失敗！'
       render :show
@@ -96,11 +97,11 @@ class BookingsController < ApplicationController
   def verify_owner; end
 
   def booking_params
-    params.require(:booking).permit(:user_id, :room_id, :start_at, :end_at, :price_per_night, :serial, :headcount)
+    params.require(:booking).permit(:user_id, :room_id, :start_at, :end_at, :price_per_night, :serial, :headcount,:viewed)
   end
 
   def review_params
-    params.require(:review).permit(:user_id, :room_id, :guest_rating, :accuracy_rating, :check_in_rating, :cleanliness_rating,
+    params.require(:review).permit(:room_id ,:booking_id, :guest_rating, :accuracy_rating, :check_in_rating, :cleanliness_rating,
                                    :communication_rating, :location_rating, :value_rating, :comment, :review_to)
   end
 
