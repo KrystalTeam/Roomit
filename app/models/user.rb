@@ -13,7 +13,6 @@ class User < ApplicationRecord
   has_many :booked_rooms, through: :bookings, source: :rooms
   has_many :wish_list_rooms
   has_many :liked_wish_list_rooms, through: :wish_list_rooms, source: :room
-  has_many :reviews
 
   has_one_attached :avatar
 

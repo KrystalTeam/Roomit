@@ -9,7 +9,6 @@
       <%= image_tag "fav_icon.svg",class:"h-7",alt:"roomit_logo" %>
     </div>
   </a>
-  <!-- logo end -->
   <!-- search bar -->
   <%= link_to search_index_path do %>
     <button class="items-center hidden p-2 text-gray-400 border rounded-full hover:border-gray-300 h-11 md:flex hover:shadow-md hover:text-gray-800" type="button">
@@ -19,7 +18,6 @@
       </div>
     </button>
   <%end%>
-  <!-- search bar end -->
   <!-- login -->
   <div>
     <div class="flex items-center justify-end ">
@@ -50,6 +48,10 @@
               <%= image_tag current_user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
             <% end %>
           </div>
+          <% if no_review_bookings_count != 0%>
+            <span class="absolute top-0 flex items-center justify-center w-5 h-5 text-xs text-white bg-pink-500 border-2 border-white rounded-full -right-1 ">
+            </span>
+          <% end%>
         </button>
         <div data-dropdown-target="menu" class="absolute right-0 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg z-999">
           <% if user_signed_in? %>
@@ -66,7 +68,6 @@
       </div>
     </div>
   </div>
-  <!-- end login -->
 </nav>
 <!-- sign_in model-->
 <div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="signin" tabindex="-1" aria-labelledby="signinTitle" aria-modal="true" role="dialog">
@@ -128,7 +129,6 @@
     </div>
   </div>
 </div>
-<!-- sign_in model end-->
 <!-- sign_up model-->
 <div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="signup" tabindex="-1" aria-labelledby="signupTitle" aria-modal="true" role="dialog">
   <div class="relative w-auto pointer-events-none modal-dialog modal-dialog-centered">
@@ -187,4 +187,3 @@
     </div>
   </div>
 </div>
-<!-- sign_up model end-->

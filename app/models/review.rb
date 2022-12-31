@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Review < ApplicationRecord
-  belongs_to :user
+  belongs_to :booking
   belongs_to :room
+  scope :no_reviews, -> { where(reviews_count: 0)}
   enum review_to: {
     'room' => 'room',
     'guest' => 'guest'

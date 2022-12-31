@@ -104,10 +104,11 @@
           查看房源資訊
           <i class="fa-solid fa-chevron-right"></i>
         <%end%>
-        <%if @booking.room.reviews.present?%>
-          <button class= "px-6 py-3 font-bold text-gray-400 bg-gray-200 border border-gray-300 rounded-lg cursor-not-allowed w-fit">已評論此房源</button>
+        <%if @guest_review.exists? %>
+          <button class= "px-6 py-3 font-bold text-gray-400 bg-gray-200 border border-gray-300 rounded-lg cursor-not-allowed w-fit">已評論此房源
+          </button>
         <%else%>
-          <button  data-bs-toggle="modal" data-bs-target="#room_review" class= "font-bold btn w-fit">評價此房源</button>
+          <button data-bs-toggle="modal" data-bs-target="#room_review" class= "font-bold btn w-fit">評價此房源</button>
         <%end%>
       </div>
     </div>
@@ -179,8 +180,8 @@
                 </div>
                 <%= review.text_area :comment, class:"input border-2 h-28 resize-none overflow-y-scroll"%>
               </div>
-              <%= review.hidden_field :user_id, value: current_user.id %>
-              <%= review.hidden_field :room_id, value: @booking.room_id %>
+              <%= review.hidden_field :booking_id, value: @booking.id %>
+              <%= review.hidden_field :room_id, value: @booking.room_id%>
               <%= review.hidden_field :review_to, value:"room"%>
               <div class="flex justify-end w-full gap-3">
                 <div class="font-bold cursor-pointer btn-cancel w-fit " data-bs-dismiss="modal" aria-label="Close">取消</div>

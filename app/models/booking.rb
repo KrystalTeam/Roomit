@@ -4,12 +4,15 @@ class Booking < ApplicationRecord
   before_validation :generate_serial
   belongs_to :user
   belongs_to :room
+  has_many :reviews
+  
 
   validates :price_per_night, presence: true
   validates :start_at, :end_at, presence: true
   validate :end_date_after_start_date, :other_booking_during_the_period
 
   enum state: %i[pending unpaid paid cancelled past]
+
 
   private
 
