@@ -1,17 +1,18 @@
-<section class="w-full px-10 text-gray-700 lg:px-56">
-  <div class="flex flex-col">
-    <div class="flex justify-between px-1 mb-2">
-      <div class="flex flex-col justify-between">
-        <h1 class="flex gap-2 h1">
+<section class="flex flex-col w-full gap-5 px-5 mx-auto mb-10 text-gray-700 sm:px-0 sm:w-10/12 xxl:w-9/12 lg:max-w-1024">
+  <div class="flex flex-col-reverse gap-2 pb-5 border-b sm:flex-col ">
+    <!-- title -->
+    <div class="flex justify-between">
+      <div class="flex flex-col justify-between gap-1">
+        <h1 class="flex gap-1 h1">
           <p><%= @room.user.name%></p>
           <p>出租的</p>
           <p><%=Room.human_enum_name(:room_type, @room.room_type)%></p>
         </h1>
-        <div class="flex gap-2">
-          <% if @room.reviews.any?%>
-            <div class="flex items-center gap-1 text-lg font-medium">
+        <% if @room.reviews.any?%>
+          <div class="flex gap-2">
+            <div class="flex items-center gap-1 font-medium text-md">
               <div class="flex items-center gap-1">
-                <i class="pb-0.5 text-base fa-solid fa-star"></i>
+                <i class="pb-0.5 text-sm fa-solid fa-star"></i>
                 <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
               </div>
               <span>．</span>
@@ -19,149 +20,164 @@
                 <span>則評價</span>
               </p>
             </div>
-          <%end%>
-        </div>
+          </div>
+        <%end%>
       </div>
-      <div class="flex self-end gap-2">
-        <div>
+      <div class="items-center self-end hidden gap-2 sm:flex ">
+        <button>
           <i class="fa-solid fa-share"></i>
-          <a href="#" class="mr-2">分享</a>
-        </div>
+          <a href="#">分享</a>
+        </button>
         <% if current_user %>
           <button data-controller="wishList" 
           data-action="click->wishList#wishListState" 
             data-id="<%= @room.id%>"
-            data-liked="<%= current_user.liked_wish_list_rooms.include?(@room) %>">
+            data-liked="<%= current_user.liked_wish_list_rooms.include?(@room) %>"
+            class="flex items-center">
             <i data-wishList-target="wishListIcon" class="text-2xl text-gray-500 fa-solid fa-heart opacity-80"></i>
           </button>
         <%end%>
       </div>
     </div>
     <!-- room_img -->
-    <button class="mb-10 overflow-hidden rounded-2xl">
-      <div class="grid grid-cols-4 grid-rows-2 gap-3 ">
-        <div class="col-span-2 row-span-2 ">
+    <button class="overflow-hidden rounded-md">
+      <!-- 組合圖 > sm > 輪播 -->
+      <div data-controller="carousel" class="relative block h-full group swiper-container sm:hidden" 
+                data-carousel-options-value='{"loop":"true","pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}}'>
+        <div class="absolute z-30 flex flex-col justify-between w-full h-full p-3">
+          <!-- 控制鈕 -->
+          <div class="flex justify-between w-full my-auto transition duration-500 ease-out opacity-0 group-hover:opacity-100">
+            <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-70 hover:opacity-100 swiper-button-prev">
+              <i class="text-gray-700 fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="flex items-center justify-center w-8 h-8 bg-white rounded-full opacity-70 hover:opacity-100 swiper-button-next">
+              <i class="text-gray-700 fa-solid fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+        <div class="self-center mb-5 swiper-pagination"></div>
+        <div class="relative swiper-wrapper">
+          <% @room.photos.each do |photo| %>
+            <div class="swiper-slide">
+              <%=image_tag photo, class:"img-full aspect-ratio-show object-cover"%>
+            </div>
+          <%end%>
+        </div>
+        <%@room.photos.all[1..4].each do |photo|%>
+          <div class="hidden sm:block">
+            <%= image_tag photo ,class:"img-full aspect-ratio"%>
+          </div>
+        <%end%>
+      </div>
+      <div class="hidden grid-cols-1 gap-3 sm:grid grid-rows-0 sm:grid-cols-4 sm:grid-rows-2">
+        <div class="col-span-1 sm:h-full sm:col-span-2 sm:row-span-2">
           <%= image_tag @room.photos.first, class:"img-full aspect-ratio"%>
         </div>
-        <% @room.photos.all[1..4].each do |photo| %>
-          <div>
+        <%@room.photos.all[1..4].each do |photo|%>
+          <div class="hidden sm:block">
             <%= image_tag photo ,class:"img-full aspect-ratio"%>
           </div>
         <%end%>
       </div>
     </button>
-    <!-- room_img_end -->
-    <div class="relative flex justify-between gap-10 ">
-      <!-- room_info -->
-      <div class="flex flex-col w-7/12 gap-5">
-        <div class="flex items-center justify-between">
-          <div class="flex flex-col gap-3">
-            <h2 class="flex gap-2 text-2xl font-bold">
-              <%= @room.address%>
-            </h2>
-            <ul class="flex gap-2.5 ">
-              <li class="flex gap-0.5 border-r border-gray-400 pr-2.5 ">
-                <%= @room.max_occupancy%>
-                <span>位</span>
-              </li>
-              <li class="flex gap-0.5 border-r border-gray-400 pr-2.5 ">
-                <%= @room.bedrooms%>
-                <span>間臥室</span>
-              </li>
-              <li class="flex gap-0.5 pr-2.5 ">
-                <%= @room.bathrooms%>
-                <span>間衛浴</span>
-              </li>
-            </ul>
-          </div>
-          <div class="rounded-full min-w-max min-h-max">
-            <% if @room.user.avatar.attached? %>
-              <%= image_tag @room.user.avatar, class:"rounded-full w-16 h-16 object-cover"%>
-            <% else %>
-              <div class="flex items-center justify-center w-16 h-16 rounded-full ">
-                <i class="text-5xl gradient-text fa-solid fa-circle-user"></i>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <hr>
-        <div class="flex flex-col gap-3" >
-          <h3 class="h3">有提供的設備與服務</h3>
-          <ul class="flex flex-col gap-5 pl-2">
-            <%equipment_provided.each do |equipment|%>
-              <li class="font-medium tracking-wide"><%= equipment %></li>
-            <%end%>
+  </div>
+  <div class="relative justify-between block gap-10 sm:flex ">
+    <!-- room_info -->
+    <div class="flex flex-col gap-5">
+      <div class="flex items-center justify-between gap-5 pb-5 border-b">
+        <div class="flex flex-col gap-3">
+          <h2 class="flex gap-2 text-2xl font-bold">
+            <%= @room.address%>
+          </h2>
+          <ul class="flex gap-2.5 ">
+            <li class="flex gap-0.5 border-r border-gray-400 pr-2.5 ">
+              <%= @room.max_occupancy%>
+              <span>位</span>
+            </li>
+            <li class="flex gap-0.5 border-r border-gray-400 pr-2.5 ">
+              <%= @room.bedrooms%>
+              <span>間臥室</span>
+            </li>
+            <li class="flex gap-0.5 pr-2.5 ">
+              <%= @room.bathrooms%>
+              <span>間衛浴</span>
+            </li>
           </ul>
         </div>
-        <hr>
-        <div class="flex flex-col gap-3 ">
-          <div class="text-2xl font-black text-pink-500">
-            <span>Roomit</span>
-            <span class="text-black">cover</span>
-          </div>
-          <p>針對房東取消預訂、房源描述不實和入住困難等其他問題，我們會為每筆預訂提供免費保障。</p>
-        </div>
-        <hr>
-        <div>
-          <h3 class="mb-2 h3">房源簡介</h3>
-          <p class="w-1/2 sm:w-3/4">
-            <%= @room.summary%>
-          </p>
-        </div>
-        <hr>
-        <div class="flex flex-col gap-3">
-          <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
-          <h4 class="mb-2 font-medium ">
-            <%= @room.address %>
-          </h4>
-          <div class="text-justify">
-            <span class="mb-3 font-bold">鄰近超商：</span>
-            <ul class="flex flex-col gap-2 list-none">
-              <li>7-ELEVEn 鑫衡陽門市</li>
-              <li>全家便利超商 衡慶門市</li>
-            </ul>
-          </div>
-          <div class="text-justify">
-            <span class="font-bold">鄰近醫院：</span>
-            台大醫院
-          </div>
+        <div class="self-start">
+          <% if @room.user.avatar.attached? %>
+            <div class="flex items-center justify-center rounded-full w-9 h-9 ">
+              <%= image_tag @room.user.avatar, class:"rounded-full w-full h-full object-cover"%>
+            </div>
+          <% else %>
+            <div class="flex items-center justify-center rounded-full w-fit h-fit ">
+              <i class="text-4xl gradient-text fa-solid fa-circle-user"></i>
+            </div>
+          <% end %>
         </div>
       </div>
-      <!-- room_info_end -->
-      <!-- booking_card -->
-      <div class="relative w-5/12">
-        <div class="sticky overflow-y-auto border border-gray-300 shadow-sm row-span-auto top-1/4 rounded-xl">
-          <%= form_with(url: new_booking_path, method:'get', data: { controller: "booking-card" }) do |form| %>
-            <input type="hidden" name="room_id" value="<%= @room.id %>">
-            <div class="p-5">
-              <div class="flex flex-col gap-3">
-                <div class="flex justify-between mb-3">
-                  <div class="inline-flex">
-                    <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
-                    <span class="text-md place-self-center">晚</span>
-                  </div>
-                  <% if @room.reviews.any?%>
-                    <div class="flex items-center gap-1 text-base font-medium">
-                      <div class="flex items-center gap-1">
-                        <i class="pb-0.5 text-sm fa-solid fa-star"></i>
-                        <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
-                      </div>
-                      <span>．</span>
-                      <p class="flex gap-1"><%= @room.reviews.count%>
-                        <span>則評價</span>
-                      </p>
+      <div class="flex flex-col gap-3 pb-5 border-b">
+        <h3 class="h3">有提供的設備與服務</h3>
+        <ul class="flex flex-col gap-3 pl-2">
+          <%equipment_provided.each do |equipment|%>
+            <li class="font-medium tracking-wide"><%= equipment %></li>
+          <%end%>
+        </ul>
+      </div>
+      <div class="flex flex-col gap-3 pb-5 border-b ">
+        <div class="text-2xl font-black text-pink-500">
+          <span>Roomit</span>
+          <span class="text-black">cover</span>
+        </div>
+        <p>針對房東取消預訂、房源描述不實和入住困難等其他問題，我們會為每筆預訂提供免費保障。</p>
+      </div>
+      <div class="flex flex-col gap-3 pb-5 border-b">
+        <h3 class="h3">房源簡介</h3>
+        <p class="w-1/2 sm:w-3/4">
+          <%= @room.summary%>
+        </p>
+      </div>
+      <div class="flex flex-col gap-3 pb-5 border-b">
+        <h3 class="mb-2 text-lg font-medium w-fu">住宿地點與附近店家</h3>
+        <h4 class="mb-2 font-medium ">
+          <%= @room.address %>
+        </h4>
+      </div>
+    </div>
+    <!-- booking_card -->
+    <div class="relative hidden sm:block max-w-450 min-w-250">
+      <div class="sticky overflow-y-auto border border-gray-300 shadow-sm row-span-auto top-1/4 rounded-xl">
+        <%= form_with(url: new_booking_path, method:'get', data: { controller: "booking-card" }) do |form| %>
+          <input type="hidden" name="room_id" value="<%= @room.id %>">
+          <div class="p-5">
+            <div class="flex flex-col gap-3">
+              <div class="flex flex-wrap justify-between mb-3">
+                <div class="inline-flex">
+                  <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
+                  <span class="text-md place-self-center">晚</span>
+                </div>
+                <% if @room.reviews.any?%>
+                  <div class="flex items-center text-base font-medium ">
+                    <div class="flex items-center gap-0.5">
+                      <i class="pb-0.5 text-sm fa-solid fa-star"></i>
+                      <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
                     </div>
-                  <%end%>
-                </div>
-                <!-- checkin_date -->
-                <div class="flex w-full -mb-3 font-bold">
-                  <span class="w-full">入住日期</span>
-                  <span class="w-full">退房日期</span>
-                </div>
-                <div class="flex overflow-hidden border-2 border-pink-500 rounded-lg justify-evenly">
-                  <%# 入住日期 %>
-                  <div class="w-full">
-                    <%= form.text_field :start_at ,data: {
+                    <span>．</span>
+                    <p class="flex gap-0.5">
+                      <%= @room.reviews.count%>
+                      <span>則評價</span>
+                    </p>
+                  </div>
+                <%end%>
+              </div>
+              <div class="flex w-full -mb-3 font-bold">
+                <span class="w-full">入住日期</span>
+                <span class="w-full">退房日期</span>
+              </div>
+              <div class="flex overflow-hidden border-2 border-pink-500 rounded-lg justify-evenly">
+                <%# 入住日期 %>
+                <div class="w-full">
+                  <%= form.text_field :start_at ,data: {
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
@@ -169,10 +185,10 @@
                     action: "input->booking-card#startDate",
                     "booking-card-target": "startDate"
                     }, class:"p-2 w-full font-bold "%>
-                  </div>
-                  <%# 退房日期 %>
-                  <div class="w-full">
-                    <%= form.text_field :end_at ,data: {
+                </div>
+                <%# 退房日期 %>
+                <div class="w-full">
+                  <%= form.text_field :end_at ,data: {
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
@@ -180,120 +196,123 @@
                     action: "input->booking-card#endDate",
                     "booking-card-target": "endDate"
                     }, class:"p-2 w-full border-pink-500 border-l-2 font-bold" %>
-                  </div>
-                </div>
-                <!-- guest_num -->
-                <div>
-                  <%= form.label :headcount,'人數',class:"font-bold"%>
-                  <div class="flex items-center gap-2 ">
-                    <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a)%>
-                    <span>位</span>
-                  </div>
-                </div>
-                <% if @room.user == current_user %>
-                  <button class="w-full mx-auto font-bold text-gray-700 bg-gray-200 rounded-xl">
-                    <%=form.submit '無法預定自己的房源', disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
-                  </button>
-                <% else%>
-                  <button class="w-full btn-cancel" data-booking-card-target="submitBtn">
-                    <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true%>
-                  </button>
-                <% end %>
-                <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
-                <div class="flex justify-between gap-10 text-sm text-gray-700">
-                  <div class="underline">
-                    <span data-booking-card-target="price"><%=number_to_currency(@room.price, precision: 0)%></span>
-                    <span data-booking-card-target="nights"> x 1 晚</span>
-                  </div>
-                  <span data-booking-card-target="amount"><%=number_to_currency(@room.price, precision: 0)%></span>
-                </div>
-                <hr class="my-5">
-                <div class="flex justify-between text-lg text-black">
-                  <span data-booking-card-target="total"><%=number_to_currency(@room.price, precision: 0)%></span>
-                  <span>稅前總價</span>
                 </div>
               </div>
+              <!-- guest_num -->
+              <div>
+                <span class="font-bold">房客</span>
+                <div class="flex items-center gap-2 ">
+                  <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a)%>
+                  <span>位</span>
+                </div>
+              </div>
+              <% if @room.user == current_user %>
+                <button class="w-full mx-auto font-bold text-gray-700 bg-gray-200 rounded-xl">
+                  <%=form.submit '無法預定自己的房源', disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
+                </button>
+              <% else%>
+                <button class="w-full btn-cancel" data-booking-card-target="submitBtn">
+                  <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true%>
+                </button>
+              <% end %>
+              <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
+              <div class="flex justify-between gap-10 text-sm text-gray-700">
+                <div class="underline">
+                  <span data-booking-card-target="price"><%=number_to_currency(@room.price, precision: 0)%></span>
+                  <span data-booking-card-target="nights"> x 1 晚</span>
+                </div>
+                <span data-booking-card-target="amount"><%=number_to_currency(@room.price, precision: 0)%></span>
+              </div>
+              <hr class="my-5">
+              <div class="flex justify-between text-lg text-black">
+                <span data-booking-card-target="total"><%=number_to_currency(@room.price, precision: 0)%></span>
+                <span>稅前總價</span>
+              </div>
             </div>
-          <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- guest_rating -->
+  <% if @room.reviews.any?%>
+    <div class="flex flex-col w-full gap-5 pb-5 border-b">
+      <!-- 平均星數、留言 -->
+      <div class="flex items-center gap-2 text-xl font-medium">
+        <div class="flex items-center gap-1">
+          <i class="pb-0.5 text-lg fa-solid fa-star"></i>
+          <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
+        </div>
+        <span>．</span>
+        <span><%= @room.reviews.count%>則評價</span>
+      </div>
+      <!-- 6項評分 -->
+      <div class="grid w-full grid-cols-2 gap-x-5 sm:grid-rows-none sm:grid-cols-2 gap-y-3 sm:gap-y-5">
+        <div class="flex flex-wrap gap-3 sm:gap-10">
+          <span class="font-normal">準確性</span>
+          <div class="flex items-center gap-2">
+            <div class="bg-gray-300 w-28 sm:w-32 ">
+              <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:accuracy_rating))%>">
+              </div>
+            </div>
+            <span class="text-sm font-bold"><%= average(:accuracy_rating)%></span>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 sm:gap-10">
+          <span class="font-normal">時間性</span>
+          <div class="flex items-center gap-2">
+            <div class="bg-gray-300 w-28 sm:w-32 ">
+              <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:check_in_rating))%>">
+              </div>
+            </div>
+            <span class="text-sm font-bold"><%= average(:check_in_rating)%></span>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 sm:gap-10">
+          <span class="font-normal">整潔性</span>
+          <div class="flex items-center gap-2">
+            <div class="bg-gray-300 w-28 sm:w-32 ">
+              <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:cleanliness_rating))%>">
+              </div>
+            </div>
+            <span class="text-sm font-bold"><%= average(:cleanliness_rating)%></span>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 sm:gap-10">
+          <span class="font-normal">溝通性</span>
+          <div class="flex items-center gap-2">
+            <div class="bg-gray-300 w-28 sm:w-32 ">
+              <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:communication_rating))%>">
+              </div>
+            </div>
+            <span class="text-sm font-bold"><%= average(:communication_rating)%></span>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 sm:gap-10">
+          <span class="font-normal">位置性</span>
+          <div class="flex items-center gap-2">
+            <div class="bg-gray-300 w-28 sm:w-32 ">
+              <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:location_rating))%>">
+              </div>
+            </div>
+            <span class="text-sm font-bold"><%= average(:location_rating)%></span>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 sm:gap-10">
+          <span class="font-normal">性價比</span>
+          <div class="flex items-center gap-2">
+            <div class="bg-gray-300 w-28 sm:w-32 ">
+              <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:value_rating))%>"></div>
+            </div>
+            <span class="text-sm font-bold"><%= average(:value_rating)%></span>
+          </div>
         </div>
       </div>
-      <!-- booking_card_end -->
-    </div>
-    <hr class="my-5">
-    <!-- guest_rating -->
-    <% if @room.reviews.any?%>
-      <div class="w-full">
-        <div class="flex items-center gap-2 text-xl font-medium">
-          <div class="flex items-center gap-1">
-            <i class="pb-0.5 text-lg fa-solid fa-star"></i>
-            <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
-          </div>
-          <span>．</span>
-          <span><%= @room.reviews.count%>則評價</span>
-        </div>
-        <div class="grid w-4/6 grid-cols-2 py-5 gap-x-40 gap-y-5">
-          <div class="flex justify-between">
-            <span class="font-normal">準確性</span>
-            <div class="flex items-center gap-2">
-              <div class="bg-gray-300 w-36">
-                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:accuracy_rating))%>"></div>
-              </div>
-              <span class="text-sm font-bold"><%= average(:accuracy_rating)%></span>
-            </div>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-normal">入住時間性</span>
-            <div class="flex items-center gap-2">
-              <div class="bg-gray-300 w-36">
-                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:check_in_rating))%>"></div>
-              </div>
-              <span class="text-sm font-bold"><%= average(:check_in_rating)%></span>
-            </div>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-normal">整潔性</span>
-            <div class="flex items-center gap-2">
-              <div class="bg-gray-300 w-36">
-                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:cleanliness_rating))%>"></div>
-              </div>
-              <span class="text-sm font-bold"><%= average(:cleanliness_rating)%></span>
-            </div>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-normal">溝通性</span>
-            <div class="flex items-center gap-2">
-              <div class="bg-gray-300 w-36">
-                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:communication_rating))%>"></div>
-              </div>
-              <span class="text-sm font-bold"><%= average(:communication_rating)%></span>
-            </div>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-normal">位置性</span>
-            <div class="flex items-center gap-2">
-              <div class="bg-gray-300 w-36">
-                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:location_rating))%>"></div>
-              </div>
-              <span class="text-sm font-bold"><%= average(:location_rating)%></span>
-            </div>
-          </div>
-          <div class="flex justify-between">
-            <span class="font-normal">性價比</span>
-            <div class="flex items-center gap-2">
-              <div class="bg-gray-300 w-36">
-                <div class="h-1 bg-gradient-to-r from-pink-500 to-orange" style="width:<%= rating_percentage(average(:value_rating))%>"></div>
-              </div>
-              <span class="text-sm font-bold"><%= average(:value_rating)%></span>
-            </div>
-          </div>
-        </div>
-      <% end %>
-      <!-- guest_rating_end -->
       <!-- guest_review -->
-      <div class="grid w-4/6 grid-cols-2 mt-5 gap-x-40 gap-y-8">
+      <div class="flex w-full gap-5 overflow-x-scroll flex-nowrap ">
         <% @room.reviews.each do |review| %>
-          <% if review.comment != "" %>
-            <div class="flex flex-col gap-2">
+          <% if review.comment != ""%>
+            <div class="flex flex-col flex-shrink-0 gap-3 p-3 border w-fit sm:w-1/2 md:1/3 rounded-xl">
               <div class="flex items-center gap-3">
                 <%= image_tag review.user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
                 <div class="text-sm">
@@ -301,29 +320,123 @@
                   <span class="text-gray-400 "><%= review.created_at.strftime("%Y年%m月")%></span>
                 </div>
               </div>
-              <p><%= review.comment%></p>
+              <p class="w-48 break-all sm:w-full">
+                <%= review.comment%>
+              </p>
             </div>
           <% end %>
         <% end %>
       </div>
     </div>
-    <!-- guest_review_end -->
-    <hr class="my-5">
-    <!-- room_location -->
-    <div>
-      <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
-      <div class="w-full">
-        <iframe
+  <% end %>
+  <!-- room_location -->
+  <div>
+    <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
+    <div class="w-full">
+      <iframe
           width="100%"
           height="480"
           frameborder="0" style="border:0"
           referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOG_MAPS_API_KEY'] %>
           &q=<%= @room.address %>"
-        allowfullscreen>
-        </iframe>
+          allowfullscreen>
+      </iframe>
+    </div>
+    <!-- room_location -->
+  </div>
+  <!-- booking_card_drop_down -->
+  <div data-controller="dropdown" class="fixed bottom-0 right-0 flex justify-end w-full h-24 p-5 bg-white border border-gray-300 shadow-md sm:hidden">
+    <button data-action="dropdown#toggle click@window->dropdown#hide"  class="px-6 font-bold text-white rounded-lg bg-color-main bg-color-main-hover">
+      預訂房源
+    </button>
+    <div data-dropdown-target="menu" class="absolute right-0 overflow-hidden bg-white bottom-24 w-400">
+      <div class="sticky overflow-y-auto border border-gray-300 shadow-sm row-span-auto top-1/4 rounded-xl">
+        <%= form_with(url: new_booking_path, method:'get', data: { controller: "booking-card" }) do |form| %>
+          <input type="hidden" name="room_id" value="<%= @room.id %>">
+          <div class="p-5">
+            <div class="flex flex-col gap-3">
+              <div class="flex flex-wrap justify-between mb-3">
+                <div class="inline-flex">
+                  <h2 class="mr-2 text-xl font-semibold"><%=number_to_currency(@room.price, precision: 0)%></h2>
+                  <span class="text-md place-self-center">晚</span>
+                </div>
+                <% if @room.reviews.any?%>
+                  <div class="flex items-center text-base font-medium ">
+                    <div class="flex items-center gap-0.5">
+                      <i class="pb-0.5 text-sm fa-solid fa-star"></i>
+                      <span><%= ((average(:value_rating) + average(:accuracy_rating) +  average(:check_in_rating) + average(:cleanliness_rating) + average(:communication_rating) + average(:value_rating))/6).floor(1) %></span>
+                    </div>
+                    <span>．</span>
+                    <p class="flex gap-0.5">
+                      <%= @room.reviews.count%>
+                      <span>則評價</span>
+                    </p>
+                  </div>
+                <%end%>
+              </div>
+              <div class="flex w-full -mb-3 font-bold">
+                <span class="w-full">入住日期</span>
+                <span class="w-full">退房日期</span>
+              </div>
+              <div class="flex overflow-hidden border-2 border-pink-500 rounded-lg justify-evenly">
+                <%# 入住日期 %>
+                <div class="w-full">
+                  <%= form.text_field :start_at ,data: {
+                    controller: "flatpickr",
+                    flatpickr_date_format: "Y-m-d",
+                    flatpickr_min_date: Time.zone.now,
+                    flatpickr_disable: @disable_dates,
+                    action: "input->booking-card#startDate",
+                    "booking-card-target": "startDate"
+                    }, class:"p-2 w-full font-bold "%>
+                </div>
+                <%# 退房日期 %>
+                <div class="w-full">
+                  <%= form.text_field :end_at ,data: {
+                    controller: "flatpickr",
+                    flatpickr_date_format: "Y-m-d",
+                    flatpickr_min_date: Time.zone.now,
+                    flatpickr_disable: @disable_dates.map{|date| date.tomorrow},
+                    action: "input->booking-card#endDate",
+                    "booking-card-target": "endDate"
+                    }, class:"p-2 w-full border-pink-500 border-l-2 font-bold" %>
+                </div>
+              </div>
+              <!-- guest_num -->
+              <div>
+                <span class="font-bold">房客</span>
+                <div class="flex items-center gap-2 ">
+                  <%= form.select :headcount, options_for_select((1..@room.max_occupancy).to_a)%>
+                  <span>位</span>
+                </div>
+              </div>
+              <% if @room.user == current_user %>
+                <button class="w-full mx-auto font-bold text-gray-700 bg-gray-200 rounded-xl">
+                  <%=form.submit '無法預定自己的房源', disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
+                </button>
+              <% else%>
+                <button class="w-full btn-cancel" data-booking-card-target="submitBtn">
+                  <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true%>
+                </button>
+              <% end %>
+              <span class="self-center text-sm text-gray-500">您暫時不會被收費</span>
+              <div class="flex justify-between gap-10 text-sm text-gray-700">
+                <div class="underline">
+                  <span data-booking-card-target="price"><%=number_to_currency(@room.price, precision: 0)%></span>
+                  <span data-booking-card-target="nights"> x 1 晚</span>
+                </div>
+                <span data-booking-card-target="amount"><%=number_to_currency(@room.price, precision: 0)%></span>
+              </div>
+              <hr class="my-5">
+              <div class="flex justify-between text-lg text-black">
+                <span data-booking-card-target="total"><%=number_to_currency(@room.price, precision: 0)%></span>
+                <span>稅前總價</span>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-      <!-- room_location -->
     </div>
   </div>
 </section>
