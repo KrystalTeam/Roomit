@@ -50,7 +50,7 @@
           </div>
           <% if user_signed_in? %>
             <% if no_review_bookings_count != 0%>
-              <span class="absolute top-0 flex items-center justify-center w-5 h-5 text-xs font-light text-white bg-pink-500 border-2 border-white rounded-full -right-1">
+              <span class="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white border-2 border-white rounded-full -top-1 bg-color-main -right-2">
                 <%= no_review_bookings_count%>
               </span>
             <% end%>
@@ -63,8 +63,10 @@
               <%= link_to bookings_path, class: "nav-item" do %>
                 <span class="relative">旅途
                   <% if no_review_bookings_count != 0%>
-                    <span class="absolute top-0 flex items-center justify-center w-2 h-2 my-auto bg-pink-500 rounded-full -right-2">
-                    </span>
+                    <div class="absolute flex w-3 h-3 -top-1 -right-3">
+                      <span class="absolute w-full h-full my-auto bg-pink-500 rounded-full inlin-flex animate-ping"></span>
+                      <span class="relative inline-flex w-3 h-3 rounded-full bg-color-main group-hover:bg-white"></span>
+                    </div>
                   <% end%>
                 </span>
               <%end%>
