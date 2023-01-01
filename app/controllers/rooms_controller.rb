@@ -36,6 +36,11 @@ class RoomsController < ApplicationController
   def show
     @booking = Booking
     @disable_dates = disable_dates(@room).flatten
+
+    @places_obj = GoogPlacesApi.new("#{@room.lat}%2C#{@room.lng}")
+    @tourist_attractions = @places_obj.get_tourist_attractions
+    @restaurants = @places_obj.get_restaurants
+    @bars = @places_obj.get_bars
   end
 
   def edit; end
@@ -80,7 +85,7 @@ class RoomsController < ApplicationController
       SELECT  b.end_at, SUM(b.price_per_night * (b.end_at - b.start_at)) 
       FROM rooms AS r
       LEFT JOIN bookings AS b
-      ON r.id = b.room_id
+        ON r.id = b.room_id
       WHERE r.user_id = #{current_user.id}
         AND b.id IS NOT NULL
         AND b.start_at >= DATE_TRUNC('month', NOW())::DATE
@@ -91,7 +96,7 @@ class RoomsController < ApplicationController
       SELECT  SUM(b.price_per_night * (b.end_at - b.start_at)) 
       FROM rooms AS r
       LEFT JOIN bookings AS b
-      ON r.id = b.room_id
+        ON r.id = b.room_id
       WHERE r.user_id = #{current_user.id}
         AND b.id IS NOT NULL
         AND b.start_at >= DATE_TRUNC('month', NOW())::DATE
@@ -102,7 +107,7 @@ class RoomsController < ApplicationController
       SELECT  SUM(b.price_per_night * (b.end_at - b.start_at)) 
       FROM rooms AS r
       LEFT JOIN bookings AS b
-      ON r.id = b.room_id
+        ON r.id = b.room_id
       WHERE r.user_id = #{current_user.id}
         AND b.id IS NOT NULL
         AND b.start_at >= DATE_TRUNC('month', NOW())::DATE

@@ -138,10 +138,40 @@
         </p>
       </div>
       <div class="flex flex-col gap-3 pb-5 border-b">
-        <h3 class="mb-2 text-lg font-medium w-fu">住宿地點與附近店家</h3>
+        <h3 class="mb-2 text-lg font-medium w-fu">住宿地點</h3>
         <h4 class="mb-2 font-medium ">
           <%= @room.address %>
         </h4>
+        <div>
+          <h4 class="mb-1">鄰近景點</h4>
+          <% if @tourist_attractions.any? %>
+            <% @tourist_attractions[0..2].each do |ta| %>
+              <h5><%= ta %></h5>
+            <% end %>
+          <% else %>
+            <h5>查無資料</h5>
+          <% end %>
+        </div>
+        <div>
+          <h4 class="mb-1">鄰近餐廳</h4>
+          <% if @restaurants.any? %>
+            <% @restaurants[0..2].each do |r| %>
+              <h5><%= r %></h5>
+            <% end %>
+          <% else %>
+            <h5>查無資料</h5>
+          <% end %>
+        </div>
+        <div>
+          <h4 class="mb-1">鄰近酒吧</h4>
+          <% if @bars.any? %>
+            <% @bars[0..1].each do |bar| %>
+              <h5><%= bar %></h5>
+            <% end %>
+          <% else %>
+            <h5>查無資料</h5>
+          <% end %>
+        </div>
       </div>
     </div>
     <!-- booking_card -->
