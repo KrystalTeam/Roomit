@@ -23,6 +23,7 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
+  config.hosts << "f10d-114-44-6-170.jp.ngrok.io"
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

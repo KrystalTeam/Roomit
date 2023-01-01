@@ -33,7 +33,7 @@ module Newebpay
   
       def set_info(booking, room, nights)
         info[:MerchantID] = @merchant_id
-        info[:MerchantOrderNo] = 
+        info[:MerchantOrderNo] = booking.serial
         info[:Amt] = (nights * room.price)
         info[:ItemDesc] = "TEST" 
         info[:Email] = "fidomoon612@gmail.com" 
