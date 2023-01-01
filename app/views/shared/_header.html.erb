@@ -48,11 +48,13 @@
               <%= image_tag current_user.avatar, class:"rounded-full w-8 h-8 object-cover"%>
             <% end %>
           </div>
-          <% if no_review_bookings_count != 0%>
-            <span class="absolute top-0 flex items-center justify-center w-5 h-5 text-xs font-light text-white bg-pink-500 border-2 border-white rounded-full -right-1">
-              <%= no_review_bookings_count%>
-            </span>
-          <% end%>
+          <% if user_signed_in? %>
+            <% if no_review_bookings_count != 0%>
+              <span class="absolute top-0 flex items-center justify-center w-5 h-5 text-xs font-light text-white bg-pink-500 border-2 border-white rounded-full -right-1">
+                <%= no_review_bookings_count%>
+              </span>
+            <% end%>
+          <% end %>
         </button>
         <div data-dropdown-target="menu" class="absolute right-0 hidden w-48 py-2 mt-2 bg-white rounded-lg shadow-lg z-999">
           <% if user_signed_in? %>
