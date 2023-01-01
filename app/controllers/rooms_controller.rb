@@ -131,16 +131,15 @@ class RoomsController < ApplicationController
   end
 
   def wish_list_rooms
-    @rooms = current_user.liked_wish_list_rooms
-    @photos = current_user.liked_wish_list_rooms.first.photos
+    @rooms = current_user.liked_wish_list_rooms.includes([:reviews])
+    @photos = current_user.liked_wish_list_rooms.first.photos.includes([:photos_attachments])
     @data = @rooms.select(:id, :lat, :lng)
-    # render json: @data
   end
 
   private
-
+  
   def find_room
-    @room = Room.with_attached_photos.find(params[:id])
+    @room = Room.includes([:photos_attachments]).includes([:reviews]).find(params[:id])
   end
 
   def find_hosted_rooms
@@ -152,7 +151,7 @@ class RoomsController < ApplicationController
   end
 
   def find_all_rooms
-    @rooms = Room.with_attached_photos.reverse_order
+    @rooms = Room.includes([:photos_attachments]).includes([:reviews]).reverse_order
   end
 
   def room_params
