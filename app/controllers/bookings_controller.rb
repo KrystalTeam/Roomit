@@ -90,7 +90,7 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
     @review = Review.new
-    @guest_review = @booking.reviews.where(review_to: 'room')
+    @room_review = @booking.reviews.where(review_to: 'room')
     @nights = (@booking.end_at.to_date - @booking.start_at.to_date).to_i
   end
 

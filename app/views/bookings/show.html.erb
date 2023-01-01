@@ -104,10 +104,10 @@
           查看房源資訊
           <i class="fa-solid fa-chevron-right"></i>
         <%end%>
-        <%if @guest_review.exists? %>
+        <%if @room_review.exists? %>
           <button class= "px-6 py-3 font-bold text-gray-400 bg-gray-200 border border-gray-300 rounded-lg cursor-not-allowed w-fit">已評論此房源
-          </button>
-        <%else%>
+          </button>>
+        <%elsif  @booking.state == "past" && !@room_review.exists? %>
           <button data-bs-toggle="modal" data-bs-target="#room_review" class= "font-bold btn w-fit">評價此房源</button>
         <%end%>
       </div>
