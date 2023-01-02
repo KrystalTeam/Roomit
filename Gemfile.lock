@@ -47,10 +47,6 @@ GEM
     activerecord (6.1.7)
       activemodel (= 6.1.7)
       activesupport (= 6.1.7)
-    activerecord-postgres-earthdistance (0.7.2)
-      activerecord (>= 3.1)
-      pg
-      rake
     activestorage (6.1.7)
       actionpack (= 6.1.7)
       activejob (= 6.1.7)
@@ -135,12 +131,8 @@ GEM
       ffi (>= 1.0.0)
       rake
     foreman (0.87.2)
-    friendly_id (5.4.2)
-      activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    groupdate (6.1.0)
-      activesupport (>= 5.2)
     hashie (5.0.0)
     http (5.1.1)
       addressable (~> 2.8)
@@ -371,7 +363,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activerecord-postgres-earthdistance
   acts_as_paranoid
   aws-sdk-s3
   bootsnap (>= 1.4.4)
@@ -382,8 +373,6 @@ DEPENDENCIES
   devise (~> 4.2)
   dotenv-rails
   foreman
-  friendly_id (~> 5.4.0)
-  groupdate
   http
   image_processing
   jbuilder (~> 2.7)

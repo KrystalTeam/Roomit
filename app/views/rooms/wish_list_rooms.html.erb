@@ -61,7 +61,7 @@
     </div>
   </div>
   <div class="hidden w-full h-full md:block">
-    <%= react_component('GoogleRoomMap', 
-      { lat: 23.67565, lng: 120.9738819, api_key: ENV['GOOG_MAPS_API_KEY'], data: @data })%>
+    <%= react_component('GoogleWLMap', 
+      { api_key: ENV['GOOG_MAPS_API_KEY'], data: @data })%>
   </div>
 </section>
