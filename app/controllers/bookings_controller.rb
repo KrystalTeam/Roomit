@@ -121,8 +121,6 @@ class BookingsController < ApplicationController
     @room = Room.find(params[:room_id])
   end
 
-  def verify_owner; end
-
   def booking_params
     params.require(:booking).permit(:user_id, :room_id, :start_at, :end_at, :price_per_night, :serial, :headcount,:viewed)
   end

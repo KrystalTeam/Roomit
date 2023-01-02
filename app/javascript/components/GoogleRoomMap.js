@@ -1,41 +1,62 @@
-import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import LocationButton from './LocationButton';
-
-const taiwanBounds = {
-  north: 28.17565,
-  south: 19.17565,
-  west: 116.9738819,
-  east: 124.9738819,
-};
+import React from 'react'
+import { DirectionsRenderer, GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import LocationButton from './LocationButton'
+import RouteButton from './RouteButton'
+import IconMarker from '/app/assets/images/marker_large.svg'
 
 const mapOptions = {
   zoomControl: true,
   streetViewControl: true,
   mapTypeControl: false,
   fullscreenControl: false,
-  restriction: {
-    latLngBounds: taiwanBounds,
-  },
-};
+}
+
 class GoogleRoomMap extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       map: /** @type google.maps.Map */ (null),
-    };
+      origin: {},
+      directionResponse: null,
+      distance: '',
+      duration: '',
+    }
+  }
+
+  async getGeolocation() {
+    let origin = await fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${this.props.api_key}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(resp => resp.json())
+    .then(location => location.location)
+
+    this.setState({origin: origin})
+  }
+
+  async calculateRoute() {
+    if (this.state.origin === {}) {
+      return
+    }
+
+    let center = { lat: this.props.lat, lng: this.props.lng }
+    let directionService = new google.maps.DirectionsService()
+    let results = await directionService.route({
+      origin: new google.maps.LatLng(this.state.origin.lat, this.state.origin.lng),
+      destination: new google.maps.LatLng(center.lat, center.lng),
+      travelMode: google.maps.TravelMode.DRIVING,
+    })
+
+    this.setState({directionResponse: results})
+    this.setState({distance: results.routes[0].legs[0].distance.text})
+    this.setState({duration: results.routes[0].legs[0].duration.text})
   }
 
   render() {
-    let latAvg =
-      this.props.data
-        .map((datum) => parseFloat(datum.lat))
-        .reduce((a, b) => a + b, 0) / this.props.data.length;
-    let lngAvg =
-      this.props.data
-        .map((datum) => parseFloat(datum.lng))
-        .reduce((a, b) => a + b, 0) / this.props.data.length;
-    let center = { lat: latAvg, lng: lngAvg };
+    let center = { lat: this.props.lat, lng: this.props.lng }
 
     return (
       <LoadScript googleMapsApiKey={this.props.api_key}>
@@ -43,33 +64,37 @@ class GoogleRoomMap extends React.Component {
           <GoogleMap
             mapContainerStyle={{
               width: '100%',
-              height: `${window.screen.height - 236}px`,
+              height: '480px',
             }}
             center={center}
-            zoom={7.8}
+            zoom={15}
             options={mapOptions}
-            onLoad={(map) => this.setState({ map: map })}
+            onLoad={(map) => {
+              this.setState({ map: map })
+              this.getGeolocation()
+            }}
           >
+            {/* Child components, such as markers, info windows, etc. */}
+            {!this.state.directionResponse && 
+              <Marker 
+                position={center} 
+              />
+            }
+            {this.state.directionResponse && 
             <>
-              {/* Child components, such as markers, info windows, etc. */}
-              {this.props.data.map((room) => {
-                return (
-                  <Marker
-                    key={room.id}
-                    position={{
-                      lat: parseFloat(room.lat),
-                      lng: parseFloat(room.lng),
-                    }}
-                  />
-                );
-              })}
-            </>
+            <DirectionsRenderer directions={this.state.directionResponse} />
+            <h2 className="absolute top-2 left-20 text-2xl">距離：{this.state.distance}{' '}<br/>車程：{this.state.duration}</h2>
+            </>}
           </GoogleMap>
           <LocationButton
             onClick={() => {
-              this.state.map.panTo(center);
-              this.state.map.setZoom(7.8);
+              this.state.map.panTo(center)
+              this.state.map.setZoom(15)
+              this.setState({directionResponse: null})
             }}
+          />
+          <RouteButton
+            onClick={this.calculateRoute.bind(this)}
           />
         </div>
       </LoadScript>
@@ -77,4 +102,4 @@ class GoogleRoomMap extends React.Component {
   }
 }
 
-export default GoogleRoomMap;
+export default GoogleRoomMap

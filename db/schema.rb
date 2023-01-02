@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_31_073029) do
+ActiveRecord::Schema.define(version: 2023_01_02_152922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,13 +52,16 @@ ActiveRecord::Schema.define(version: 2022_12_31_073029) do
     t.integer "state", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.string "serial"
     t.integer "headcount", default: 1, null: false
     t.index ["room_id"], name: "index_bookings_on_room_id"
+    t.index ["slug"], name: "index_bookings_on_slug", unique: true
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.bigint "room_id", null: false
     t.integer "guest_rating"
     t.integer "accuracy_rating"
     t.integer "check_in_rating"
@@ -71,7 +74,6 @@ ActiveRecord::Schema.define(version: 2022_12_31_073029) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "booking_id"
-    t.bigint "room_id"
     t.index ["booking_id"], name: "index_reviews_on_booking_id"
     t.index ["room_id"], name: "index_reviews_on_room_id"
   end
