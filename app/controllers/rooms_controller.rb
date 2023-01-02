@@ -11,7 +11,10 @@ class RoomsController < ApplicationController
   before_action :should_compelete_user_info, only: [:new]
 
   def index
-    
+    searched_dates = ((params[:q][:bookings_start_at]).to_date..(params[:q][:bookings_end_at]).to_date).to_a
+    @rooms = @q.result(distinct: true).with_attached_photos.includes([:reviews]).reject do |room|
+      disable_dates(room).intersect?(searched_dates)
+    end
   end
 
   def new
@@ -137,7 +140,7 @@ class RoomsController < ApplicationController
 
   def wish_list_rooms
     @rooms = current_user.liked_wish_list_rooms.includes([:reviews])
-    @photos = current_user.liked_wish_list_rooms.first.photos.includes([:photos_attachments])
+    @photos = current_user.liked_wish_list_rooms&.first&.photos.includes([:photos_attachments])
     @data = @rooms.select(:id, :lat, :lng)
   end
 

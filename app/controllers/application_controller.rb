@@ -2,6 +2,11 @@
 
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :set_global_search_variable
+
+  def set_global_search_variable
+    @q = Room.ransack(params[:q])
+  end
 
   def should_compelete_user_info
     if current_user.name.blank? && current_user.phone_num.blank?
