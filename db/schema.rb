@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 2023_01_02_152922) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "booking_id"
     t.index ["booking_id"], name: "index_reviews_on_booking_id"
-    t.index ["room_id"], name: "index_reviews_on_room_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -140,7 +139,6 @@ ActiveRecord::Schema.define(version: 2023_01_02_152922) do
   add_foreign_key "bookings", "rooms"
   add_foreign_key "bookings", "users"
   add_foreign_key "reviews", "bookings"
-  add_foreign_key "reviews", "rooms"
   add_foreign_key "wish_list_rooms", "rooms"
   add_foreign_key "wish_list_rooms", "users"
 end

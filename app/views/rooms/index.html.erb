@@ -24,7 +24,7 @@
             <div class="relative swiper-wrapper">
               <% room.photos[0..2].each do |photo| %>
                 <div class="swiper-slide">
-                  <%=image_tag photo.variant(saver: {strip: true, quality: 30, interlace: "JPEG", sampling_factor: "4:2.:", colorspace: "sRGB"}), class:"object-cover w-full aspect-ratio"%>
+                  <%=image_tag photo, class:"object-cover w-full aspect-ratio"%>
                 </div>
               <%end%>
             </div>
