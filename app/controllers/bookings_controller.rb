@@ -5,6 +5,7 @@ class BookingsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[confirm cancel ]
   before_action :should_compelete_user_info, only: [:new]
   before_action :cancel_unpaid_bookings, :update_past_bookings
+  protect_from_forgery with: :null_session, only: [:ebpaid]
 
   def create
     @room = Room.find(params[:booking][:room_id])
@@ -52,7 +53,7 @@ class BookingsController < ApplicationController
     @cancelled_bookings = current_user.bookings.where(state: 'cancelled')
   end
 
-  def new    
+  def new  
     @booking = current_user.bookings.new
     @room = Room.find(params[:room_id])
     @owner_name = User.find(@room.user_id).name || '房東'
@@ -83,6 +84,10 @@ class BookingsController < ApplicationController
   end
 
   def ebpaid
+    # response = MpgResponse.new(params[:TradeInfo])
+    # @order = Order.find_by(serial: response.order_no)
+    # user = User.find(@booking.user_id)
+    # sign_in(user)
     redirect_to root_path, notice: "訂單付款成功！"
   end
   

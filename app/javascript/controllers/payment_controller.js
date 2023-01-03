@@ -16,7 +16,6 @@ export default class extends Controller {
     'Email',
     'LoginType',
   ];
-  connect() {}
 
   btneb() {
     this.changeState(true);
@@ -60,8 +59,10 @@ export default class extends Controller {
     if (state) {
       this.linePayTarget.classList.add('hidden');
       this.ebPayTarget.classList.remove('hidden');
+      this.linePayTarget.classList.remove('flex');
     } else {
       this.linePayTarget.classList.remove('hidden');
+      this.linePayTarget.classList.add('flex');
       this.ebPayTarget.classList.add('hidden');
     }
   }

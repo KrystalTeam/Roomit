@@ -142,7 +142,7 @@ end
   end
 
   def wish_list_rooms
-    @rooms = current_user.liked_wish_list_rooms.includes([:reviews])
+    @rooms = current_user.liked_wish_list_rooms.includes(:reviews,:photos_attachments)
     @photos = current_user.liked_wish_list_rooms&.first&.photos.includes([:photos_attachments])
     @data = @rooms.select(:id, :lat, :lng)
   end
