@@ -1,7 +1,12 @@
-import React from 'react'
-import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api'
-import LocationButton from './LocationButton'
-import Roomit from 'images/marker_small.svg'
+import React from 'react';
+import {
+  GoogleMap,
+  InfoWindow,
+  LoadScript,
+  Marker,
+} from '@react-google-maps/api';
+import LocationButton from './LocationButton';
+import Roomit from 'images/marker_small.svg';
 
 const taiwanBounds = {
   north: 28.17565,
@@ -46,7 +51,7 @@ class GoogleWLMap extends React.Component {
           <GoogleMap
             mapContainerStyle={{
               width: '100%',
-              height: `${window.screen.height - 236}px`,
+              height: `${window.innerHeight - 80}px`,
             }}
             center={center}
             zoom={7.8}
@@ -64,7 +69,7 @@ class GoogleWLMap extends React.Component {
                         lat: parseFloat(room.lat),
                         lng: parseFloat(room.lng),
                       }}
-                    /> 
+                    />
                   </>
                 );
               })}
@@ -72,8 +77,8 @@ class GoogleWLMap extends React.Component {
           </GoogleMap>
           <LocationButton
             onClick={() => {
-              this.state.map.panTo(center)
-              this.state.map.setZoom(7.8)
+              this.state.map.panTo(center);
+              this.state.map.setZoom(7.8);
             }}
           />
           {/* <InfoWindow position={center} onLoad={m => console.log(m)}>
@@ -87,4 +92,4 @@ class GoogleWLMap extends React.Component {
   }
 }
 
-export default GoogleWLMap
+export default GoogleWLMap;

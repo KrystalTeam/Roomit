@@ -157,7 +157,7 @@ class RoomsController < ApplicationController
 
   def wish_list_rooms
     @rooms = current_user.liked_wish_list_rooms.includes(:reviews,:photos_attachments)
-    @photos = current_user.liked_wish_list_rooms&.first&.photos.includes([:photos_attachments])
+    @photos = current_user.liked_wish_list_rooms.includes([:photos_attachments])&.first&.photos
     @data = @rooms.select(:id, :lat, :lng)
   end
 

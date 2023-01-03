@@ -90,9 +90,13 @@ class GoogleRoomMap extends React.Component {
             {this.state.directionResponse && (
               <>
                 <DirectionsRenderer directions={this.state.directionResponse} />
-                <h2 className='absolute text-2xl top-2 left-20'>
-                  距離：{this.state.distance} <br />
-                  車程：{this.state.duration}
+                <h2 className='absolute p-5 font-bold bg-white border rounded-lg shadow-xl top-2 left-20'>
+                  <div className='gradient-text'>
+                    距離：{this.state.distance}
+                  </div>
+                  <div className='gradient-text'>
+                    車程：{this.state.duration}
+                  </div>
                 </h2>
               </>
             )}
