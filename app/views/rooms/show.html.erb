@@ -142,34 +142,40 @@
         <h4 class="mb-2 font-medium ">
           <%= @room.address %>
         </h4>
-        <div>
-          <h4 class="mb-1">鄰近景點</h4>
+        <div class="flex flex-col gap-1">
+          <h4 class="h3">鄰近景點</h4>
           <% if @tourist_attractions.any? %>
-            <% @tourist_attractions[0..2].each do |ta| %>
-              <h5><%= ta %></h5>
-            <% end %>
+            <ul class="flex flex-col gap-1">
+              <% @tourist_attractions[0..2].each do |ta| %>
+                <li><%= ta %></li>
+              <% end %>
+            </ul>
           <% else %>
-            <h5>查無資料</h5>
+            <h5>無鄰近景點</h5>
           <% end %>
         </div>
-        <div>
-          <h4 class="mb-1">鄰近餐廳</h4>
+        <div class="flex flex-col gap-1">
+          <h4 class="h3">鄰近餐廳</h4>
           <% if @restaurants.any? %>
-            <% @restaurants[0..2].each do |r| %>
-              <h5><%= r %></h5>
-            <% end %>
+            <ul class="flex flex-col gap-1">
+              <% @restaurants[0..2].each do |r| %>
+                <li><%= r %></li>
+              <% end %>
+            </ul>
           <% else %>
-            <h5>查無資料</h5>
+            <h5>無鄰近餐廳</h5>
           <% end %>
         </div>
-        <div>
-          <h4 class="mb-1">鄰近酒吧</h4>
+        <div class="flex flex-col gap-1">
+          <h4 class="h3">鄰近酒吧</h4>
           <% if @bars.any? %>
-            <% @bars[0..1].each do |bar| %>
-              <h5><%= bar %></h5>
-            <% end %>
+            <ul class="flex flex-col gap-1">
+              <% @bars[0..1].each do |bar| %>
+                <li><%= bar %></li>
+              <% end %>
+            </ul>
           <% else %>
-            <h5>查無資料</h5>
+            <h5>無鄰近酒吧</h5>
           <% end %>
         </div>
       </div>
