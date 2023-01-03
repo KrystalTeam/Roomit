@@ -34,8 +34,8 @@ class LinePayApi
         ]
       }],
       redirectUrls: {
-        confirmUrl: "https://roomit-25xt.onrender.com/bookings/#{booking.serial}/confirm",
-        cancelUrl: "https://roomit-25xt.onrender.com/bookings/#{booking.serial}/cancel"
+        confirmUrl: "https://roomit.gg/bookings/#{booking.serial}/confirm",
+        cancelUrl: "https://roomit.gg/bookings/#{booking.serial}/cancel"
       }
     }
   end

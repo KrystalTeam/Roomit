@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def no_review_bookings_count
-  Booking.includes(:reviews).where(user_id: current_user.id,reviews:{id: nil}).count
+  Booking.includes(:reviews).where(user_id: current_user.id,state: 2,reviews:{id: nil}).count
   end
   
 end

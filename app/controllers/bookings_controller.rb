@@ -2,9 +2,10 @@
 
 class BookingsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[index confirm cancel ebpaid notify_response]
-  skip_before_action :authenticate_user!, only: %i[confirm cancel ]
+  skip_before_action :authenticate_user!, only: %i[confirm cancel ebpaid]
   before_action :should_compelete_user_info, only: [:new]
   before_action :cancel_unpaid_bookings, :update_past_bookings
+  protect_from_forgery with: :null_session, only: [:ebpaid]
 
   def create
     @room = Room.find(params[:booking][:room_id])
@@ -35,6 +36,7 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking = Booking.find_by!(serial: params[:id])
+    # @user = User.find(@booking.user_id) 
     return unless @booking.paid!
 
     @api_obj = LinePayApi.new("/v3/payments/#{params[:transactionId]}/confirm")
@@ -43,7 +45,8 @@ class BookingsController < ApplicationController
     confirm_signature = @api_obj.get_signature(confirm_nonce, confirm_body)
     @api_obj.get_response(@api_obj.header(confirm_nonce, confirm_signature), confirm_body)
 
-    redirect_to root_path, notice: '訂單付款成功'
+    # sign_in_and_redirect @user, notice: '訂單付款成功'
+    redirect_to root_path, flash: { notice: '訂單付款成功' }
   end
 
   def index
@@ -52,7 +55,7 @@ class BookingsController < ApplicationController
     @cancelled_bookings = current_user.bookings.where(state: 'cancelled')
   end
 
-  def new    
+  def new  
     @booking = current_user.bookings.new
     @room = Room.find(params[:room_id])
     @owner_name = User.find(@room.user_id).name || '房東'
@@ -73,7 +76,7 @@ class BookingsController < ApplicationController
     })
 
     if @ebbooking.save
-
+      @ebbooking.unpaid!
       mpg = Newebpay::Mpg.new(@ebbooking, @ebroom, @nights)
       @form_info = mpg.form_info
       @info = mpg.info
@@ -83,14 +86,20 @@ class BookingsController < ApplicationController
   end
 
   def ebpaid
-    redirect_to root_path, notice: "訂單付款成功！"
+    response = Newebpay::MpgResponse.new(params[:TradeInfo])
+    @ebbooking = Booking.find_by(serial: response.order_no)
+    @ebbooking.paid!
+    # user = User.find(@booking.user_id)
+    # sign_in(user)
+    
+    redirect_to root_path, flash: { notice: '訂單付款成功' }
   end
   
 
   def show
     @booking = Booking.find(params[:id])
     @review = Review.new
-    @guest_review = @booking.reviews.where(review_to: 'room')
+    @room_review = @booking.reviews.where(review_to: 'room')
     @nights = (@booking.end_at.to_date - @booking.start_at.to_date).to_i
   end
 
@@ -108,9 +117,9 @@ class BookingsController < ApplicationController
   def create_review
     @review = Review.create!(review_params)
     if @review.save
-      redirect_to room_path(@review.booking.room.id), notice: '評論發佈成功!'
+      redirect_to room_path(@review.booking.room.id), notice: '評論發佈成功'
     else
-      flash.alert = '評論發佈失敗！'
+      flash.alert = '評論發佈失敗'
       render :show
     end
   end

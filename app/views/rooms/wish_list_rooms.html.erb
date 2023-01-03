@@ -4,7 +4,8 @@
       <i class="fa-solid fa-chevron-left"></i>返回
     <%end%>
     <div class="grid w-full grid-cols-1 gap-3 p-2 mx-auto overflow-y-scroll border sm:grid-cols-2 md:grid-cols-1 h-fit md:w-500">
-      <%if current_user.liked_wish_list_rooms.any?%>
+      <%if current_user.liked_wish_list_rooms.nil?%>
+      <%else%>
         <% current_user.liked_wish_list_rooms.each do |room| %>
           <a href="<%=room_path(room.id) %>" class="flex flex-col items-center gap-2 p-3 bg-white border shadow-md md:flex-row md:items-start rounded-xl">
             <!-- card_img -->

@@ -12,6 +12,7 @@ module Newebpay
         @result = response['Result']
         @order_no = @result["MerchantOrderNo"]
         @trans_no = @result["TradeNo"]
+       
   
       end
   

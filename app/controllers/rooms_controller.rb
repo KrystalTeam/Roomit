@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
       @rooms = @query.result(distinct: true).with_attached_photos.includes([:reviews]).reject do |room|
         disable_dates(room).intersect?(searched_dates)
       end
-    end
+end
   end
 
   def new
@@ -27,12 +27,12 @@ class RoomsController < ApplicationController
   def create
     @room = current_user.rooms.new(room_params)
 
-    @geocoding_obj = GoogGeocodingApi.new(@room.address)
-    @coordinates = @geocoding_obj.get_response
-    @room.lat = @geocoding_obj.get_lat(@coordinates)
-    @room.lng = @geocoding_obj.get_lng(@coordinates)
-
     if @room.save
+      @geocoding_obj = GoogGeocodingApi.new(@room.address)
+      @coordinates = @geocoding_obj.get_response
+      @room.lat = @geocoding_obj.get_lat(@coordinates)
+      @room.lng = @geocoding_obj.get_lng(@coordinates)
+      
       redirect_to manage_rooms_path, notice: '新增成功'
     else
       flash.alert = '新增失敗'
@@ -142,7 +142,7 @@ class RoomsController < ApplicationController
   end
 
   def wish_list_rooms
-    @rooms = current_user.liked_wish_list_rooms.includes([:reviews])
+    @rooms = current_user.liked_wish_list_rooms.includes(:reviews,:photos_attachments)
     @photos = current_user.liked_wish_list_rooms&.first&.photos.includes([:photos_attachments])
     @data = @rooms.select(:id, :lat, :lng)
   end
@@ -150,7 +150,7 @@ class RoomsController < ApplicationController
   private
   
   def find_room
-    @room = Room.includes([:photos_attachments]).includes([:reviews]).find(params[:id])
+    @room = Room.includes(:photos_attachments,:reviews,photos_attachments: :blob).find(params[:id])
   end
 
   def find_hosted_rooms
@@ -162,7 +162,7 @@ class RoomsController < ApplicationController
   end
 
   def find_all_rooms
-    @rooms = Room.includes([:photos_attachments]).includes([:reviews]).reverse_order
+    @rooms = Room.includes(:photos_attachments, :reviews,photos_attachments: :blob).reverse_order
   end
 
   def room_params
