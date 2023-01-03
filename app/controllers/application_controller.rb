@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_global_search_variable
 
   def set_global_search_variable
-    @q = Room.ransack(params[:q])
+    @query = Room.ransack(params[:q])
   end
 
   def should_compelete_user_info
