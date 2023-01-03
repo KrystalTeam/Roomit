@@ -36,11 +36,11 @@ module Newebpay
         info[:MerchantOrderNo] = booking.serial
         info[:Amt] = (nights * room.price)
         info[:ItemDesc] = "TEST" 
-        info[:Email] = "fidomoon612@gmail.com" 
+        info[:Email] = "" 
         info[:TimeStamp] = nights
         info[:RespondType] = "JSON"
         info[:Version] = "1.6"
-        info[:ReturnURL] = "https://f10d-114-44-6-170.jp.ngrok.io/bookings/ebpaid"
+        info[:ReturnURL] =  ENV['EB_PAY_RETURN_URL']
         info[:NotifyURL] = ""
         info[:LoginType] = 0 
         info[:CREDIT] =  1,
