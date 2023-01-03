@@ -220,7 +220,7 @@
       <div class="relative p-4 modal-body">
         <div class="flex flex-col gap-4 ">
           <form>
-            <%= search_form_for @q do |form| %>
+            <%= search_form_for @query do |form| %>
               <%= form.label :address_cont , "地點"%>
               <%= form.search_field :address_cont, class:"input pb-2"%>
               <%= form.label :max_occupancy_gteq , "人數"%>
