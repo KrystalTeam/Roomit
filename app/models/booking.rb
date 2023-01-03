@@ -11,6 +11,9 @@ class Booking < ApplicationRecord
   validates :start_at, :end_at, presence: true
   validate :end_date_after_start_date, :other_booking_during_the_period
 
+  scope :paid, -> { where(state: "paid") }
+  scope :not_due, -> { where("end_at >= ?",Time.current) }
+
   enum state: %i[pending unpaid paid cancelled past]
 
 
