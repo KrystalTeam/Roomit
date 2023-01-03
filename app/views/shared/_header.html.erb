@@ -11,13 +11,13 @@
   </a>
   <!-- search bar -->
   <%= link_to search_index_path do %>
-  <button class="items-center hidden p-2 text-gray-400 border rounded-full hover:border-gray-300 h-11 md:flex hover:shadow-md hover:text-gray-800" type="button" data-bs-toggle="modal" data-bs-target="#search">
-    <div class="flex-grow flex-shrink block px-20">搜尋房源</div>
-    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-color-main">
-      <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
-    </div>
-  </button>
-  <!-- search bar end -->
+    <button class="items-center hidden p-2 text-gray-400 border rounded-full hover:border-gray-300 h-11 md:flex hover:shadow-md hover:text-gray-800" type="button">
+      <div class="flex-grow flex-shrink block px-20">搜尋房源</div>
+      <div class="flex items-center justify-center w-8 h-8 rounded-full bg-color-main">
+        <i class="text-sm text-white fa-solid fa-magnifying-glass"></i>
+      </div>
+    </button>
+  <%end%>
   <!-- login -->
   <div>
     <div class="flex items-center justify-end ">
@@ -29,7 +29,7 @@
       </a>
       <a class="mr-4 lg:hidden" href="<%=new_room_path%>">
         <div class="flex items-center gap-1 px-2 py-1 bg-white border rounded-full h-11 w-fit hover:bg-gray-200 hover:border-gray-500 hover:shadow-md ">
-          <i class="text-2xl text-gray-700 fa-regualr fa-plus"></i>
+          <i class="text-xl not-italic text-gray-700 fa-solid fa-plus "></i>
           <span class="text-sm font-medium text-gray-700">發佈房源</span>
         </div>
       </a>
@@ -204,48 +204,3 @@
     </div>
   </div>
 </div>
-<!-- sign_up model end-->
-<!-- search modal-->
-<div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="search" tabindex="-1" aria-labelledby="search" aria-modal="true" role="dialog">
-  <div class="relative w-auto pointer-events-none modal-dialog modal-dialog-centered">
-    <div class="relative flex flex-col w-full text-current bg-white border-none rounded-md shadow-lg outline-none pointer-events-auto modal-content bg-clip-padding">
-      <div class="flex items-center justify-between flex-shrink-0 p-4 border-b border-gray-200 modal-header rounded-t-md">
-        <div class="w-8"></div>
-        <div class=""id="exampleModalScrollableLabel">
-          搜尋房源
-        </div>
-        <button class="w-8 h-8 rounded-full hover:bg-gray-200" data-bs-dismiss="modal" aria-label="Close">
-          <i class="text-2xl text-gray-700 i-center fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="relative p-4 modal-body">
-        <div class="flex flex-col gap-4 ">
-          <form>
-            <%= search_form_for @query do |form| %>
-              <%= form.label :address_cont , "地點"%>
-              <%= form.search_field :address_cont, class:"input pb-2"%>
-              <%= form.label :max_occupancy_gteq , "人數"%>
-              <%= form.search_field :max_occupancy_gteq ,class:"input pb-2"%>
-              <%= form.label :bookings_start_at, "入住時間"%>
-              <%= form.date_field :bookings_start_at,data: {
-                    controller: "flatpickr",
-                    flatpickr_date_format: "Y-m-d",
-                    flatpickr_min_date: Time.zone.now,
-                    }, class:"input pb-2"%>
-              <%= form.label :bookings_end_at, "退房時間"%>
-              <%= form.date_field :bookings_end_at,data: {
-                    controller: "flatpickr",
-                    flatpickr_date_format: "Y-m-d",
-                    flatpickr_min_date: Time.zone.now,
-                    }, class:"input pb-2"%>
-              <button class="my-2 btn">
-                <%= form.submit "送出查詢"%>
-              </button>
-            <% end %>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- search modal end-->
