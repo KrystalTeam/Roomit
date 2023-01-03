@@ -11,9 +11,11 @@ class RoomsController < ApplicationController
   before_action :should_compelete_user_info, only: [:new]
 
   def index
-    searched_dates = ((params[:q][:bookings_start_at]).to_date..(params[:q][:bookings_end_at]).to_date).to_a
-    @rooms = @q.result(distinct: true).with_attached_photos.includes([:reviews]).reject do |room|
-      disable_dates(room).intersect?(searched_dates)
+    unless params[:q].blank? || params[:q][:bookings_start_at].blank? || params[:q][:bookings_end_at].blank?
+      searched_dates = ((params[:q][:bookings_start_at]).to_date..(params[:q][:bookings_end_at]).to_date).to_a
+      @rooms = @q.result(distinct: true).with_attached_photos.includes([:reviews]).reject do |room|
+        disable_dates(room).intersect?(searched_dates)
+      end
     end
   end
 
