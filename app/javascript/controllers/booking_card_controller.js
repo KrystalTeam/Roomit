@@ -73,11 +73,13 @@ export default class extends Controller {
 
   enableSubmit() {
     this.submitTarget.value = '預定行程';
+    this.submitBtnTarget.disabled = false;
     this.submitTarget.disabled = false;
   }
 
   disableSubmit() {
     this.submitTarget.value = '請輸入正確日期';
+    this.submitBtnTarget.disabled = true;
     this.submitTarget.disabled = true;
   }
 
