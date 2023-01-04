@@ -58,12 +58,14 @@ export default class extends Controller {
   changeState(state) {
     if (state) {
       this.linePayTarget.classList.add('hidden');
-      this.ebPayTarget.classList.remove('hidden');
       this.linePayTarget.classList.remove('flex');
+      this.ebPayTarget.classList.add('flex');
+      this.ebPayTarget.classList.remove('hidden');
     } else {
-      this.linePayTarget.classList.remove('hidden');
       this.linePayTarget.classList.add('flex');
+      this.linePayTarget.classList.remove('hidden');
       this.ebPayTarget.classList.add('hidden');
+      this.ebPayTarget.classList.remove('flex');
     }
   }
 }

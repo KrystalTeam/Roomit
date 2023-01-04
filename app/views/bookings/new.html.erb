@@ -15,9 +15,9 @@
   <div class="relative flex flex-col justify-between gap-5 sm:flex-row">
     <div class="flex flex-col content-between gap-5">
       <!--Room_info_sm-->
-      <div class="block border rounded-md shadow-md sm:hidden">
+      <div class="block overflow-hidden border rounded-md shadow-md sm:hidden">
         <div class="flex gap-5">
-          <%= image_tag @room.photos.first, class:"aspect-ratio object-cover w-1/2 rounded-xl"%>
+          <%= image_tag @room.photos.first, class:"aspect-ratio object-cover w-1/2"%>
           <div class="flex flex-col justify-between gap-2 py-5 ">
             <div class="flex flex-col gap-2">
               <span class="font-medium text-gray-500 ">
@@ -179,7 +179,7 @@
       <% end %>
     </div>
     <!-- ebpay_form -->
-    <div data-payment-target="ebPay" class="flex justify-end hidden mb-5 ">
+    <div data-payment-target="ebPay" class="justify-end hidden mb-5 ">
       <%= form_with url: "https://ccore.spgateway.com/MPG/mpg_gateway" do |booking| %>
         <div class="flex justify-end gap-5">
           <button class="flex justify-center btn-cancel text-md whitespace-nowrap md:w-40">
