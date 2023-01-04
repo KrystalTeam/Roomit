@@ -11,13 +11,22 @@ class RoomsController < ApplicationController
   before_action :should_compelete_user_info, only: [:new]
 
   def index
-    @rooms = @query.result(distinct: true).with_attached_photos.includes([:reviews])
-    if params[:q].present? && params[:q][:bookings_start_at].present? && params[:q][:bookings_end_at].present?
+    if params[:q].blank?
+      @rooms = Room.with_attached_photos.includes([:reviews])
+    elsif params[:q][:bookings_start_at].blank? && params[:q][:bookings_end_at].blank? && params[:q][:address_cont].blank? && params[:q][:max_occupancy_gteq].blank? && params[:q][:by_search]
+      redirect_to rooms_path, notice: '請輸入搜尋條件'
+    elsif params[:q][:bookings_start_at].present? ^ params[:q][:bookings_end_at].present?
+      redirect_to rooms_path, notice: '請輸入正確日期'
+    elsif @query.result(distinct: true).with_attached_photos.includes([:reviews]).blank?
+      redirect_to rooms_path, notice: '此搜尋條件下沒有可訂房間，請重新搜尋'
+    elsif params[:q].present? && params[:q][:bookings_start_at].present? && params[:q][:bookings_end_at].present?
       searched_dates = ((params[:q][:bookings_start_at]).to_date..(params[:q][:bookings_end_at]).to_date).to_a
       @rooms = @query.result(distinct: true).with_attached_photos.includes([:reviews]).reject do |room|
         disable_dates(room).intersect?(searched_dates)
       end
-end
+    else
+      @rooms = @query.result(distinct: true).with_attached_photos.includes([:reviews])
+    end
   end
 
   def new
@@ -88,6 +97,10 @@ end
   end
 
   def manage
+    @bookings_query = current_user.bookings_to_hosted_rooms.where(state: [2, 4]).includes([:room]).includes([:user]).ransack(params[:q])
+    @bookings = @bookings_query.result
+
+
     monthly_income_data_query = <<-SQL
       SELECT  b.end_at, SUM(b.price_per_night * (b.end_at - b.start_at)) 
       FROM rooms AS r
@@ -129,6 +142,7 @@ end
     
     @monthly_past_income_result = ActiveRecord::Base.connection.execute(monthly_past_income_query).values.flatten.first
     @monthly_past_income = @monthly_past_income_result.nil? ? 0 : @monthly_past_income_result
+      # dashbord end
   end
 
   def wish_list
