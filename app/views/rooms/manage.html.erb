@@ -23,6 +23,7 @@
         <% @rooms.reverse.each do |room| %>
           <tr class="bg-white border-b ">
             <th scope="row" class="py-5 font-medium text-gray-700 ">
+              <%=image_tag room.photos.first, class:"rounded-lg w-16 h-16 object-cover mr-3", alt:"guest-avatar"%>
               <div class="flex flex-col flex-wrap gap-1 px-2">
                 <%= link_to room.address, room_path(room), class:"block" %>
                 <%= Room.human_enum_name(:home_type, room.home_type) %>
@@ -48,33 +49,62 @@
     </table>
   </div>
   <!-- 即將到來的住宿 -->
-  <h2 class="h2">即將到來的住宿</h2>
+  <h2 class="h2">住宿列表</h2>
   <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-sm text-gray-700 uppercase bg-gray-50">
         <tr>
           <th scope="col" class="px-6 py-3">
-            地址
+            <%= sort_link(@bookings_query, :room_id, '房源', default_order: :desc) %>
           </th>
           <th scope="col" class="px-6 py-3">
-            日期
+            <%= sort_link(@bookings_query, :start_at, '住宿開始日') %> -
+            <%= sort_link(@bookings_query, :end_at, '結束日') %>
           </th>
           <th scope="col" class="px-6 py-3">
             入住者
           </th>
           <th scope="col" class="px-6 py-3">
-            價格
+            總價
           </th>
           <th scope="col" class="px-6 py-3">
-            選項
+            <%= sort_link(@bookings_query, :start_at, '住宿開始日') %> -
           </th>
         </tr>
       </thead>
       <tbody>
-        <%current_user.bookings.where(state: 3).each do |booking|%>
+        <% @bookings.each do |booking|%>
+          <tr>
+            <td scope="col" class="px-6 py-3">
+              <%= link_to room_path(booking.room) do %>
+                <div class="flex items-center">
+                  <%=image_tag booking.room.photos.first, class:"rounded-lg w-16 h-16 object-cover mr-3", alt:"guest-avatar"%>
+                  <%=booking.room.address%>
+                </div>
+              <% end %>
+            </td>
+            <td scope="col" class="px-6 py-3">
+              <%=booking.start_at%> - <%=booking.end_at%>
+            </td>
+            <td scope="col" class="px-6 py-3">
+              <%=booking.user.name%>
+              <%#=image_tag booking.user.avatar, class:"rounded-full w-16 h-16 object-cover", alt:"guest-avatar" %>
+            </td>
+            <td scope="col" class="px-6 py-3">
+              <%=to_twd(booking.price_per_night * (booking.end_at - booking.start_at).to_i)%>
+            </td>
+            <td scope="col" class="px-6 py-3">
+              <%if booking.past?%>
+                <span>住宿已結束</span>
+                <button class='btn'>評論房客</button>
+              <%elsif booking.start_at < Time.current%>
+                <span class='bold'>住宿進行中</span>
+              <%else%>
+                <span>即將到來的住宿</span>
+              <%end%>
+            </td>
+          </tr>
           <div class="flex gap-1 font-bold h3">
-            <%=booking.start_at%>
-            <%=booking.end_at%>
           </div>
         <% end %>
       </tbody>

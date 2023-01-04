@@ -50,9 +50,9 @@ class BookingsController < ApplicationController
   end
 
   def index
-    @first_booking = current_user.bookings.where(state: 'paid').order(start_at: :ASC)[0]
-    @past_bookings = current_user.bookings.where(state: 'past')
-    @cancelled_bookings = current_user.bookings.where(state: 'cancelled')
+    @first_booking = current_user.bookings.paid.order(start_at: :ASC).first
+    @past_bookings = current_user.bookings.past
+    @cancelled_bookings = current_user.bookings.cancelled
   end
 
   def new  
@@ -141,13 +141,13 @@ class BookingsController < ApplicationController
 
   def cancel_unpaid_bookings
     Booking.unpaid.each do |booking|
-      booking.update_column(:state, 3) if booking.created_at + 30 * 60 <= Time.current
+      booking.cancelled! if booking.created_at + 30 * 60 <= Time.current
     end
   end
 
   def update_past_bookings
     Booking.paid.each do |booking|
-      booking.update_column(:state, 4) if booking.end_at <= Time.current
+      booking.past! if booking.end_at <= Time.current
     end
   end
 end

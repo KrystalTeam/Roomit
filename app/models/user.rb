@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :bookings
   has_many :rooms
   has_many :booked_rooms, through: :bookings, source: :rooms
+  has_many :bookings_to_hosted_rooms, through: :rooms, source: :bookings
   has_many :wish_list_rooms
   has_many :liked_wish_list_rooms, through: :wish_list_rooms, source: :room
 

@@ -10,7 +10,7 @@ module RoomHelper
   end
 
 
-  def  to_twd(number)
+  def to_twd(number)
     number_to_currency( number, negative_format: "(%u%n)",precision:0,unit: "$")
   end
 end
