@@ -247,7 +247,7 @@
                   <%=form.submit '無法預定自己的房源', disabled: true, class: "block w-full h-full p-3 text-white font-bold"%>
                 </button>
               <% else%>
-                <button class="w-full btn-cancel" data-booking-card-target="submitBtn">
+                <button class="w-full btn-cancel" data-booking-card-target="submitBtn" disabled = true>
                   <%=form.submit '', data:{ 'booking-card-target': "submit", disable_with: "請稍等"}, disabled: true%>
                 </button>
               <% end %>
