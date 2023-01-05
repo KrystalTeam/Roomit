@@ -60,10 +60,12 @@
           <th scope="col" class="w-8/12 px-2 py-5 sm:w-4/12">
             <%= sort_link(@bookings_query, :room_id, '房源', default_order: :desc) %>
           </th>
-          <th scope="col" class="items-center justify-center hidden h-full gap-1 px-2 text-center sm:flex">
-            <p><%= sort_link(@bookings_query, :start_at, '住宿開始日') %></p>
-            <span>~</span>
-            <p><%= sort_link(@bookings_query, :end_at, '結束日') %></p>
+          <th scope="col" class="hidden px-2 py-5 sm:block">
+            <div class="flex flex-wrap gap-1">
+              <p class="w-fit"><%= sort_link(@bookings_query, :start_at, '住宿開始日') %></p>
+              <span>~</span>
+              <p class="w-fit"><%= sort_link(@bookings_query, :end_at, '結束日') %></p>
+            </div>
           </th>
           <th scope="col" class="hidden w-2/12 px-2 sm:table-cell">
             入住者
