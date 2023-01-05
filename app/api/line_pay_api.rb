@@ -13,7 +13,7 @@ class LinePayApi
   end
 
   def req_body(room, booking)
-    name = "#{room.address} #{room.home_type}"
+    name = "#{room.address} #{Room.human_enum_name(:home_type, room.home_type)}"
     quantity = (booking.end_at - booking.start_at).to_i
     price = room.price.to_i
     amount = quantity * price
