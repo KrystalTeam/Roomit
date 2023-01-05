@@ -8132,11 +8132,6 @@ stimulus-carousel@^4.0.0:
   dependencies:
     swiper "^7.4.1"
 
-stimulus-clipboard@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/stimulus-clipboard/-/stimulus-clipboard-3.3.0.tgz#e6ff1528bc028f481a537810081bdcfb57eb05f7"
-  integrity sha512-msD0UKxyzv4L3KoTP18Rma3+PIT+rplTVlbIJ1ndAuP8jPBmQbDZsE9qRti3B/6aPJ/K6hQiQdXGg33cDdi+Fw==
-
 stimulus-dropdown@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/stimulus-dropdown/-/stimulus-dropdown-2.0.0.tgz#3d401e418be21787f182c0de4bf0d2fd91cfbf8e"
