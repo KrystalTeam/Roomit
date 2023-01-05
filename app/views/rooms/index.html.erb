@@ -22,10 +22,12 @@
             </div>
             <div class="self-center mb-5 swiper-pagination"></div>
             <div class="relative swiper-wrapper">
-              <% room.photos[0..2].each do |photo| %>
-                <div class="swiper-slide">
-                  <%=image_tag photo, class:"object-cover w-full aspect-ratio"%>
-                </div>
+              <% if room.photo.attached?%>
+                <% room.photos[0..2].each do |photo| %>
+                  <div class="swiper-slide">
+                    <%=image_tag photo, class:"object-cover w-full aspect-ratio"%>
+                  </div>
+                <%end%>
               <%end%>
             </div>
           </div>

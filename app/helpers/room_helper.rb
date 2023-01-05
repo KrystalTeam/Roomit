@@ -9,6 +9,14 @@ module RoomHelper
     end
   end
 
+  def equipment_provided
+    res = []
+    res << 'Wi-Fi' if @room.has_wifi
+    res << '廚房' if @room.has_kitchen
+    res << '空調' if @room.has_air_con
+    res << '浴缸' if @room.has_bathtub
+    res
+  end
 
   def to_twd(number)
     number_to_currency( number, negative_format: "(%u%n)",precision:0,unit: "$")
