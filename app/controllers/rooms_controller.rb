@@ -98,7 +98,7 @@ class RoomsController < ApplicationController
 
   def manage
     @bookings_query = current_user.bookings_to_hosted_rooms.where(state: [2, 4]).includes([:room]).includes([:user]).ransack(params[:q])
-    @bookings = @bookings_query.result
+    @bookings = @bookings_query.result.order(:created_at).reverse_order
 
 
     monthly_income_data_query = <<-SQL

@@ -24,7 +24,7 @@
           <tr class="bg-white border-b ">
             <th scope="row" class="py-5 font-medium text-gray-700">
               <% if room.photos.attached?%>
-                <div class="flex"><%=image_tag room.photos.first, class:"rounded-lg w-16 h-16 object-cover mr-3", alt:"guest-avatar"%>
+                <div class="flex"><%=image_tag room.photos.first, class:"rounded-lg w-16 h-16 object-cover mr-3", alt:"room-photo"%>
                   <div class="flex flex-col flex-wrap gap-1 px-2">
                     <%= link_to room.address, room_path(room), class:"block" %>
                     <%= Room.human_enum_name(:home_type, room.home_type) %>
@@ -58,7 +58,7 @@
       <thead class="text-sm text-gray-700 uppercase bg-gray-50">
         <tr>
           <th scope="col" class="w-8/12 px-2 py-5 sm:w-4/12">
-            <%= sort_link(@bookings_query, :room_id, '房源', default_order: :desc) %>
+            <%= sort_link(@bookings_query, :room_id, '房源') %>
           </th>
           <th scope="col" class="hidden px-2 py-5 sm:block">
             <div class="flex flex-wrap gap-1">
