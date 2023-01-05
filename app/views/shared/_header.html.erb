@@ -84,8 +84,7 @@
     </div>
   </div>
 </nav>
-<% if user_signed_in? %>
-<%else%>
+<% if !user_signed_in? %>
   <!-- sign_in model-->
   <div class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto outline-none modal fade" id="signin" tabindex="-1" aria-labelledby="signinTitle" aria-modal="true" role="dialog">
     <div class="relative w-auto pointer-events-none modal-dialog modal-dialog-centered">
