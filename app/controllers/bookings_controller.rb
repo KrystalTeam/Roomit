@@ -36,7 +36,6 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking = Booking.find_by!(serial: params[:id])
-    # @user = User.find(@booking.user_id) 
     return unless @booking.paid!
 
     @api_obj = LinePayApi.new("/v3/payments/#{params[:transactionId]}/confirm")
@@ -45,8 +44,7 @@ class BookingsController < ApplicationController
     confirm_signature = @api_obj.get_signature(confirm_nonce, confirm_body)
     @api_obj.get_response(@api_obj.header(confirm_nonce, confirm_signature), confirm_body)
 
-    # sign_in_and_redirect @user, notice: '訂單付款成功'
-    redirect_to root_path, flash: { notice: '訂單付款成功' }
+    redirect_to root_path, notice: '訂單付款成功'
   end
 
   def index
@@ -89,10 +87,9 @@ class BookingsController < ApplicationController
     response = Newebpay::MpgResponse.new(params[:TradeInfo])
     @ebbooking = Booking.find_by(serial: response.order_no)
     @ebbooking.paid!
-    # user = User.find(@booking.user_id)
-    # sign_in(user)
     
-    redirect_to root_path, flash: { notice: '訂單付款成功' }
+    redirect_to root_path, notice: '訂單付款成功'
+    flash.keep(:notice)
   end
   
 

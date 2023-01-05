@@ -13,3 +13,5 @@ import Flatpickr from 'stimulus-flatpickr';
 require('flatpickr/dist/flatpickr.css');
 application.register('flatpickr', Flatpickr);
 import 'flatpickr/dist/themes/airbnb.css';
+// import Clipboard from 'stimulus-clipboard';
+// application.register('clipboard', Clipboard);

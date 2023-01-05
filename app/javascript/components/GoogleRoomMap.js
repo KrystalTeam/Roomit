@@ -8,6 +8,7 @@ import {
 import LocationButton from './LocationButton';
 import RouteButton from './RouteButton';
 // import IconMarker from '/app/assets/images/marker_large.svg'
+import Swal from 'sweetalert2';
 
 const mapOptions = {
   zoomControl: true,
@@ -40,7 +41,12 @@ class GoogleRoomMap extends React.Component {
       }
     )
       .then((resp) => resp.json())
-      .then((location) => location.location);
+      .then((location) => location.location)
+      .catch(() => Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      }))
 
     this.setState({ origin: origin });
   }
