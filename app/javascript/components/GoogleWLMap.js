@@ -47,7 +47,7 @@ class GoogleWLMap extends React.Component {
 
       return { lat: latAvg, lng: lngAvg };
     } else {
-      return { lat: 23.97565, lng: 120.9738819 };
+      return { lat: 23.67565, lng: 120.9738819 };
     }
   }
 

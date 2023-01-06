@@ -10,7 +10,10 @@ class GoogGeocodingApi
     uri = "https://maps.googleapis.com/maps/api/geocode/json?address=#{@address}&key=#{key}"
 
     response = HTTP.post(uri)
-    response.parse['results'][0]['geometry']['location']
+
+    if response.parse['status'] == 'OK'
+      response.parse['results'][0]['geometry']['location']
+    end
   end
 
   def get_lat(coordinates)
