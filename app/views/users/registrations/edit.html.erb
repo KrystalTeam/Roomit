@@ -75,9 +75,10 @@
             </div>
           </div>
           <div  data-user-edit-target="edit" class="hidden name1">
-            <%= f.text_field :phone_num, autocomplete: "phone_num", class:"input w-1/2 mt-0 mb-3", data:{action:"keydown->user-edit#save"}%>
+            <%= f.text_field :phone_num, autocomplete: "phone_num", class:"input w-1/2 mt-0 mb-3", data:{action:"keydown->user-edit#save", "user-edit-target":"phone_num"}%>
+            <span data-user-edit-target="errorMessages" class="text-pink-500"></span>
             <div class="px-4 py-2 font-bold btn w-fit">
-              <%= f.submit "更新",data:{ "user-edit-target" => "save" }%>
+              <%= f.submit "更新", data:{ "user-edit-target" => "save", "action"=>"click->user-edit#validatePhoneNum"}%>
             </div>
           </div>
         </div>

@@ -14,8 +14,9 @@ class User < ApplicationRecord
   has_many :bookings_to_hosted_rooms, through: :rooms, source: :bookings
   has_many :wish_list_rooms
   has_many :liked_wish_list_rooms, through: :wish_list_rooms, source: :room
-
   has_one_attached :avatar
+
+  validates :phone_num, presence: true, format: { with: /((\w+\s?-?\w+)(,|\z))/i, message: "請填寫正確電話"}
 
   enum role: %i[guest host admin]
 

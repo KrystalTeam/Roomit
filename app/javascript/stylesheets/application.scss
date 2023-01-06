@@ -112,5 +112,7 @@ select{
     hover:from-orange 
     hover:to-pink-500 
   }
-
+  .field_with_errors input{
+    border: 2px solid #ec4899
+  }
 }

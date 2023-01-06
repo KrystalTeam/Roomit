@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = ['edit', 'save', 'editTip', 'currentSetting'];
+  static targets = ['edit', 'save', 'editTip', 'currentSetting', 'phone_num', 'errorMessages'];
 
   connect() {}
   setEditStatus(state) {
@@ -29,6 +29,17 @@ export default class extends Controller {
     if (e.key === 'Enter') {
       e.preventDefault();
       this.saveTarget.click();
+    }
+  }
+
+
+  validatePhoneNum(e){
+    const regex = /(\d{2,3}-?|(\d{2,3}))\d{3,4}-?\d{4}|09\d{2}(\d{6}|-\d{3}-\d{3})/
+    if (regex.test(this.phone_numTarget.value)){
+      this.errorMessagesTarget.innerText = ''
+    }else{
+      e.preventDefault();
+      this.errorMessagesTarget.innerText = '請輸入正確電話號碼'
     }
   }
 }
