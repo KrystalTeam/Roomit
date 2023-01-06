@@ -24,10 +24,6 @@
         <%end%>
       </div>
       <div class="items-center self-end hidden gap-2 sm:flex ">
-        <button>
-          <i class="fa-solid fa-share"></i>
-          <a href="#">分享</a>
-        </button>
         <% if current_user %>
           <button data-controller="wishList" 
           data-action="click->wishList#wishListState" 
