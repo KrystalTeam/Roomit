@@ -168,7 +168,7 @@ class RoomsController < ApplicationController
   end
 
   def find_hosted_rooms
-    @rooms = current_user.rooms.includes([:photos_attachments])
+    @rooms = current_user.rooms.includes(:photos_attachments,photos_attachments: :blob)
   end
 
   def find_hosted_room

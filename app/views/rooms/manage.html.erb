@@ -121,18 +121,33 @@
       </tbody>
     </table>
   </div>
-  <!-- 未來收入 -->
-  <div>
-    <h2 class="font-bold h2">本月預定收入
-      <%= to_twd(@monthly_past_income + @monthly_paid_income)%>
-    </h2>
-    <div class="text-xl">
-      <h3 class="h3">可提領收入：<%= to_twd(@monthly_past_income) %></h3>
-      <h3 class="h3">預期收入：<%=  to_twd(@monthly_paid_income) %></h3>
-      <div class="mb-8">
-        <%# dashboard will be here %>
-        <%= line_chart @monthly_income_data, 
-    xmin: Date.today.beginning_of_month, xmax: Date.today.end_of_month, curve: false,
-    ytitle: '收入', loading: 'Loading...', empty: 'No data', prefix: '$' %>
+
+
+  <div class="flex flex-col gap-5"> 
+    <h2 class="h2">本月預定收入</h2>
+    <div class="flex text-sm ">
+      <div class="flex flex-col w-40 gap-1">
+        <h3 class="">本月可提領收入：</h3>
+        <h3 class="">本月預期收入：</h3>
+        <h3 class="font-bold ">本月總預定收入：</h3>
+      </div>
+      <div class="flex flex-col justify-end gap-1">
+        <span><%= to_twd(@monthly_past_income) %></span>
+        <span class="underline"><%= to_twd(@monthly_paid_income) %></span>
+        <span class="font-bold "><%= to_twd(@monthly_past_income + @monthly_paid_income)%></span>
       </div>
     </div>
+
+
+    <div class="mb-8">
+      <%# dashboard will be here %>
+      <%= line_chart @monthly_income_data, 
+        xmin: Date.today.beginning_of_month, xmax: Date.today.end_of_month,
+        ytitle: '收入', loading: 'Loading...', empty: 'No data', prefix: '$', 
+        colors: [ "#ed64a6"] %>
+    </div>
+
+  </div>
+  <!-- 未來收入 -->
+
+
