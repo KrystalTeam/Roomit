@@ -36,16 +36,22 @@ class RoomsController < ApplicationController
   def create
     @room = current_user.rooms.new(room_params)
 
-    if @room.save
-      @geocoding_obj = GoogGeocodingApi.new(@room.address)
-      @coordinates = @geocoding_obj.get_response
+    @geocoding_obj = GoogGeocodingApi.new(@room.address)
+    @coordinates = @geocoding_obj.get_response
+
+    if @coordinates.nil?
+      flash.alert = '請輸入有效的地址'
+      render :new
+    else
       @room.lat = @geocoding_obj.get_lat(@coordinates)
       @room.lng = @geocoding_obj.get_lng(@coordinates)
-      
-      redirect_to manage_rooms_path, notice: '新增成功'
-    else
-      flash.alert = '新增失敗'
-      render :new
+
+      if @room.save
+        redirect_to manage_rooms_path, notice: '新增成功'
+      else
+        flash.alert = '新增失敗'
+        render :new
+      end
     end
   end
 
@@ -68,18 +74,24 @@ class RoomsController < ApplicationController
       end
     end
 
-    if @room.update(room_params_without_photos)
-      @geocoding_obj = GoogGeocodingApi.new(@room.address)
-      @coordinates = @geocoding_obj.get_response
-      @room.update(
-        lat: @geocoding_obj.get_lat(@coordinates),
-        lng: @geocoding_obj.get_lng(@coordinates)
-      )
+    @geocoding_obj = GoogGeocodingApi.new(params[:room][:address])
+    @coordinates = @geocoding_obj.get_response
 
-      redirect_to manage_rooms_path, notice: '更新成功'
-    else
-      flash.alert = '更新失敗'
+    if @coordinates.nil?
+      flash.alert = '請輸入有效的地址'
       render :edit
+    else
+      if @room.update(room_params_without_photos)
+        @room.update(
+          lat: @geocoding_obj.get_lat(@coordinates),
+          lng: @geocoding_obj.get_lng(@coordinates)
+        )
+  
+        redirect_to manage_rooms_path, notice: '更新成功'
+      else
+        flash.alert = '更新失敗'
+        render :edit
+      end
     end
   end
 
@@ -102,15 +114,16 @@ class RoomsController < ApplicationController
 
 
     monthly_income_data_query = <<-SQL
-      SELECT  b.end_at, SUM(b.price_per_night * (b.end_at - b.start_at)) 
-      FROM rooms AS r
-      LEFT JOIN bookings AS b
-        ON r.id = b.room_id
-      WHERE r.user_id = #{current_user.id}
-        AND b.id IS NOT NULL
-        AND b.start_at >= DATE_TRUNC('month', NOW())::DATE
-        AND b.end_at <= (DATE_TRUNC('month', NOW()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE
-      GROUP BY b.end_at;
+    SELECT  b.end_at, SUM(b.price_per_night * (b.end_at - b.start_at)) 
+    FROM rooms AS r
+    LEFT JOIN bookings AS b
+      ON r.id = b.room_id
+    WHERE r.user_id = #{current_user.id}
+      AND b.id IS NOT NULL
+      AND b.start_at >= DATE_TRUNC('month', NOW())::DATE
+      AND b.end_at <= (DATE_TRUNC('month', NOW()::DATE) + INTERVAL '1 month' - INTERVAL '1 day')::DATE
+      AND b.state IN (2, 4)
+    GROUP BY b.end_at;
     SQL
     monthly_paid_income_query = <<-SQL
       SELECT  SUM(b.price_per_night * (b.end_at - b.start_at)) 

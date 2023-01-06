@@ -25,7 +25,7 @@ class BookingsController < ApplicationController
       req_response = @api_obj.get_response(req_header, req_body)
 
       # redirect to the paymentUrl => user scans and pays
-      if device == 'desktop'
+      if device() == 'desktop'
         webConfirmUrl = JSON.parse(req_response.body)['info']['paymentUrl']['web']
         redirect_to webConfirmUrl
       else

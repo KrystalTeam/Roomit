@@ -38,7 +38,7 @@ class Room < ApplicationRecord
        _prefix: :checkout_time
 
   private
-
+  
   def checkin_time_more_then_3_hours
     return unless Room.checkin_end_ats[checkin_end_at] - Room.checkin_start_ats[checkin_start_at] < 3
 
