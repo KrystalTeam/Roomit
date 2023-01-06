@@ -219,19 +219,29 @@
       </div>
       <div class="relative p-4 modal-body">
         <div class="flex flex-col gap-4 ">
-          <form>
+          <form data-controller="search">
             <%= search_form_for @query do |form| %>
               <%= form.label :address_cont , "地點"%>
-              <%= form.search_field :address_cont, class:"input pb-2"%>
+              <%= form.search_field :address_cont, class:"input pb-2", data:{ "search-target" => "addressField"} %>
+              <div class='flex gap-1 text-sm' data-action="click->search#fillText">
+                <span class="px-3 py-1 my-1 btn-cancel">台北</span>
+                <span class="px-3 py-1 my-1 btn-cancel">新北</span>
+                <span class="px-3 py-1 my-1 btn-cancel">桃園</span>
+                <span class="px-3 py-1 my-1 btn-cancel">台中</span>
+                <span class="px-3 py-1 my-1 btn-cancel">台南</span>
+                <span class="px-3 py-1 my-1 btn-cancel">高雄</span>
+                <span class="px-3 py-1 my-1 btn-cancel">宜蘭</span>
+                <span class="px-3 py-1 my-1 btn-cancel">花蓮</span>
+              </div>
               <%= form.label :max_occupancy_gteq , "人數"%>
               <%= form.search_field :max_occupancy_gteq ,class:"input pb-2"%>
-              <%= form.label :bookings_start_at, "入住時間"%>
+              <%= form.label :bookings_start_at, "入住日期"%>
               <%= form.date_field :bookings_start_at,data: {
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",
                     flatpickr_min_date: Time.zone.now,
                     }, class:"input pb-2"%>
-              <%= form.label :bookings_end_at, "退房時間"%>
+              <%= form.label :bookings_end_at, "退房日期"%>
               <%= form.date_field :bookings_end_at,data: {
                     controller: "flatpickr",
                     flatpickr_date_format: "Y-m-d",

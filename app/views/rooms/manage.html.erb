@@ -80,7 +80,7 @@
       </thead>
       <tbody>
         <% @bookings.each do |booking|%>
-          <tr>
+          <tr class="border-b">
             <th scope="row" class="py-5 font-medium text-gray-700">
               <%= link_to room_path(booking.room) do %>
                 <div class="flex flex-row items-start sm:items-center">
@@ -121,9 +121,7 @@
       </tbody>
     </table>
   </div>
-
-
-  <div class="flex flex-col gap-5"> 
+  <div class="flex flex-col gap-5">
     <h2 class="h2">本月預定收入</h2>
     <div class="flex text-sm ">
       <div class="flex flex-col w-40 gap-1">
@@ -137,17 +135,12 @@
         <span class="font-bold "><%= to_twd(@monthly_past_income + @monthly_paid_income)%></span>
       </div>
     </div>
-
-
     <div class="mb-8">
       <%# dashboard will be here %>
       <%= line_chart @monthly_income_data, 
         xmin: Date.today.beginning_of_month, xmax: Date.today.end_of_month,
         ytitle: '收入', loading: 'Loading...', empty: 'No data', prefix: '$', 
-        colors: [ "#ed64a6"] %>
+        colors: ["#ed64a6"] %>
     </div>
-
   </div>
   <!-- 未來收入 -->
-
-
