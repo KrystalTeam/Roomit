@@ -23,11 +23,16 @@ class BookingsController < ApplicationController
 
       # get the response from the request api => get the paymentUrl
       req_response = @api_obj.get_response(req_header, req_body)
-      webConfirmUrl = JSON.parse(req_response.body)['info']['paymentUrl']['web']
 
       # redirect to the paymentUrl => user scans and pays
-      redirect_to webConfirmUrl
-      # if success => redirect to the confirmUrl
+      if device == 'desktop'
+        webConfirmUrl = JSON.parse(req_response.body)['info']['paymentUrl']['web']
+        redirect_to webConfirmUrl
+      else
+        appConfirmUrl = JSON.parse(req_response.body)['info']['paymentUrl']['app']
+        redirect_to appConfirmUrl
+      end
+      # if payment success => redirect to the confirmUrl
       # if not => redirect to the cancelUrl
     else
       redirect_to room_path(@room), alert: '訂房失敗'

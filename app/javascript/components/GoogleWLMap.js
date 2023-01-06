@@ -34,16 +34,26 @@ class GoogleWLMap extends React.Component {
     };
   }
 
-  render() {
-    let latAvg =
+  getAvgCoordinates() {
+    if (this.props.data.length > 0) {
+      let latAvg =
       this.props.data
         .map((datum) => parseFloat(datum.lat))
         .reduce((a, b) => a + b, 0) / this.props.data.length;
-    let lngAvg =
-      this.props.data
-        .map((datum) => parseFloat(datum.lng))
-        .reduce((a, b) => a + b, 0) / this.props.data.length;
-    let center = { lat: latAvg, lng: lngAvg };
+      let lngAvg =
+        this.props.data
+          .map((datum) => parseFloat(datum.lng))
+          .reduce((a, b) => a + b, 0) / this.props.data.length;
+
+      return { lat: latAvg, lng: lngAvg };
+    } else {
+      return { lat: 23.97565, lng: 120.9738819 };
+    }
+  }
+
+  render() {
+    const center = this.getAvgCoordinates()
+    console.log(center);
 
     return (
       <LoadScript googleMapsApiKey={this.props.api_key}>
