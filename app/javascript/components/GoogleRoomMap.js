@@ -7,7 +7,6 @@ import {
 } from '@react-google-maps/api';
 import LocationButton from './LocationButton';
 import RouteButton from './RouteButton';
-// import IconMarker from '/app/assets/images/marker_large.svg'
 import Swal from 'sweetalert2';
 
 const mapOptions = {
