@@ -1,3 +1,4 @@
+<% content_for(:html_title) { "#{@room.user.name} 出租的 #{Room.human_enum_name(:room_type, @room.room_type)}" } %>
 <section class="flex flex-col w-full gap-5 px-5 mx-auto mb-10 text-gray-700 sm:px-0 sm:w-10/12 xxl:w-9/12 lg:max-w-1024">
   <div class="flex flex-col-reverse gap-2 pb-5 border-b sm:flex-col ">
     <!-- title -->
