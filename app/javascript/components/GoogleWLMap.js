@@ -6,7 +6,6 @@ import {
   Marker,
 } from '@react-google-maps/api';
 import LocationButton from './LocationButton';
-import Roomit from 'images/marker_small.svg';
 
 const taiwanBounds = {
   north: 28.17565,
