@@ -49,7 +49,9 @@ class BookingsController < ApplicationController
     confirm_signature = @api_obj.get_signature(confirm_nonce, confirm_body)
     @api_obj.get_response(@api_obj.header(confirm_nonce, confirm_signature), confirm_body)
 
-    redirect_to root_path, notice: '訂單付款成功'
+    if device() == 'desktop'
+      redirect_to root_path, notice: '訂單付款成功'
+    end
   end
 
   def index
