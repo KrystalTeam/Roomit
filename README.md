@@ -4,6 +4,8 @@
 
 ### 致敬 Airbnb 的台灣旅遊訂房平台
 
+[成果發表](https://www.youtube.com/watch?v=sTie-Jnyz00)
+
 ## 開發技術
 
 前端：
