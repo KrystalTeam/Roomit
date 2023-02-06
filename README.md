@@ -21,12 +21,12 @@ PostgreSQL
 Google / Facebook
 
 協作工具：
-git / github
+git / GitHub
 
 部署：
 Render
 
 ## 環境
 
-RUBY 3.1.2
+Ruby 3.1.2
 Rails 6.1.7
